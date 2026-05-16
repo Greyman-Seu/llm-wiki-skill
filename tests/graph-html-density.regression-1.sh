@@ -4,6 +4,10 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+NODE_BIN="$(command -v node 2>/dev/null || true)"
+if [ -z "$NODE_BIN" ] && command -v zsh >/dev/null 2>&1; then
+    NODE_BIN="$(zsh -ic 'command -v node' 2>/dev/null | tail -1 || true)"
+fi
 
 fail() {
     echo "FAIL: $1" >&2
@@ -19,11 +23,16 @@ assert_file_contains() {
     fi
 }
 
+require_node() {
+    [ -n "$NODE_BIN" ] || fail "node is required for density fixture assertions"
+}
+
 write_density_fixture() {
     local output="$1"
     local count="$2"
 
-    node - <<'NODE' "$output" "$count"
+    require_node
+    "$NODE_BIN" - <<'NODE' "$output" "$count"
 const fs = require("fs");
 const output = process.argv[2];
 const count = Number(process.argv[3]);
@@ -124,7 +133,8 @@ test_graph_html_builds_large_density_fixture() {
 }
 
 test_graph_density_thresholds_and_budgets() {
-    node - <<'NODE' "$REPO_ROOT" || fail "density thresholds and budgets should hold"
+    require_node
+    "$NODE_BIN" - <<'NODE' "$REPO_ROOT" || fail "density thresholds and budgets should hold"
 const assert = require("node:assert/strict");
 const path = require("node:path");
 const repoRoot = process.argv[2];
@@ -174,14 +184,12 @@ const pointSnapshot = snapshotFor(201, 900, "node-200");
 assert.equal(pointSnapshot.densityMode, "point-plus-focus");
 assert.ok(Object.keys(pointSnapshot.labelNodeIds).length <= 61, "201-node mode should cap labels while allowing the selected node");
 assert.ok(pointSnapshot.labelNodeIds["node-200"], "selected node should stay readable in point mode");
-assert.ok(pointSnapshot.importantNodeIds["node-0"], "recommended starts should remain important in point mode");
 assert.ok(pointSnapshot.edges.length <= 800, "point mode should cap edges at 800");
 
 const overviewSnapshot = snapshotFor(501, 1500, "node-500");
 assert.equal(overviewSnapshot.densityMode, "overview");
 assert.ok(Object.keys(overviewSnapshot.labelNodeIds).length <= 41, "501-node mode should cap labels while allowing the selected node");
 assert.ok(overviewSnapshot.labelNodeIds["node-500"], "selected node should stay readable in overview mode");
-assert.ok(overviewSnapshot.importantNodeIds["node-0"], "recommended starts should remain important in overview mode");
 assert.ok(overviewSnapshot.edges.length <= 1000, "overview mode should cap edges at 1000");
 NODE
 }

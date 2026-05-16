@@ -4,6 +4,14 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
+if ! command -v node >/dev/null 2>&1 && command -v zsh >/dev/null 2>&1; then
+    NODE_FROM_ZSH="$(zsh -ic 'command -v node' 2>/dev/null | tail -1 || true)"
+    if [ -n "${NODE_FROM_ZSH:-}" ]; then
+        PATH="$(dirname "$NODE_FROM_ZSH"):$PATH"
+        export PATH
+    fi
+fi
+
 fail() {
     echo "FAIL: $1" >&2
     exit 1
@@ -49,6 +57,88 @@ assert_path_exists() {
     local path="$1"
 
     [ -e "$path" ] || fail "Expected path to exist: $path"
+}
+
+json_normalize_graph_without_source_path() {
+    local input="$1"
+    local output="$2"
+
+    python3 - "$input" "$output" <<'PY'
+import json
+import sys
+
+input_path, output_path = sys.argv[1:3]
+with open(input_path, "r", encoding="utf-8") as f:
+    data = json.load(f)
+for node in data.get("nodes", []):
+    node.pop("source_path", None)
+with open(output_path, "w", encoding="utf-8") as f:
+    json.dump(data, f, ensure_ascii=False, indent=2)
+    f.write("\n")
+PY
+}
+
+json_meta_value() {
+    local input="$1"
+    local key="$2"
+
+    python3 - "$input" "$key" <<'PY'
+import json
+import sys
+
+input_path, key = sys.argv[1:3]
+with open(input_path, "r", encoding="utf-8") as f:
+    data = json.load(f)
+print(data.get("meta", {}).get(key))
+PY
+}
+
+json_edge_types() {
+    local input="$1"
+
+    python3 - "$input" <<'PY'
+import json
+import sys
+
+with open(sys.argv[1], "r", encoding="utf-8") as f:
+    data = json.load(f)
+for value in sorted({edge.get("type", "") for edge in data.get("edges", [])}):
+    print(value)
+PY
+}
+
+json_nodes_by_community() {
+    local input="$1"
+    local community="$2"
+
+    python3 - "$input" "$community" <<'PY'
+import json
+import sys
+
+input_path, community = sys.argv[1:3]
+with open(input_path, "r", encoding="utf-8") as f:
+    data = json.load(f)
+ids = sorted(node.get("id", "") for node in data.get("nodes", []) if node.get("community") == community)
+print(" ".join(ids) + (" " if ids else ""))
+PY
+}
+
+json_node_community() {
+    local input="$1"
+    local node_id="$2"
+
+    python3 - "$input" "$node_id" <<'PY'
+import json
+import sys
+
+input_path, node_id = sys.argv[1:3]
+with open(input_path, "r", encoding="utf-8") as f:
+    data = json.load(f)
+for node in data.get("nodes", []):
+    if node.get("id") == node_id:
+        print(node.get("community", ""))
+        break
+PY
 }
 
 each_registry_label() {
@@ -431,6 +521,7 @@ test_skill_md_phase2_init_mentions_purpose_and_cache() {
     section="$(sed -n '/## 工作流 1：init/,/## 工作流 2：ingest/p' "$REPO_ROOT/SKILL.md")"
 
     assert_text_contains "$section" "purpose.md"
+    assert_text_contains "$section" ".wiki-vocabulary.md"
     assert_text_contains "$section" ".wiki-cache.json"
     assert_text_contains "$section" "填写核心目标和关键问题"
 }
@@ -439,11 +530,11 @@ test_skill_md_phase2_ingest_mentions_two_step_cache_and_confidence() {
     local section
     section="$(sed -n '/## 工作流 2：ingest/,/## 工作流 3：batch-ingest/p' "$REPO_ROOT/SKILL.md")"
 
-    assert_text_contains "$section" '`purpose.md` > `.wiki-schema.md` > `index.md`'
+    assert_text_contains "$section" '`purpose.md` > `.wiki-schema.md` > `.wiki-vocabulary.md` > `index.md`'
     assert_text_contains "$section" 'bash ${SKILL_DIR}/scripts/cache.sh check'
-    assert_text_contains "$section" "Step 1：结构化分析"
+    assert_text_contains "$section" "Step 1：FollowHub 决策分析"
     assert_text_contains "$section" "Step 2：页面生成"
-    assert_text_contains "$section" '"confidence": "EXTRACTED"'
+    assert_text_contains "$section" '"confidence": "EXTRACTED | INFERRED | AMBIGUOUS | UNVERIFIED"'
     assert_text_contains "$section" "<!-- confidence: UNVERIFIED -->"
     assert_text_contains "$section" "页面顶部加注释说明本次处理因格式问题降级"
 }
@@ -814,7 +905,7 @@ test_english_templates_have_no_empty_links() {
 test_skill_md_has_shared_preflight_and_language_rules() {
     assert_file_contains "$REPO_ROOT/SKILL.md" "## 通用前置检查"
     assert_file_contains "$REPO_ROOT/SKILL.md" "## 输出语言规则"
-    assert_file_contains "$REPO_ROOT/SKILL.md" "素材 → Source"
+    assert_file_contains "$REPO_ROOT/SKILL.md" "材料页 / 材料 → Source Page / Material"
     assert_file_contains "$REPO_ROOT/SKILL.md" "知识图谱 → Knowledge Graph"
 }
 
@@ -1444,7 +1535,7 @@ test_graph_data_sample_wiki_matches_expected() {
         "$tmp_dir/graph-data.json" > /dev/null 2>&1 \
         || fail "build-graph-data.sh should succeed on sample wiki"
 
-    jq 'del(.nodes[].source_path)' "$tmp_dir/graph-data.json" > "$tmp_dir/normalized.json"
+    json_normalize_graph_without_source_path "$tmp_dir/graph-data.json" "$tmp_dir/normalized.json"
     diff "$tmp_dir/normalized.json" "$REPO_ROOT/tests/expected/graph-data-sample.json" \
         || fail "sample wiki graph-data output differs from expected"
 }
@@ -1493,7 +1584,7 @@ test_graph_data_has_three_confidence_types() {
         "$REPO_ROOT/$GRAPH_DATA_SAMPLE" \
         "$tmp_dir/graph-data.json" > /dev/null 2>&1
 
-    edges=$(jq -r '.edges[].type' "$tmp_dir/graph-data.json" | sort -u)
+    edges=$(json_edge_types "$tmp_dir/graph-data.json")
     assert_text_contains "$edges" "EXTRACTED"
     assert_text_contains "$edges" "INFERRED"
     assert_text_contains "$edges" "AMBIGUOUS"
@@ -1509,21 +1600,21 @@ test_graph_data_community_clustering() {
         "$REPO_ROOT/$GRAPH_DATA_SAMPLE" \
         "$tmp_dir/graph-data.json" > /dev/null 2>&1
 
-    arch_nodes=$(jq -r '.nodes[] | select(.community == "arch") | .id' "$tmp_dir/graph-data.json" | sort | tr '\n' ' ')
+    arch_nodes=$(json_nodes_by_community "$tmp_dir/graph-data.json" "arch")
     assert_text_contains "$arch_nodes" "Decoder"
     assert_text_contains "$arch_nodes" "Encoder"
     assert_text_contains "$arch_nodes" "Transformer"
     assert_text_contains "$arch_nodes" "arch"
 
-    finetune_nodes=$(jq -r '.nodes[] | select(.community == "finetune") | .id' "$tmp_dir/graph-data.json" | sort | tr '\n' ' ')
+    finetune_nodes=$(json_nodes_by_community "$tmp_dir/graph-data.json" "finetune")
     assert_text_contains "$finetune_nodes" "GPT"
     assert_text_contains "$finetune_nodes" "finetune"
 
-    attention_comm=$(jq -r '.nodes[] | select(.community == "Attention") | .id' "$tmp_dir/graph-data.json" | sort | tr '\n' ' ')
+    attention_comm=$(json_nodes_by_community "$tmp_dir/graph-data.json" "Attention")
     assert_text_contains "$attention_comm" "Attention"
     assert_text_contains "$attention_comm" "paper"
 
-    paper_comm=$(jq -r '.nodes[] | select(.id == "paper") | .community' "$tmp_dir/graph-data.json")
+    paper_comm=$(json_node_community "$tmp_dir/graph-data.json" "paper")
     [ "$paper_comm" = "Attention" ] || fail "Expected paper community to be Attention, got: $paper_comm"
 }
 
@@ -1537,8 +1628,8 @@ test_graph_data_empty_wiki_has_zero_nodes_and_edges() {
         "$REPO_ROOT/$GRAPH_DATA_EMPTY" \
         "$tmp_dir/graph-data.json" > /dev/null 2>&1
 
-    nodes_count=$(jq '.meta.total_nodes' "$tmp_dir/graph-data.json")
-    edges_count=$(jq '.meta.total_edges' "$tmp_dir/graph-data.json")
+    nodes_count=$(json_meta_value "$tmp_dir/graph-data.json" "total_nodes")
+    edges_count=$(json_meta_value "$tmp_dir/graph-data.json" "total_edges")
     [ "$nodes_count" = "0" ] || fail "Expected 0 nodes in empty wiki, got: $nodes_count"
     [ "$edges_count" = "0" ] || fail "Expected 0 edges in empty wiki, got: $edges_count"
 }
@@ -1637,8 +1728,8 @@ test_graph_data_dead_links_are_ignored() {
 
     # 应该只有 Alpha 一个节点，0 条边（NonExistent 不存在）
     local node_count edge_count
-    node_count=$(jq '.meta.total_nodes' "$tmp_dir/wiki/graph-data.json")
-    edge_count=$(jq '.meta.total_edges' "$tmp_dir/wiki/graph-data.json")
+    node_count=$(json_meta_value "$tmp_dir/wiki/graph-data.json" "total_nodes")
+    edge_count=$(json_meta_value "$tmp_dir/wiki/graph-data.json" "total_edges")
     [ "$node_count" = "1" ] || fail "Expected 1 node, got: $node_count"
     [ "$edge_count" = "0" ] || fail "Expected 0 edges (dead link ignored), got: $edge_count"
 }
@@ -1656,11 +1747,11 @@ test_graph_data_self_links_are_ignored() {
         bash "$REPO_ROOT/scripts/build-graph-data.sh" "$tmp_dir" "$tmp_dir/wiki/graph-data.json" > /dev/null 2>&1
 
     local edge_count
-    edge_count=$(jq '.meta.total_edges' "$tmp_dir/wiki/graph-data.json")
+    edge_count=$(json_meta_value "$tmp_dir/wiki/graph-data.json" "total_edges")
     [ "$edge_count" = "0" ] || fail "Expected 0 edges (self-link ignored), got: $edge_count"
 }
 
-test_graph_data_exits_without_jq() {
+test_graph_data_exits_without_python() {
     local tmp_dir output
     tmp_dir="$(mktemp -d)"
     trap 'rm -rf "$tmp_dir"' RETURN
@@ -1669,11 +1760,11 @@ test_graph_data_exits_without_jq() {
     mkdir -p "$tmp_dir/bin"
     ln -s /bin/bash "$tmp_dir/bin/bash"
 
-    # 用只包含 bash 的隔离 PATH 来测试 jq 依赖缺失，避免宿主机把 jq 装进 /bin
+    # 用只包含 bash 的隔离 PATH 来测试 python3 依赖缺失。
     if output="$(PATH="$tmp_dir/bin" "$tmp_dir/bin/bash" "$REPO_ROOT/scripts/build-graph-data.sh" "$tmp_dir" 2>&1)"; then
-        fail "build-graph-data.sh should fail when jq is not available"
+        fail "build-graph-data.sh should fail when python3 is not available"
     fi
-    assert_text_contains "$output" "jq"
+    assert_text_contains "$output" "python3"
 }
 
 test_graph_data_wiki_dir_missing_exits() {
@@ -1712,9 +1803,10 @@ bash "$REPO_ROOT/tests/graph-html-search.regression-1.sh" || fail "graph-html-se
 bash "$REPO_ROOT/tests/graph-html-mobile.regression-1.sh" || fail "graph-html-mobile.regression-1.sh 测试失败"
 bash "$REPO_ROOT/tests/graph-html-oriental-atlas-contract.regression-1.sh" || fail "graph-html-oriental-atlas-contract.regression-1.sh 测试失败"
 bash "$REPO_ROOT/tests/graph-html-oriental-design-contract.regression-1.sh" || fail "graph-html-oriental-design-contract.regression-1.sh 测试失败"
+bash "$REPO_ROOT/tests/followhub-wiki-package.regression-1.sh" || fail "followhub-wiki-package.regression-1.sh 测试失败"
 test_graph_data_dead_links_are_ignored
 test_graph_data_self_links_are_ignored
-test_graph_data_exits_without_jq
+test_graph_data_exits_without_python
 test_graph_data_wiki_dir_missing_exits
 
 bash "$REPO_ROOT/tests/adapter-state.sh" || fail "adapter-state.sh 测试失败"

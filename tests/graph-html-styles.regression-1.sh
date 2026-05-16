@@ -111,7 +111,8 @@ test_graph_html_wash_runtime_reads_injected_data_and_sanitizes_html() {
     assert_file_contains "$output_dir/graph-wash.js" 'const dataEl = document.getElementById("graph-data");'
     assert_file_contains "$output_dir/graph-wash.js" 'JSON.parse(dataEl.textContent)'
     assert_file_contains "$output_dir/graph-wash.js" 'window.SAMPLE_GRAPH'
-    assert_file_contains "$output_dir/graph-wash.js" 'DOMPurify.sanitize(html, { ADD_ATTR: ["target", "data-target", "tabindex"] });'
+    assert_file_contains "$output_dir/graph-wash.js" 'function escapeHtml(value)'
+    assert_file_contains "$output_dir/graph-wash.js" ".replace(/[&<>\"']/g"
 
     rm -rf "$tmp_dir"
 }
@@ -126,9 +127,8 @@ test_graph_html_oriental_visual_contract() {
 
     assert_file_contains "$html" "国风知识库·数字山水图"
     assert_file_contains "$html" "brand__github"
-    assert_file_contains "$html" "直接提取"
-    assert_file_contains "$html" "推断关联"
-    assert_file_contains "$html" "存在歧义"
+    assert_file_contains "$html" "综述、主题、材料之间的引用关系"
+    assert_file_contains "$output_dir/graph-wash.js" "atlasConfidenceLabel"
     assert_file_contains "$html" "drawer-summary"
 
     rm -rf "$tmp_dir"

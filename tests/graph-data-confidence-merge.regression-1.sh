@@ -21,6 +21,33 @@ fail() {
     exit 1
 }
 
+require_python() {
+    command -v python3 >/dev/null 2>&1 || fail "python3 is required for JSON assertions"
+}
+
+json_edge_type() {
+    local json_path="$1"
+    local from_id="$2"
+    local to_id="$3"
+
+    python3 - "$json_path" "$from_id" "$to_id" <<'PY'
+import json
+import sys
+
+json_path, from_id, to_id = sys.argv[1:4]
+with open(json_path, encoding="utf-8") as handle:
+    data = json.load(handle)
+
+for edge in data.get("edges", []):
+    if edge.get("from") == from_id and edge.get("to") == to_id:
+        print(edge.get("type", ""))
+        sys.exit(0)
+
+sys.stderr.write(f"edge not found: {from_id} -> {to_id}\n")
+sys.exit(1)
+PY
+}
+
 test_explicit_confidence_overrides_default_on_same_page() {
     local tmp_dir
     tmp_dir="$(mktemp -d)"
@@ -68,8 +95,8 @@ EOF
         || fail "build-graph-data.sh should succeed on fixture"
 
     local a_to_b_type b_to_a_type
-    a_to_b_type=$(jq -r '.edges[] | select(.from == "A" and .to == "B") | .type' "$tmp_dir/graph-data.json")
-    b_to_a_type=$(jq -r '.edges[] | select(.from == "B" and .to == "A") | .type' "$tmp_dir/graph-data.json")
+    a_to_b_type=$(json_edge_type "$tmp_dir/graph-data.json" "A" "B")
+    b_to_a_type=$(json_edge_type "$tmp_dir/graph-data.json" "B" "A")
 
     [ "$a_to_b_type" = "INFERRED" ] \
         || fail "A→B should be INFERRED after merging (default + explicit INFERRED on same page), got: $a_to_b_type"
@@ -123,7 +150,7 @@ EOF
         || fail "build-graph-data.sh should succeed on fixture"
 
     local x_to_y_type
-    x_to_y_type=$(jq -r '.edges[] | select(.from == "X" and .to == "Y") | .type' "$tmp_dir/graph-data.json")
+    x_to_y_type=$(json_edge_type "$tmp_dir/graph-data.json" "X" "Y")
 
     [ "$x_to_y_type" = "AMBIGUOUS" ] \
         || fail "X→Y should be AMBIGUOUS (default + default + AMBIGUOUS merge), got: $x_to_y_type"
@@ -172,7 +199,7 @@ EOF
         || fail "build-graph-data.sh should succeed on fixture"
 
     local p_to_q_type
-    p_to_q_type=$(jq -r '.edges[] | select(.from == "P" and .to == "Q") | .type' "$tmp_dir/graph-data.json")
+    p_to_q_type=$(json_edge_type "$tmp_dir/graph-data.json" "P" "Q")
 
     [ "$p_to_q_type" = "EXTRACTED" ] \
         || fail "P→Q should default to EXTRACTED when no annotation exists, got: $p_to_q_type"
@@ -225,12 +252,13 @@ EOF
         || fail "build-graph-data.sh should succeed on fixture"
 
     local m_to_n_type
-    m_to_n_type=$(jq -r '.edges[] | select(.from == "M" and .to == "N") | .type' "$tmp_dir/graph-data.json")
+    m_to_n_type=$(json_edge_type "$tmp_dir/graph-data.json" "M" "N")
 
     [ "$m_to_n_type" = "INFERRED" ] \
         || fail "M→N should keep first explicit INFERRED, got: $m_to_n_type"
 }
 
+require_python
 test_explicit_confidence_overrides_default_on_same_page
 test_ambiguous_overrides_default_when_mixed
 test_default_extracted_when_no_annotation

@@ -47,6 +47,9 @@ echo "[完成] 目录结构已创建"
 replace_vars "$SKILL_DIR/templates/schema-template.md" "$WIKI_ROOT/.wiki-schema.md"
 echo "[完成] Schema 文件已生成"
 
+replace_vars "$SKILL_DIR/templates/vocabulary-template.md" "$WIKI_ROOT/.wiki-vocabulary.md"
+echo "[完成] 领域与标签词表已生成"
+
 replace_vars "$SKILL_DIR/templates/index-template.md" "$WIKI_ROOT/index.md"
 echo "[完成] 索引文件已生成"
 
@@ -90,6 +93,7 @@ echo "   ├── index.md    （索引）"
 echo "   ├── log.md      （日志）"
 echo "   ├── purpose.md  （研究方向）"
 echo "   ├── .wiki-cache.json （缓存）"
+echo "   ├── .wiki-vocabulary.md （领域与标签词表）"
 echo "   └── .wiki-schema.md （配置）"
 echo ""
 echo "下一步：给 agent 一个链接或文件，开始构建知识库！"

@@ -76,9 +76,9 @@ done
 
 WIKI_ROOT="$1"
 
-command -v jq >/dev/null 2>&1 || {
-  echo "ERROR: jq is not installed. Install it via:" >&2
-  print_install_hint jq
+command -v python3 >/dev/null 2>&1 || {
+  echo "ERROR: python3 is not installed. Install it via:" >&2
+  print_install_hint python3
   exit 1
 }
 
@@ -100,10 +100,25 @@ OUTPUT="$WIKI_ROOT/wiki/knowledge-graph.html"
 ensure_file "$HEADER" "模板"
 ensure_file "$FOOTER" "模板"
 
-WIKI_TITLE=$(jq -r '.meta.wiki_title // "知识库"' "$DATA")
-NODE_COUNT=$(jq -r '.meta.total_nodes // 0' "$DATA")
-EDGE_COUNT=$(jq -r '.meta.total_edges // 0' "$DATA")
-BUILD_DATE=$(jq -r '.meta.build_date // ""' "$DATA")
+GRAPH_META="$(
+  python3 - "$DATA" <<'PY'
+import json
+import sys
+
+path = sys.argv[1]
+with open(path, "r", encoding="utf-8") as f:
+    data = json.load(f)
+meta = data.get("meta", {})
+print(meta.get("wiki_title") or "知识库")
+print(meta.get("total_nodes") or 0)
+print(meta.get("total_edges") or 0)
+print(meta.get("build_date") or "")
+PY
+)"
+WIKI_TITLE=$(printf '%s\n' "$GRAPH_META" | sed -n '1p')
+NODE_COUNT=$(printf '%s\n' "$GRAPH_META" | sed -n '2p')
+EDGE_COUNT=$(printf '%s\n' "$GRAPH_META" | sed -n '3p')
+BUILD_DATE=$(printf '%s\n' "$GRAPH_META" | sed -n '4p')
 BUILD_DATE_SHORT="${BUILD_DATE:0:10}"
 [ -n "$BUILD_DATE_SHORT" ] || BUILD_DATE_SHORT="未知"
 

@@ -3,142 +3,198 @@
 # 用法：bash validate-step1.sh <json_file>
 # 返回：0 = 格式正确，1 = 格式有问题（触发回退）
 
-SCRIPT_DIR="${BASH_SOURCE[0]%/*}"
-[ "$SCRIPT_DIR" = "${BASH_SOURCE[0]}" ] && SCRIPT_DIR="."
-SCRIPT_DIR="$(cd "$SCRIPT_DIR" && pwd)"
-# shellcheck disable=SC1091
-source "$SCRIPT_DIR/shared-config.sh"
+if [ "$#" -ne 1 ]; then
+    echo "ERROR: usage: validate-step1.sh <json_file>"
+    exit 1
+fi
 
 JSON_FILE="$1"
 
-# 参数检查
-[ -z "$1" ] && { echo "ERROR: usage: validate-step1.sh <json_file>"; exit 1; }
-
-# 检查 jq 是否可用（必需依赖）
-command -v jq >/dev/null 2>&1 || {
-  echo "ERROR: jq is not installed. Install it via:" >&2
-  print_install_hint jq
-  exit 1
-}
-
-# 检查文件是否存在
 [ -f "$JSON_FILE" ] || { echo "ERROR: file not found: $JSON_FILE"; exit 1; }
+command -v python3 >/dev/null 2>&1 || { echo "ERROR: python3 is required for Step 1 validation"; exit 1; }
 
-# 检查是否是有效 JSON
-jq empty "$JSON_FILE" 2>/dev/null || { echo "ERROR: invalid JSON format"; exit 1; }
+python3 - "$JSON_FILE" <<'PY'
+import json
+import sys
 
-# 检查必需字段存在且类型正确
-jq -e '.entities | type == "array"' "$JSON_FILE" >/dev/null 2>&1 || { echo "ERROR: 'entities' must be an array"; exit 1; }
-jq -e '.topics | type == "array"' "$JSON_FILE" >/dev/null 2>&1 || { echo "ERROR: 'topics' must be an array"; exit 1; }
-jq -e '.connections | type == "array"' "$JSON_FILE" >/dev/null 2>&1 || { echo "ERROR: 'connections' must be an array"; exit 1; }
-jq -e '.contradictions | type == "array"' "$JSON_FILE" >/dev/null 2>&1 || { echo "ERROR: 'contradictions' must be an array"; exit 1; }
-jq -e '.new_vs_existing | type == "object"' "$JSON_FILE" >/dev/null 2>&1 || { echo "ERROR: 'new_vs_existing' must be an object"; exit 1; }
+path = sys.argv[1]
 
-# 检查每个 entity 的必需子字段
-VALID_CONFIDENCE="EXTRACTED|INFERRED|AMBIGUOUS|UNVERIFIED"
+try:
+    with open(path, "r", encoding="utf-8") as handle:
+        data = json.load(handle)
+except Exception:
+    print("ERROR: invalid JSON format")
+    sys.exit(1)
 
-ENTITY_COUNT=$(jq '.entities | length' "$JSON_FILE" 2>/dev/null)
-if [ "$ENTITY_COUNT" -gt 0 ] 2>/dev/null; then
-    NON_OBJECT_ENTITY_COUNT=$(jq '[.entities[] | select(type != "object")] | length' "$JSON_FILE" 2>/dev/null)
-    if [ "$NON_OBJECT_ENTITY_COUNT" -gt 0 ] 2>/dev/null; then
-        echo "ERROR: $NON_OBJECT_ENTITY_COUNT entity/entities must be objects"
-        exit 1
-    fi
 
-    # name, type, confidence 必须存在且非空
-    BAD_ENTITY_COUNT=$(jq '
-        [.entities[] | select(
-            (.name // "" | length) == 0 or
-            (.type // "" | length) == 0 or
-            (.confidence // "" | length) == 0
-        )] | length
-    ' "$JSON_FILE" 2>/dev/null)
-    if [ "$BAD_ENTITY_COUNT" -gt 0 ] 2>/dev/null; then
-        echo "ERROR: $BAD_ENTITY_COUNT entity/entities missing required fields (name/type/confidence)"
-        exit 1
-    fi
+def fail(message):
+    print(f"ERROR: {message}")
+    sys.exit(1)
 
-    # confidence 值必须是四个有效值之一
-    INVALID=$(jq -r '.entities[]? | (.confidence // "MISSING")' "$JSON_FILE" 2>/dev/null | \
-        grep -v -E "^($VALID_CONFIDENCE)$" | head -3)
-    if [ -n "$INVALID" ]; then
-        echo "ERROR: invalid entity confidence value(s): $INVALID"
-        echo "       Valid values: EXTRACTED | INFERRED | AMBIGUOUS | UNVERIFIED"
-        exit 1
-    fi
 
-    # EXTRACTED 和 INFERRED 必须提供 evidence 字段
-    NO_EVIDENCE_COUNT=$(jq '
-        [.entities[] | select(
-            (.confidence == "EXTRACTED" or .confidence == "INFERRED") and
-            ((.evidence // "" | length) == 0)
-        )] | length
-    ' "$JSON_FILE" 2>/dev/null)
-    if [ "$NO_EVIDENCE_COUNT" -gt 0 ] 2>/dev/null; then
-        echo "WARN: $NO_EVIDENCE_COUNT entity/entities with EXTRACTED/INFERRED confidence missing 'evidence' field"
-    fi
-fi
+def is_nonempty(value):
+    return isinstance(value, str) and len(value.strip()) > 0
 
-# 检查每个 topic 的必需子字段
-TOPIC_COUNT=$(jq '.topics | length' "$JSON_FILE" 2>/dev/null)
-if [ "$TOPIC_COUNT" -gt 0 ] 2>/dev/null; then
-    NON_OBJECT_TOPIC_COUNT=$(jq '[.topics[] | select(type != "object")] | length' "$JSON_FILE" 2>/dev/null)
-    if [ "$NON_OBJECT_TOPIC_COUNT" -gt 0 ] 2>/dev/null; then
-        echo "ERROR: $NON_OBJECT_TOPIC_COUNT topic(s) must be objects"
-        exit 1
-    fi
 
-    BAD_TOPIC_COUNT=$(jq '
-        [.topics[] | select(
-            (.name // "" | length) == 0
-        )] | length
-    ' "$JSON_FILE" 2>/dev/null)
-    if [ "$BAD_TOPIC_COUNT" -gt 0 ] 2>/dev/null; then
-        echo "ERROR: $BAD_TOPIC_COUNT topic(s) missing required 'name' field"
-        exit 1
-    fi
-fi
+def require_array(key):
+    if not isinstance(data.get(key), list):
+        fail(f"'{key}' must be an array")
+    return data[key]
 
-# 检查每个 connection 的必需子字段（from, to, confidence）
-CONN_COUNT=$(jq '.connections | length' "$JSON_FILE" 2>/dev/null)
-if [ "$CONN_COUNT" -gt 0 ] 2>/dev/null; then
-    NON_OBJECT_CONN_COUNT=$(jq '[.connections[] | select(type != "object")] | length' "$JSON_FILE" 2>/dev/null)
-    if [ "$NON_OBJECT_CONN_COUNT" -gt 0 ] 2>/dev/null; then
-        echo "ERROR: $NON_OBJECT_CONN_COUNT connection(s) must be objects"
-        exit 1
-    fi
 
-    BAD_CONN_COUNT=$(jq '
-        [.connections[] | select(
-            (.from // "" | length) == 0 or
-            (.to // "" | length) == 0 or
-            (.confidence // "" | length) == 0
-        )] | length
-    ' "$JSON_FILE" 2>/dev/null)
-    if [ "$BAD_CONN_COUNT" -gt 0 ] 2>/dev/null; then
-        echo "ERROR: $BAD_CONN_COUNT connection(s) missing required fields (from/to/confidence)"
-        exit 1
-    fi
+def require_object(key):
+    if not isinstance(data.get(key), dict):
+        fail(f"'{key}' must be an object")
+    return data[key]
 
-    INVALID_CONN_CONF=$(jq -r '.connections[]? | (.confidence // "MISSING")' "$JSON_FILE" 2>/dev/null | \
-        grep -v -E "^($VALID_CONFIDENCE)$" | head -3)
-    if [ -n "$INVALID_CONN_CONF" ]; then
-        echo "ERROR: invalid connection confidence value(s): $INVALID_CONN_CONF"
-        echo "       Valid values: EXTRACTED | INFERRED | AMBIGUOUS | UNVERIFIED"
-        exit 1
-    fi
 
-    # EXTRACTED 和 INFERRED connections 必须提供 evidence
-    NO_CONN_EVIDENCE=$(jq '
-        [.connections[] | select(
-            (.confidence == "EXTRACTED" or .confidence == "INFERRED") and
-            ((.evidence // "" | length) == 0)
-        )] | length
-    ' "$JSON_FILE" 2>/dev/null)
-    if [ "$NO_CONN_EVIDENCE" -gt 0 ] 2>/dev/null; then
-        echo "WARN: $NO_CONN_EVIDENCE connection(s) with EXTRACTED/INFERRED confidence missing 'evidence' field"
-    fi
-fi
+VALID_CONFIDENCE = {"EXTRACTED", "INFERRED", "AMBIGUOUS", "UNVERIFIED"}
+is_followhub = any(
+    key in data
+    for key in (
+        "source_decision",
+        "classification",
+        "topic_decisions",
+        "synthesis_decision",
+    )
+)
 
-echo "OK: Step 1 JSON validation passed"
-exit 0
+if is_followhub:
+    source = require_object("source_decision")
+    classification = require_object("classification")
+    topic_decisions = require_array("topic_decisions")
+    synthesis = require_object("synthesis_decision")
+    graph_edges = require_array("graph_edges")
+
+    if source.get("action") not in {"create_source", "update_source", "link_as_related_source"}:
+        fail("source_decision.action must be create_source | update_source | link_as_related_source")
+    if not is_nonempty(source.get("reason")):
+        fail("source_decision.reason is required")
+
+    if not is_nonempty(classification.get("material_type")):
+        fail("classification.material_type is required")
+    if not is_nonempty(classification.get("source_type")):
+        fail("classification.source_type is required")
+    domains = classification.get("domains")
+    if not isinstance(domains, list) or len(domains) < 1:
+        fail("classification.domains must contain at least one domain")
+    tags = classification.get("tags")
+    if not isinstance(tags, list) or len(tags) < 1 or len(tags) > 2:
+        fail("classification.tags must contain 1-2 tags")
+
+    bad_topics = 0
+    for item in topic_decisions:
+        if not isinstance(item, dict):
+            bad_topics += 1
+            continue
+        if item.get("action") not in {"attach_existing", "create_topic"} or not is_nonempty(item.get("reason")):
+            bad_topics += 1
+    if bad_topics:
+        fail(f"{bad_topics} topic_decision(s) missing valid action/reason")
+
+    if synthesis.get("action") not in {"unchanged", "update", "create"}:
+        fail("synthesis_decision.action must be unchanged | update | create")
+    if not is_nonempty(synthesis.get("reason")):
+        fail("synthesis_decision.reason is required")
+
+    valid_edge_types = {"supports", "evidence_for", "updates", "contrasts", "relates"}
+    invalid_confidences = []
+    bad_edges = 0
+    for edge in graph_edges:
+        if not isinstance(edge, dict):
+            bad_edges += 1
+            continue
+        confidence = edge.get("confidence", "MISSING")
+        if confidence not in VALID_CONFIDENCE and len(invalid_confidences) < 3:
+            invalid_confidences.append(str(confidence))
+        if not is_nonempty(edge.get("from")) or not is_nonempty(edge.get("to")) or edge.get("type") not in valid_edge_types:
+            bad_edges += 1
+    if invalid_confidences:
+        print(f"ERROR: invalid graph edge confidence value(s): {' '.join(invalid_confidences)}")
+        print("       Valid values: EXTRACTED | INFERRED | AMBIGUOUS | UNVERIFIED")
+        sys.exit(1)
+    if bad_edges:
+        fail(f"{bad_edges} graph_edge(s) missing from/to or valid type")
+
+    print("OK: FollowHub Step 1 decision validation passed")
+    sys.exit(0)
+
+entities = require_array("entities")
+topics = require_array("topics")
+connections = require_array("connections")
+require_array("contradictions")
+require_object("new_vs_existing")
+
+non_object_entities = sum(1 for item in entities if not isinstance(item, dict))
+if non_object_entities:
+    fail(f"{non_object_entities} entity/entities must be objects")
+
+bad_entities = [
+    item
+    for item in entities
+    if not is_nonempty(item.get("name"))
+    or not is_nonempty(item.get("type"))
+    or not is_nonempty(item.get("confidence"))
+]
+if bad_entities:
+    fail(f"{len(bad_entities)} entity/entities missing required fields (name/type/confidence)")
+
+invalid_entity_conf = [
+    str(item.get("confidence", "MISSING"))
+    for item in entities
+    if item.get("confidence", "MISSING") not in VALID_CONFIDENCE
+][:3]
+if invalid_entity_conf:
+    print(f"ERROR: invalid entity confidence value(s): {' '.join(invalid_entity_conf)}")
+    print("       Valid values: EXTRACTED | INFERRED | AMBIGUOUS | UNVERIFIED")
+    sys.exit(1)
+
+no_entity_evidence = sum(
+    1
+    for item in entities
+    if item.get("confidence") in {"EXTRACTED", "INFERRED"} and not is_nonempty(item.get("evidence"))
+)
+if no_entity_evidence:
+    print(f"WARN: {no_entity_evidence} entity/entities with EXTRACTED/INFERRED confidence missing 'evidence' field")
+
+non_object_topics = sum(1 for item in topics if not isinstance(item, dict))
+if non_object_topics:
+    fail(f"{non_object_topics} topic(s) must be objects")
+bad_topics = [item for item in topics if not is_nonempty(item.get("name"))]
+if bad_topics:
+    fail(f"{len(bad_topics)} topic(s) missing required 'name' field")
+
+non_object_connections = sum(1 for item in connections if not isinstance(item, dict))
+if non_object_connections:
+    fail(f"{non_object_connections} connection(s) must be objects")
+
+bad_connections = [
+    item
+    for item in connections
+    if not is_nonempty(item.get("from"))
+    or not is_nonempty(item.get("to"))
+    or not is_nonempty(item.get("confidence"))
+]
+if bad_connections:
+    fail(f"{len(bad_connections)} connection(s) missing required fields (from/to/confidence)")
+
+invalid_connection_conf = [
+    str(item.get("confidence", "MISSING"))
+    for item in connections
+    if item.get("confidence", "MISSING") not in VALID_CONFIDENCE
+][:3]
+if invalid_connection_conf:
+    print(f"ERROR: invalid connection confidence value(s): {' '.join(invalid_connection_conf)}")
+    print("       Valid values: EXTRACTED | INFERRED | AMBIGUOUS | UNVERIFIED")
+    sys.exit(1)
+
+no_connection_evidence = sum(
+    1
+    for item in connections
+    if item.get("confidence") in {"EXTRACTED", "INFERRED"} and not is_nonempty(item.get("evidence"))
+)
+if no_connection_evidence:
+    print(f"WARN: {no_connection_evidence} connection(s) with EXTRACTED/INFERRED confidence missing 'evidence' field")
+
+print("OK: Step 1 JSON validation passed")
+PY

@@ -58,12 +58,6 @@ export PYTHONIOENCODING="${PYTHONIOENCODING:-utf-8}"
 print_install_hint() {
   local tool="$1"
   case "$tool" in
-    jq)
-      echo "  macOS:        brew install jq" >&2
-      echo "  Linux/WSL:    sudo apt-get install jq   (Debian/Ubuntu)" >&2
-      echo "                sudo dnf install jq       (RHEL/Fedora)" >&2
-      echo "  Windows:      winget install jqlang.jq  (or choco install jq)" >&2
-      ;;
     node)
       echo "  macOS:        brew install node" >&2
       echo "  Linux/WSL:    sudo apt-get install nodejs npm" >&2

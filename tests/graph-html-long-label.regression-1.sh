@@ -5,6 +5,10 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 GRAPH_HTML_BASIC="tests/fixtures/graph-interactive-basic"
+NODE_BIN="$(command -v node 2>/dev/null || true)"
+if [ -z "$NODE_BIN" ] && command -v zsh >/dev/null 2>&1; then
+    NODE_BIN="$(zsh -ic 'command -v node' 2>/dev/null | tail -1 || true)"
+fi
 
 fail() {
     echo "FAIL: $1" >&2
@@ -18,6 +22,10 @@ assert_file_contains() {
     if ! grep -F -- "$text" "$file" > /dev/null; then
         fail "Expected $file to contain: $text"
     fi
+}
+
+require_node() {
+    [ -n "$NODE_BIN" ] || fail "node is required for runtime helper assertions"
 }
 
 build_graph_html_fixture() {
@@ -42,9 +50,9 @@ test_graph_html_has_truncate_label_markup_hooks() {
 
     assert_file_contains "$output_dir/graph-wash.js" "button.title = node.label;"
     assert_file_contains "$output_dir/graph-wash.js" "dataset.densityMode"
-    assert_file_contains "$output_dir/graph-wash.js" "queue-item"
+    assert_file_contains "$output_dir/graph-wash.js" "neighbor-card"
     assert_file_contains "$html" ".node-name {"
-    assert_file_contains "$html" ".queue-item__copy strong"
+    assert_file_contains "$html" ".card-copy strong"
     assert_file_contains "$html" ".knowledge-card pre"
     assert_file_contains "$html" ".drawer-subtitle"
     assert_file_contains "$html" "text-overflow: ellipsis;"
@@ -73,7 +81,8 @@ test_graph_html_truncate_label_runtime_behavior() {
     build_graph_html_fixture "$tmp_dir"
 
     # Use extracted helpers module directly (no vm extraction)
-    node - <<'NODE' "$output_dir/graph-wash-helpers.js" || exit 1
+    require_node
+    "$NODE_BIN" - <<'NODE' "$output_dir/graph-wash-helpers.js" || exit 1
 const path = require('path');
 const helpers = require(path.resolve(process.argv[2]));
 

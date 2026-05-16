@@ -129,7 +129,7 @@ describe("atlas state contract", () => {
     assert.equal(model.byId.a.degree, 2);
     assert.equal(model.byId.a.summary, "整理一次，持续维护。");
     assert.deepEqual(model.communities.map((community) => community.label), ["方法论", "素材来源"]);
-    assert.equal(model.starts[0].node.id, "a");
+    assert.equal(model.starts.length, 0);
   });
 
   it("treats null atlas coordinates as missing layout input", () => {
@@ -152,7 +152,7 @@ describe("atlas state contract", () => {
     );
   });
 
-  it("uses one visible snapshot for filters, search, density, and starts", () => {
+  it("uses one visible snapshot for filters, search, and density", () => {
     const model = buildAtlasModel(rawGraph);
     const layout = deriveAtlasLayout(model);
     const snapshot = resolveAtlasVisibleSnapshot(model, layout, {
@@ -167,12 +167,12 @@ describe("atlas state contract", () => {
     assert.deepEqual(snapshot.nodes.map((node) => node.id), ["b"]);
     assert.deepEqual(snapshot.edges, []);
     assert.equal(snapshot.densityMode, "card");
-    assert.equal(snapshot.starts[0].node.id, "b");
+    assert.equal(snapshot.starts.length, 0);
     assert.equal(snapshot.importantNodeIds.b, true);
     assert.equal(snapshot.counts.total_nodes, 3);
   });
 
-  it("keeps recommended starts and high-priority nodes readable as atlas index slips", () => {
+  it("keeps high-priority nodes readable as atlas index slips", () => {
     const model = buildAtlasModel(rawGraph);
     const layout = deriveAtlasLayout(model);
     const snapshot = resolveAtlasVisibleSnapshot(model, layout, {
@@ -183,8 +183,8 @@ describe("atlas state contract", () => {
       filters: { EXTRACTED: true, INFERRED: true, AMBIGUOUS: true, UNVERIFIED: true }
     });
 
-    assert.equal(snapshot.starts[0].node.id, "a");
-    assert.equal(snapshot.startNodeIds.a, true);
+    assert.equal(snapshot.starts.length, 0);
+    assert.equal(snapshot.startNodeIds.a, undefined);
     assert.equal(snapshot.importantNodeIds.a, true);
     assert.equal(snapshot.labelNodeIds.a, true);
   });
@@ -212,7 +212,7 @@ describe("atlas state contract", () => {
     assert.equal(resolveAtlasSelectedNodeId(model, emptySnapshot, "c"), null);
   });
 
-  it("does not auto-select a recommended start on first open", () => {
+  it("does not auto-select a node on first open", () => {
     const model = buildAtlasModel(rawGraph);
     const layout = deriveAtlasLayout(model);
     const snapshot = resolveAtlasVisibleSnapshot(model, layout, {
@@ -223,7 +223,7 @@ describe("atlas state contract", () => {
       filters: { EXTRACTED: true, INFERRED: true, AMBIGUOUS: true, UNVERIFIED: true }
     });
 
-    assert.equal(snapshot.starts[0].node.id, "a");
+    assert.equal(snapshot.starts.length, 0);
     assert.equal(resolveAtlasSelectedNodeId(model, snapshot, null), null);
   });
 

@@ -81,11 +81,128 @@ hook_command_for_skill_dir() {
   printf 'bash %s/scripts/hook-session-start.sh\n' "$1"
 }
 
-require_jq() {
-  if ! command -v jq >/dev/null 2>&1; then
-    err "注册或移除 hook 需要 jq"
-    exit 1
+require_json_tool() {
+  if command -v jq >/dev/null 2>&1; then
+    return 0
   fi
+  if command -v python3 >/dev/null 2>&1; then
+    return 0
+  fi
+  err "注册或移除 hook 需要 jq 或 python3"
+  exit 1
+}
+
+json_has_session_hook() {
+  local settings_path="$1"
+  local hook_command="$2"
+
+  if command -v jq >/dev/null 2>&1; then
+    jq -e --arg cmd "$hook_command" '[ (.hooks.SessionStart // [])[]? | (.hooks // [])[]? | .command ] | index($cmd) != null' "$settings_path" > /dev/null
+    return $?
+  fi
+
+  python3 - "$settings_path" "$hook_command" <<'PY'
+import json
+import sys
+
+path, command = sys.argv[1], sys.argv[2]
+try:
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+except Exception:
+    data = {}
+
+for group in data.get("hooks", {}).get("SessionStart", []):
+    for hook in group.get("hooks", []):
+        if hook.get("command") == command:
+            sys.exit(0)
+sys.exit(1)
+PY
+}
+
+json_add_session_hook() {
+  local settings_path="$1"
+  local hook_command="$2"
+  local tmp_file="$3"
+
+  if command -v jq >/dev/null 2>&1; then
+    jq --arg cmd "$hook_command" '
+      .hooks = (.hooks // {}) |
+      .hooks.SessionStart = ((.hooks.SessionStart // []) + [{"hooks":[{"type":"command","command":$cmd}]}])
+    ' "$settings_path" > "$tmp_file"
+    return $?
+  fi
+
+  python3 - "$settings_path" "$hook_command" > "$tmp_file" <<'PY'
+import json
+import sys
+
+path, command = sys.argv[1], sys.argv[2]
+try:
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+except Exception:
+    data = {}
+
+hooks = data.setdefault("hooks", {})
+session = hooks.setdefault("SessionStart", [])
+session.append({"hooks": [{"type": "command", "command": command}]})
+json.dump(data, sys.stdout, ensure_ascii=False, indent=2)
+sys.stdout.write("\n")
+PY
+}
+
+json_remove_session_hook() {
+  local settings_path="$1"
+  local hook_command="$2"
+  local tmp_file="$3"
+
+  if command -v jq >/dev/null 2>&1; then
+    jq --arg cmd "$hook_command" '
+      .hooks = (.hooks // {}) |
+      .hooks.SessionStart = (
+        (.hooks.SessionStart // [])
+        | map(.hooks = ((.hooks // []) | map(select(.command != $cmd))))
+        | map(select((.hooks // []) | length > 0))
+      ) |
+      if ((.hooks.SessionStart // []) | length) == 0 then del(.hooks.SessionStart) else . end |
+      if (.hooks | length) == 0 then del(.hooks) else . end
+    ' "$settings_path" > "$tmp_file"
+    return $?
+  fi
+
+  python3 - "$settings_path" "$hook_command" > "$tmp_file" <<'PY'
+import json
+import sys
+
+path, command = sys.argv[1], sys.argv[2]
+try:
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+except Exception:
+    data = {}
+
+hooks = data.get("hooks")
+if isinstance(hooks, dict):
+    session = hooks.get("SessionStart")
+    if isinstance(session, list):
+        next_session = []
+        for group in session:
+            group_hooks = [hook for hook in group.get("hooks", []) if hook.get("command") != command]
+            if group_hooks:
+                next_group = dict(group)
+                next_group["hooks"] = group_hooks
+                next_session.append(next_group)
+        if next_session:
+            hooks["SessionStart"] = next_session
+        else:
+            hooks.pop("SessionStart", None)
+    if not hooks:
+        data.pop("hooks", None)
+
+json.dump(data, sys.stdout, ensure_ascii=False, indent=2)
+sys.stdout.write("\n")
+PY
 }
 
 register_claude_session_hook() {
@@ -97,7 +214,7 @@ register_claude_session_hook() {
     exit 1
   }
 
-  require_jq
+  require_json_tool
 
   settings_dir="$HOME/.claude"
   settings_path="$settings_dir/settings.json"
@@ -113,16 +230,13 @@ register_claude_session_hook() {
   [ -f "$settings_path" ] || printf '{}\n' > "$settings_path"
   cp "$settings_path" "$backup_path"
 
-  if jq -e --arg cmd "$hook_command" '[ (.hooks.SessionStart // [])[]? | (.hooks // [])[]? | .command ] | index($cmd) != null' "$settings_path" > /dev/null; then
+  if json_has_session_hook "$settings_path" "$hook_command"; then
     ok "Claude Code SessionStart hook 已存在，跳过"
     return 0
   fi
 
   tmp_file="$(mktemp)"
-  jq --arg cmd "$hook_command" '
-    .hooks = (.hooks // {}) |
-    .hooks.SessionStart = ((.hooks.SessionStart // []) + [{"hooks":[{"type":"command","command":$cmd}]}])
-  ' "$settings_path" > "$tmp_file"
+  json_add_session_hook "$settings_path" "$hook_command" "$tmp_file"
   mv "$tmp_file" "$settings_path"
 
   ok "Claude Code SessionStart hook 已注册"
@@ -132,7 +246,7 @@ uninstall_claude_session_hook() {
   local skill_dir="$1"
   local settings_dir settings_path backup_path hook_command tmp_file
 
-  require_jq
+  require_json_tool
 
   settings_dir="$HOME/.claude"
   settings_path="$settings_dir/settings.json"
@@ -156,16 +270,7 @@ uninstall_claude_session_hook() {
   cp "$settings_path" "$backup_path"
 
   tmp_file="$(mktemp)"
-  jq --arg cmd "$hook_command" '
-    .hooks = (.hooks // {}) |
-    .hooks.SessionStart = (
-      (.hooks.SessionStart // [])
-      | map(.hooks = ((.hooks // []) | map(select(.command != $cmd))))
-      | map(select((.hooks // []) | length > 0))
-    ) |
-    if ((.hooks.SessionStart // []) | length) == 0 then del(.hooks.SessionStart) else . end |
-    if (.hooks | length) == 0 then del(.hooks) else . end
-  ' "$settings_path" > "$tmp_file"
+  json_remove_session_hook "$settings_path" "$hook_command" "$tmp_file"
   mv "$tmp_file" "$settings_path"
 
   ok "Claude Code SessionStart hook 已移除"

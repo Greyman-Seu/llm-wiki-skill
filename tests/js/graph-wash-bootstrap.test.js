@@ -44,7 +44,7 @@ describe("graph-wash bootstrap", () => {
     assert.deepEqual(errors, ["[wiki] graph-wash-helpers.js is missing or failed to load"]);
   });
 
-  it("passes null to createSafeStorage when localStorage getter throws", () => {
+  it("passes null to createSafeStorage when localStorage getter throws", async () => {
     let capturedStorage;
     const sandbox = {
       window: {
@@ -102,7 +102,7 @@ describe("graph-wash bootstrap", () => {
     };
 
     vm.createContext(sandbox);
-    vm.runInContext(`(function () {\n${GRAPH_WASH_BOOTSTRAP_SOURCE}\n})();`, sandbox, { filename: GRAPH_WASH_PATH });
+    await vm.runInContext(`(async function () {\n${GRAPH_WASH_BOOTSTRAP_SOURCE}\n})();`, sandbox, { filename: GRAPH_WASH_PATH });
 
     assert.equal(capturedStorage, null);
   });

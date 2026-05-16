@@ -5,6 +5,10 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 GRAPH_HTML_BASIC="tests/fixtures/graph-interactive-basic"
+NODE_BIN="$(command -v node 2>/dev/null || true)"
+if [ -z "$NODE_BIN" ] && command -v zsh >/dev/null 2>&1; then
+    NODE_BIN="$(zsh -ic 'command -v node' 2>/dev/null | tail -1 || true)"
+fi
 
 fail() {
     echo "FAIL: $1" >&2
@@ -18,6 +22,10 @@ assert_file_contains() {
     if ! grep -F -- "$text" "$file" > /dev/null; then
         fail "Expected $file to contain: $text"
     fi
+}
+
+require_node() {
+    [ -n "$NODE_BIN" ] || fail "node is required for design contract assertions"
 }
 
 build_graph_html_fixture() {
@@ -66,7 +74,8 @@ test_oriental_design_contract_hooks() {
 }
 
 test_first_open_selection_contract() {
-    node - <<'NODE' "$REPO_ROOT" || fail "first-open selection contract should hold"
+    require_node
+    "$NODE_BIN" - <<'NODE' "$REPO_ROOT" || fail "first-open selection contract should hold"
 const assert = require("node:assert/strict");
 const path = require("node:path");
 const {
@@ -96,8 +105,8 @@ const snapshot = resolveAtlasVisibleSnapshot(model, layout, {
   filters: { EXTRACTED: true, INFERRED: true, AMBIGUOUS: true, UNVERIFIED: true }
 });
 
-assert.equal(snapshot.starts[0].node.id, "start");
-assert.equal(snapshot.startNodeIds.start, true);
+assert.equal(snapshot.starts.length, 0);
+assert.equal(snapshot.startNodeIds.start, undefined);
 assert.equal(snapshot.importantNodeIds.start, true);
 assert.equal(resolveAtlasSelectedNodeId(model, snapshot, null), null);
 assert.equal(resolveAtlasSelectedNodeId(model, snapshot, "start"), "start");

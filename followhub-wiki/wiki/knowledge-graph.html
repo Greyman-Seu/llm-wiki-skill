@@ -1,0 +1,2988 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>知识图谱 · 研究目的与方向</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%238B2E24'/%3E%3Cpath d='M10 43 C17 34 22 25 29 31 C35 18 42 14 54 43' fill='none' stroke='%23FFFDF7' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14 49 C24 45 34 46 50 49' fill='none' stroke='%23FFFDF7' stroke-width='3' stroke-linecap='round' opacity='.75'/%3E%3Ccircle cx='43' cy='18' r='3' fill='%23FFFDF7'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4efe4;
+      --surface: #fffdf7;
+      --surface-2: #f8f1e4;
+      --vellum: #e9ddc9;
+      --mist: #ece5d8;
+      --ink: #241f1a;
+      --muted: #6f6559;
+      --faint: #9b8f7e;
+      --rule: #d8cdbb;
+      --line: #cfc4b1;
+      --cinnabar: #8b2e24;
+      --cinnabar-2: #a23b2a;
+      --jade: #4b7564;
+      --green: #3e6b4b;
+      --night: #315f72;
+      --amber: #b7791f;
+      --violet: #6f557f;
+      --shadow: 0 18px 36px rgba(36, 31, 26, .11);
+      --soft-shadow: 0 10px 24px rgba(36, 31, 26, .08);
+      --radius: 12px;
+      --font-serif: "Noto Serif SC", "Songti SC", "STSong", Georgia, serif;
+      --font-ui: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      --font-mono: "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(255, 253, 247, .72), transparent 28%),
+        radial-gradient(circle at 90% 18%, rgba(75, 117, 100, .12), transparent 28%),
+        linear-gradient(145deg, #f4efe4 0%, #ece4d4 48%, #f6f0e4 100%);
+      color: var(--ink);
+      font-family: var(--font-ui);
+      overflow: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::before {
+      opacity: .42;
+      background-image:
+        repeating-linear-gradient(0deg, transparent 0 31px, rgba(104, 88, 66, .055) 31px 32px),
+        repeating-linear-gradient(90deg, transparent 0 31px, rgba(104, 88, 66, .042) 31px 32px),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .48 0 0 0 0 .34 0 0 0 .18 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+    }
+
+    body::after {
+      background:
+        linear-gradient(90deg, transparent 0 86px, rgba(139, 46, 36, .22) 86px 87px, transparent 87px),
+        linear-gradient(180deg, rgba(255, 255, 255, .28), transparent 22%);
+    }
+
+    button,
+    input,
+    a {
+      font: inherit;
+    }
+
+    button,
+    input,
+    a {
+      min-height: 44px;
+    }
+
+    a {
+      color: inherit;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    [tabindex]:focus-visible {
+      outline: 2px solid rgba(139, 46, 36, .72);
+      outline-offset: 3px;
+    }
+
+    .app {
+      position: relative;
+      z-index: 1;
+      height: 100vh;
+      display: grid;
+      grid-template-columns: minmax(236px, 276px) minmax(520px, 1fr) minmax(300px, 370px);
+      grid-template-rows: auto 1fr;
+      gap: 16px;
+      padding: 14px 16px 16px 24px;
+    }
+
+    .app[data-reading="1"] {
+      grid-template-columns: minmax(226px, 260px) minmax(500px, 1fr) minmax(340px, 430px);
+    }
+
+    .topbar {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(240px, 1fr) auto;
+      gap: 18px;
+      align-items: center;
+      padding: 14px 16px 13px 18px;
+      background: rgba(255, 253, 247, .82);
+      border: 1px solid rgba(216, 205, 187, .92);
+      border-radius: var(--radius);
+      box-shadow: var(--soft-shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .brand {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .seal {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 10px;
+      background:
+        linear-gradient(135deg, rgba(139, 46, 36, .95), rgba(162, 59, 42, .95)),
+        var(--cinnabar);
+      color: #fffdf7;
+      box-shadow: inset 0 0 0 1px rgba(255, 253, 247, .28), 0 10px 18px rgba(139, 46, 36, .22);
+    }
+
+    .seal svg {
+      width: 29px;
+      height: 29px;
+      display: block;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-family: var(--font-serif);
+      font-size: clamp(21px, 2vw, 31px);
+      line-height: 1.08;
+      letter-spacing: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .status-strip {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .mode-tabs {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px;
+      border-radius: 999px;
+      border: 1px solid rgba(216, 205, 187, .92);
+      background: rgba(248, 241, 228, .84);
+    }
+
+    .mode-tab {
+      min-height: 36px;
+      padding: 0 14px;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease;
+    }
+
+    .mode-tab[aria-pressed="true"] {
+      background: linear-gradient(135deg, rgba(139, 46, 36, .94), rgba(162, 59, 42, .94));
+      color: #fffdf7;
+      box-shadow: 0 8px 16px rgba(139, 46, 36, .18);
+    }
+
+    .status-pill,
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 32px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(216, 205, 187, .92);
+      background: rgba(248, 241, 228, .84);
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    button.chip {
+      min-height: 44px;
+    }
+
+    button[disabled],
+    .is-disabled {
+      cursor: not-allowed;
+      opacity: .62;
+      filter: saturate(.65);
+    }
+
+    button[disabled],
+    .is-disabled,
+    .node.is-disabled {
+      border-style: dashed;
+      background-image: repeating-linear-gradient(135deg, transparent 0 8px, rgba(111, 101, 89, .08) 8px 10px);
+    }
+
+    .is-disabled::after {
+      content: "不可用";
+      display: inline-flex;
+      align-items: center;
+      min-height: 20px;
+      margin-left: 8px;
+      padding: 0 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(111, 101, 89, .36);
+      color: var(--muted);
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 99px;
+      background: var(--green);
+      box-shadow: 0 0 0 4px rgba(62, 107, 75, .12);
+    }
+
+    .icon-button,
+    .ghost-button,
+    .primary-button,
+    .state-button,
+    .nav-item,
+    .node {
+      border: 0;
+      cursor: pointer;
+      color: inherit;
+    }
+
+    .icon-button {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      border: 1px solid rgba(216, 205, 187, .94);
+      background: rgba(255, 253, 247, .82);
+      display: inline-grid;
+      place-items: center;
+      color: var(--muted);
+    }
+
+    .ghost-button,
+    .primary-button,
+    .state-button {
+      border-radius: 10px;
+      padding: 0 12px;
+      border: 1px solid rgba(216, 205, 187, .94);
+      background: rgba(255, 253, 247, .82);
+      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .primary-button {
+      border-color: var(--cinnabar);
+      background: var(--cinnabar);
+      color: #fffdf7;
+      box-shadow: 0 10px 18px rgba(139, 46, 36, .18);
+    }
+
+    .ghost-button:hover,
+    .state-button:hover,
+    .icon-button:hover,
+    .nav-item:hover,
+    .node:hover {
+      transform: translateY(-1px);
+      border-color: rgba(139, 46, 36, .42);
+      box-shadow: 0 8px 16px rgba(36, 31, 26, .08);
+    }
+
+    .github-button {
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .github-button svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+    }
+
+    .mobile-atlas-preview,
+    .sidebar,
+    .drawer,
+    .canvas-card {
+      min-height: 0;
+      border: 1px solid rgba(216, 205, 187, .92);
+      background: rgba(255, 253, 247, .76);
+      border-radius: var(--radius);
+      box-shadow: var(--soft-shadow);
+      backdrop-filter: blur(9px);
+    }
+
+    .mobile-atlas-preview {
+      display: none;
+    }
+
+    .sidebar {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 15px 22px 15px 15px;
+      overflow-y: auto;
+    }
+
+    .sidebar::after,
+    .drawer::before {
+      content: "";
+      position: absolute;
+      top: 16px;
+      bottom: 16px;
+      width: 1px;
+      background: rgba(139, 46, 36, .24);
+      pointer-events: none;
+    }
+
+    .sidebar::after {
+      right: 14px;
+    }
+
+    .drawer::before {
+      left: 14px;
+    }
+
+    .section {
+      position: relative;
+      display: grid;
+      gap: 9px;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      min-height: 24px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: .04em;
+    }
+
+    .section-title b {
+      color: var(--ink);
+      font-family: var(--font-serif);
+      font-size: 15px;
+      letter-spacing: 0;
+    }
+
+    .search-box {
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      min-height: 46px;
+      padding: 0 42px 0 13px;
+      border-radius: 10px;
+      border: 1px solid rgba(216, 205, 187, .95);
+      background: rgba(248, 241, 228, .78);
+      color: var(--ink);
+    }
+
+    .search-box span {
+      position: absolute;
+      right: 13px;
+      top: 50%;
+      translate: 0 -50%;
+      color: var(--faint);
+    }
+
+    .nav-list,
+    .queue-list,
+    .start-list,
+    .neighbor-list,
+    .notes-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .nav-item,
+    .queue-card,
+    .start-card,
+    .neighbor-card,
+    .note-card,
+    .state-panel {
+      width: 100%;
+      min-width: 0;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(216, 205, 187, .92);
+      background: rgba(248, 241, 228, .66);
+      text-align: left;
+    }
+
+    .start-card[data-preview-start="true"],
+    .start-card[data-selected="true"] {
+      border-color: rgba(139, 46, 36, .42);
+      background: rgba(248, 241, 228, .78);
+      box-shadow: inset 3px 0 0 rgba(139, 46, 36, .56);
+    }
+
+    .nav-item {
+      display: grid;
+      grid-template-columns: 10px 1fr auto;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .nav-item[aria-pressed="true"] {
+      border-color: rgba(139, 46, 36, .46);
+      background: rgba(255, 253, 247, .94);
+      box-shadow: inset 3px 0 0 var(--cinnabar), 0 7px 16px rgba(36, 31, 26, .07);
+    }
+
+    .swatch {
+      width: 10px;
+      height: 28px;
+      border-radius: 99px;
+      background: var(--night);
+    }
+
+    .nav-copy,
+    .card-copy {
+      min-width: 0;
+    }
+
+    .nav-copy strong,
+    .card-copy strong {
+      display: block;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-family: var(--font-serif);
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    .nav-copy span,
+    .card-copy span {
+      display: block;
+      margin-top: 3px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .count {
+      font-family: var(--font-mono);
+      color: var(--cinnabar);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .segmented {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+      padding: 5px;
+      border-radius: 12px;
+      background: rgba(233, 221, 201, .52);
+      border: 1px solid rgba(216, 205, 187, .82);
+    }
+
+    .segmented button {
+      min-width: 44px;
+      min-height: 44px;
+      border-radius: 8px;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .segmented button[aria-pressed="true"] {
+      color: var(--ink);
+      background: rgba(255, 253, 247, .92);
+      box-shadow: 0 5px 12px rgba(36, 31, 26, .08);
+    }
+
+    .queue-card {
+      display: grid;
+      gap: 10px;
+    }
+
+    .queue-item {
+      display: grid;
+      grid-template-columns: 4px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 9px;
+      width: 100%;
+      min-width: 0;
+      padding: 9px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(216, 205, 187, .92);
+      background: rgba(255, 253, 247, .72);
+      text-align: left;
+    }
+
+    .queue-item[aria-current="true"] {
+      border-color: rgba(139, 46, 36, .42);
+      background: rgba(255, 253, 247, .94);
+      box-shadow: 0 7px 16px rgba(36, 31, 26, .07);
+    }
+
+    .queue-item__marker {
+      width: 4px;
+      align-self: stretch;
+      border-radius: 99px;
+      background: var(--night);
+    }
+
+    .queue-item[data-kind="note"] .queue-item__marker {
+      background: var(--cinnabar);
+    }
+
+    .queue-item[data-kind="favorite"] .queue-item__marker {
+      background: var(--jade);
+    }
+
+    .queue-item__copy {
+      min-width: 0;
+      display: grid;
+      gap: 3px;
+    }
+
+    .queue-item__copy strong {
+      min-width: 0;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      color: var(--ink);
+      font-family: var(--font-serif);
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .queue-item__copy span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .queue-item__badge {
+      color: var(--cinnabar);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      white-space: nowrap;
+    }
+
+    .queue-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .metric {
+      padding: 9px;
+      border-radius: 9px;
+      background: rgba(255, 253, 247, .72);
+      border: 1px dashed rgba(216, 205, 187, .95);
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .metric b {
+      display: block;
+      margin-top: 5px;
+      font-family: var(--font-serif);
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .canvas-card {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      background:
+        linear-gradient(180deg, rgba(255, 253, 247, .62), rgba(248, 241, 228, .58)),
+        var(--surface-2);
+    }
+
+    .canvas-card::before,
+    .canvas-card::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .canvas-card::before {
+      inset: 64px 16px 72px;
+      opacity: .66;
+      background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='920' height='620' viewBox='0 0 920 620'%3E%3Cg fill='none' stroke='%23cfc4b1' stroke-width='1.35' opacity='.9'%3E%3Cpath d='M-20 480 C88 420 140 448 212 386 C298 312 364 378 454 322 C548 264 608 278 704 228 C798 180 856 206 946 150'/%3E%3Cpath d='M-28 525 C86 462 166 492 244 426 C332 350 394 414 482 352 C574 288 638 306 734 254 C820 208 880 236 952 196'/%3E%3Cpath d='M18 372 C112 324 170 340 240 282 C324 212 386 272 466 222 C542 174 636 190 700 142 C782 82 854 120 930 78'/%3E%3Cpath d='M44 540 C118 520 148 558 218 522 C306 478 340 514 430 462 C514 414 586 430 674 386 C778 334 826 362 912 322'/%3E%3Cpath d='M-32 262 C60 224 112 242 174 198 C244 148 300 184 374 142 C450 96 520 106 594 72 C686 32 760 56 930 4'/%3E%3Cpath d='M72 470 C156 430 218 456 290 404 C366 350 424 392 512 338 C602 284 662 302 742 260 C812 224 856 238 936 198'/%3E%3Cpath d='M80 302 C154 266 218 286 286 238 C350 190 422 218 492 178 C568 134 650 142 724 96 C796 52 854 72 930 34'/%3E%3C/g%3E%3Cg fill='none' stroke='%23315f72' stroke-width='1.1' opacity='.22'%3E%3Cpath d='M120 154 L206 198 L316 162 L430 236 L546 176 L678 226 L798 144'/%3E%3Cpath d='M172 398 L260 338 L368 390 L486 316 L604 356 L732 294'/%3E%3Cpath d='M236 112 L330 92 L426 140 L528 106 L632 156 L738 112'/%3E%3C/g%3E%3Cg fill='%23315f72' opacity='.18'%3E%3Ccircle cx='120' cy='154' r='3'/%3E%3Ccircle cx='316' cy='162' r='2.6'/%3E%3Ccircle cx='546' cy='176' r='2.8'/%3E%3Ccircle cx='798' cy='144' r='3'/%3E%3Ccircle cx='260' cy='338' r='2.4'/%3E%3Ccircle cx='604' cy='356' r='2.4'/%3E%3Ccircle cx='738' cy='112' r='2.8'/%3E%3C/g%3E%3C/svg%3E") center / cover no-repeat;
+    }
+
+    .canvas-card::after {
+      inset: 0;
+      background:
+        radial-gradient(circle at 52% 38%, rgba(49, 95, 114, .16), transparent 18%),
+        radial-gradient(circle at 70% 56%, rgba(75, 117, 100, .12), transparent 22%),
+        radial-gradient(circle at 35% 62%, rgba(139, 46, 36, .10), transparent 18%),
+        linear-gradient(90deg, rgba(255, 253, 247, .1), rgba(236, 229, 216, .18), rgba(255, 253, 247, .1));
+      mix-blend-mode: multiply;
+    }
+
+    .mobile-atlas-preview {
+      position: relative;
+      overflow: hidden;
+      padding: 12px;
+      background:
+        linear-gradient(180deg, rgba(255, 253, 247, .76), rgba(248, 241, 228, .66)),
+        var(--surface-2);
+    }
+
+    .mobile-atlas-preview::before {
+      content: "";
+      position: absolute;
+      inset: 8px 10px;
+      pointer-events: none;
+      opacity: .72;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='340' height='112' viewBox='0 0 340 112'%3E%3Cg fill='none' stroke='%23cfc4b1' stroke-width='1.1' opacity='.86'%3E%3Cpath d='M-4 88 C32 58 64 76 96 50 C132 22 164 44 202 30 C246 14 280 34 346 10'/%3E%3Cpath d='M-10 106 C34 78 72 96 108 68 C148 38 178 60 218 44 C258 28 296 46 348 24'/%3E%3Cpath d='M10 66 C48 42 78 52 112 30 C150 8 184 24 218 16 C258 6 292 16 340 2'/%3E%3C/g%3E%3Cg fill='none' stroke='%23315f72' stroke-width='1' opacity='.26'%3E%3Cpath d='M48 68 L104 44 L164 56 L226 32 L292 50'/%3E%3Cpath d='M84 88 L146 74 L206 90 L272 70'/%3E%3C/g%3E%3Cg fill='%23315f72' opacity='.32'%3E%3Ccircle cx='48' cy='68' r='3'/%3E%3Ccircle cx='164' cy='56' r='3'/%3E%3Ccircle cx='292' cy='50' r='3'/%3E%3C/g%3E%3Cg fill='%238b2e24' opacity='.8'%3E%3Ccircle cx='104' cy='44' r='4'/%3E%3C/g%3E%3Cg fill='%234b7564' opacity='.72'%3E%3Ccircle cx='226' cy='32' r='4'/%3E%3C/g%3E%3C/svg%3E") center / cover no-repeat;
+    }
+
+    .preview-copy,
+    .preview-map {
+      position: relative;
+      z-index: 1;
+    }
+
+    .preview-copy {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .preview-copy strong {
+      font-family: var(--font-serif);
+      font-size: 16px;
+    }
+
+    .preview-copy span {
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .preview-map {
+      height: 94px;
+      border-radius: 11px;
+      border: 1px solid rgba(216, 205, 187, .86);
+      background: rgba(255, 253, 247, .38);
+    }
+
+    .canvas-toolbar,
+    .canvas-footer {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+    }
+
+    .canvas-toolbar {
+      border-bottom: 1px solid rgba(216, 205, 187, .78);
+      background: rgba(255, 253, 247, .72);
+    }
+
+    .canvas-title {
+      min-width: 0;
+    }
+
+    .canvas-title strong {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 18px;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .canvas-title span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .canvas-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .atlas {
+      position: relative;
+      z-index: 1;
+      min-height: 0;
+      overflow: hidden;
+      cursor: grab;
+      touch-action: none;
+    }
+
+    .atlas.is-panning {
+      cursor: grabbing;
+    }
+
+    .mist {
+      position: absolute;
+      inset: auto -10% 8% -10%;
+      height: 28%;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 28% 55%, rgba(255, 253, 247, .56), transparent 56%),
+        radial-gradient(ellipse at 70% 48%, rgba(236, 229, 216, .6), transparent 58%);
+      filter: blur(18px);
+      opacity: .9;
+      animation: drift 12s ease-in-out infinite alternate;
+    }
+
+    .graph-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    #edge-layer,
+    #node-layer {
+      transform-origin: 0 0;
+    }
+
+    #node-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      will-change: transform;
+    }
+
+    .edge {
+      fill: none;
+      stroke-linecap: round;
+      opacity: .74;
+    }
+
+    .edge.extracted {
+      stroke: rgba(49, 95, 114, .74);
+      stroke-width: 2.4;
+    }
+
+    .edge.inferred {
+      stroke: rgba(75, 117, 100, .62);
+      stroke-width: 1.7;
+      stroke-dasharray: 6 8;
+    }
+
+    .edge.ambiguous {
+      stroke: rgba(183, 121, 31, .66);
+      stroke-width: 1.6;
+      stroke-dasharray: 2 7;
+    }
+
+    .edge.unverified {
+      stroke: rgba(111, 101, 89, .45);
+      stroke-width: 1.2;
+      stroke-dasharray: 1 8;
+    }
+
+    .node {
+      position: absolute;
+      z-index: 3;
+      min-height: 46px;
+      max-width: 178px;
+      padding: 8px 11px;
+      border-radius: 12px;
+      border: 1px solid rgba(216, 205, 187, .98);
+      background: rgba(255, 253, 247, .88);
+      box-shadow: 0 12px 22px rgba(36, 31, 26, .09), inset 0 0 0 1px rgba(255, 255, 255, .44);
+      translate: -50% -50%;
+      transition: opacity .16s ease, transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+      text-align: left;
+    }
+
+    .node::before {
+      content: "";
+      position: absolute;
+      inset: -7px;
+      border-radius: 17px;
+      background: radial-gradient(circle, rgba(49, 95, 114, .18), transparent 66%);
+      z-index: -1;
+      opacity: .46;
+    }
+
+    .node[data-type="topic"] {
+      border-left: 5px solid var(--cinnabar);
+    }
+
+    .node[data-type="entity"] {
+      border-left: 5px solid var(--night);
+    }
+
+    .node[data-type="source"] {
+      border-left: 5px solid var(--jade);
+    }
+
+    .node[aria-pressed="true"] {
+      border-color: rgba(139, 46, 36, .74);
+      box-shadow: 0 16px 28px rgba(139, 46, 36, .16), 0 0 0 4px rgba(139, 46, 36, .1);
+      transform: translateY(-2px);
+    }
+
+    .node.is-dim,
+    .edge.is-dim {
+      opacity: .18;
+    }
+
+    .node.is-disabled {
+      opacity: .72;
+    }
+
+    .node.is-disabled::before {
+      background: radial-gradient(circle, rgba(111, 101, 89, .16), transparent 66%);
+    }
+
+    .node.is-disabled .spark {
+      background: var(--muted);
+      box-shadow: none;
+    }
+
+    .node.is-hidden {
+      display: none;
+    }
+
+    .node-kind {
+      display: block;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .node-name {
+      display: block;
+      max-width: 146px;
+      margin-top: 3px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-family: var(--font-serif);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .node-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+      color: var(--faint);
+      font-size: 11px;
+    }
+
+    .spark {
+      width: 5px;
+      height: 5px;
+      border-radius: 99px;
+      background: var(--night);
+      box-shadow: 0 0 10px rgba(49, 95, 114, .7);
+    }
+
+    .empty-state,
+    .loading-state,
+    .error-state {
+      position: absolute;
+      z-index: 5;
+      left: 50%;
+      top: 50%;
+      width: min(360px, calc(100% - 48px));
+      translate: -50% -50%;
+      padding: 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(216, 205, 187, .95);
+      background: rgba(255, 253, 247, .9);
+      box-shadow: var(--shadow);
+      text-align: center;
+      display: none;
+    }
+
+    .state-title {
+      margin: 0;
+      font-family: var(--font-serif);
+      font-size: 18px;
+    }
+
+    .state-copy {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .spinner {
+      width: 34px;
+      height: 34px;
+      margin: 0 auto 12px;
+      border-radius: 99px;
+      border: 2px solid rgba(216, 205, 187, .95);
+      border-top-color: var(--cinnabar);
+      animation: spin .9s linear infinite;
+    }
+
+    .atlas[data-mode="loading"] .loading-state,
+    .atlas[data-mode="empty"] .empty-state,
+    .atlas[data-mode="error"] .error-state {
+      display: block;
+    }
+
+    .atlas[data-mode="loading"] .node,
+    .atlas[data-mode="loading"] .edge,
+    .atlas[data-mode="empty"] .node,
+    .atlas[data-mode="empty"] .edge,
+    .atlas[data-mode="error"] .node,
+    .atlas[data-mode="error"] .edge {
+      opacity: .1;
+    }
+
+    .canvas-footer {
+      border-top: 1px solid rgba(216, 205, 187, .78);
+      background: rgba(255, 253, 247, .7);
+      align-items: stretch;
+    }
+
+    .legend,
+    .mini-map,
+    .insight {
+      min-width: 0;
+      border: 1px solid rgba(216, 205, 187, .82);
+      border-radius: 10px;
+      background: rgba(248, 241, 228, .62);
+      padding: 10px;
+    }
+
+    .legend {
+      flex: 1.2;
+    }
+
+    .mini-map {
+      flex: .9;
+      min-width: 138px;
+    }
+
+    .insight {
+      flex: 1.15;
+    }
+
+    .footer-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .confidence-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .confidence {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .confidence i {
+      width: 22px;
+      border-top: 2px solid var(--night);
+    }
+
+    .confidence:nth-child(2) i {
+      border-top-color: var(--jade);
+      border-top-style: dashed;
+    }
+
+    .confidence:nth-child(3) i {
+      border-top-color: var(--amber);
+      border-top-style: dotted;
+    }
+
+    .confidence:nth-child(4) i {
+      border-top-color: var(--muted);
+      border-top-style: dotted;
+    }
+
+    .mini-map svg {
+      width: 100%;
+      height: 54px;
+      display: block;
+      cursor: crosshair;
+      touch-action: manipulation;
+    }
+
+    .mini-map .mini-map-viewport {
+      fill: rgba(139, 46, 36, .06);
+      stroke: var(--cinnabar);
+      stroke-width: 1.35;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .insight strong {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-family: var(--font-serif);
+      font-size: 13px;
+    }
+
+    .insight p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .drawer {
+      position: relative;
+      min-width: 0;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 0 0 0 12px;
+      overflow: hidden;
+    }
+
+    .drawer,
+    .drawer * {
+      min-width: 0;
+    }
+
+    .drawer-header {
+      padding: 18px 18px 13px;
+      border-bottom: 1px solid rgba(216, 205, 187, .82);
+      background: rgba(255, 253, 247, .72);
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--cinnabar);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .drawer h2 {
+      margin: 9px 0 0;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow-wrap: anywhere;
+      font-family: var(--font-serif);
+      font-size: 25px;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+
+    .drawer-subtitle {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 13px;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .drawer-body {
+      min-height: 0;
+      padding: 16px 18px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      display: grid;
+      align-content: start;
+      gap: 15px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .meta-box {
+      min-width: 0;
+      padding: 10px;
+      border: 1px solid rgba(216, 205, 187, .9);
+      border-radius: 10px;
+      background: rgba(248, 241, 228, .62);
+    }
+
+    .meta-box span {
+      display: block;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: .04em;
+    }
+
+    .meta-box b {
+      display: block;
+      margin-top: 5px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow-wrap: anywhere;
+      font-family: var(--font-serif);
+      font-size: 14px;
+    }
+
+    .drawer-section {
+      display: grid;
+      gap: 8px;
+    }
+
+    .drawer-section h3 {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--font-serif);
+      font-size: 15px;
+    }
+
+    .summary-card {
+      padding: 12px 13px;
+      border-left: 3px solid var(--cinnabar);
+      border-radius: 0 10px 10px 0;
+      background: rgba(248, 241, 228, .66);
+      color: var(--ink);
+      line-height: 1.68;
+      font-size: 13px;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .knowledge-card {
+      display: grid;
+      gap: 10px;
+      min-width: 0;
+      padding: 13px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(216, 205, 187, .88);
+      background: rgba(255, 253, 247, .7);
+      color: var(--ink);
+      line-height: 1.72;
+      font-size: 13px;
+      overflow-x: hidden;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .knowledge-card p {
+      margin: 0;
+    }
+
+    .knowledge-card h1,
+    .knowledge-card h2,
+    .knowledge-card h3,
+    .knowledge-card h4,
+    .knowledge-card h5,
+    .knowledge-card h6 {
+      margin: 4px 0 0;
+      overflow-wrap: anywhere;
+      font-family: var(--font-serif);
+      line-height: 1.35;
+    }
+
+    .knowledge-card ul,
+    .knowledge-card ol {
+      margin: 0;
+      padding-left: 1.35em;
+    }
+
+    .knowledge-card pre {
+      max-width: 100%;
+      margin: 0;
+      padding: 10px 11px;
+      overflow-x: auto;
+      border-radius: 9px;
+      background: rgba(36, 31, 26, .06);
+      white-space: pre;
+    }
+
+    .knowledge-card code {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      font-family: var(--font-mono);
+      font-size: .94em;
+    }
+
+    .knowledge-card pre code {
+      overflow-wrap: normal;
+      word-break: normal;
+      white-space: pre;
+    }
+
+    .knowledge-card img,
+    .knowledge-card video {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .knowledge-card table {
+      display: block;
+      max-width: 100%;
+      overflow-x: auto;
+      border-collapse: collapse;
+    }
+
+    .neighbor-section {
+      padding: 0;
+      border: 1px solid rgba(216, 205, 187, .88);
+      border-radius: 10px;
+      background: rgba(248, 241, 228, .48);
+      overflow: hidden;
+    }
+
+    .neighbor-section > summary {
+      min-height: 44px;
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+      list-style: none;
+      color: var(--ink);
+      font-family: var(--font-serif);
+      font-size: 15px;
+    }
+
+    .neighbor-section > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .neighbor-section > summary span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .neighbor-section > summary small {
+      color: var(--muted);
+      font-family: var(--font-ui);
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    .neighbor-section > summary::after {
+      content: "关联";
+      flex: 0 0 auto;
+      color: var(--muted);
+      font-family: var(--font-ui);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .neighbor-section[open] > summary::after {
+      content: "关联";
+    }
+
+    .neighbor-section .neighbor-list {
+      padding: 0 12px 12px;
+    }
+
+    .neighbor-section[open] .neighbor-list {
+      max-height: 168px;
+      overflow-y: auto;
+      padding-right: 8px;
+      scrollbar-gutter: stable;
+    }
+
+    .neighbor-section[open] .neighbor-list::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .neighbor-section[open] .neighbor-list::-webkit-scrollbar-thumb {
+      border-radius: 999px;
+      background: rgba(111, 101, 89, .32);
+    }
+
+    .neighbor-card,
+    .note-card,
+    .start-card {
+      display: grid;
+      gap: 4px;
+      color: var(--ink);
+    }
+
+    .start-card {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .start-card__main {
+      min-width: 0;
+      min-height: 36px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .start-card__link {
+      min-height: 32px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(216, 205, 187, .92);
+      border-radius: 9px;
+      background: rgba(255, 253, 247, .78);
+      padding: 0 9px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .start-card__main:hover .card-copy strong,
+    .start-card__link:hover {
+      color: var(--cinnabar);
+    }
+
+    .list-pager {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .list-pager button {
+      min-height: 32px;
+      border: 1px solid rgba(216, 205, 187, .92);
+      border-radius: 9px;
+      background: rgba(255, 253, 247, .78);
+      color: var(--muted);
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .list-pager button:not(:disabled):hover {
+      color: var(--cinnabar);
+    }
+
+    .list-pager button:disabled {
+      cursor: default;
+      opacity: .45;
+    }
+
+    .list-pager span {
+      white-space: nowrap;
+    }
+
+    .note-card {
+      border-style: dashed;
+      background: rgba(255, 253, 247, .62);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .drawer-actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 9px;
+      padding: 13px 18px 16px;
+      border-top: 1px solid rgba(216, 205, 187, .82);
+      background: rgba(255, 253, 247, .76);
+    }
+
+    .state-dock {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .state-button {
+      min-width: 44px;
+      min-height: 44px;
+      padding: 0 12px;
+      font-size: 12px;
+    }
+
+    .state-button[aria-pressed="true"] {
+      border-color: rgba(139, 46, 36, .55);
+      color: var(--cinnabar);
+      background: rgba(255, 253, 247, .96);
+    }
+
+    .hidden-count {
+      display: none;
+      margin-top: 8px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(183, 121, 31, .48);
+      background: rgba(248, 232, 196, .55);
+      color: var(--ink);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .hidden-count.is-visible {
+      display: block;
+    }
+
+    .papers-page,
+    .reader-page {
+      display: none;
+      grid-column: 1 / -1;
+      grid-row: 2;
+      min-height: 0;
+      border-radius: 18px;
+      border: 1px solid rgba(216, 205, 187, .9);
+      background: linear-gradient(180deg, rgba(255, 253, 247, .96), rgba(248, 241, 228, .92));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .app[data-route="papers"] .sidebar,
+    .app[data-route="papers"] .canvas-card,
+    .app[data-route="papers"] .drawer,
+    .app[data-route="reader"] .sidebar,
+    .app[data-route="reader"] .canvas-card,
+    .app[data-route="reader"] .drawer {
+      display: none;
+    }
+
+    .app[data-route="papers"] .papers-page,
+    .app[data-route="reader"] .reader-page {
+      display: grid;
+    }
+
+    .papers-page {
+      grid-template-columns: 320px minmax(0, 1fr);
+    }
+
+    .papers-rail {
+      border-right: 1px solid var(--rule);
+      background: linear-gradient(180deg, rgba(244, 239, 228, .82), rgba(255, 253, 247, .82));
+      padding: 22px 18px 24px;
+      overflow: auto;
+    }
+
+    .papers-rail h2,
+    .reader-hero h2 {
+      margin: 0;
+      font-family: var(--font-serif);
+      font-size: 28px;
+      line-height: 1.16;
+    }
+
+    .papers-rail p,
+    .reader-hero p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .papers-index {
+      margin-top: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .papers-tools {
+      margin-top: 16px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .tool-row {
+      display: grid;
+      grid-template-columns: 1fr 108px;
+      gap: 8px;
+    }
+
+    .tool-row input,
+    .tool-row select {
+      min-height: 42px;
+      border-radius: 10px;
+      border: 1px solid rgba(216, 205, 187, .95);
+      background: rgba(255, 253, 247, .82);
+      color: var(--ink);
+      padding: 0 12px;
+    }
+
+    .paper-item {
+      width: 100%;
+      text-align: left;
+      border: 1px solid rgba(216, 205, 187, .86);
+      border-radius: 14px;
+      background: rgba(255, 253, 247, .82);
+      box-shadow: var(--soft-shadow);
+      padding: 14px 14px 13px;
+      display: grid;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .paper-item[aria-current="true"] {
+      border-color: rgba(139, 46, 36, .52);
+      background: linear-gradient(180deg, rgba(255, 253, 247, .96), rgba(248, 241, 228, .92));
+    }
+
+    .paper-item__meta,
+    .paper-item__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--faint);
+      font-size: 11px;
+    }
+
+    .paper-item__title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      line-height: 1.3;
+      color: var(--ink);
+    }
+
+    .paper-item__summary {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .paper-item__badge,
+    .paper-spotlight__pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 0 9px;
+      border-radius: 999px;
+      background: rgba(139, 46, 36, .08);
+      color: var(--cinnabar);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .papers-main {
+      overflow: auto;
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .paper-spotlight {
+      display: grid;
+      gap: 16px;
+      padding: 22px 24px;
+      border-radius: 18px;
+      border: 1px solid rgba(216, 205, 187, .88);
+      background: radial-gradient(circle at top right, rgba(139, 46, 36, .08), transparent 26%), rgba(255, 253, 247, .92);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .paper-spotlight__meta,
+    .paper-spotlight__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .paper-spotlight__body {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) 260px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .paper-spotlight__body img {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(216, 205, 187, .9);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .reader-page {
+      grid-template-rows: auto 1fr;
+    }
+
+    .reader-hero {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 22px 24px 18px;
+      border-bottom: 1px solid var(--rule);
+      background: radial-gradient(circle at top right, rgba(139, 46, 36, .08), transparent 26%), rgba(255, 253, 247, .96);
+    }
+
+    .reader-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .reader-scroll {
+      min-height: 0;
+      overflow: auto;
+      padding: 28px 26px 40px;
+    }
+
+    .reader-article {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 30px 34px 36px;
+      border-radius: 18px;
+      border: 1px solid rgba(216, 205, 187, .88);
+      background: rgba(255, 253, 247, .96);
+      box-shadow: var(--shadow);
+    }
+
+    .reader-article h1,
+    .reader-article h2,
+    .reader-article h3 {
+      font-family: var(--font-serif);
+    }
+
+    .reader-article p,
+    .reader-article li {
+      line-height: 1.85;
+      color: #2f2923;
+    }
+
+    .reader-article img {
+      max-width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(216, 205, 187, .9);
+      box-shadow: var(--soft-shadow);
+      display: block;
+      margin: 1.2rem auto;
+    }
+
+    .reader-layout {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .reader-toc {
+      position: sticky;
+      top: 0;
+      padding: 16px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(216, 205, 187, .88);
+      background: rgba(248, 241, 228, .84);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .reader-toc h3 {
+      margin: 0 0 10px;
+      font-family: var(--font-serif);
+      font-size: 18px;
+    }
+
+    .reader-toc-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .reader-toc-list a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .reader-toc-list a:hover {
+      color: var(--cinnabar);
+    }
+
+    .reader-empty {
+      display: grid;
+      place-items: center;
+      min-height: 360px;
+      color: var(--muted);
+      text-align: center;
+      padding: 40px;
+    }
+
+
+    .node.is-compact {
+      min-height: 34px;
+      max-width: 130px;
+      padding: 6px 9px;
+      border-radius: 10px;
+    }
+
+    .node.is-compact .node-kind,
+    .node.is-compact .node-meta {
+      display: none;
+    }
+
+    .node.is-compact .node-name {
+      max-width: 104px;
+      font-size: 12px;
+    }
+
+    .node.is-point,
+    .node.is-overview {
+      width: 14px;
+      height: 14px;
+      min-width: 14px;
+      min-height: 14px;
+      padding: 0;
+      border-radius: 999px;
+      border: 0;
+      background: var(--night);
+      box-shadow: 0 0 0 4px rgba(49, 95, 114, .14);
+    }
+
+    .node.is-point[data-type="topic"],
+    .node.is-overview[data-type="topic"] { background: var(--cinnabar); }
+
+    .node.is-point[data-type="source"],
+    .node.is-overview[data-type="source"] { background: var(--jade); }
+
+    .node.is-point .node-kind,
+    .node.is-point .node-name,
+    .node.is-point .node-meta,
+    .node.is-overview .node-kind,
+    .node.is-overview .node-name,
+    .node.is-overview .node-meta {
+      display: none;
+    }
+
+    .node.is-label-hidden .node-name {
+      display: none;
+    }
+
+    .node[data-visual-role="landmark"] {
+      min-height: 30px;
+      max-width: 150px;
+      padding: 5px 10px 5px 24px;
+      border: 1px solid rgba(216, 205, 187, .78);
+      border-radius: 999px 8px 8px 999px;
+      background: rgba(255, 253, 247, .7);
+      box-shadow: 0 8px 16px rgba(36, 31, 26, .06);
+    }
+
+    .node[data-visual-role="landmark"]::before {
+      inset: auto auto auto 9px;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--night);
+      opacity: .78;
+      translate: 0 -50%;
+    }
+
+    .node[data-visual-role="landmark"][data-type="topic"]::before {
+      background: var(--cinnabar);
+    }
+
+    .node[data-visual-role="landmark"][data-type="source"]::before {
+      background: var(--jade);
+    }
+
+    .node[data-visual-role="landmark"] .node-kind,
+    .node[data-visual-role="landmark"] .node-meta {
+      display: none;
+    }
+
+    .node[data-visual-role="landmark"] .node-name {
+      max-width: 116px;
+      margin-top: 0;
+      font-size: 12px;
+      line-height: 1.2;
+    }
+
+    .node[data-visual-role="index-slip"] {
+      min-height: 42px;
+      max-width: 182px;
+      padding: 8px 11px 8px 13px;
+      border-radius: 8px 12px 12px 8px;
+      background: rgba(255, 253, 247, .92);
+      box-shadow: 0 13px 24px rgba(36, 31, 26, .1), inset 0 0 0 1px rgba(255, 255, 255, .5);
+    }
+
+    .node[data-visual-role="index-slip"]::before {
+      inset: -6px;
+      border-radius: 13px;
+      background: radial-gradient(circle, rgba(49, 95, 114, .16), transparent 68%);
+      opacity: .42;
+      translate: 0 0;
+      width: auto;
+      height: auto;
+    }
+
+    .node[data-visual-role="index-slip"][data-start-node="true"] {
+      border-color: rgba(139, 46, 36, .42);
+      box-shadow: 0 14px 26px rgba(139, 46, 36, .11), inset 0 0 0 1px rgba(255, 253, 247, .82);
+    }
+
+    .node.is-preview-start {
+      border-color: rgba(139, 46, 36, .48);
+      box-shadow: 0 14px 26px rgba(139, 46, 36, .12), 0 0 0 3px rgba(139, 46, 36, .07);
+    }
+
+    .node.is-compact[data-visual-role="index-slip"] {
+      min-height: 34px;
+      max-width: 138px;
+      padding: 6px 9px 6px 10px;
+    }
+
+    .node.is-compact[data-visual-role="index-slip"] .node-name {
+      max-width: 112px;
+    }
+
+    .node[data-visual-role="cinnabar-note"] {
+      min-height: 48px;
+      max-width: 190px;
+      padding: 9px 12px 9px 14px;
+      border-radius: 9px 14px 14px 9px;
+      border-color: rgba(139, 46, 36, .78);
+      background: rgba(255, 253, 247, .96);
+      box-shadow: 0 17px 30px rgba(139, 46, 36, .18), 0 0 0 4px rgba(139, 46, 36, .11);
+    }
+
+    .node[data-visual-role="cinnabar-note"]::before {
+      inset: -8px;
+      border-radius: 17px;
+      background: radial-gradient(circle, rgba(139, 46, 36, .2), transparent 68%);
+      opacity: .78;
+      translate: 0 0;
+      width: auto;
+      height: auto;
+    }
+
+    .node[data-visual-role="map-pin"] {
+      width: 14px;
+      height: 14px;
+      min-width: 14px;
+      min-height: 14px;
+      max-width: 14px;
+      padding: 0;
+      border: 0;
+      border-radius: 999px;
+      box-shadow: 0 0 0 4px rgba(49, 95, 114, .14);
+    }
+
+    .node[data-visual-role="map-pin"]::before {
+      inset: -6px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(49, 95, 114, .18), transparent 70%);
+      opacity: .7;
+      translate: 0 0;
+      width: auto;
+      height: auto;
+    }
+
+    .density-notice {
+      position: absolute;
+      z-index: 4;
+      right: 18px;
+      bottom: 18px;
+      max-width: 280px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(183, 121, 31, .45);
+      background: rgba(255, 253, 247, .82);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+      box-shadow: var(--soft-shadow);
+      display: none;
+    }
+
+    .atlas[data-density="overview"] .density-notice {
+      display: block;
+    }
+
+    .knowledge-card a.wikilink {
+      display: inline;
+      min-height: 0;
+      color: var(--cinnabar);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .knowledge-card a.wikilink--dead {
+      color: var(--muted);
+      text-decoration-style: dotted;
+    }
+
+    .drawer[data-state="start-preview"] .summary-card {
+      border-left-color: var(--night);
+      background: rgba(248, 241, 228, .72);
+    }
+
+    .drawer[data-state="start-preview"] .knowledge-card {
+      border-style: dashed;
+      background: rgba(255, 253, 247, .62);
+    }
+
+    .drawer[data-state="start-preview"] #queue-action {
+      background: var(--cinnabar);
+      color: var(--surface);
+      border-color: var(--cinnabar);
+    }
+
+    @keyframes drift {
+      from {
+        transform: translateX(-2%);
+      }
+      to {
+        transform: translateX(3%);
+      }
+    }
+
+    @keyframes spin {
+      to {
+        rotate: 360deg;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .001ms !important;
+      }
+    }
+
+    @media (max-width: 1180px) {
+      .app {
+        grid-template-columns: 238px minmax(460px, 1fr) 318px;
+        gap: 12px;
+        padding: 12px;
+      }
+
+      .app[data-reading="1"] {
+        grid-template-columns: 230px minmax(430px, 1fr) minmax(318px, 360px);
+      }
+
+      .status-strip .status-pill:nth-child(3) {
+        display: none;
+      }
+
+      .canvas-footer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .insight {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 900px) {
+      body {
+        overflow: auto;
+      }
+
+      .app {
+        min-height: 100vh;
+        height: auto;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto minmax(620px, 72vh) auto;
+        padding: 10px;
+      }
+
+      .app[data-reading="1"] {
+        grid-template-columns: 1fr;
+      }
+
+      .mobile-atlas-preview {
+        display: block;
+      }
+
+      .topbar {
+        grid-template-columns: 1fr;
+      }
+
+      .status-strip {
+        justify-content: flex-start;
+      }
+
+      .sidebar {
+        max-height: none;
+        overflow: visible;
+      }
+
+      .drawer {
+        min-height: 560px;
+      }
+
+      .brand h1,
+      .brand p {
+        white-space: normal;
+      }
+
+      .canvas-footer {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .brand {
+        align-items: flex-start;
+      }
+
+      .seal {
+        width: 38px;
+        height: 38px;
+      }
+
+      .canvas-toolbar,
+      .canvas-actions,
+      .drawer-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .canvas-toolbar {
+        align-items: start;
+      }
+
+      .canvas-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .canvas-actions .state-dock {
+        grid-column: 1 / -1;
+      }
+
+      .status-pill,
+      .chip {
+        min-height: 44px;
+      }
+
+      .state-dock,
+      .segmented {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .state-dock {
+        display: grid;
+      }
+
+      .canvas-actions .state-dock {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .ghost-button,
+      .state-button {
+        min-height: 44px;
+        padding-inline: 8px;
+      }
+
+      .node {
+        max-width: 144px;
+        min-width: 44px;
+        padding: 7px 9px;
+      }
+
+      .node-name {
+        max-width: 116px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app" id="app">
+    <header class="topbar" aria-label="图谱标题与状态">
+      <div class="brand">
+        <div class="seal" aria-hidden="true">
+          <svg viewBox="0 0 48 48" role="img">
+            <path d="M5 32c7-6 10-16 17-10 5-10 12-13 21 10" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M8 38c8-3 18-2 32 0" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" opacity=".76"></path>
+            <path d="M13 28c5 2 10 2 15 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".52"></path>
+            <circle cx="35" cy="11" r="2.8" fill="currentColor"></circle>
+            <circle cx="40" cy="18" r="1.6" fill="currentColor" opacity=".8"></circle>
+          </svg>
+        </div>
+        <div>
+          <h1 id="wiki-title">研究目的与方向 知识舆图</h1>
+          <p>国风知识库·数字山水图</p>
+        </div>
+      </div>
+      <div class="status-strip">
+        <nav class="mode-tabs" aria-label="知识库视图切换">
+          <button class="mode-tab" type="button" data-route="graph" aria-pressed="true">图谱</button>
+          <button class="mode-tab" type="button" data-route="papers" aria-pressed="false">论文</button>
+        </nav>
+        <span class="status-pill"><i class="status-dot"></i>已生成 12 个索引点</span>
+        <span class="status-pill">关系 24 条</span>
+        <span class="status-pill">最近更新 2026-05-16</span>
+        <a class="ghost-button github-button brand__github" href="https://github.com/sdyckjq-lab/llm-wiki-skill" target="_blank" rel="noopener" aria-label="打开 GitHub 项目">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+            <path d="M9 18c-4.51 2-5-2-7-2"></path>
+          </svg>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </header>
+
+    <section class="mobile-atlas-preview" aria-label="移动端图谱预览">
+      <div class="preview-copy">
+        <strong>数字山水图谱</strong>
+        <span>12 点 · 24 关系</span>
+      </div>
+      <div class="preview-map" aria-hidden="true"></div>
+    </section>
+
+    <aside class="sidebar" aria-label="图谱导航">
+      <section class="section">
+        <div class="section-title"><b>图谱检索</b></div>
+        <div class="search-box">
+          <input id="search" type="search" autocomplete="off" placeholder="搜索综述、主题或材料">
+          <span aria-hidden="true">⌕</span>
+        </div>
+        <div id="no-results" class="hidden-count">没有匹配结果，清除筛选后可回到完整图谱。</div>
+      </section>
+
+      <section class="section">
+        <div class="section-title"><b>节点类型</b></div>
+        <div class="segmented" aria-label="聚焦模式">
+          <button type="button" data-focus="all" aria-pressed="true">全部</button>
+          <button type="button" data-focus="synthesis" aria-pressed="false">综述</button>
+          <button type="button" data-focus="topic" aria-pressed="false">主题</button>
+          <button type="button" data-focus="source" aria-pressed="false">材料</button>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title"><b>综述判断</b></div>
+        <div class="start-list" id="synthesis-list"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-title"><b>主题路线</b></div>
+        <div class="start-list" id="topic-list"></div>
+      </section>
+    </aside>
+
+    <section class="canvas-card" aria-label="知识图谱画布">
+      <div class="canvas-toolbar">
+        <div class="canvas-title">
+          <strong id="canvas-title">知识地图 · 全局视图</strong>
+          <span id="canvas-subtitle">综述、主题、材料之间的引用关系</span>
+        </div>
+      </div>
+
+      <div class="atlas" id="atlas" data-mode="normal">
+        <svg class="graph-svg" viewBox="0 0 1000 680" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <filter id="softGlow">
+              <feGaussianBlur stdDeviation="5" result="blur"></feGaussianBlur>
+              <feMerge>
+                <feMergeNode in="blur"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+              </feMerge>
+            </filter>
+          </defs>
+          <g id="edge-layer"></g>
+        </svg>
+        <div class="mist" aria-hidden="true"></div>
+        <div id="node-layer"></div>
+        <div class="loading-state" role="status" aria-live="polite">
+          <div class="spinner" aria-hidden="true"></div>
+          <p class="state-title">正在加载知识图谱</p>
+          <p class="state-copy">图谱数据已读取，正在整理节点关系。</p>
+        </div>
+        <div class="empty-state" role="status" aria-live="polite">
+          <p class="state-title">当前知识库还没有图谱</p>
+          <p class="state-copy">消化材料后会自动生成节点和关系。</p>
+        </div>
+        <div class="error-state" role="alert">
+          <p class="state-title">图谱数据没有加载成功</p>
+          <p class="state-copy">请确认本地 graph-data.json 存在且格式完整。</p>
+        </div>
+        <div class="density-notice" id="density-notice">当前视图过密，可搜索或筛选节点类型。</div>
+      </div>
+
+      <footer class="canvas-footer" aria-label="图谱二级信息">
+        <div class="mini-map" id="minimap" data-collapsed="0">
+          <div class="footer-label"><span>小地图</span><span>方位图</span></div>
+          <svg id="mini-map-svg" viewBox="0 0 160 54" aria-hidden="true">
+            <path d="M8 40 C34 20 54 36 76 22 C98 8 118 24 150 12" fill="none" stroke="#cfc4b1" stroke-width="1.4"></path>
+            <circle cx="28" cy="34" r="3" fill="#315f72"></circle>
+            <circle cx="58" cy="27" r="3" fill="#8b2e24"></circle>
+            <circle cx="90" cy="21" r="3" fill="#4b7564"></circle>
+            <circle cx="124" cy="18" r="3" fill="#b7791f"></circle>
+            <rect class="mini-map-viewport" x="22" y="12" width="76" height="32" rx="5"></rect>
+          </svg>
+        </div>
+        <div class="insight">
+          <div class="footer-label"><span>洞察</span><span>INSIGHT</span></div>
+          <strong id="insight-title">节点关系</strong>
+          <p id="insight-copy">建议从“知识编译”进入，可同时看到方法论、缓存与图谱生成的关系。</p>
+        </div>
+      </footer>
+    </section>
+
+    <aside class="drawer" id="drawer" aria-label="节点详情">
+      <header class="drawer-header">
+        <div class="eyebrow" id="drawer-kind"><span class="spark"></span>TOPIC · SELECTED</div>
+        <h2 id="drawer-title">知识编译</h2>
+        <p class="drawer-subtitle" id="drawer-subtitle">方法论 · EXTRACTED · wiki/topics/知识编译.md</p>
+      </header>
+
+      <div class="drawer-body">
+        <section class="drawer-section">
+          <h3>摘要</h3>
+          <div class="summary-card" id="drawer-summary">知识编译强调“整理一次，持续维护”。它连接素材消化、结构化页面、缓存、查询和图谱展示，是 llm-wiki 区别于临时问答的关键。</div>
+        </section>
+
+        <section class="drawer-section">
+          <h3>对应页面</h3>
+          <div class="knowledge-card" id="drawer-content">
+            <p>知识编译把材料、主题、实体和关系串成一张可维护的地图。它不是临时总结，而是让后续查询、图谱和复盘都能复用同一份整理结果。</p>
+            <p>完整内容由对应 wiki 页面维护，图谱这里只保留摘要和关系入口。</p>
+          </div>
+        </section>
+
+        <details class="drawer-section neighbor-section" id="neighbor-details" data-collapsed="0" open>
+          <summary aria-expanded="true"><span>相邻节点 <small id="drawer-neighbor-count">5 个</small></span></summary>
+          <div class="neighbor-list" id="neighbor-list"></div>
+        </details>
+
+      </div>
+
+      <footer class="drawer-actions">
+        <button class="primary-button" type="button" id="source-action">打开页面</button>
+      </footer>
+    </aside>
+
+    <section class="papers-page" id="papers-page" aria-label="材料总览">
+      <aside class="papers-rail">
+        <h2>材料目录</h2>
+        <p>按时间与标题列出全部材料，适合直接进入单篇阅读。</p>
+        <div class="papers-tools">
+          <div class="tool-row">
+            <input id="papers-search" type="search" autocomplete="off" placeholder="搜索材料标题或关键词">
+            <select id="papers-sort" aria-label="材料排序">
+              <option value="date-desc">最新优先</option>
+              <option value="date-asc">最早优先</option>
+              <option value="title-asc">标题 A-Z</option>
+            </select>
+          </div>
+        </div>
+        <div class="papers-index" id="papers-index"></div>
+      </aside>
+      <div class="papers-main" id="papers-main">
+        <div class="reader-empty">
+          <div>
+            <strong>从左侧选择一篇论文</strong>
+            <span>这里会显示论文摘要、图和进入材料页面的入口。</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reader-page" id="reader-page" aria-label="材料阅读">
+      <header class="reader-hero">
+        <div>
+          <h2 id="reader-title">打开页面</h2>
+          <p id="reader-subtitle">从图谱或材料目录进入后，这里会显示完整笔记。</p>
+        </div>
+        <div class="reader-actions">
+          <button class="ghost-button" type="button" id="reader-back-graph">返回图谱</button>
+          <button class="primary-button" type="button" id="reader-back-papers">回到材料列表</button>
+        </div>
+      </header>
+      <div class="reader-scroll">
+        <article class="reader-article" id="reader-article">
+          <div class="reader-empty">
+            <div>
+              <strong>还没有选中论文</strong>
+              <span>从图谱节点或材料目录进入一篇材料，这里会完整显示笔记正文。</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script id="graph-data" type="application/json">
+{
+  "meta": {
+    "build_date": "2026-05-16T14:03:08Z",
+    "wiki_title": "研究目的与方向",
+    "total_nodes": 12,
+    "total_edges": 24,
+    "initial_view": [
+      "Human-to-Robot Transfer",
+      "Long-Horizon Memory for Robot Policies",
+      "Vision-Language-Action",
+      "Human Video Robot Data Generation",
+      "Online RL for VLA",
+      "pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities",
+      "deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos",
+      "emergence-of-human-to-robot-transfer-in-vision-language-action-models",
+      "mem-multi-scale-embodied-memory-for-vision-language-action-models",
+      "rl-token-bootstrapping-online-rl-with-vision-language-action-models",
+      "current-vla-landscape-foundation-control-memory-and-transfer",
+      "openvla-an-open-source-vision-language-action-model"
+    ],
+    "degraded": false,
+    "insights_degraded": false
+  },
+  "nodes": [
+    {
+      "id": "Human Video Robot Data Generation",
+      "label": "Human Video Robot Data Generation",
+      "type": "topic",
+      "community": "Human-to-Robot Transfer",
+      "content": "# Human Video Robot Data Generation\n\n> 这条主题关注如何把 human videos 编译成机器人能直接训练或执行的数据，而不是只把人类视频当作预训练语料。\n\n## 主题概述\n\nHuman video 覆盖大量自然操作、工具使用和长时程任务，但人手和机器人灵巧手之间存在 embodiment gap。这个主题关注一类更工程化的路线：先从视频里恢复手-物体交互，再生成物理可行的机器人轨迹或 demonstrations，最后用增强和过滤让数据能服务真实部署。\n\n## 为什么重要\n\n- 它绕开了“直接从人类视频学动作”的动作空间不一致问题。\n- 它把互联网视频、人工拍摄视频、甚至视频生成模型产物都变成潜在机器人数据来源。\n- 它和 VLA co-training 互补：显式数据生成提供更接近机器人动作空间的监督，VLA 负责吸收和泛化。\n\n## 当前知识库里的代表工作\n\n- [来源: DexImit: Learning Bimanual Dexterous Manipulation from Monocular Human Videos](../sources/deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos.md)\n  这条主题的主工作。它提出四阶段 pipeline：单目 4D 重建、action-centric 双手调度、force-closure 抓取与运动规划、面向零样本真实部署的数据增强。\n\n## 当前理解\n\n- `DexImit` 的核心贡献不是一个新策略网络，而是一个 human-video-to-robot-data compiler。\n- 这条路线的关键难点在数据生成链路的每一层：几何尺度、遮挡、手-物体接触、双手协作调度、轨迹物理可行性和真实传感器噪声。\n- 相比直接 human-to-robot representation transfer，它更可解释，也更容易插入检查点和过滤器；但它会受到重建误差和模块串联误差限制。\n\n## 和相关主题的关系\n\n- [[Human-to-Robot Transfer]] 关注人类数据什么时候变成机器人能力；本主题更关注一种具体机制：把人类视频显式转换成机器人数据。\n- [[Vision-Language-Action]] 关注 foundation policy 的输入与控制接口；本主题生成的数据未来可以成为 VLA 训练或微调的上游材料。\n\n## 值得后续关注的问题\n\n- human video data engine 与 VLA co-training 如何组合，才不会重复引入噪声？\n- 是否可以用更强的 3D reconstruction / world model 降低对人工修正的依赖？\n- 自动过滤是否足以支撑大规模数据生成，还是仍需要人工验收关键样本？\n\n## 相关页面\n\n- [[DexImit: Learning Bimanual Dexterous Manipulation from Monocular Human Videos]]\n- [[Human-to-Robot Transfer]]\n- [[当前 VLA 路线图：基座、可控性、在线精修、记忆与人类数据]]"
+    },
+    {
+      "id": "Human-to-Robot Transfer",
+      "label": "Human-to-Robot Transfer",
+      "type": "topic",
+      "community": "Human-to-Robot Transfer",
+      "content": "# Human-to-Robot Transfer\n\n> 人类视频什么时候能真正变成机器人能力，不只是数据源问题，也是表示能力和预训练多样性问题。\n\n## 主题概述\n\n这条主题关注 human video、human embodiment data 与 robot policy 之间的迁移。核心问题不是“人类数据多不多”，而是“模型什么时候开始有能力利用这些数据”。\n\n## 当前知识库里的代表工作\n\n- [来源: Emergence of Human to Robot Transfer in Vision-Language-Action Models](../sources/emergence-of-human-to-robot-transfer-in-vision-language-action-models.md)\n  这条主题的主工作。它提出：human-to-robot transfer 不是固定技巧，而是会随着 VLA 预训练多样性增长而涌现。\n\n- [来源: π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities](../sources/pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities.md)\n  虽然不是专门研究 human transfer，但它展示了 non-robot data、egocentric human data 与 robot data 可以被统一吸纳到 foundation model 训练中。\n\n- [来源: DexImit: Learning Bimanual Dexterous Manipulation from Monocular Human Videos](../sources/deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos.md)\n  这篇补上了另一条路线：不直接让模型从 human video 中学表示，而是把单目人类操作视频重建、调度、规划并增强成双手灵巧机器人训练数据。\n\n## 当前判断\n\n- `Human-to-Robot Transfer` 这篇更强调“能力何时出现”\n- `π0.7` 更强调“多源数据如何被统一利用”\n- `DexImit` 更强调“人类视频如何被编译成物理可行的机器人数据”\n- 放在一起看，可以把问题理解成：\n  - 预训练多样性负责让 shared representation 成熟\n  - richer context / prompt 负责让这些能力在控制中被真正调用出来\n  - 显式数据生成 pipeline 负责把一部分 human video 转成更接近机器人动作空间的 supervision\n\n## 值得后续关注的问题\n\n- human data 在 pretraining 阶段和 finetuning 阶段的作用是否不同\n- human-to-robot transfer 与 cross-embodiment transfer 是否本质同源\n- 显式 data generation 与 VLA co-training 是替代关系，还是更适合组合使用\n- 这种能力的出现，更依赖模型规模还是数据多样性\n\n## 相关页面\n\n- [[Emergence of Human to Robot Transfer in Vision-Language-Action Models]]\n- [[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities]]\n- [[DexImit: Learning Bimanual Dexterous Manipulation from Monocular Human Videos]]\n- [[Human Video Robot Data Generation]]\n- [[Vision-Language-Action]]"
+    },
+    {
+      "id": "Long-Horizon Memory for Robot Policies",
+      "label": "Long-Horizon Memory for Robot Policies",
+      "type": "topic",
+      "community": "Long-Horizon Memory for Robot Policies",
+      "content": "# Long-Horizon Memory for Robot Policies\n\n> 长时程机器人控制不是只把上下文窗口拉长，而是要决定不同时间尺度的信息如何表示。\n\n## 主题概述\n\n这条主题关注机器人策略如何处理分钟级任务。关键不是更多帧，而是多尺度记忆：哪些信息应该保留为短期视觉痕迹，哪些应该抽象成长期语义状态。\n\n## 当前知识库里的代表工作\n\n- [来源: MEM: Multi-Scale Embodied Memory for Vision Language Action Models](../sources/mem-multi-scale-embodied-memory-for-vision-language-action-models.md)\n  明确把 memory 分解成视频短期记忆和语言长期记忆，是这条主题的主工作。\n\n- [来源: π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities](../sources/pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities.md)\n  通过 subgoal image、subtask instruction、episode metadata 给策略提供 richer context，本质上也是在补 memory 和 progress control。\n\n## 当前判断\n\n- `MEM` 是显式 memory 架构路线\n- `π0.7` 更偏通过 richer prompt 和 context 让模型具备更强的阶段性控制\n- 这两条路线未来很可能会合流：显式 memory + 可控 prompt 共同支撑 long-horizon embodied policy\n\n## 值得后续关注的问题\n\n- 语言长期记忆如何更新、压缩和纠错\n- 视频短期记忆如何在保证实时性的同时保留关键信息\n- high-level memory 与 low-level control 的接口应如何设计\n\n## 相关页面\n\n- [[MEM: Multi-Scale Embodied Memory for Vision Language Action Models]]\n- [[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities]]\n- [[Vision-Language-Action]]"
+    },
+    {
+      "id": "Online RL for VLA",
+      "label": "Online RL for VLA",
+      "type": "topic",
+      "community": "Vision-Language-Action",
+      "content": "# Online RL for VLA\n\n> 通才策略已经有了，接下来的问题是怎样把它快速打磨到高精度 specialist 表现。\n\n## 主题概述\n\n这条主题关注 VLA 预训练之后的在线适配。核心问题不是“VLA 能不能泛化”，而是“当真实机器人需要更高精度、更高速度时，怎么以较低样本成本继续优化它”。\n\n## 当前知识库里的代表工作\n\n- [来源: RL Token: Bootstrapping Online RL with Vision-Language-Action Models](../sources/rl-token-bootstrapping-online-rl-with-vision-language-action-models.md)\n  代表作。通过 `RL token` 把预训练 VLA 与轻量 actor-critic 接起来，让 online RL 重点修正 critical phase。\n\n- [来源: π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities](../sources/pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities.md)\n  虽然主体不是 RL 论文，但它明确展示了 generalist policy 可以蒸馏和吸收 specialist 经验，也说明 online optimization 与 foundation policy 不是对立关系。\n\n## 当前判断\n\n- `RLT` 给出的是一条很现实的 engineering 路线：不要重训整个 VLA，只给它暴露一个适合 RL 的接口\n- `π0.7` 则从另一个角度说明，generalist policy 最终仍然需要 specialist-style refinement，只是 refinement 的位置和形式不同\n\n## 值得后续关注的问题\n\n- online RL 的接口应该放在 VLA 哪一层最合适\n- 是 refinement head 更重要，还是 reward design 更重要\n- 对不同 embodiment，这类轻量接口是否还能保持稳定性\n\n## 相关页面\n\n- [[RL Token: Bootstrapping Online RL with Vision-Language-Action Models]]\n- [[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities]]\n- [[Vision-Language-Action]]"
+    },
+    {
+      "id": "Vision-Language-Action",
+      "label": "Vision-Language-Action",
+      "type": "topic",
+      "community": "Vision-Language-Action",
+      "content": "# Vision-Language-Action\n\n> 把视觉、语言和动作统一进同一策略建模框架，是当前具身智能主线之一。\n\n## 这条主题在讲什么\n\nVLA 的核心不是“把图像和文本都喂给机器人”，而是把机器人控制问题放进 foundation model 语境里，让预训练、多任务泛化、迁移、微调和跨 embodiment 学习都能在一套统一框架里讨论。\n\n## 为什么重要\n\n- VLA 是现在连接大模型能力与机器人执行能力的主干路线\n- 它把机器人学习从 task-specific policy 推向 reusable foundation policy\n- 很多后续方向，本质上都是在回答“VLA 还缺什么”\n  - 更强的可控性\n  - 更长的记忆\n  - 更高的精度\n  - 更好的跨 embodiment 迁移\n  - 更低成本地利用人类数据\n\n## 当前知识库里的几条子路线\n\n- **开源基座化**\n  来自 [来源: OpenVLA: An Open-Source Vision-Language-Action Model](../sources/openvla-an-open-source-vision-language-action-model.md)\n  OpenVLA 强调训练、微调、部署三件事一起开源，代表“VLA 作为公开基础设施”的路线。\n\n- **更强 steerability**\n  来自 [来源: π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities](../sources/pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities.md)\n  π0.7 通过 richer prompt、subgoal image、episode metadata 把“怎么做”也编码进策略上下文。\n\n- **在线 RL 精修**\n  来自 [来源: RL Token: Bootstrapping Online RL with Vision-Language-Action Models](../sources/rl-token-bootstrapping-online-rl-with-vision-language-action-models.md)\n  RLT 关注如何在保留 VLA 泛化先验的前提下，把精度和速度继续打磨到 specialist 水平。\n\n- **长时程记忆**\n  来自 [来源: MEM: Multi-Scale Embodied Memory for Vision Language Action Models](../sources/mem-multi-scale-embodied-memory-for-vision-language-action-models.md)\n  MEM 试图解决 VLA 在长达十几分钟任务中的任务进度保持和局部视觉记忆问题。\n\n- **利用 human data**\n  来自 [来源: Emergence of Human to Robot Transfer in Vision-Language-Action Models](../sources/emergence-of-human-to-robot-transfer-in-vision-language-action-models.md)\n  这条路线关注 VLA 何时开始能真正吃进 human video，并把它转化成机器人能力。\n\n## 当前判断\n\n这几篇放在一起看，VLA 主线已经很清楚：\n\n- `OpenVLA` 解决“基座是否开放、可训、可部署”\n- `π0.7` 解决“多源数据如何通过 prompt 变成可控能力”\n- `RLT` 解决“如何把通才策略继续打磨到高精度”\n- `MEM` 解决“如何把策略延长到 long-horizon”\n- `Human-to-Robot Transfer` 解决“如何把人类数据真正吸纳进来”\n\n也就是说，VLA 不再只是一个单点模型设计问题，而已经分化成一套系统问题族。\n\n## 相关页面\n\n- [[OpenVLA: An Open-Source Vision-Language-Action Model]]\n- [[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities]]\n- [[RL Token: Bootstrapping Online RL with Vision-Language-Action Models]]\n- [[MEM: Multi-Scale Embodied Memory for Vision Language Action Models]]\n- [[Emergence of Human to Robot Transfer in Vision-Language-Action Models]]\n- [[Online RL for VLA]]\n- [[Long-Horizon Memory for Robot Policies]]\n- [[Human-to-Robot Transfer]]"
+    },
+    {
+      "id": "deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos",
+      "label": "DexImit: Learning Bimanual Dexterous Manipulation from Monocular Human Videos",
+      "type": "source",
+      "community": "Human-to-Robot Transfer",
+      "content": "# DexImit: Learning Bimanual Dexterous Manipulation from Monocular Human Videos\n\n## 太长不看\n\nDexImit 的价值在于把大量单目人类操作视频转成可训练的双手灵巧机器人数据，而不是直接把 human embodiment 当成 policy 输入。它通过重建、调度、动作生成和增强四阶段，把 Internet 或生成模型产生的人类视频变成物理可行的机器人轨迹，并在零真实机器人数据下支持 sim-to-real 部署。\n\n## 直观理解\n\n可以把 DexImit 理解成一个 human-video-to-robot-data compiler：先从单目视频里恢复手-物体交互和世界坐标，再把长时程双手动作拆成可调度子任务，最后用力闭合抓取、关键帧运动规划和数据增强生成机器人训练集。\n\n![主要图](https://arxiv.org/html/2602.10105/src/pipeline_new.png)\n\n*主要图*\n\n## 核心信息\n\n- **作者**：Juncheng Mu、Sizhe Yang、Yiming Bao、Hojin Bae、Tianming Wei、Linning Xu、Boyi Li、Huazhe Xu、Jiangmiao Pang\n- **作者单位**：Shanghai AI Laboratory; Tsinghua University; The Chinese University of Hong Kong; NVIDIA\n- **来源类型**：arxiv_abs_url\n- **输入来源**：https://arxiv.org/abs/2602.10105\n- **原文链接**：https://arxiv.org/abs/2602.10105\n- **HTML 正文**：https://arxiv.org/html/2602.10105\n- **PDF 地址**：https://arxiv.org/pdf/2602.10105.pdf\n- **代码地址**：https://mujc2021.github.io/deximit/\n- **中英翻译地址**：https://hjfy.top/arxiv/2602.10105\n- **发布日期**：2026-02-10\n- **主题域**：Physical/Embodied Intelligence\n\n## 背景与问题\n\n**动机：** 双手灵巧操作需要大量高质量机器人示范，但真实采集成本远高于普通夹爪操作。与此同时，互联网视频和视频生成模型可以提供大量人类操作视频，覆盖工具使用、长时程任务和细粒度手部动作，因此关键问题变成如何把这些视频转成机器人可用的数据。\n\n**问题缺口：** 直接把人手视频当作另一种 embodiment 训练策略会遇到视觉外观、动作空间和动力学差异；而现有从视频重建轨迹再生成机器人数据的方法又依赖深度或高精度重建，面对快速动作、遮挡、复杂交互和长时程双手协作时容易失败。\n\n## 论文摘要（英文原文）\n\nData scarcity fundamentally limits the generalization of bimanual dexterous manipulation, as real-world data collection for dexterous hands is expensive and labor-intensive. Human manipulation videos, as a direct carrier of manipulation knowledge, offer significant potential for scaling up robot learning. However, the substantial embodiment gap between human hands and robotic dexterous hands makes direct pretraining from human videos extremely challenging. To bridge this gap and unleash the potential of large-scale human manipulation video data, we propose DexImit, an automated framework that converts monocular human manipulation videos into physically plausible robot data, without any additional information. DexImit employs a four-stage generation pipeline: (1) reconstructing hand-object interactions from arbitrary viewpoints with near-metric scale; (2) performing subtask decomposition and bimanual scheduling; (3) synthesizing robot trajectories consistent with the demonstrated interactions; (4) comprehensive data augmentation for zero-shot real-world deployment. Building on these designs, DexImit can generate large-scale robot data based on human videos, either from the Internet or video generation models. DexImit is capable of handling diverse manipulation tasks, including tool use (e.g., cutting an apple), long-horizon tasks (e.g., making a beverage), and fine-grained manipulations (e.g., stacking cups).\n\n## 论文摘要（中文翻译）\n\n双手灵巧操作的数据稀缺严重限制了泛化能力，因为真实机器人数据采集昂贵且依赖人工。人类操作视频天然包含任务概念和底层动作，但人手与机器人灵巧手之间存在很大的 embodiment gap，导致直接从人类视频预训练非常困难。DexImit 提出一个自动框架，在没有额外深度、相机或标注信息的条件下，把单目人类操作视频转换成物理可行的机器人数据。它使用四阶段流程：近似尺度的手-物体交互重建、子任务分解与双手调度、与演示一致的机器人轨迹合成，以及面向零样本真实部署的数据增强。系统能处理工具使用、长时程任务和细粒度操作等多类双手灵巧任务。\n\n## 方法\n\n**方法概述：** DexImit 是一个从单目人类操作视频自动生成双手灵巧机器人训练数据的框架，核心流程是 4D 手-物体重建、action-centric 双手调度、力闭合抓取和运动规划、以及面向 sim-to-real 的数据增强。\n\n**核心机制：** DexImit 用四阶段 pipeline 缩小这个 gap：先用 SpatialTracker v2、Wilor、SAM3D 和 FoundationPose++ 从单目视频中恢复近似尺度的手与物体轨迹，并映射到统一世界坐标；再用 Qwen3-VL 做任务理解和子任务标注，通过 Action-Centric Scheduling 安排多手多阶段动作；随后用基于 force-closure 的抓取合成和关键帧运动规划生成机器人轨迹；最后通过物体位姿、尺度、相机和点云观测增强训练 3D Diffusion Policy。\n\n**方法拆解：**\n\n- 4D 重建：用手部尺寸先验估计单目深度尺度，结合手/物体分割、SAM3D 物体生成、Wilor 手姿态和 FoundationPose++ 6D 跟踪得到连续手-物体轨迹。\n- 世界坐标对齐：通过桌面法向、双手初始方向和物体初始包围盒把任意视角视频映射到统一机器人工作空间。\n- 双手调度：用 Qwen3-VL 把视频拆成 Task/Subaction，并用 Action-Centric Scheduling 处理单手、协作双手、并发双手和长时程任务。\n- 动作生成：用 MANO prompt 和 force-closure 约束生成抓取候选，再按与人手演示的一致性排序，并通过稳定性检查选择最终 grasp；物体运动通过关键帧相对变换转成末端执行器目标。\n- 数据增强：随机化物体位姿和尺度、相机位姿以及点云观测缺失/噪声，目标是在没有真实机器人数据的情况下提升零样本部署鲁棒性。\n\n**关键要点：**\n\n- 这篇论文把 human video 的价值从表示迁移推进到可执行数据生成：human video 可以被编译成机器人 demonstrations。\n- 最关键的工程选择是不用单一端到端策略硬吃视频，而是把重建、语义调度、物理抓取和增强分层处理。\n- DexImit 特别瞄准双手灵巧操作，因为这里真实数据更贵、普通 human-to-robot 路线更容易被 embodiment gap 卡住。\n\n![方法图](https://arxiv.org/html/2602.10105/src/pipeline_new.png)\n\n*方法图*\n\n## 结果\n\n**核心结果：**\n\n- 对象轨迹重建实验中，ST2+FPose 达到 82% 成功率，高于 ST2+PCR 的 76%、DA3+PCR 的 45%、TA+RANSAC 的 38%、VGGT+PCR 的 32% 和 TA+PCR 的 11%。\n- 六类仿真任务中，DexImit 在 Put Cup、Grapefruit、Fruits、Pour 上达到 100% 成功率，在 Pot 上达到 78%，在 Stack Cups 上达到 52%；RigVid 和 DexMan 在长时程或复杂双手任务上多项失败。\n- 真实零样本部署评估覆盖四个 real-world meta-tasks，并比较三种数据增强 ablation，论文结论是完整增强 pipeline 对 sim-to-real 鲁棒性最关键。\n- 运行时间分析显示，5s/10s/20s 输入视频总处理时间约为 173.1s/201.1s/256.6s，单视频约数分钟级，具备批量数据生成潜力。\n\n**结果表：**\n\n| 维度 | DexImit 结果 | 对比/含义 |\n| --- | --- | --- |\n| 4D 轨迹重建 | ST2+FPose 82% | 高于 ST2+PCR 76%、DA3+PCR 45%、VGGT+PCR 32% |\n| 仿真短程任务 | Put Cup/Grapefruit/Fruits/Pour 均 100% | 优于 RigVid/DexMan 的不完整覆盖 |\n| 长时程/细粒度任务 | Pot 78%，Stack Cups 52% | baseline 在这些任务上多项失败 |\n| 数据生成效率 | 20s 视频约 256.6s | 单视频数分钟，适合规模化但仍非实时 |\n\n![结果图](https://arxiv.org/html/2602.10105/src/sim_compress.png)\n\n*结果图*\n\n## 洞察\n\n**核心 insight：**\n\n- DexImit 提供了 human video 利用的另一条路线：不是等待大模型自然学会跨 embodiment 表示，而是把人类视频显式编译成机器人可训练数据。\n- 四阶段 pipeline 的价值在于把难题拆开：几何重建负责把视频落到物理世界，VLM 负责语义分解，抓取/规划负责物理可执行性，增强负责真实部署鲁棒性。\n- 这类 data-engine 方法和 VLA co-training 并不冲突：前者可以生产更接近机器人动作空间的 demonstration，后者负责把多源数据吸收到 foundation policy。\n\n**和已有方法的关系：**\n\n- 相对 Human-to-Robot Transfer 的 co-training 路线，DexImit 更偏显式数据生成和物理可行性约束。\n- 相对 RigVid/DexMan 等从视频复现轨迹的方法，DexImit 加入近似尺度重建、双手调度和力闭合抓取，降低轨迹噪声与 long-horizon compounding error。\n\n**可借鉴点：**\n\n- 用手部尺寸作为单目视频尺度估计先验，是把 human video 转 robot data 的实用桥接点。\n- Action-Centric Scheduling 可以作为长时程双手操作数据生成的中间表示，而不是直接从视频回归连续动作。\n- VLM 不只用于理解输入视频，也可以用于自动过滤生成数据是否符合文本描述。\n\n## 风险与判断\n\n**局限：**\n\n- 当前依赖 SAM3D 等刚体几何生成，不能很好处理软体或关节物体。\n- 系统针对桌面双手操作，尚不支持移动操作场景。\n- 长视频中多模块串联会积累误差，复杂长时程任务有时仍需要人工修正 VLM 子任务分解或重建结果。\n- 严重遮挡下的 in-hand manipulation 很难从单目视频可靠恢复，当前不支持专门机制。\n\n**适用场景：**\n\n- 适合需要从互联网视频、人工拍摄视频或视频生成模型中扩展双手灵巧操作数据的场景。\n- 适合工具使用、长时程桌面操作、双手协作和细粒度堆叠/倒水/切割等任务。\n\n**最终判断：**\n\n- 这篇论文值得进入 wiki，因为它把 human video 方向从 representation transfer 扩展到 robot data generation，是补齐 human-to-robot 路线的重要材料。\n- 它不直接改变 VLA 基座路线的判断，但会改变对 human data 的理解：人类视频既可以作为预训练信号，也可以通过重建与规划被编译成机器人数据。\n\n## 结果速览表\n\n| 维度 | DexImit 结果 | 对比/含义 |\n| --- | --- | --- |\n| 4D 轨迹重建 | ST2+FPose 82% | 高于 ST2+PCR 76%、DA3+PCR 45%、VGGT+PCR 32% |\n| 仿真短程任务 | Put Cup/Grapefruit/Fruits/Pour 均 100% | 优于 RigVid/DexMan 的不完整覆盖 |\n| 长时程/细粒度任务 | Pot 78%，Stack Cups 52% | baseline 在这些任务上多项失败 |\n| 数据生成效率 | 20s 视频约 256.6s | 单视频数分钟，适合规模化但仍非实时 |\n\n## 相关主题\n\n- human-video-robot-data-generation\n- human-to-robot-transfer\n\n## 相关页面\n\n- [[Human Video Robot Data Generation]]\n- [[Human-to-Robot Transfer]]\n- [[当前 VLA 路线图：基座、可控性、在线精修、记忆与人类数据]]"
+    },
+    {
+      "id": "emergence-of-human-to-robot-transfer-in-vision-language-action-models",
+      "label": "Emergence of Human to Robot Transfer in Vision-Language-Action Models",
+      "type": "source",
+      "community": "Human-to-Robot Transfer",
+      "content": "# Emergence of Human to Robot Transfer in Vision-Language-Action Models\n\n## 太长不看\n\n这篇论文的关键判断是：`human-to-robot transfer` 不是简单靠对齐技巧手工做出来的，而是会随着 VLA 预训练规模和多样性增长而“涌现”。也就是说，当机器人预训练覆盖足够多任务、场景和 embodiment 后，模型开始能够真正从 human video 中学到对机器人有用的东西。\n\n## 直观理解\n\n可以把这篇工作看成在问一个很实际的问题：如果我们不能直接拿大量 human video 监督机器人动作，那么能不能先把 human data 当成“另一种 embodiment”，再依赖大规模 VLA 的表示能力自己学出共享结构？作者的答案是：可以，而且这种能力和预训练多样性强相关。\n\n![主要图](https://arxiv.org/html/2512.22414/figures/scalingAllV2.jpg)\n\n*主要图*\n\n## 核心信息\n\n- **作者**：Simar Kareer 等\n- **原文链接**：https://arxiv.org/abs/2512.22414\n- **PDF 地址**：https://arxiv.org/pdf/2512.22414\n- **发布日期**：2025-12-27\n- **主题域**：physical-embodied-intelligence\n\n## 背景与问题\n\n**动机：** Human video 覆盖范围大、便宜、自然，但直接拿来训练机器人策略一直很难，因为 humans 和 robots 在外观、动力学和动作空间上差异太大。\n\n**问题缺口：** 以往方法往往要显式设计 human-robot 映射。作者则想验证一种更像 LLM scaling law 的观点：当 VLA 预训练足够大、足够多样时，human-to-robot transfer 会不会自然出现。\n\n## 论文摘要（英文原文）\n\nVision-language-action (VLA) models can enable broad open world generalization, but require large and diverse datasets. It is appealing to consider whether some of this data can come from human videos, which cover diverse real-world situations and are easy to obtain. However, it is difficult to train VLAs with human videos alone, and establishing a mapping between humans and robots requires manual engineering and presents a major research challenge. Drawing inspiration from advances in large language models, where the ability to learn from diverse supervision emerges with scale, we ask whether a similar phenomenon holds for VLAs that incorporate human video data. We introduce a simple co-training recipe, and find that human-to-robot transfer emerges once the VLA is pre-trained on sufficient scenes, tasks, and embodiments. Our analysis suggests that this emergent capability arises because diverse pretraining produces embodiment-agnostic representations for human and robot data. We validate these findings through a series of experiments probing human to robot skill transfer and find that with sufficiently diverse robot pre-training our method can nearly double the performance on generalization settings seen only in human data.\n\n## 论文摘要（中文翻译）\n\nVLA 能支持广泛的开放世界泛化，但需要大规模多样化数据。一个自然问题是：这些数据能否部分来自 human video？然而仅用 human video 训练 VLA 很困难，而且建立 human 与 robot 之间的映射通常需要大量手工工程。作者借鉴大语言模型中的“能力随规模涌现”现象，提出一个问题：对包含 human video 的 VLA，这种现象是否也成立？他们提出一种简单的 co-training recipe，并发现当 VLA 在足够多样的场景、任务和 embodiment 上预训练后，human-to-robot transfer 能力会涌现出来。分析表明，这种能力来自于多样预训练所形成的 embodiment-agnostic 表示。实验进一步显示，在只出现在 human data 中的泛化设置上，加入 human data 几乎可以把性能翻倍。\n\n## 方法\n\n**方法概述：** 这篇工作不是靠显式人机对齐工程去解决 transfer，而是提出一个更简单的 co-training recipe：把 human video 视作额外 embodiment，并在与机器人数据相近的训练目标下联合微调，再观察能力是否会随着预训练多样性而涌现。\n\n**核心机制：**\n\n- 把 human video 当作额外 embodiment 参与 co-training\n- 同时使用高层 sub-task prediction 和低层 action prediction\n- 用只存在于 human data 的 generalization benchmark 验证 transfer 是否真的发生\n- 分析 latent representation 是否随着 pretraining diversity 增长而对齐\n\n**方法拆解：**\n\n- 对 human data，作者使用 3D hand tracks 和 dense language annotations 构造与机器人数据近似的监督目标\n- co-finetuning 时混合 human data 与相关 robot data\n- 预训练多样性被系统控制：从较弱 pretraining 到覆盖 scenes/tasks/embodiments 的更强预训练\n- 然后比较 human+robot finetuning 与 robot-only finetuning 在 unseen scene/object/task 设置下的差异\n\n![方法图](https://arxiv.org/html/2512.22414/figures/arch.jpg)\n\n*方法图*\n\n**关键要点：**\n\n- 这篇工作关心的不是“人类视频有没有用”，而是“在什么条件下开始有用”\n- 预训练多样性被当成 transfer emergence 的主要解释变量\n- representation alignment 被拿来解释能力涌现，而不是只看终端任务分数\n\n## 结果\n\n**核心结果：**\n\n- human-to-robot transfer 随着 robot pretraining diversity 增长而显著增强\n- 在 scene、object、task 三类 generalization benchmark 上，co-training 带来明显提升\n- 论文给出的典型数字包括：Spice `32% -> 71%`，dresser `25% -> 50%`，bussing `53 -> 63`\n- 在 egg sorting 任务上，robot-only policy 只有 `57%` sorting accuracy，而 co-trained 后提升到 `78%`\n- 作者认为这说明 transfer 不是手工对齐的偶然产物，而是随规模与多样性增长而涌现出的能力\n\n![结果图](https://arxiv.org/html/2512.22414/figures/taskPerf.jpg)\n\n*结果图*\n\n**结果表：**\n\n| 维度 | 结论 |\n| --- | --- |\n| transfer 触发条件 | 足够多样的 robot pretraining |\n| 验证维度 | scene / object / task generalization |\n| 代表收益 | 多项任务显著提升，部分接近翻倍 |\n| 表示解释 | 更强的 embodiment-agnostic representation |\n\n## 洞察\n\n**核心 insight：**\n\n- 这篇论文真正重要的地方，在于它把 “scaling brings emergence” 从 LLM 语境移到了 embodied learning。它不是简单证明 human video useful，而是证明“随着预训练足够多样，模型开始自己学会利用 human data”。\n\n**和已有方法的关系：**\n\n- 相对显式 human-robot alignment 路线，它更依赖 representation 自然形成\n- 相对只看 robot teleoperation 的路线，它尝试把更廉价、更广覆盖的人类数据吸纳进来\n- 相对单纯追求更大数据量，它更强调 diversity of scenes, tasks, embodiments\n\n**可借鉴点：**\n\n- 对具身智能来说，多样性可能比单一目标域精调更关键\n- 人类视频不一定要先被完全“翻译成机器人动作”才有价值\n- 这条路线很适合和 `cross-embodiment transfer`、`world-model / VLA pretraining scale` 一起看\n\n## 风险与判断\n\n**局限：**\n\n- 结论依赖非常强的预训练多样性，普通团队复制门槛高\n- 所谓“涌现”也可能部分来自大规模 remix，而不一定完全意味着更深层抽象理解\n- human data 与 robot data 的融合仍然需要 carefully designed training recipe，不是零成本接入\n\n**适用场景：**\n\n- 关注 human video 利用、cross-embodiment transfer、数据扩展性的研究\n- 想研究具身智能中 scaling law 类现象的场景\n- 想把 “human data as another embodiment” 作为系统设计前提的方向\n\n**最终判断：** 这篇是 `human-to-robot transfer` 方向里很值得保留的强论文，也很适合作为你后续 topic 页的种子。\n\n## 结果速览表\n\n| 维度 | 结论 |\n| --- | --- |\n| 研究问题 | human-to-robot transfer 是否随规模涌现 |\n| 核心机制 | co-training + diverse robot pretraining |\n| 关键发现 | 足够多样预训练后 transfer 才明显出现 |\n| 解释变量 | embodiment-agnostic representation |\n\n## 相关主题\n\n- vision-language-action\n- human-to-robot-transfer\n\n## 相关页面\n\n- [[Vision-Language-Action]]\n- [[Human-to-Robot Transfer]]\n- [[当前 VLA 路线图：基座、可控性、在线精修、记忆与人类数据]]\n- [[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities]]"
+    },
+    {
+      "id": "mem-multi-scale-embodied-memory-for-vision-language-action-models",
+      "label": "MEM: Multi-Scale Embodied Memory for Vision Language Action Models",
+      "type": "source",
+      "community": "Long-Horizon Memory for Robot Policies",
+      "content": "# MEM: Multi-Scale Embodied Memory for Vision Language Action Models\n\n## 太长不看\n\n这篇工作的重点，是把机器人策略里的“记忆”从单一历史帧堆叠，升级成多尺度、多模态的长期记忆结构。MEM 用视频短期记忆处理最近视觉细节，用文本长期记忆保留高层语义进度，从而把 VLA 推到更长时间跨度的任务上。\n\n## 直观理解\n\n如果普通 VLA 的记忆更像“最近几秒发生了什么”，那 MEM 想解决的是“机器人十分钟前做过什么、现在做到哪一步、接下来该切到哪个阶段”。它试图让策略同时记住局部感知细节和全局任务进度。\n\n![主要图](https://arxiv.org/html/2603.03596v1/x1.png)\n\n*主要图*\n\n## 核心信息\n\n- **作者**：Marcel Torne 等\n- **原文链接**：https://arxiv.org/abs/2603.03596\n- **HTML 正文**：https://arxiv.org/html/2603.03596v1\n- **PDF 地址**：https://arxiv.org/pdf/2603.03596.pdf\n- **发布日期**：2026-03-04\n- **主题域**：physical-embodied-intelligence\n\n## 背景与问题\n\n**动机：** 长时程机器人任务不是简单地看当前帧就能决策。比如做饭、整理厨房、做三明治，机器人既要记住最近的遮挡和物体位置，也要记住更长时间的任务阶段进展。\n\n**问题缺口：** 传统 end-to-end policy 的记忆往往只是在输入里堆过去观测，难以同时兼顾短期视觉细节和长期语义状态。作者要解决的是：怎样让 VLA 在长达十几分钟的任务中真正具备“多层次记忆”。\n\n## 论文摘要（英文原文）\n\nConventionally, memory in end-to-end robotic learning involves inputting a sequence of past observations into the learned policy. However, in complex multi-stage real-world tasks, the robot's memory must represent past events at multiple levels of granularity: from long-term memory that captures abstracted semantic concepts (e.g., a robot cooking dinner should remember which stages of the recipe are already done) to short-term memory that captures recent events and compensates for occlusions (e.g., a robot remembering the object it wants to pick up once its arm occludes it). In this work, our main insight is that an effective memory architecture for long-horizon robotic control should combine multiple modalities to capture these different levels of abstraction. We introduce Multi-Scale Embodied Memory (MEM), an approach for mixed-modal long-horizon memory in robot policies. MEM combines video-based short-horizon memory, compressed via a video encoder, with text-based long-horizon memory. Together, they enable robot policies to perform tasks that span up to fifteen minutes, like cleaning up a kitchen, or preparing a grilled cheese sandwich. Additionally, we find that memory enables MEM policies to intelligently adapt manipulation strategies in-context.\n\n## 论文摘要（中文翻译）\n\n传统端到端机器人学习中的记忆，通常只是把过去一段观测序列输入给策略。然而在复杂的多阶段真实任务中，机器人记忆必须在多个粒度上表示过去事件：既要有记录高层语义进度的长期记忆，也要有补偿遮挡和保留近期细节的短期记忆。作者的核心观点是，长时程机器人控制需要把多种模态结合起来，分别承载这些不同层次的抽象。为此他们提出 MEM，将视频短期记忆和文本长期记忆结合起来，使策略能够完成长达十五分钟的任务，并在上下文中更智能地调整 manipulation 策略。\n\n## 方法\n\n**方法概述：** MEM 试图把机器人策略中的记忆做成分层结构，而不是简单地把更多历史帧堆进上下文窗口。它把 memory 分成两类：短期 dense visual memory 和长期 semantic memory，并分别用视频编码器和语言记忆来承载。\n\n**核心机制：**\n\n- 高层 policy 更新 language memory，用于记录长期语义事件与任务阶段\n- 低层 policy 使用短期 observation-based memory，处理遮挡、近时感知和局部调整\n- 两类 memory 一起接入 VLA，使策略既能记住高层进度，也能保留近期视觉细节\n\n**方法拆解：**\n\n- 语言长期记忆负责存“已经做过什么、还没做什么、当前任务阶段是什么”\n- 视频短期记忆通过高效 video encoder 压缩近期视觉历史，避免直接把长序列原样送进 backbone\n- MEM 被集成进 π0.6 这类通用 VLA，使其能在长时程任务上保持 runtime 可接受\n- 论文还强调 memory 不只是提升 recall，还能帮助策略在上下文里改变 manipulation strategy\n\n![方法图](https://arxiv.org/html/2603.03596v1/x3.png)\n\n*方法图*\n\n**关键要点：**\n\n- 长期语义记忆和短期视觉记忆必须分开建模\n- memory 设计要考虑实时性，否则长历史会让推理延迟不可用\n- 这是把 VLA 往 long-horizon agent 化推进的一条关键路线\n\n## 结果\n\n**核心结果：**\n\n- MEM 支持跨度长达 `15 分钟` 的任务\n- 代表任务包括 cleanup kitchen、preparing a grilled cheese sandwich 等多阶段真实操作\n- 论文强调：没有 memory 的强 generalist policy 如 π0.6，在这些任务上明显不足；而组合短期视频记忆和长期语言记忆后，性能显著提升\n- 除了完成长时程任务，MEM 还支持 in-context adaptation，例如根据任务过程动态改变 grasp 高度、开门方向等 manipulation strategy\n\n![结果图](https://arxiv.org/html/2603.03596v1/x5.png)\n\n*结果图*\n\n**结果表：**\n\n| 维度 | MEM 结论 |\n| --- | --- |\n| 记忆结构 | 视频短期 + 语言长期 |\n| 时间跨度 | 最长约 15 分钟 |\n| 代表收益 | 长时程任务完成率与策略适应性提升 |\n| 相对无记忆基线 | 明显更强 |\n\n## 洞察\n\n**核心 insight：**\n\n- 这篇论文最重要的贡献，是把机器人 memory 从“上下文长度问题”提升成了“表示分层问题”。作者不是简单让模型看更多历史，而是明确区分哪些信息应该以视觉形式保留、哪些信息应该以语义形式长期保存。\n\n**和已有方法的关系：**\n\n- 相对直接堆历史帧的做法，它更关注 memory abstraction\n- 相对只做 low-level history encoder 的路线，它把 long-horizon semantic progress 也纳入体系\n- 相对 agent 式高层规划，这篇更接近把 memory 直接内嵌进 policy 结构\n\n**可借鉴点：**\n\n- 未来 long-horizon VLA 很可能都需要显式 memory decomposition\n- language memory 很适合作为任务阶段与语义进度的载体\n- 这篇对“具身智能为什么需要 memory module”给出了很有说服力的结构性答案\n\n## 风险与判断\n\n**局限：**\n\n- 长期语言记忆如何更新、压缩与纠错，本身就是新的复杂系统问题\n- 多模态 memory 会显著增加训练和系统设计复杂度\n- 这条路线虽然强，但也意味着更高的工程门槛和更重的模型维护成本\n\n**适用场景：**\n\n- 长时程多阶段 manipulation\n- 需要显式任务进度管理的具身系统\n- 面向 kitchen cleanup、recipe execution 这类真实长流程场景\n\n**最终判断：** 这篇是你这套 wiki 里非常值得保留的 `memory for embodied intelligence` 核心论文，后续很适合做 topic 页的骨架。\n\n## 结果速览表\n\n| 维度 | 结论 |\n| --- | --- |\n| 记忆类型 | 视频短期 + 文本长期 |\n| 目标问题 | 长时程多阶段控制 |\n| 实现重点 | 记忆分层与高效编码 |\n| 代表能力 | 最长 15 分钟任务 |\n\n## 相关主题\n\n- vision-language-action\n- long-horizon-memory-for-robot-policies\n\n## 相关页面\n\n- [[Vision-Language-Action]]\n- [[Long-Horizon Memory for Robot Policies]]\n- [[当前 VLA 路线图：基座、可控性、在线精修、记忆与人类数据]]\n- [[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities]]"
+    },
+    {
+      "id": "openvla-an-open-source-vision-language-action-model",
+      "label": "OpenVLA: An Open-Source Vision-Language-Action Model",
+      "type": "source",
+      "community": "Vision-Language-Action",
+      "content": "# OpenVLA: An Open-Source Vision-Language-Action Model\n\n## 太长不看\n\nOpenVLA 的价值不只是开源一个 VLA 模型，而是把可训练、可微调、可部署的完整开源机器人大模型工作流真正落到了实践层面。\n\n## 直观理解\n\n可以把 OpenVLA 理解成一个把视觉输入、语言指令和机器人动作统一进同一生成框架里的大模型底座，然后你可以像调教基础模型一样去微调它，让它适配新的机器人和任务。\n\n## 核心信息\n\n- **作者**：Ted Xiao、Ashwin Balakrishna、Suraj Nair、Rafael Rafailov、Ethan Foster、Pannag Sanketi、Quan Vuong、Thomas Kollar、Benjamin Burchfiel、Russ Tedrake、Dorsa Sadigh、Sergey Levine、Percy Liang、Chelsea Finn\n- **作者单位**：Stanford University; UC Berkeley; Toyota Research Institute; Google Deepmind; Physical Intelligence; MIT\n- **来源类型**：arxiv_html_url\n- **输入来源**：https://arxiv.org/html/2406.09246v3\n- **原文链接**：https://arxiv.org/abs/2406.09246\n- **HTML 正文**：https://arxiv.org/html/2406.09246v3\n- **PDF 地址**：https://arxiv.org/pdf/2406.09246.pdf\n- **代码地址**：https://openvla.github.io\n- **中英翻译地址**：https://hjfy.top/arxiv/2406.09246\n- **发布日期**：2024-06-13\n- **主题域**：physical-embodied-intelligence\n\n## 背景与问题\n\n**动机：** 机器人领域已经开始从单任务策略转向可复用的基础模型路线，而 VLA 正是把视觉、语言和动作统一到同一模型里的代表方向。\n\n**问题缺口：** 作者要解决的核心问题不是再做一个更大的机器人模型，而是如何给社区提供一个真正可用的开源 VLA：既要有足够强的通用操作能力，又要能在新机器人和新任务上高效微调，还要在部署成本上可接受。\n\n## 论文摘要（英文原文）\n\nLarge policies pretrained on a combination of Internet-scale vision-language data and diverse robot demonstrations have the potential to change how we teach robots new skills: rather than training new behaviors from scratch, we can fine-tune such vision-language-action (VLA) models to obtain robust, generalizable policies for visuomotor control. Yet, widespread adoption of VLAs for robotics has been challenging as 1) existing VLAs are largely closed and inaccessible to the public, and 2) prior work fails to explore methods for efficiently fine-tuning VLAs for new tasks, a key component for adoption. Addressing these challenges, we introduce OpenVLA, a 7B-parameter open-source VLA trained on a diverse collection of 970k real-world robot demonstrations. OpenVLA builds on a Llama 2 language model combined with a visual encoder that fuses pretrained features from DINOv2 and SigLIP. As a product of the added data diversity and new model components, OpenVLA demonstrates strong results for generalist manipulation, outperforming closed models such as RT-2-X (55B) by 16.5% in absolute task success rate across 29 tasks and multiple robot embodiments, with 7x fewer parameters. We further show that we can effectively fine-tune OpenVLA for new settings, with especially strong generalization results in multi-task environments involving multiple objects and strong language grounding abilities, and outperform expressive from-scratch imitation learning methods such as Diffusion Policy by 20.4%. We also explore compute efficiency; as a separate contribution, we show that OpenVLA can be fine-tuned on consumer GPUs via modern low-rank adaptation methods and served efficiently via quantization without a hit to downstream success rate. Finally, we release model checkpoints, fine-tuning notebooks, and our PyTorch codebase with built-in support for training VLAs at scale on Open X-Embodiment datasets.\n\n## 论文摘要（中文翻译）\n\n基于互联网规模视觉语言数据和多样化机器人示范进行预训练的大模型，有可能改变机器人学习新技能的方式：我们不再需要从零开始训练新行为，而是可以通过微调 vision-language-action（VLA）模型来获得更稳健、更具泛化性的视觉运动控制策略。然而，VLAs 在机器人领域的广泛采用一直受限于两个问题：其一，现有 VLA 大多是闭源的，公众难以访问；其二，已有工作没有系统探索如何高效微调 VLA 以适配新任务，而这恰恰是实际采用的关键。为了解决这两个问题，作者提出 OpenVLA，一个 70 亿参数、开源的 VLA 模型，训练数据来自 97 万条真实机器人示范。OpenVLA 以 Llama 2 为语言骨干，并结合融合 DINOv2 与 SigLIP 特征的视觉编码器。得益于更丰富的数据和新的模型组件，OpenVLA 在通用操作任务上表现强劲：在跨 29 个任务和多个机器人平台的评测中，它以少 7 倍参数量的代价，在绝对任务成功率上比闭源模型 RT-2-X（55B）高出 16.5%。作者进一步展示，OpenVLA 可以有效微调到新机器人设置上，特别是在多对象、多任务和强语言 grounding 环境中具有较强泛化能力，并比从零训练的 Diffusion Policy 高出 20.4%。此外，作者还讨论了计算效率：OpenVLA 可以通过低秩适配方法在消费级 GPU 上完成微调，并通过量化高效部署而几乎不损失下游成功率。最后，作者开源了模型权重、微调 notebook 和支持大规模 Open X-Embodiment 数据训练的 PyTorch 代码库。\n\n## 方法\n\n**方法概述：** OpenVLA 是一个 70 亿参数的开源 VLA 模型，目标是让机器人领域拥有一个既能和闭源大模型竞争、又真正可微调和可部署的通用操作模型基座。\n\n**核心机制：** OpenVLA 建立在 Llama 2 语言模型之上，用融合 DINOv2 和 SigLIP 的视觉编码器提取观察特征，再将视觉与语言上下文统一映射到动作生成流程中，从而实现图像、语言、动作的一体化建模。\n\n**方法拆解：** - 模型主体由视觉编码器、视觉到语言空间的投影层，以及 Llama 2 语言骨干组成，最终直接预测 7 维机器人控制动作。\n- 训练阶段使用 97 万条真实机器人示范，并利用 Open X-Embodiment 风格的数据混合，强调跨平台和跨任务的数据多样性。\n- 作者不仅训练基础模型，还系统研究了新机器人设置下的数据高效适配、LoRA 等参数高效微调，以及量化后的低内存推理。\n\n**关键要点：** - OpenVLA 把机器人基础模型是否必须闭源这个问题正面回答了：不必。\n- 论文最强的贡献不只是模型本身，而是把训练、适配、部署三件事连成了一条可复现的开源链路。\n\n![方法图](https://arxiv.org/html/2406.09246v3/x1.png)\n\n*方法图*\n\n## 结果\n\n**核心结果：** - 在 29 个任务和多个机器人平台上，OpenVLA 以 7 倍更小的参数规模，相比 RT-2-X 获得 16.5% 的绝对成功率提升。\n- 在新机器人设置的微调实验中，OpenVLA 在多对象和强语言 grounding 场景下表现出比 Diffusion Policy 更强的泛化，最高绝对提升达到 20.4%。\n- 参数高效微调实验表明，LoRA 在训练参数只占 1.4% 的情况下，就可以达到接近全量微调的效果。\n- 量化实验表明，4-bit 推理几乎不损伤成功率，却能显著降低显存占用。\n\n**结果表：** | 指标 | OpenVLA | 结论 |\n| --- | --- | --- |\n| 模型规模 | 7B | 明显小于 RT-2-X 55B |\n| 通用操作成功率 | +16.5% vs RT-2-X | 闭源强基线之上 |\n| 微调相对 Diffusion Policy | +20.4% | 新设置适配更强 |\n| LoRA 训练参数占比 | 1.4% | 参数高效微调可行 |\n| 量化推理 | 4-bit 几乎无损 | 部署成本更低 |\n\n![结果图](https://arxiv.org/html/2406.09246v3/x2.png)\n\n*结果图*\n\n![结果图](https://arxiv.org/html/2406.09246v3/x3.png)\n\n*结果图*\n\n## 洞察\n\n**核心 insight：** - 这篇论文真正改变的是机器人社区的研发起点：以后大家不必总从零开始训练策略，而可以围绕一个开源 VLA 基座持续累积能力。\n- OpenVLA 的价值不只在性能，而在它把基础模型、适配与部署变成了可被社区继承和复用的公共资产。\n\n**和已有方法的关系：** - 相对 RT-2-X 这类闭源大模型，OpenVLA 更强调开放性和可复现性。\n- 相对 Diffusion Policy 这类从零训练的策略模型，OpenVLA 的核心优势是把基础模型预训练带来的迁移性引入机器人控制。\n\n**可借鉴点：** - 如果一个模型想成为领域基座，必须同时解决训练、微调和部署，而不是只在单个 benchmark 上赢。\n- 视觉编码器融合和参数高效微调在具身场景里是非常务实的技术路线。\n\n![洞察图](https://arxiv.org/html/2406.09246v3/x4.png)\n\n*洞察图*\n\n## 风险与判断\n\n**局限：** - 论文的主要贡献偏基础设施和生态层面，因此它并不自动解决真实机器人上的安全、延迟、数据偏差和执行鲁棒性问题。\n\n**适用场景：** - 多平台通用操作、具身智能研究基座，以及需要快速适配新机器人设置的实验室环境。\n\n**最终判断：** - 这篇论文更像一个开源机器人基座项目，而不只是单篇模型论文。\n\n## 结果速览表\n\n| 指标 | OpenVLA | 结论 |\n| --- | --- | --- |\n| 模型规模 | 7B | 明显小于 RT-2-X 55B |\n| 通用操作成功率 | +16.5% vs RT-2-X | 闭源强基线之上 |\n| 微调相对 Diffusion Policy | +20.4% | 新设置适配更强 |\n| LoRA 训练参数占比 | 1.4% | 参数高效微调可行 |\n| 量化推理 | 4-bit 几乎无损 | 部署成本更低 |\n\n## 相关主题\n\n- vision-language-action\n\n## 相关页面\n\n- [[Vision-Language-Action]]\n- [[当前 VLA 路线图：基座、可控性、在线精修、记忆与人类数据]]\n- [[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities]]"
+    },
+    {
+      "id": "pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities",
+      "label": "π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities",
+      "type": "source",
+      "community": "Long-Horizon Memory for Robot Policies",
+      "content": "# π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities\n\n## 太长不看\n\nπ0.7 的关键价值不只是把模型继续做大，而是把“可控的通才机器人策略”往前推了一步。它试图解决的核心问题是：当训练数据越来越杂时，机器人基础模型怎样既能吃下示范、失败轨迹、人类视频和网页数据，又不在推理时退化成平均化、含糊的动作。作者给出的答案是把“怎么做”也写进 prompt，包括子任务语言、子目标图像、质量/速度/错误等 episode metadata，让模型学会在多模态上下文里被 steer。\n\n## 直观理解\n\n可以把 π0.7 理解成一个面向具身智能的“提示可控型 VLA”。传统 VLA 往往只知道任务目标，而 π0.7 还显式接收策略线索和阶段性目标，所以它不只是知道“做什么”，还更知道“按什么方式做”。这使它更容易利用 heterogeneous data，并把不同来源学到的技能重新组合到新任务上。\n\n![Fig. 1 总览图](https://followhub.tenstep.top/papers/pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities/figure-hero.png?v=20260511a)\n\n*Fig. 1：π0.7 总览图，展示 heterogeneous data、prompt 组成以及开箱即用能力与 cross-embodiment transfer。*\n\n## 核心信息\n\n- **作者**：Bo Ai 等 Physical Intelligence 团队\n- **机构**：Physical Intelligence\n- **来源类型**：pdf_url\n- **输入来源**：https://www.pi.website/download/pi07.pdf\n- **项目页面**：https://www.pi.website/pi07\n- **PDF 地址**：https://www.pi.website/download/pi07.pdf\n- **arXiv**：https://arxiv.org/abs/2604.15483\n- **发布日期**：2026-04-16\n- **主题域**：physical-embodied-intelligence\n\n## 背景与问题\n\n**动机：** 机器人基础模型一直在追求 generalist 能力，但过去很多 VLA 虽然能覆盖很多任务，却很难真正展示类似 LLM 的组合泛化。尤其当数据混入不同策略、不同质量、失败轨迹和跨 embodiment 数据后，模型很容易把这些模式平均掉，最后既不稳也不够可控。\n\n**问题缺口：** 作者关注的不只是“怎样训练一个更强 VLA”，而是“怎样让机器人基础模型在更杂、更广的数据混合里仍然保持可控性，并把这些数据真正转化成可组合能力”。这也是具身智能走向通用化时的一个核心瓶颈。\n\n## 论文摘要（英文原文）\n\nWe present a new robotic foundation model, called π0.7, that can enable strong out-of-the-box performance in a wide range of scenarios. π0.7 can follow diverse language instructions in unseen environments, including multi-stage tasks with various kitchen appliances, provide zero-shot cross-embodiment generalization, for example enabling a robot to fold laundry without seeing the task before, and perform challenging tasks such as operating an espresso machine out of the box at a level of performance that matches much more specialized RL-finetuned models. The main idea behind π0.7 is to use diverse context conditioning during training. This conditioning information, contained in the prompt, makes it possible to steer the model precisely to perform many tasks with different strategies. It is conditioned not just on a language command that describes what it should do, but on additional multimodal information that also describes the manner or strategy in which it should do it, including metadata about task performance and subgoal images. This enables π0.7 to use very diverse data, including demonstrations, potentially suboptimal (autonomous) data including failures, and data from non-robot sources. Our experiments evaluate π0.7 across numerous tasks with multiple robot platforms, on tasks that require speed and dexterity, language following, and compositional task generalization.\n\n## 论文摘要（中文翻译）\n\n作者提出了一个新的机器人基础模型 π0.7，它可以在多种场景中实现很强的开箱即用表现。π0.7 能够在未见环境中遵循多样化语言指令，包括涉及多种厨房电器的多阶段任务；能够实现 zero-shot 的跨 embodiment 泛化，例如在从未见过该任务的情况下完成叠衣服；还能在不做任务特定后训练的前提下，完成如操作咖啡机这类具有挑战性的任务，其表现可与专门经过 RL 微调的模型相匹配。π0.7 的核心思想是在训练中使用多样化的上下文条件信息。这些包含在 prompt 里的条件让模型能够被更精确地 steer，从而以不同策略执行多种任务。模型接收的不仅是描述“做什么”的语言命令，还包括描述“如何做”的额外多模态信息，例如任务执行质量相关的 metadata 和子目标图像。这样一来，π0.7 就能利用非常多样的数据，包括示范数据、包含失败在内的次优自主数据，以及非机器人来源的数据。论文在多个机器人平台和大量任务上评估了 π0.7，涵盖速度与灵巧性、语言跟随以及组合泛化等能力。\n\n## 方法\n\n**方法概述：** π0.7 是一个约 5B 参数的机器人基础模型，由 4B 级别的 VLM backbone、MEM 风格的视频历史编码器和 860M 的 action expert 组成。作者没有把重点放在全新架构发明上，而是把重点放在 prompt 设计和数据利用方式上。\n\n**核心机制：** π0.7 不只接收 task instruction，而是把 context 扩展成多种模态的组合：\n\n- **子任务语言**：给出更细粒度的当前 subtask instruction\n- **子目标图像**：由轻量 world model 生成，帮助模型更明确地知道阶段性目标状态\n- **episode metadata**：包含速度、质量、是否犯错等标签，让模型学习“什么样的执行方式更优”\n- **控制模式标识**：区分 joint-level 与 end-effector 控制\n\n**训练数据策略：** 这篇工作的一大特点是明确拥抱 heterogeneous data，而不是只保留高质量示范：\n\n- 机器人示范数据\n- 较低质量甚至失败的轨迹\n- 来自先前模型评估或自主执行的数据\n- 人类 egocentric 视频\n- 通用多模态网页数据\n\n作者的核心判断是，只要 prompt 足够细、能把行为方式 disambiguate 清楚，次优数据和非机器人数据也能成为通才能力的一部分，而不只是噪声。\n\n**方法要点：**\n\n- 通过 richer prompting 缓解多源数据带来的 mode averaging\n- 用 subgoal image 把“想达到什么状态”显式交给策略模型\n- 用 metadata 让模型能在推理时被 steer 到“更快”“更稳”“少犯错”等偏好\n- 把 prior RL specialists 的经验蒸馏进一个 generalist 模型中\n\n![Fig. 2 架构图](https://followhub.tenstep.top/papers/pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities/figure-method.png?v=20260511a)\n\n*Fig. 2：架构总览图，说明 4B VLM backbone、MEM-style history encoder、860M action expert，以及 language / metadata / subgoal image 的关系。*\n\n## 结果\n\n**核心结果：**\n\n- π0.7 在多类高灵巧、长时程任务上实现了强 out-of-the-box 表现，不依赖任务特定 post-training\n- 在 espresso making、box building、laundry folding 等任务上，性能可与先前 RL specialist 模型竞争，部分任务吞吐甚至更高\n- 在未见环境中的 instruction following 上，明显优于 π0.5 和 π0.6\n- 在复杂 referential instruction 上，加入 world-model 生成的 subgoal image 后效果进一步提升\n- 展示了 zero-shot cross-embodiment transfer，例如在目标机器人从未见过相应任务数据时也能直接迁移\n\n![Fig. 6 结果图](https://followhub.tenstep.top/papers/pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities/figure-result.png?v=20260511a)\n\n*Fig. 6：开箱即用灵巧操作结果图，展示 π0.7 在 laundry、espresso、box building 等任务上与 specialist 路线的对比。*\n\n**结果速览表：**\n\n| 维度 | π0.7 的结论 |\n| --- | --- |\n| 开箱即用灵巧操作 | 能直接完成多种高难度 manipulation 任务 |\n| 对比 RL specialist | 多项任务接近甚至超过专用策略 |\n| 指令泛化 | 明显强于 π0.5 / π0.6 |\n| 跨 embodiment 泛化 | 展现 zero-shot transfer 能力 |\n| 组合泛化 | 能把已学技能重新组合到新任务 |\n\n## 洞察\n\n**核心 insight：** 这篇论文真正值得记住的不是“又一个更强的 VLA”，而是它把具身智能里的 prompt engineering 推到了更结构化的层面。作者实际上在做一件很重要的事：把训练数据中的“执行方式”也显式化，使得基础模型不只是学习任务结果，还学习任务风格、质量和阶段性目标。\n\n**和已有路线的关系：**\n\n- 相对传统 VLA，π0.7 更强调 steerability，而不是只强调任务覆盖面\n- 相对只吃高质量 demonstration 的路线，它更愿意吸收失败轨迹和 autonomous data\n- 相对只做 policy learning 的路线，它把 lightweight world model 纳入 prompt 生成链路，让图像化子目标成为机器人控制的一部分\n\n**可借鉴点：**\n\n- 具身智能里“数据更多”并不自动等于“泛化更强”，关键是有没有把数据差异显式编码给模型\n- subgoal image 可能是连接 world model 与 low-level policy 的一条务实接口\n- 从工程视角看，这篇工作说明通才策略与 specialist 策略不一定是替代关系，也可以是蒸馏关系\n\n## 风险与判断\n\n**局限：**\n\n- 论文展示了强 generalization 信号，但作者自己也承认，在如此大而杂的数据集下，很难严格界定什么是真正“未见”的任务\n- 许多能力可能来自对已见技能片段的 remix，而不是更强意义上的系统性推理\n- 这条路线对高质量标注、prompt 设计和数据组织的要求很高，复制门槛不低\n\n**适用场景：**\n\n- 面向多任务 manipulation 的机器人基础模型\n- 需要跨 embodiment 泛化的研究场景\n- 想把 world model、language coaching、metadata control 结合进统一策略框架的系统\n\n**最终判断：** 这是近阶段具身智能里很有代表性的一篇工作。它的重要性不只在性能，而在于明确提出并验证了一条“通过多模态可控 prompt 把 heterogeneous data 变成通才能力”的路线。\n\n## 相关主题\n\n- vision-language-action\n- human-to-robot-transfer\n\n## 相关页面\n\n- [[Vision-Language-Action]]\n- [[Online RL for VLA]]\n- [[Long-Horizon Memory for Robot Policies]]\n- [[Human-to-Robot Transfer]]\n- [[当前 VLA 路线图：基座、可控性、在线精修、记忆与人类数据]]"
+    },
+    {
+      "id": "rl-token-bootstrapping-online-rl-with-vision-language-action-models",
+      "label": "RL Token: Bootstrapping Online RL with Vision-Language-Action Models",
+      "type": "source",
+      "community": "Vision-Language-Action",
+      "content": "# RL Token: Bootstrapping Online RL with Vision-Language-Action Models\n\n## 太长不看\n\n这篇工作最重要的点，是给 VLA 和在线 RL 之间找到了一个足够轻量的接口。作者没有直接对整套大模型做昂贵 RL，而是让预训练 VLA 暴露一个紧凑的 `RL token`，再在这个表示上训练小型 actor-critic，从而把 VLA 的泛化能力和 real-world online RL 的样本效率拼接起来。\n\n## 直观理解\n\n可以把 RLT 理解成“让 VLA 给 RL 提供一个好用的中间状态表示”。VLA 继续负责广义感知和先验动作建议，而在线 RL 只负责在关键精细阶段做快速校正，所以它特别适合“最后几毫米”这种高精度操作优化。\n\n![方法图](https://arxiv.org/html/2604.23073v2/x1.png)\n\n*方法图*\n\n## 核心信息\n\n- **作者**：Charles Xu 等\n- **机构**：Physical Intelligence\n- **原文链接**：https://arxiv.org/abs/2604.23073\n- **PDF 地址**：https://www.pi.website/download/rlt.pdf\n- **发布日期**：2026-04-24\n- **主题域**：physical-embodied-intelligence\n\n## 背景与问题\n\n**动机：** 预训练 VLA 已经能“开箱即用”完成很多 manipulation 任务，但在真实机器人上，最决定成功率的往往是最后的精细接触阶段，比如插接、拧螺丝、卡扣对齐等。\n\n**问题缺口：** 直接用 RL 精调大模型成本太高，传统高样本效率 RL 又往往基于更小模型、会丢掉 VLA 的泛化先验。作者试图解决的就是：能不能在不重训整套 VLA 的前提下，用几小时甚至几分钟真实机器人实践，就把关键精细阶段补强。\n\n## 论文摘要（英文原文）\n\nVision-language-action (VLA) models can learn to perform diverse manipulation skills \"out of the box,\" but achieving the precision and speed that real-world tasks demand requires further fine-tuning -- for example, via reinforcement learning (RL). We introduce a lightweight method that enables sample-efficient online RL fine-tuning of pretrained VLAs using just a few hours of real-world practice. We (1) adapt the VLA to expose an \"RL token,\" a compact readout representation that preserves task-relevant pretrained knowledge while serving as an efficient interface for online RL, and (2) train a small actor-critic head on this RL token to refine the actions, while anchoring the learned policy to the VLA. Online RL with the RL token (RLT) makes it possible to fine-tune even large VLAs with RL quickly and efficiently. Across four real-robot tasks (screw installation, zip tie fastening, charger insertion, and Ethernet insertion), RLT improves the speed on the hardest part of the task by up to 3x and raises success rates significantly within minutes to a few hours of practice. It can even surpass the speed of human teleoperation on some of the tasks.\n\n## 论文摘要（中文翻译）\n\nVLA 可以开箱执行多样化操作技能，但要达到真实任务要求的精度和速度，通常还需要进一步微调，比如用 RL。作者提出一种轻量方法，可以只用几小时真实机器人实践，就对预训练 VLA 做高样本效率的在线 RL 精调。方法分两步：一是让 VLA 暴露一个 `RL token`，它保留与任务相关的预训练知识，同时作为在线 RL 的高效接口；二是在这个 token 上训练一个小型 actor-critic 头，在保持策略锚定于原始 VLA 的同时对动作进行细化。作者在四个高精度真实机器人任务上表明，RLT 能在几分钟到几小时内显著提升成功率，并把关键阶段速度提升到最高 3 倍，部分任务甚至超过人类遥操作速度。\n\n## 方法\n\n**方法概述：** 这篇论文并不主张把整套大 VLA 直接拿去做重型 online RL，而是主张在预训练 VLA 与轻量 real-world RL 之间插入一个中间接口。作者通过一个 encoder-decoder transformer，从预训练 VLA 的内部特征里提取一个紧凑的 `RL token`，再基于这个 token 训练轻量 actor-critic，从而把 foundation model 的表示能力与在线 RL 的快速适配能力组合起来。\n\n**核心机制：**\n\n- 从 VLA 内部特征中暴露一个 `RL token`\n- 用小型 actor-critic 在 `RL token` 上进行样本高效在线 RL\n- 用 regularizer 把 actor 锚定在原始 VLA 行为附近，避免从零学起\n- 只把 online RL 用在高精度、最难的 critical phase，而不是整段任务\n\n**方法拆解：**\n\n- 先从预训练 VLA 的内部表示中压缩出一个维度更低、任务相关但仍保留预训练知识的 `RL token`\n- 在 `RL token` 上训练 actor 和 critic，使 online RL 只优化一个轻量策略层\n- actor 输入不仅包含 token，也参考 VLA 的原始动作建议，并通过锚定项限制策略偏移过大\n- 训练重点放在真实任务中的关键精细阶段，例如插接、拧入、卡扣等“最后几毫米”问题\n- 基础 VLA 继续执行前面较容易的阶段，而 RL 集中提升最容易失败的部分\n\n**关键要点：**\n\n- 让大模型保留先验，小模型承担快速适配\n- 强调 real-world online fine-tuning，而不是大规模离线再训练\n- 特别适合精细接触和高精度 manipulation 阶段\n- 这是把 generalist policy 继续打磨成 specialist-level precision 的务实路线\n\n## 结果\n\n**核心结果：**\n\n- 在 screw installation、zip tie fastening、charger insertion、Ethernet insertion 四个真实机器人任务上，RLT 都能在几分钟到几小时内带来明显收益\n- 论文摘要给出的最强结果是：关键阶段速度最高提升 `3x`\n- 在困难任务上不仅 throughput 提升，success rate 也明显改善\n- 对某些高精度部分，最终策略甚至能超过 expert teleoperation 的速度\n\n![结果图](https://arxiv.org/html/2604.23073v2/x2.png)\n\n*结果图*\n\n**结果表：**\n\n| 维度 | RLT 结论 |\n| --- | --- |\n| 微调目标 | 关键高精度阶段 |\n| 在线学习成本 | 几分钟到几小时 |\n| 速度提升 | 最多约 3x |\n| 成功率提升 | 困难任务上显著提高 |\n| 对比大模型直接 RL | 更轻、更快、更样本高效 |\n\n## 洞察\n\n**核心 insight：**\n\n- 这篇工作最值得记住的不是 `RL token` 这个名词本身，而是它展示了一种 VLA 与 online RL 的分层协作方式：foundation model 提供广义能力，轻量 RL 负责最后的高精度矫正。\n\n**和已有方法的关系：**\n\n- 相对直接对大模型做 RL 的路线，它更强调接口化和参数效率\n- 相对完全基于小模型的高样本效率 RL，它尽量不放弃 VLA 的预训练泛化能力\n- 相对把 specialist policy 与 generalist policy 割裂开来的做法，它更像在 generalist 上叠一层 task-specific sharpening\n\n**可借鉴点：**\n\n- 对具身智能来说，很多时候不需要重训整套模型，只需要找到一个合适的 adaptation interface\n- “critical phase only” 的 online RL 很适合真实机器人环境，因为它把实验预算集中在最值钱的阶段\n- 如果后面你关注具身智能系统工程，这篇可以看成是“foundation policy + lightweight adaptation head”范式的代表作\n\n## 风险与判断\n\n**局限：**\n\n- 论文验证任务集中在高精度 manipulation，而不是更复杂的长时程或跨场景连续任务\n- 方法高度依赖预训练 VLA 本身已经具备不错的先验；如果底座很弱，`RL token` 未必能救回来\n- 这种轻量 RL 接口是否能稳定推广到更多 embodiment、更多奖励形式，还需要更系统的验证\n\n**适用场景：**\n\n- 真实机器人上的高精度技能打磨\n- 在 generalist policy 基础上快速追求更高成功率和更高速度\n- 实验预算有限、不能承受整套大模型重训的场景\n\n**最终判断：** 这篇是 “VLA 如何接 online RL” 方向里很有代表性的工作，尤其适合放进你后续的 `VLA + RL refinement` 主线。\n\n## 结果速览表\n\n| 维度 | 结论 |\n| --- | --- |\n| 微调方式 | 轻量在线 RL |\n| 核心接口 | RL token |\n| 训练对象 | 小型 actor-critic |\n| 样本效率 | 几分钟到几小时 |\n| 关键收益 | 提升精度、速度和成功率 |\n\n## 相关主题\n\n- vision-language-action\n- online-rl-for-vla\n\n## 相关页面\n\n- [[Vision-Language-Action]]\n- [[Online RL for VLA]]\n- [[当前 VLA 路线图：基座、可控性、在线精修、记忆与人类数据]]\n- [[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities]]"
+    },
+    {
+      "id": "current-vla-landscape-foundation-control-memory-and-transfer",
+      "label": "当前 VLA 路线图：基座、可控性、在线精修、记忆与人类数据",
+      "type": "synthesis",
+      "community": "Human-to-Robot Transfer",
+      "content": "# 当前 VLA 路线图：基座、可控性、在线精修、记忆与人类数据\n\n> 这 6 篇论文放在一起看，已经足够勾勒出当前具身智能 VLA 与 human data 主线的几条关键分叉。\n\n## 综述结论\n\n如果只看单篇论文，很容易觉得大家都在“继续做更强的 VLA”。但把 `OpenVLA`、`π0.7`、`RLT`、`MEM`、`Human-to-Robot Transfer`、`DexImit` 放在一起，会看到这条路线其实已经分化成六个相互关联的问题：\n\n1. `VLA 基座如何开放、可训、可部署`\n2. `heterogeneous data 如何变成可控能力`\n3. `通才策略如何继续被打磨到 specialist 级精度`\n4. `分钟级任务如何通过 memory 真正支撑起来`\n5. `人类数据何时开始能真正被机器人利用`\n6. `人类视频如何被显式编译成机器人可训练数据`\n\n这说明当前 VLA 研究已经不再只是单点模型设计，而是在演化成一套完整系统栈。\n\n## 路线 1：基座化\n\n代表工作：\n[来源: OpenVLA: An Open-Source Vision-Language-Action Model](../sources/openvla-an-open-source-vision-language-action-model.md)\n\nOpenVLA 回答的是最底层的问题：如果机器人领域要像语言模型一样进入 foundation model 时代，是否有一个真正公开、可训练、可微调、可部署的基座。它的意义不只是性能，而是把训练、适配、部署连成一条开源链路，使后续路线有了可复用底座。\n\n## 路线 2：可控性与多源数据吸纳\n\n代表工作：\n[来源: π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities](../sources/pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities.md)\n\nπ0.7 强调的是：当机器人基础模型开始吃 demonstration、autonomous data、human video、web data 时，真正的难点不是“数据够不够多”，而是“模型能不能分辨这些数据应该怎么用”。它通过子任务语言、subgoal image、episode metadata 把“怎么做”也写进 prompt，本质上是在解决 heterogeneous data 的 disambiguation 问题。\n\n## 路线 3：在线精修\n\n代表工作：\n[来源: RL Token: Bootstrapping Online RL with Vision-Language-Action Models](../sources/rl-token-bootstrapping-online-rl-with-vision-language-action-models.md)\n\nRLT 则往下游走一步，解决 foundation policy 落地时的高精度问题。它并不否定 VLA 的 generalist 路线，而是承认现实：很多真实机器人任务最终卡在最后几毫米。它给出的答案是用 `RL token` 之类的轻量接口，在不重训整套大模型的前提下，把关键阶段继续打磨成 specialist 级表现。\n\n## 路线 4：长时程记忆\n\n代表工作：\n[来源: MEM: Multi-Scale Embodied Memory for Vision Language Action Models](../sources/mem-multi-scale-embodied-memory-for-vision-language-action-models.md)\n\nMEM 进一步把问题拉长到分钟级任务。它说明单纯增加历史长度不能解决 long-horizon control，memory 必须是分层的：短期视觉记忆负责局部细节和遮挡补偿，长期语义记忆负责任务进度与阶段管理。这意味着 VLA 的未来很可能越来越像“带显式 memory module 的 embodied agent”。\n\n## 路线 5：人类数据吸纳\n\n代表工作：\n[来源: Emergence of Human to Robot Transfer in Vision-Language-Action Models](../sources/emergence-of-human-to-robot-transfer-in-vision-language-action-models.md)\n\nHuman-to-Robot Transfer 这篇把视角转向更上游的数据扩展问题。它的关键发现不是“human video useful”，而是“当 robot pretraining 多样性达到某个阈值后，human-to-robot transfer 才开始明显涌现”。这给出一个很重要的判断：具身智能里很多看似需要手工对齐的能力，可能其实是 scale 和 diversity 的副产物。\n\n## 路线 6：人类视频到机器人数据引擎\n\n代表工作：\n[来源: DexImit: Learning Bimanual Dexterous Manipulation from Monocular Human Videos](../sources/deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos.md)\n\nDexImit 补上了 human data 的另一种用法：不是直接把 human video 作为另一种 embodiment 参与训练，而是把单目人类操作视频经过 4D 重建、双手调度、抓取与运动规划、数据增强，显式转换成双手灵巧机器人训练数据。它说明 human video 的价值不只在 representation transfer，也可能在于成为一个可规模化的数据生成入口。\n\n## 综合判断\n\n把这 5 篇合起来看，目前 VLA 主线至少有三个明显结论：\n\n- **第一，VLA 不是单一路线，而是平台化问题。**\n  从 `OpenVLA` 到 `RLT`，可以看到大家已经默认 foundation policy 是起点，不是终点。\n\n- **第二，真正的瓶颈在“如何把广泛数据转成可靠控制”。**\n  `π0.7` 关心 prompt 和 steerability，`MEM` 关心 memory abstraction，`Human-to-Robot Transfer` 关心 pretraining diversity，`DexImit` 关心显式 data generation，这些本质都在解决“广覆盖是否真的会变成能力”。\n\n- **第三，后续突破更可能来自系统组合，而不是单点模型变大。**\n  基座、可控性、在线精修、长时程记忆、人类数据和数据生成引擎，这些路线更像模块而不是相互替代关系。未来更可能出现的是它们的组合系统。\n\n- **第四，human data 至少有两条不同技术路线。**\n  一条是 `Human-to-Robot Transfer` 代表的 co-training / representation transfer，另一条是 `DexImit` 代表的 reconstruction / scheduling / planning data engine。前者更依赖预训练多样性，后者更依赖几何与物理可行性检查。\n\n## 当前知识库的合理结构判断\n\n基于现在只有 6 篇 source 的状态，真正成熟的 topic 其实还不多。\n\n- `Vision-Language-Action` 已经是一个成立的总主题\n- `Online RL for VLA`、`Long-Horizon Memory`、`Human-to-Robot Transfer`、`Human Video Robot Data Generation` 目前更像正在形成中的子主题\n\n因此当前更合理的入口，不是强行把每条子方向都做成厚 topic，而是先保留一个总主题页，再用这篇 synthesis 作为跨论文主入口。\n\n## 后续建议\n\n- 再补 2-3 篇 `online RL for VLA / policy refinement` 论文，再厚化 `Online RL for VLA`\n- 再补 2-3 篇 `memory / long horizon` 论文，再厚化 `Long-Horizon Memory`\n- 再补 `human video / cross-embodiment / multimodal transfer` 论文，再厚化 `Human-to-Robot Transfer`\n- 再补 `video-to-robot-data / dexterous data generation / imitation from video` 论文，再判断 `Human Video Robot Data Generation` 是否应升级为更重的综述入口\n- 到那时再做更重的 topic，而不是现在就假装它们已经成熟\n\n## 相关页面\n\n- [[Vision-Language-Action]]\n- [[OpenVLA: An Open-Source Vision-Language-Action Model]]\n- [[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities]]\n- [[RL Token: Bootstrapping Online RL with Vision-Language-Action Models]]\n- [[MEM: Multi-Scale Embodied Memory for Vision Language Action Models]]\n- [[Emergence of Human to Robot Transfer in Vision-Language-Action Models]]\n- [[DexImit: Learning Bimanual Dexterous Manipulation from Monocular Human Videos]]\n- [[Human Video Robot Data Generation]]"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "Human Video Robot Data Generation",
+      "to": "Human-to-Robot Transfer",
+      "type": "EXTRACTED",
+      "weight": 0.5,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.2,
+        "source_overlap": null,
+        "type_affinity": 0.8
+      }
+    },
+    {
+      "id": "e2",
+      "from": "Human Video Robot Data Generation",
+      "to": "Vision-Language-Action",
+      "type": "EXTRACTED",
+      "weight": 0.5,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.2,
+        "source_overlap": null,
+        "type_affinity": 0.8
+      }
+    },
+    {
+      "id": "e3",
+      "from": "Human-to-Robot Transfer",
+      "to": "Human Video Robot Data Generation",
+      "type": "EXTRACTED",
+      "weight": 0.5,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.2,
+        "source_overlap": null,
+        "type_affinity": 0.8
+      }
+    },
+    {
+      "id": "e4",
+      "from": "Human-to-Robot Transfer",
+      "to": "Vision-Language-Action",
+      "type": "EXTRACTED",
+      "weight": 0.55,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.3,
+        "source_overlap": null,
+        "type_affinity": 0.8
+      }
+    },
+    {
+      "id": "e5",
+      "from": "Long-Horizon Memory for Robot Policies",
+      "to": "Vision-Language-Action",
+      "type": "EXTRACTED",
+      "weight": 0.5,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.2,
+        "source_overlap": null,
+        "type_affinity": 0.8
+      }
+    },
+    {
+      "id": "e6",
+      "from": "Online RL for VLA",
+      "to": "Vision-Language-Action",
+      "type": "EXTRACTED",
+      "weight": 0.5,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.2,
+        "source_overlap": null,
+        "type_affinity": 0.8
+      }
+    },
+    {
+      "id": "e7",
+      "from": "Vision-Language-Action",
+      "to": "Online RL for VLA",
+      "type": "EXTRACTED",
+      "weight": 0.5,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.2,
+        "source_overlap": null,
+        "type_affinity": 0.8
+      }
+    },
+    {
+      "id": "e8",
+      "from": "Vision-Language-Action",
+      "to": "Long-Horizon Memory for Robot Policies",
+      "type": "EXTRACTED",
+      "weight": 0.5,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.2,
+        "source_overlap": null,
+        "type_affinity": 0.8
+      }
+    },
+    {
+      "id": "e9",
+      "from": "Vision-Language-Action",
+      "to": "Human-to-Robot Transfer",
+      "type": "EXTRACTED",
+      "weight": 0.55,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.3,
+        "source_overlap": null,
+        "type_affinity": 0.8
+      }
+    },
+    {
+      "id": "e10",
+      "from": "deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos",
+      "to": "Human Video Robot Data Generation",
+      "type": "EXTRACTED",
+      "weight": 0.25,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e11",
+      "from": "deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos",
+      "to": "Human-to-Robot Transfer",
+      "type": "EXTRACTED",
+      "weight": 0.25,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e12",
+      "from": "emergence-of-human-to-robot-transfer-in-vision-language-action-models",
+      "to": "Vision-Language-Action",
+      "type": "EXTRACTED",
+      "weight": 0.25,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e13",
+      "from": "emergence-of-human-to-robot-transfer-in-vision-language-action-models",
+      "to": "Human-to-Robot Transfer",
+      "type": "EXTRACTED",
+      "weight": 0.25,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e14",
+      "from": "mem-multi-scale-embodied-memory-for-vision-language-action-models",
+      "to": "Vision-Language-Action",
+      "type": "EXTRACTED",
+      "weight": 0.25,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e15",
+      "from": "mem-multi-scale-embodied-memory-for-vision-language-action-models",
+      "to": "Long-Horizon Memory for Robot Policies",
+      "type": "EXTRACTED",
+      "weight": 0.25,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e16",
+      "from": "openvla-an-open-source-vision-language-action-model",
+      "to": "Vision-Language-Action",
+      "type": "EXTRACTED",
+      "weight": 0.25,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e17",
+      "from": "pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities",
+      "to": "Vision-Language-Action",
+      "type": "EXTRACTED",
+      "weight": 0.25,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e18",
+      "from": "pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities",
+      "to": "Online RL for VLA",
+      "type": "EXTRACTED",
+      "weight": 0.25,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e19",
+      "from": "pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities",
+      "to": "Long-Horizon Memory for Robot Policies",
+      "type": "EXTRACTED",
+      "weight": 0.25,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e20",
+      "from": "pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities",
+      "to": "Human-to-Robot Transfer",
+      "type": "EXTRACTED",
+      "weight": 0.25,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e21",
+      "from": "rl-token-bootstrapping-online-rl-with-vision-language-action-models",
+      "to": "Vision-Language-Action",
+      "type": "EXTRACTED",
+      "weight": 0.25,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e22",
+      "from": "rl-token-bootstrapping-online-rl-with-vision-language-action-models",
+      "to": "Online RL for VLA",
+      "type": "EXTRACTED",
+      "weight": 0.25,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e23",
+      "from": "current-vla-landscape-foundation-control-memory-and-transfer",
+      "to": "Vision-Language-Action",
+      "type": "EXTRACTED",
+      "weight": 0.25,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e24",
+      "from": "current-vla-landscape-foundation-control-memory-and-transfer",
+      "to": "Human Video Robot Data Generation",
+      "type": "EXTRACTED",
+      "weight": 0.25,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    }
+  ],
+  "insights": {
+    "surprising_connections": [],
+    "isolated_nodes": [
+      {
+        "id": "openvla-an-open-source-vision-language-action-model",
+        "label": "OpenVLA: An Open-Source Vision-Language-Action Model",
+        "degree": 1,
+        "community": "Vision-Language-Action"
+      }
+    ],
+    "bridge_nodes": [
+      {
+        "id": "Human-to-Robot Transfer",
+        "label": "Human-to-Robot Transfer",
+        "community": "Human-to-Robot Transfer",
+        "connected_communities": [
+          "Long-Horizon Memory for Robot Policies",
+          "Vision-Language-Action"
+        ],
+        "community_count": 2
+      },
+      {
+        "id": "pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities",
+        "label": "π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities",
+        "community": "Long-Horizon Memory for Robot Policies",
+        "connected_communities": [
+          "Human-to-Robot Transfer",
+          "Vision-Language-Action"
+        ],
+        "community_count": 2
+      },
+      {
+        "id": "Vision-Language-Action",
+        "label": "Vision-Language-Action",
+        "community": "Vision-Language-Action",
+        "connected_communities": [
+          "Human-to-Robot Transfer",
+          "Long-Horizon Memory for Robot Policies"
+        ],
+        "community_count": 2
+      }
+    ],
+    "sparse_communities": [],
+    "meta": {
+      "degraded": false,
+      "node_count": 12,
+      "edge_count": 24,
+      "max_insight_nodes": 250,
+      "max_insight_edges": 1000
+    }
+  },
+  "learning": {
+    "version": 1,
+    "entry": {
+      "recommended_start_node_id": "Human-to-Robot Transfer",
+      "recommended_start_reason": "community_hub",
+      "default_mode": "global"
+    },
+    "views": {
+      "path": {
+        "enabled": true,
+        "start_node_id": "Human-to-Robot Transfer",
+        "node_ids": [
+          "Human-to-Robot Transfer",
+          "Human Video Robot Data Generation",
+          "deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos",
+          "emergence-of-human-to-robot-transfer-in-vision-language-action-models"
+        ],
+        "degraded": false
+      },
+      "community": {
+        "enabled": true,
+        "community_id": "Human-to-Robot Transfer",
+        "label": "Human-to-Robot Transfer",
+        "node_ids": [
+          "Human Video Robot Data Generation",
+          "Human-to-Robot Transfer",
+          "current-vla-landscape-foundation-control-memory-and-transfer",
+          "deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos",
+          "emergence-of-human-to-robot-transfer-in-vision-language-action-models"
+        ],
+        "is_weak": false,
+        "degraded": false
+      },
+      "global": {
+        "enabled": true,
+        "node_ids": [
+          "Vision-Language-Action",
+          "Human-to-Robot Transfer",
+          "Human Video Robot Data Generation",
+          "Long-Horizon Memory for Robot Policies",
+          "Online RL for VLA",
+          "pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities",
+          "current-vla-landscape-foundation-control-memory-and-transfer",
+          "deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos",
+          "emergence-of-human-to-robot-transfer-in-vision-language-action-models",
+          "mem-multi-scale-embodied-memory-for-vision-language-action-models",
+          "rl-token-bootstrapping-online-rl-with-vision-language-action-models",
+          "openvla-an-open-source-vision-language-action-model"
+        ],
+        "degraded": false
+      }
+    },
+    "communities": [
+      {
+        "id": "Human-to-Robot Transfer",
+        "label": "Human-to-Robot Transfer",
+        "node_count": 5,
+        "source_count": 2,
+        "internal_edge_weight": 2,
+        "is_primary": true,
+        "is_weak": false,
+        "recommended_start_node_id": "Human-to-Robot Transfer"
+      },
+      {
+        "id": "Vision-Language-Action",
+        "label": "Vision-Language-Action",
+        "node_count": 4,
+        "source_count": 2,
+        "internal_edge_weight": 1.75,
+        "is_primary": false,
+        "is_weak": false,
+        "recommended_start_node_id": "Vision-Language-Action"
+      },
+      {
+        "id": "Long-Horizon Memory for Robot Policies",
+        "label": "Long-Horizon Memory for Robot Policies",
+        "node_count": 3,
+        "source_count": 2,
+        "internal_edge_weight": 0.5,
+        "is_primary": false,
+        "is_weak": false,
+        "recommended_start_node_id": "Long-Horizon Memory for Robot Policies"
+      }
+    ],
+    "degraded": {
+      "path_to_community": false,
+      "community_to_global": false
+    }
+  }
+}
+</script>
+
+<!-- TWEAKS DEFAULTS (editable by host) -->
+<script>
+window.__TWEAKS = /*EDITMODE-BEGIN*/{
+  "variant": "wash",
+  "sizeMode": "uniform",
+  "bubbleMode": "wash",
+  "nodeStyle": "card"
+}/*EDITMODE-END*/;
+</script>
+
+<!-- Libraries -->
+<script src="d3.min.js" defer></script>
+<script src="rough.min.js" defer></script>
+<script src="marked.min.js" defer></script>
+<script src="purify.min.js" defer></script>
+
+<!-- Sample graph data -->
+<!-- Main app -->
+<script src="graph-wash-helpers.js" defer></script>
+<script src="graph-wash.js" defer></script>
+
+</body>
+</html>

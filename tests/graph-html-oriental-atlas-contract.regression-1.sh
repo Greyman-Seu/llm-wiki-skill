@@ -81,15 +81,14 @@ test_oriental_atlas_has_required_copy() {
     html="$tmp_dir/wiki/knowledge-graph.html"
 
     assert_file_contains "$html" "国风知识库·数字山水图"
-    assert_file_contains "$html" "文献索引"
-    assert_file_contains "$html" "社区"
+    assert_file_contains "$html" "搜索综述、主题或材料"
+    assert_file_contains "$html" "综述判断"
+    assert_file_contains "$html" "主题路线"
+    assert_file_contains "$html" "材料目录"
     assert_file_contains "$html" "聚焦"
-    assert_file_contains "$html" "关系置信度"
-    assert_file_contains "$html" "直接提取"
-    assert_file_contains "$html" "推断关联"
-    assert_file_contains "$html" "存在歧义"
-    assert_file_contains "$html" "未核实"
+    assert_file_contains "$html" "综述、主题、材料之间的引用关系"
     assert_file_contains "$html" "GitHub"
+    assert_file_not_contains "$html" "文献索引"
 
     rm -rf "$tmp_dir"
 }

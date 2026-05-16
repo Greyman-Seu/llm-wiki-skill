@@ -41,7 +41,7 @@ test_graph_html_has_search_ui() {
 
     assert_file_contains "$html" 'class="search-box"'
     assert_file_contains "$html" 'id="search"'
-    assert_file_contains "$html" "搜索节点、来源或主题"
+    assert_file_contains "$html" "搜索综述、主题或材料"
     assert_file_contains "$html" 'id="no-results"'
 
     rm -rf "$tmp_dir"

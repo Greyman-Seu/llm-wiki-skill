@@ -11,6 +11,10 @@ fail() {
     exit 1
 }
 
+require_python() {
+    command -v python3 >/dev/null 2>&1 || fail "python3 is required for JSON assertions"
+}
+
 assert_text_contains() {
     local text="$1"
     local expected="$2"
@@ -18,6 +22,73 @@ assert_text_contains() {
     if ! printf '%s' "$text" | grep -F -- "$expected" > /dev/null; then
         fail "Expected output to contain: $expected"
     fi
+}
+
+json_edge_metrics() {
+    local json_path="$1"
+    local from_id="$2"
+    local to_id="$3"
+
+    python3 - "$json_path" "$from_id" "$to_id" <<'PY'
+import json
+import sys
+
+json_path, from_id, to_id = sys.argv[1:4]
+with open(json_path, encoding="utf-8") as handle:
+    data = json.load(handle)
+
+for edge in data.get("edges", []):
+    if edge.get("from") == from_id and edge.get("to") == to_id:
+        signals = edge.get("signals") or {}
+        source_overlap = signals.get("source_overlap")
+        if source_overlap is None:
+            source_overlap = "null"
+        values = [
+            edge.get("weight"),
+            edge.get("source_signal_available"),
+            source_overlap,
+            signals.get("type_affinity"),
+        ]
+        print("\t".join(str(value).lower() if isinstance(value, bool) else str(value) for value in values))
+        sys.exit(0)
+
+sys.stderr.write(f"edge not found: {from_id} -> {to_id}\n")
+sys.exit(1)
+PY
+}
+
+json_parse_sources_row() {
+    local json_text="$1"
+
+    python3 - "$json_text" <<'PY'
+import json
+import sys
+
+data = json.loads(sys.argv[1])
+values = [
+    data.get("hasField"),
+    data.get("parsed"),
+    data.get("signalAvailable"),
+    ",".join(str(source) for source in data.get("sources", [])),
+]
+print("\t".join(str(value).lower() if isinstance(value, bool) else str(value) for value in values))
+PY
+}
+
+json_ids_for_array() {
+    local json_text="$1"
+    local array_key="$2"
+
+    python3 - "$array_key" "$json_text" <<'PY'
+import json
+import sys
+
+array_key = sys.argv[1]
+data = json.loads(sys.argv[2])
+for item in data.get(array_key, []):
+    if isinstance(item, dict) and item.get("id") is not None:
+        print(item["id"])
+PY
 }
 
 test_helper_computes_weights_and_source_omission() {
@@ -70,10 +141,10 @@ EOF
 
     node "$HELPER" "$tmp_dir/nodes.json" "$tmp_dir/edges.json" "$tmp_dir/out.json" 0 500 250 1000 > /dev/null
 
-    output="$(jq -r '.edges[] | select(.from == "A" and .to == "B") | [.weight, .source_signal_available, .signals.source_overlap, .signals.type_affinity] | @tsv' "$tmp_dir/out.json")"
+    output="$(json_edge_metrics "$tmp_dir/out.json" "A" "B")"
     [ "$output" = $'0.667	true	1	1' ] || fail "Unexpected A-B edge metrics: $output"
 
-    output="$(jq -r '.edges[] | select(.from == "C" and .to == "A") | [.weight, .source_signal_available, (.signals.source_overlap // "null"), .signals.type_affinity] | @tsv' "$tmp_dir/out.json")"
+    output="$(json_edge_metrics "$tmp_dir/out.json" "C" "A")"
     [ "$output" = $'0.5	false	null	1' ] || fail "Expected missing sources to be omitted from denominator, got: $output"
 
     rm -rf "$tmp_dir"
@@ -106,10 +177,7 @@ console.log(JSON.stringify(result));
 NODE
 )"
     local has_field parsed signal sources
-    has_field="$(printf '%s' "$output" | jq -r '.hasField')"
-    parsed="$(printf '%s' "$output" | jq -r '.parsed')"
-    signal="$(printf '%s' "$output" | jq -r '.signalAvailable')"
-    sources="$(printf '%s' "$output" | jq -r '.sources | join(",")')"
+    IFS=$'\t' read -r has_field parsed signal sources <<< "$(json_parse_sources_row "$output")"
     [ "$has_field" = "true" ] || fail "Expected hasField=true for YAML multiline, got: $has_field"
     [ "$parsed" = "true" ] || fail "Expected parsed=true for YAML multiline, got: $parsed"
     [ "$signal" = "true" ] || fail "Expected signalAvailable=true, got: $signal"
@@ -187,14 +255,15 @@ NODE
 )"
 
     local bridge sparse
-    bridge="$(printf '%s' "$output" | jq -r '.bridge_nodes[]?.id')"
+    bridge="$(json_ids_for_array "$output" "bridge_nodes")"
     assert_text_contains "$bridge" "bridge"
 
-    sparse="$(printf '%s' "$output" | jq -r '.sparse_communities[]?.id')"
+    sparse="$(json_ids_for_array "$output" "sparse_communities")"
     assert_text_contains "$sparse" "s-topic"
 }
 
 main() {
+    require_python
     test_helper_computes_weights_and_source_omission
     test_single_node_graph_louvain_returns_safely
     test_parse_sources_yaml_multiline

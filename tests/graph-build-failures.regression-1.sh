@@ -21,13 +21,14 @@ assert_text_contains() {
 }
 
 test_graph_data_exits_without_node() {
-    local tmp_dir fake_bin output
+    local tmp_dir fake_bin output python_bin
     tmp_dir="$(mktemp -d)"
     fake_bin="$tmp_dir/bin"
     mkdir -p "$fake_bin"
 
+    python_bin="$(command -v python3)"
     ln -s /bin/bash "$fake_bin/bash"
-    ln -s "$(command -v jq)" "$fake_bin/jq"
+    ln -s "$python_bin" "$fake_bin/python3"
 
     if output="$(PATH="$fake_bin" bash "$REPO_ROOT/scripts/build-graph-data.sh" "$GRAPH_DATA_SAMPLE" 2>&1)"; then
         fail "build-graph-data.sh should fail when node is unavailable"

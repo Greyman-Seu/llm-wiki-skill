@@ -185,6 +185,35 @@
       flex-wrap: wrap;
     }
 
+    .mode-tabs {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px;
+      border-radius: 999px;
+      border: 1px solid rgba(216, 205, 187, .92);
+      background: rgba(248, 241, 228, .84);
+    }
+
+    .mode-tab {
+      min-height: 36px;
+      padding: 0 14px;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease;
+    }
+
+    .mode-tab[aria-pressed="true"] {
+      background: linear-gradient(135deg, rgba(139, 46, 36, .94), rgba(162, 59, 42, .94));
+      color: #fffdf7;
+      box-shadow: 0 8px 16px rgba(139, 46, 36, .18);
+    }
+
     .status-pill,
     .chip {
       display: inline-flex;
@@ -420,7 +449,8 @@
       text-align: left;
     }
 
-    .start-card[data-preview-start="true"] {
+    .start-card[data-preview-start="true"],
+    .start-card[data-selected="true"] {
       border-color: rgba(139, 46, 36, .42);
       background: rgba(248, 241, 228, .78);
       box-shadow: inset 3px 0 0 rgba(139, 46, 36, .56);
@@ -1317,16 +1347,16 @@
     }
 
     .neighbor-section > summary::after {
-      content: "展开";
+      content: "关联";
       flex: 0 0 auto;
-      color: var(--cinnabar);
+      color: var(--muted);
       font-family: var(--font-ui);
       font-size: 12px;
       font-weight: 700;
     }
 
     .neighbor-section[open] > summary::after {
-      content: "收起";
+      content: "关联";
     }
 
     .neighbor-section .neighbor-list {
@@ -1357,6 +1387,76 @@
       color: var(--ink);
     }
 
+    .start-card {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .start-card__main {
+      min-width: 0;
+      min-height: 36px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .start-card__link {
+      min-height: 32px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(216, 205, 187, .92);
+      border-radius: 9px;
+      background: rgba(255, 253, 247, .78);
+      padding: 0 9px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .start-card__main:hover .card-copy strong,
+    .start-card__link:hover {
+      color: var(--cinnabar);
+    }
+
+    .list-pager {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .list-pager button {
+      min-height: 32px;
+      border: 1px solid rgba(216, 205, 187, .92);
+      border-radius: 9px;
+      background: rgba(255, 253, 247, .78);
+      color: var(--muted);
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .list-pager button:not(:disabled):hover {
+      color: var(--cinnabar);
+    }
+
+    .list-pager button:disabled {
+      cursor: default;
+      opacity: .45;
+    }
+
+    .list-pager span {
+      white-space: nowrap;
+    }
+
     .note-card {
       border-style: dashed;
       background: rgba(255, 253, 247, .62);
@@ -1367,7 +1467,7 @@
 
     .drawer-actions {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 9px;
       padding: 13px 18px 16px;
       border-top: 1px solid rgba(216, 205, 187, .82);
@@ -1407,6 +1507,290 @@
 
     .hidden-count.is-visible {
       display: block;
+    }
+
+    .papers-page,
+    .reader-page {
+      display: none;
+      grid-column: 1 / -1;
+      grid-row: 2;
+      min-height: 0;
+      border-radius: 18px;
+      border: 1px solid rgba(216, 205, 187, .9);
+      background: linear-gradient(180deg, rgba(255, 253, 247, .96), rgba(248, 241, 228, .92));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .app[data-route="papers"] .sidebar,
+    .app[data-route="papers"] .canvas-card,
+    .app[data-route="papers"] .drawer,
+    .app[data-route="reader"] .sidebar,
+    .app[data-route="reader"] .canvas-card,
+    .app[data-route="reader"] .drawer {
+      display: none;
+    }
+
+    .app[data-route="papers"] .papers-page,
+    .app[data-route="reader"] .reader-page {
+      display: grid;
+    }
+
+    .papers-page {
+      grid-template-columns: 320px minmax(0, 1fr);
+    }
+
+    .papers-rail {
+      border-right: 1px solid var(--rule);
+      background: linear-gradient(180deg, rgba(244, 239, 228, .82), rgba(255, 253, 247, .82));
+      padding: 22px 18px 24px;
+      overflow: auto;
+    }
+
+    .papers-rail h2,
+    .reader-hero h2 {
+      margin: 0;
+      font-family: var(--font-serif);
+      font-size: 28px;
+      line-height: 1.16;
+    }
+
+    .papers-rail p,
+    .reader-hero p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .papers-index {
+      margin-top: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .papers-tools {
+      margin-top: 16px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .tool-row {
+      display: grid;
+      grid-template-columns: 1fr 108px;
+      gap: 8px;
+    }
+
+    .tool-row input,
+    .tool-row select {
+      min-height: 42px;
+      border-radius: 10px;
+      border: 1px solid rgba(216, 205, 187, .95);
+      background: rgba(255, 253, 247, .82);
+      color: var(--ink);
+      padding: 0 12px;
+    }
+
+    .paper-item {
+      width: 100%;
+      text-align: left;
+      border: 1px solid rgba(216, 205, 187, .86);
+      border-radius: 14px;
+      background: rgba(255, 253, 247, .82);
+      box-shadow: var(--soft-shadow);
+      padding: 14px 14px 13px;
+      display: grid;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .paper-item[aria-current="true"] {
+      border-color: rgba(139, 46, 36, .52);
+      background: linear-gradient(180deg, rgba(255, 253, 247, .96), rgba(248, 241, 228, .92));
+    }
+
+    .paper-item__meta,
+    .paper-item__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--faint);
+      font-size: 11px;
+    }
+
+    .paper-item__title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      line-height: 1.3;
+      color: var(--ink);
+    }
+
+    .paper-item__summary {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .paper-item__badge,
+    .paper-spotlight__pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 0 9px;
+      border-radius: 999px;
+      background: rgba(139, 46, 36, .08);
+      color: var(--cinnabar);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .papers-main {
+      overflow: auto;
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .paper-spotlight {
+      display: grid;
+      gap: 16px;
+      padding: 22px 24px;
+      border-radius: 18px;
+      border: 1px solid rgba(216, 205, 187, .88);
+      background: radial-gradient(circle at top right, rgba(139, 46, 36, .08), transparent 26%), rgba(255, 253, 247, .92);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .paper-spotlight__meta,
+    .paper-spotlight__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .paper-spotlight__body {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) 260px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .paper-spotlight__body img {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(216, 205, 187, .9);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .reader-page {
+      grid-template-rows: auto 1fr;
+    }
+
+    .reader-hero {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 22px 24px 18px;
+      border-bottom: 1px solid var(--rule);
+      background: radial-gradient(circle at top right, rgba(139, 46, 36, .08), transparent 26%), rgba(255, 253, 247, .96);
+    }
+
+    .reader-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .reader-scroll {
+      min-height: 0;
+      overflow: auto;
+      padding: 28px 26px 40px;
+    }
+
+    .reader-article {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 30px 34px 36px;
+      border-radius: 18px;
+      border: 1px solid rgba(216, 205, 187, .88);
+      background: rgba(255, 253, 247, .96);
+      box-shadow: var(--shadow);
+    }
+
+    .reader-article h1,
+    .reader-article h2,
+    .reader-article h3 {
+      font-family: var(--font-serif);
+    }
+
+    .reader-article p,
+    .reader-article li {
+      line-height: 1.85;
+      color: #2f2923;
+    }
+
+    .reader-article img {
+      max-width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(216, 205, 187, .9);
+      box-shadow: var(--soft-shadow);
+      display: block;
+      margin: 1.2rem auto;
+    }
+
+    .reader-layout {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .reader-toc {
+      position: sticky;
+      top: 0;
+      padding: 16px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(216, 205, 187, .88);
+      background: rgba(248, 241, 228, .84);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .reader-toc h3 {
+      margin: 0 0 10px;
+      font-family: var(--font-serif);
+      font-size: 18px;
+    }
+
+    .reader-toc-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .reader-toc-list a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .reader-toc-list a:hover {
+      color: var(--cinnabar);
+    }
+
+    .reader-empty {
+      display: grid;
+      place-items: center;
+      min-height: 360px;
+      color: var(--muted);
+      text-align: center;
+      padding: 40px;
     }
 
 
@@ -1814,6 +2198,10 @@
         </div>
       </div>
       <div class="status-strip">
+        <nav class="mode-tabs" aria-label="知识库视图切换">
+          <button class="mode-tab" type="button" data-route="graph" aria-pressed="true">图谱</button>
+          <button class="mode-tab" type="button" data-route="papers" aria-pressed="false">论文</button>
+        </nav>
         <span class="status-pill"><i class="status-dot"></i>已生成 __NODE_COUNT__ 个索引点</span>
         <span class="status-pill">关系 __EDGE_COUNT__ 条</span>
         <span class="status-pill">最近更新 __BUILD_DATE__</span>
@@ -1835,46 +2223,34 @@
       <div class="preview-map" aria-hidden="true"></div>
     </section>
 
-    <aside class="sidebar" aria-label="文献索引导航">
+    <aside class="sidebar" aria-label="图谱导航">
       <section class="section">
-        <div class="section-title"><b>文献索引</b></div>
+        <div class="section-title"><b>图谱检索</b></div>
         <div class="search-box">
-          <input id="search" type="search" autocomplete="off" placeholder="搜索节点、来源或主题">
+          <input id="search" type="search" autocomplete="off" placeholder="搜索综述、主题或材料">
           <span aria-hidden="true">⌕</span>
         </div>
         <div id="no-results" class="hidden-count">没有匹配结果，清除筛选后可回到完整图谱。</div>
       </section>
 
       <section class="section">
-        <div class="section-title"><b>社区</b></div>
-        <div class="nav-list" id="community-list"></div>
-      </section>
-
-      <section class="section">
-        <div class="section-title"><b>聚焦</b></div>
+        <div class="section-title"><b>节点类型</b></div>
         <div class="segmented" aria-label="聚焦模式">
-          <button type="button" data-focus="all" aria-pressed="true">全图</button>
-          <button type="button" data-focus="core" aria-pressed="false">核心</button>
-          <button type="button" data-focus="source" aria-pressed="false">来源</button>
+          <button type="button" data-focus="all" aria-pressed="true">全部</button>
+          <button type="button" data-focus="synthesis" aria-pressed="false">综述</button>
+          <button type="button" data-focus="topic" aria-pressed="false">主题</button>
+          <button type="button" data-focus="source" aria-pressed="false">材料</button>
         </div>
       </section>
 
       <section class="section">
-        <div class="section-title"><b>学习队列</b></div>
-        <div class="queue-card">
-          <div class="queue-metrics">
-            <div class="metric"><span>今日待读</span><b>5</b></div>
-            <div class="metric"><span>已批注</span><b>17</b></div>
-          </div>
-          <div class="queue-list">
-            <div class="note-card">选中节点后可加入学习队列。</div>
-          </div>
-        </div>
+        <div class="section-title"><b>综述判断</b></div>
+        <div class="start-list" id="synthesis-list"></div>
       </section>
 
       <section class="section">
-        <div class="section-title"><b>推荐起点</b></div>
-        <div class="start-list" id="start-list"></div>
+        <div class="section-title"><b>主题路线</b></div>
+        <div class="start-list" id="topic-list"></div>
       </section>
     </aside>
 
@@ -1882,17 +2258,7 @@
       <div class="canvas-toolbar">
         <div class="canvas-title">
           <strong id="canvas-title">知识地图 · 全局视图</strong>
-          <span id="canvas-subtitle">社区地貌、关系路径与批注状态保持同步</span>
-        </div>
-        <div class="canvas-actions">
-          <button class="ghost-button" type="button" id="fit-view">回到全图</button>
-          <button class="ghost-button" type="button" id="toggle-dim">弱化未选中</button>
-          <div class="state-dock" aria-label="数据状态">
-            <button class="state-button" type="button" data-mode="normal" aria-pressed="true">正常</button>
-            <button class="state-button" type="button" data-mode="loading" aria-pressed="false">加载</button>
-            <button class="state-button" type="button" data-mode="empty" aria-pressed="false">空</button>
-            <button class="state-button" type="button" data-mode="error" aria-pressed="false">错误</button>
-          </div>
+          <span id="canvas-subtitle">综述、主题、材料之间的引用关系</span>
         </div>
       </div>
 
@@ -1913,30 +2279,21 @@
         <div id="node-layer"></div>
         <div class="loading-state" role="status" aria-live="polite">
           <div class="spinner" aria-hidden="true"></div>
-          <p class="state-title">正在铺开知识地图</p>
-          <p class="state-copy">图谱数据已读取，正在整理社区、关系和标签。</p>
+          <p class="state-title">正在加载知识图谱</p>
+          <p class="state-copy">图谱数据已读取，正在整理节点关系。</p>
         </div>
         <div class="empty-state" role="status" aria-live="polite">
-          <p class="state-title">这座知识库还没有图谱</p>
-          <p class="state-copy">消化素材后会自动生成节点、来源和关系。</p>
+          <p class="state-title">当前知识库还没有图谱</p>
+          <p class="state-copy">消化材料后会自动生成节点和关系。</p>
         </div>
         <div class="error-state" role="alert">
           <p class="state-title">图谱数据没有加载成功</p>
           <p class="state-copy">请确认本地 graph-data.json 存在且格式完整。</p>
         </div>
-        <div class="density-notice" id="density-notice">当前视图过密，可搜索或筛选社区。</div>
+        <div class="density-notice" id="density-notice">当前视图过密，可搜索或筛选节点类型。</div>
       </div>
 
       <footer class="canvas-footer" aria-label="图谱二级信息">
-        <div class="legend">
-          <div class="footer-label"><span>关系置信度</span><span>说明</span></div>
-          <div class="confidence-list">
-            <span class="confidence"><i></i>直接提取</span>
-            <span class="confidence"><i></i>推断关联</span>
-            <span class="confidence"><i></i>存在歧义</span>
-            <span class="confidence"><i></i>未核实</span>
-          </div>
-        </div>
         <div class="mini-map" id="minimap" data-collapsed="0">
           <div class="footer-label"><span>小地图</span><span>方位图</span></div>
           <svg id="mini-map-svg" viewBox="0 0 160 54" aria-hidden="true">
@@ -1950,13 +2307,13 @@
         </div>
         <div class="insight">
           <div class="footer-label"><span>洞察</span><span>INSIGHT</span></div>
-          <strong id="insight-title">来源节点连接度偏高</strong>
+          <strong id="insight-title">节点关系</strong>
           <p id="insight-copy">建议从“知识编译”进入，可同时看到方法论、缓存与图谱生成的关系。</p>
         </div>
       </footer>
     </section>
 
-    <aside class="drawer" id="drawer" aria-label="批注札记详情">
+    <aside class="drawer" id="drawer" aria-label="节点详情">
       <header class="drawer-header">
         <div class="eyebrow" id="drawer-kind"><span class="spark"></span>TOPIC · SELECTED</div>
         <h2 id="drawer-title">知识编译</h2>
@@ -1970,32 +2327,73 @@
         </section>
 
         <section class="drawer-section">
-          <h3>知识内容</h3>
+          <h3>对应页面</h3>
           <div class="knowledge-card" id="drawer-content">
-            <p>知识编译把素材、主题、实体和来源串成一张可维护的地图。它不是临时总结，而是让后续查询、图谱和复盘都能复用同一份整理结果。</p>
-            <p>在图谱中，这个节点连接素材消化、缓存、查询和图谱展示，适合作为理解 llm-wiki 工作方式的入口。</p>
+            <p>知识编译把材料、主题、实体和关系串成一张可维护的地图。它不是临时总结，而是让后续查询、图谱和复盘都能复用同一份整理结果。</p>
+            <p>完整内容由对应 wiki 页面维护，图谱这里只保留摘要和关系入口。</p>
           </div>
         </section>
 
-        <details class="drawer-section neighbor-section" id="neighbor-details" data-collapsed="1">
-          <summary aria-expanded="false"><span>相邻节点 <small id="drawer-neighbor-count">5 个</small></span></summary>
+        <details class="drawer-section neighbor-section" id="neighbor-details" data-collapsed="0" open>
+          <summary aria-expanded="true"><span>相邻节点 <small id="drawer-neighbor-count">5 个</small></span></summary>
           <div class="neighbor-list" id="neighbor-list"></div>
         </details>
 
-        <section class="drawer-section">
-          <h3>札记</h3>
-          <div class="notes-list">
-            <div class="note-card">批注：适合放在 README 首屏，作为“不是一次性总结”的视觉证明。</div>
-            <div class="note-card">待看：梳理“札记阅读”和“图谱入口”的职责边界。</div>
-          </div>
-        </section>
       </div>
 
       <footer class="drawer-actions">
-        <button class="primary-button" type="button" id="queue-action">加入学习队列</button>
-        <button class="ghost-button" type="button" id="source-action">查看来源</button>
+        <button class="primary-button" type="button" id="source-action">打开页面</button>
       </footer>
     </aside>
+
+    <section class="papers-page" id="papers-page" aria-label="材料总览">
+      <aside class="papers-rail">
+        <h2>材料目录</h2>
+        <p>按时间与标题列出全部材料，适合直接进入单篇阅读。</p>
+        <div class="papers-tools">
+          <div class="tool-row">
+            <input id="papers-search" type="search" autocomplete="off" placeholder="搜索材料标题或关键词">
+            <select id="papers-sort" aria-label="材料排序">
+              <option value="date-desc">最新优先</option>
+              <option value="date-asc">最早优先</option>
+              <option value="title-asc">标题 A-Z</option>
+            </select>
+          </div>
+        </div>
+        <div class="papers-index" id="papers-index"></div>
+      </aside>
+      <div class="papers-main" id="papers-main">
+        <div class="reader-empty">
+          <div>
+            <strong>从左侧选择一篇论文</strong>
+            <span>这里会显示论文摘要、图和进入材料页面的入口。</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reader-page" id="reader-page" aria-label="材料阅读">
+      <header class="reader-hero">
+        <div>
+          <h2 id="reader-title">打开页面</h2>
+          <p id="reader-subtitle">从图谱或材料目录进入后，这里会显示完整笔记。</p>
+        </div>
+        <div class="reader-actions">
+          <button class="ghost-button" type="button" id="reader-back-graph">返回图谱</button>
+          <button class="primary-button" type="button" id="reader-back-papers">回到材料列表</button>
+        </div>
+      </header>
+      <div class="reader-scroll">
+        <article class="reader-article" id="reader-article">
+          <div class="reader-empty">
+            <div>
+              <strong>还没有选中论文</strong>
+              <span>从图谱节点或材料目录进入一篇材料，这里会完整显示笔记正文。</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
 
   <script id="graph-data" type="application/json">

@@ -29,13 +29,18 @@ MAX_CONTENT_LINES=500
 MAX_INSIGHT_NODES=250
 MAX_INSIGHT_EDGES=1000
 
-command -v jq >/dev/null 2>&1 || {
-  echo "ERROR: jq is not installed. Install it via:" >&2
-  print_install_hint jq
+command -v python3 >/dev/null 2>&1 || {
+  echo "ERROR: python3 is not installed. Install it via:" >&2
+  print_install_hint python3
   exit 1
 }
 
-command -v node >/dev/null 2>&1 || {
+NODE_BIN="$(command -v node 2>/dev/null || true)"
+if [ -z "$NODE_BIN" ] && command -v zsh >/dev/null 2>&1; then
+  NODE_BIN="$(zsh -ic 'command -v node' 2>/dev/null | tail -1 || true)"
+fi
+
+[ -n "$NODE_BIN" ] || {
   echo "ERROR: node is not installed. Install it via:" >&2
   print_install_hint node
   exit 1
@@ -99,50 +104,63 @@ scan_kind queries query
 if [ ! -s "$NODES_TSV" ]; then
   mkdir -p "$(dirname "$OUTPUT")"
   OUTPUT_TMP="$TMPDIR/graph-data.empty.json"
-  jq -n \
-    --arg build_date "$BUILD_DATE" \
-    --arg wiki_title "$WIKI_TITLE" \
-    '{
-      meta: {
-        build_date: $build_date,
-        wiki_title: $wiki_title,
-        total_nodes: 0,
-        total_edges: 0,
-        initial_view: [],
-        degraded: false,
-        insights_degraded: false
-      },
-      nodes: [],
-      edges: [],
-      insights: {
-        surprising_connections: [],
-        isolated_nodes: [],
-        bridge_nodes: [],
-        sparse_communities: [],
-        meta: {
-          degraded: false,
-          node_count: 0,
-          edge_count: 0,
-          max_insight_nodes: 250,
-          max_insight_edges: 1000
-        }
-      },
-      learning: {
-        version: 1,
-        entry: {
-          recommended_start_node_id: null,
-          recommended_start_reason: null,
-          default_mode: "global"
+  python3 - "$OUTPUT_TMP" "$BUILD_DATE" "$WIKI_TITLE" "$MAX_INSIGHT_NODES" "$MAX_INSIGHT_EDGES" <<'PY'
+import json
+import sys
+
+output, build_date, wiki_title, max_nodes, max_edges = sys.argv[1:6]
+data = {
+    "meta": {
+        "build_date": build_date,
+        "wiki_title": wiki_title,
+        "total_nodes": 0,
+        "total_edges": 0,
+        "initial_view": [],
+        "degraded": False,
+        "insights_degraded": False,
+    },
+    "nodes": [],
+    "edges": [],
+    "insights": {
+        "surprising_connections": [],
+        "isolated_nodes": [],
+        "bridge_nodes": [],
+        "sparse_communities": [],
+        "meta": {
+            "degraded": False,
+            "node_count": 0,
+            "edge_count": 0,
+            "max_insight_nodes": int(max_nodes),
+            "max_insight_edges": int(max_edges),
         },
-        views: {
-          path: { enabled: false, start_node_id: null, node_ids: [], degraded: true },
-          community: { enabled: false, community_id: null, label: null, node_ids: [], is_weak: false, degraded: true },
-          global: { enabled: true, node_ids: [], degraded: false }
+    },
+    "learning": {
+        "version": 1,
+        "entry": {
+            "recommended_start_node_id": None,
+            "recommended_start_reason": None,
+            "default_mode": "global",
         },
-        communities: [],
-        degraded: { path_to_community: true, community_to_global: true }
-      }
-    }' > "$OUTPUT_TMP"
+        "views": {
+            "path": {"enabled": False, "start_node_id": None, "node_ids": [], "degraded": True},
+            "community": {
+                "enabled": False,
+                "community_id": None,
+                "label": None,
+                "node_ids": [],
+                "is_weak": False,
+                "degraded": True,
+            },
+            "global": {"enabled": True, "node_ids": [], "degraded": False},
+        },
+        "communities": [],
+        "degraded": {"path_to_community": True, "community_to_global": True},
+    },
+}
+with open(output, "w", encoding="utf-8") as f:
+    json.dump(data, f, ensure_ascii=False, indent=2)
+    f.write("\n")
+PY
   mv "$OUTPUT_TMP" "$OUTPUT"
   echo "空图谱已写入：${OUTPUT}（wiki/ 下无可纳入节点）"
   exit 0
@@ -231,17 +249,18 @@ NODES_JSONL="$TMPDIR/nodes.jsonl"
 : > "$NODES_JSONL"
 while IFS=$'\t' read -r id label type path; do
   abs_path=$(cd "$(dirname "$path")" && pwd)/$(basename "$path")
-  jq -n \
-    --arg id "$id" \
-    --arg label "$label" \
-    --arg type "$type" \
-    --arg source_path "$abs_path" \
-    '{
-      id: $id,
-      label: $label,
-      type: $type,
-      source_path: $source_path
-    }' >> "$NODES_JSONL"
+  python3 - "$id" "$label" "$type" "$abs_path" <<'PY' >> "$NODES_JSONL"
+import json
+import sys
+
+node_id, label, node_type, source_path = sys.argv[1:5]
+print(json.dumps({
+    "id": node_id,
+    "label": label,
+    "type": node_type,
+    "source_path": source_path,
+}, ensure_ascii=False))
+PY
 done < "$NODES_TSV"
 
 EDGES_JSONL="$TMPDIR/edges.jsonl"
@@ -249,27 +268,72 @@ EDGES_JSONL="$TMPDIR/edges.jsonl"
 idx=0
 while IFS=$'\t' read -r from to etype; do
   idx=$((idx + 1))
-  jq -n \
-    --arg id "e$idx" \
-    --arg from "$from" \
-    --arg to "$to" \
-    --arg etype "$etype" \
-    '{id: $id, from: $from, to: $to, type: $etype}' >> "$EDGES_JSONL"
+  python3 - "e$idx" "$from" "$to" "$etype" <<'PY' >> "$EDGES_JSONL"
+import json
+import sys
+
+edge_id, from_id, to_id, edge_type = sys.argv[1:5]
+print(json.dumps({
+    "id": edge_id,
+    "from": from_id,
+    "to": to_id,
+    "type": edge_type,
+}, ensure_ascii=False))
+PY
 done < "$EDGES_TSV"
 
 if [ "${LLM_WIKI_TEST_MODE:-0}" = "1" ]; then
-  jq -s 'sort_by(.id)' "$NODES_JSONL" > "$TMPDIR/nodes.raw.json"
-  jq -s 'sort_by(.from, .to, .type)
-         | to_entries
-         | map(.value + {id: ("e" + ((.key + 1) | tostring))})' \
-    "$EDGES_JSONL" > "$TMPDIR/edges.raw.json"
+  python3 - "$NODES_JSONL" "$TMPDIR/nodes.raw.json" nodes-test <<'PY'
+import json
+import sys
+
+src, dst, mode = sys.argv[1:4]
+items = [json.loads(line) for line in open(src, encoding="utf-8") if line.strip()]
+if mode == "nodes-test":
+    items = sorted(items, key=lambda item: item.get("id", ""))
+with open(dst, "w", encoding="utf-8") as f:
+    json.dump(items, f, ensure_ascii=False, indent=2)
+    f.write("\n")
+PY
+  python3 - "$EDGES_JSONL" "$TMPDIR/edges.raw.json" edges-test <<'PY'
+import json
+import sys
+
+src, dst, mode = sys.argv[1:4]
+items = [json.loads(line) for line in open(src, encoding="utf-8") if line.strip()]
+if mode == "edges-test":
+    items = sorted(items, key=lambda item: (item.get("from", ""), item.get("to", ""), item.get("type", "")))
+    for index, item in enumerate(items, start=1):
+        item["id"] = f"e{index}"
+with open(dst, "w", encoding="utf-8") as f:
+    json.dump(items, f, ensure_ascii=False, indent=2)
+    f.write("\n")
+PY
 else
-  jq -s '.' "$NODES_JSONL" > "$TMPDIR/nodes.raw.json"
-  jq -s '.' "$EDGES_JSONL" > "$TMPDIR/edges.raw.json"
+  python3 - "$NODES_JSONL" "$TMPDIR/nodes.raw.json" <<'PY'
+import json
+import sys
+
+src, dst = sys.argv[1:3]
+items = [json.loads(line) for line in open(src, encoding="utf-8") if line.strip()]
+with open(dst, "w", encoding="utf-8") as f:
+    json.dump(items, f, ensure_ascii=False, indent=2)
+    f.write("\n")
+PY
+  python3 - "$EDGES_JSONL" "$TMPDIR/edges.raw.json" <<'PY'
+import json
+import sys
+
+src, dst = sys.argv[1:3]
+items = [json.loads(line) for line in open(src, encoding="utf-8") if line.strip()]
+with open(dst, "w", encoding="utf-8") as f:
+    json.dump(items, f, ensure_ascii=False, indent=2)
+    f.write("\n")
+PY
 fi
 
 ANALYSIS_JSON="$TMPDIR/analysis.json"
-if ! node "$HELPER" \
+if ! "$NODE_BIN" "$HELPER" \
   "$TMPDIR/nodes.raw.json" \
   "$TMPDIR/edges.raw.json" \
   "$ANALYSIS_JSON" \
@@ -281,94 +345,200 @@ if ! node "$HELPER" \
   exit 1
 fi
 
-jq -e '
-  (.nodes | type) == "array" and
-  (.edges | type) == "array" and
-  (.insights | type) == "object" and
-  (.insights.surprising_connections | type) == "array" and
-  (.insights.isolated_nodes | type) == "array" and
-  (.insights.bridge_nodes | type) == "array" and
-  (.insights.sparse_communities | type) == "array" and
-  (.learning | type) == "object"
-' "$ANALYSIS_JSON" > /dev/null 2>&1 || {
+python3 - "$ANALYSIS_JSON" <<'PY' || {
+import json
+import sys
+
+path = sys.argv[1]
+try:
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+except Exception:
+    sys.exit(1)
+
+checks = [
+    isinstance(data.get("nodes"), list),
+    isinstance(data.get("edges"), list),
+    isinstance(data.get("insights"), dict),
+    isinstance(data.get("insights", {}).get("surprising_connections"), list),
+    isinstance(data.get("insights", {}).get("isolated_nodes"), list),
+    isinstance(data.get("insights", {}).get("bridge_nodes"), list),
+    isinstance(data.get("insights", {}).get("sparse_communities"), list),
+    isinstance(data.get("learning"), dict),
+]
+sys.exit(0 if all(checks) else 1)
+PY
   echo "ERROR: 图谱分析 helper 返回坏 JSON：$ANALYSIS_JSON" >&2
   exit 1
 }
 
 if [ "${LLM_WIKI_TEST_MODE:-0}" = "1" ]; then
-  jq '.nodes | sort_by(.id)' "$ANALYSIS_JSON" > "$TMPDIR/nodes.sorted.json"
-  jq '.edges | sort_by(.from, .to, .type)
-       | to_entries
-       | map(.value + {id: ("e" + ((.key + 1) | tostring))})' "$ANALYSIS_JSON" > "$TMPDIR/edges.sorted.json"
+  python3 - "$ANALYSIS_JSON" "$TMPDIR/nodes.sorted.json" nodes-test <<'PY'
+import json
+import sys
+
+src, dst, mode = sys.argv[1:4]
+with open(src, "r", encoding="utf-8") as f:
+    data = json.load(f)
+items = data.get("nodes", [])
+items = sorted(items, key=lambda item: item.get("id", ""))
+with open(dst, "w", encoding="utf-8") as f:
+    json.dump(items, f, ensure_ascii=False, indent=2)
+    f.write("\n")
+PY
+  python3 - "$ANALYSIS_JSON" "$TMPDIR/edges.sorted.json" edges-test <<'PY'
+import json
+import sys
+
+src, dst, mode = sys.argv[1:4]
+with open(src, "r", encoding="utf-8") as f:
+    data = json.load(f)
+items = data.get("edges", [])
+items = sorted(items, key=lambda item: (item.get("from", ""), item.get("to", ""), item.get("type", "")))
+for index, item in enumerate(items, start=1):
+    item["id"] = f"e{index}"
+with open(dst, "w", encoding="utf-8") as f:
+    json.dump(items, f, ensure_ascii=False, indent=2)
+    f.write("\n")
+PY
 else
-  jq '.nodes' "$ANALYSIS_JSON" > "$TMPDIR/nodes.sorted.json"
-  jq '.edges' "$ANALYSIS_JSON" > "$TMPDIR/edges.sorted.json"
+  python3 - "$ANALYSIS_JSON" "$TMPDIR/nodes.sorted.json" nodes <<'PY'
+import json
+import sys
+
+src, dst, key = sys.argv[1:4]
+with open(src, "r", encoding="utf-8") as f:
+    data = json.load(f)
+with open(dst, "w", encoding="utf-8") as f:
+    json.dump(data.get(key, []), f, ensure_ascii=False, indent=2)
+    f.write("\n")
+PY
+  python3 - "$ANALYSIS_JSON" "$TMPDIR/edges.sorted.json" edges <<'PY'
+import json
+import sys
+
+src, dst, key = sys.argv[1:4]
+with open(src, "r", encoding="utf-8") as f:
+    data = json.load(f)
+with open(dst, "w", encoding="utf-8") as f:
+    json.dump(data.get(key, []), f, ensure_ascii=False, indent=2)
+    f.write("\n")
+PY
 fi
 
-INITIAL_VIEW=$(jq \
-  --argjson nodes "$(cat "$TMPDIR/nodes.sorted.json")" \
-  '
-  . as $edges
-  | (
-      reduce $edges[] as $e (
-        {};
-        .[$e.from] = (.[$e.from] // 0) + 1 |
-        .[$e.to] = (.[$e.to] // 0) + 1
-      )
-    ) as $deg
-  | ($nodes | group_by(.community // "_")) as $groups
-  | ([ $groups[] | max_by(($deg[.id] // 0)) | .id ]) as $reps
-  | (
-      $nodes
-      | sort_by(- ($deg[.id] // 0))
-      | map(.id)
-      | map(select(. as $x | $reps | index($x) | not))
-    ) as $rest
-  | ($reps + $rest)[0:30]
-  ' \
-  "$TMPDIR/edges.sorted.json")
+python3 - "$TMPDIR/nodes.sorted.json" "$TMPDIR/edges.sorted.json" "$ANALYSIS_JSON" "$TMPDIR/initial-view.json" "$TMPDIR/counts.env" <<'PY'
+import json
+import sys
 
-NODE_COUNT=$(jq 'length' "$TMPDIR/nodes.sorted.json")
-EDGE_COUNT=$(jq 'length' "$TMPDIR/edges.sorted.json")
-INSIGHTS_DEGRADED=$(jq '.insights.meta.degraded == true' "$ANALYSIS_JSON")
+nodes_path, edges_path, analysis_path, initial_path, counts_path = sys.argv[1:6]
+with open(nodes_path, "r", encoding="utf-8") as f:
+    nodes = json.load(f)
+with open(edges_path, "r", encoding="utf-8") as f:
+    edges = json.load(f)
+with open(analysis_path, "r", encoding="utf-8") as f:
+    analysis = json.load(f)
+
+degree = {}
+for edge in edges:
+    degree[edge.get("from")] = degree.get(edge.get("from"), 0) + 1
+    degree[edge.get("to")] = degree.get(edge.get("to"), 0) + 1
+
+groups = {}
+for node in nodes:
+    groups.setdefault(node.get("community", "_"), []).append(node)
+
+reps = []
+for group_nodes in groups.values():
+    if group_nodes:
+        reps.append(max(group_nodes, key=lambda item: degree.get(item.get("id"), 0)).get("id"))
+
+rep_set = set(reps)
+rest = [
+    node.get("id")
+    for node in sorted(nodes, key=lambda item: -degree.get(item.get("id"), 0))
+    if node.get("id") not in rep_set
+]
+initial_view = (reps + rest)[:30]
+
+with open(initial_path, "w", encoding="utf-8") as f:
+    json.dump(initial_view, f, ensure_ascii=False, indent=2)
+    f.write("\n")
+
+insights_degraded = analysis.get("insights", {}).get("meta", {}).get("degraded") is True
+with open(counts_path, "w", encoding="utf-8") as f:
+    f.write(f"NODE_COUNT={len(nodes)}\n")
+    f.write(f"EDGE_COUNT={len(edges)}\n")
+    f.write(f"INITIAL_VIEW_COUNT={len(initial_view)}\n")
+    f.write(f"INSIGHTS_DEGRADED={'true' if insights_degraded else 'false'}\n")
+PY
+
+# shellcheck disable=SC1090
+source "$TMPDIR/counts.env"
 
 mkdir -p "$(dirname "$OUTPUT")"
 OUTPUT_TMP="$TMPDIR/graph-data.final.json"
 
-jq -n \
-  --arg build_date "$BUILD_DATE" \
-  --arg wiki_title "$WIKI_TITLE" \
-  --argjson total_nodes "$NODE_COUNT" \
-  --argjson total_edges "$EDGE_COUNT" \
-  --argjson initial_view "$INITIAL_VIEW" \
-  --argjson nodes "$(cat "$TMPDIR/nodes.sorted.json")" \
-  --argjson edges "$(cat "$TMPDIR/edges.sorted.json")" \
-  --argjson insights "$(jq '.insights' "$ANALYSIS_JSON")" \
-  --argjson learning "$(jq '.learning' "$ANALYSIS_JSON")" \
-  --argjson degraded "$DEGRADE" \
-  --argjson insights_degraded "$INSIGHTS_DEGRADED" \
-  '{
-    meta: {
-      build_date: $build_date,
-      wiki_title: $wiki_title,
-      total_nodes: $total_nodes,
-      total_edges: $total_edges,
-      initial_view: $initial_view,
-      degraded: ($degraded == 1),
-      insights_degraded: $insights_degraded
+python3 - \
+  "$BUILD_DATE" \
+  "$WIKI_TITLE" \
+  "$NODE_COUNT" \
+  "$EDGE_COUNT" \
+  "$TMPDIR/initial-view.json" \
+  "$TMPDIR/nodes.sorted.json" \
+  "$TMPDIR/edges.sorted.json" \
+  "$ANALYSIS_JSON" \
+  "$DEGRADE" \
+  "$INSIGHTS_DEGRADED" \
+  "$OUTPUT_TMP" <<'PY'
+import json
+import sys
+
+(
+    build_date,
+    wiki_title,
+    node_count,
+    edge_count,
+    initial_path,
+    nodes_path,
+    edges_path,
+    analysis_path,
+    degraded,
+    insights_degraded,
+    output_path,
+) = sys.argv[1:12]
+
+def read_json(path):
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+analysis = read_json(analysis_path)
+data = {
+    "meta": {
+        "build_date": build_date,
+        "wiki_title": wiki_title,
+        "total_nodes": int(node_count),
+        "total_edges": int(edge_count),
+        "initial_view": read_json(initial_path),
+        "degraded": degraded == "1",
+        "insights_degraded": insights_degraded == "true",
     },
-    nodes: $nodes,
-    edges: $edges,
-    insights: $insights,
-    learning: $learning
-  }' > "$OUTPUT_TMP"
+    "nodes": read_json(nodes_path),
+    "edges": read_json(edges_path),
+    "insights": analysis.get("insights", {}),
+    "learning": analysis.get("learning", {}),
+}
+
+with open(output_path, "w", encoding="utf-8") as f:
+    json.dump(data, f, ensure_ascii=False, indent=2)
+    f.write("\n")
+PY
 
 mv "$OUTPUT_TMP" "$OUTPUT"
 
 echo "图谱数据已生成：$OUTPUT"
 echo "  节点：$NODE_COUNT"
 echo "  关联：$EDGE_COUNT"
-echo "  初始视图：$(echo "$INITIAL_VIEW" | jq 'length') 个节点"
+echo "  初始视图：$INITIAL_VIEW_COUNT 个节点"
 [ "$DEGRADE" = "1" ] && echo "  ⚠ 降级模式：内嵌内容 > 2MB，每节点仅保留前 ${MAX_CONTENT_LINES} 行"
 [ "$INSIGHTS_DEGRADED" = "true" ] && echo "  ⚠ 洞察降级：图规模超出预算，仅保留基础权重与社区"
 exit 0

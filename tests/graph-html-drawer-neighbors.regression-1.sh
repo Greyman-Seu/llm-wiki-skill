@@ -5,6 +5,10 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 GRAPH_HTML_BASIC="tests/fixtures/graph-interactive-basic"
+NODE_BIN="$(command -v node 2>/dev/null || true)"
+if [ -z "$NODE_BIN" ] && command -v zsh >/dev/null 2>&1; then
+    NODE_BIN="$(zsh -ic 'command -v node' 2>/dev/null | tail -1 || true)"
+fi
 
 fail() {
     echo "FAIL: $1" >&2
@@ -18,6 +22,10 @@ assert_file_contains() {
     if ! grep -F -- "$text" "$file" > /dev/null; then
         fail "Expected $file to contain: $text"
     fi
+}
+
+require_node() {
+    [ -n "$NODE_BIN" ] || fail "node is required for runtime neighbor assertions"
 }
 
 build_graph_html_fixture() {
@@ -48,7 +56,7 @@ test_graph_html_has_bounded_neighbor_region() {
     assert_file_contains "$html" 'overflow-y: auto;'
     assert_file_contains "$html" 'id="neighbor-details"'
     assert_file_contains "$html" 'id="neighbor-list"'
-    assert_file_contains "$html" 'data-collapsed="1"'
+    assert_file_contains "$html" 'data-collapsed="0" open'
 
     rm -rf "$tmp_dir"
 }
@@ -60,7 +68,8 @@ test_graph_html_neighbor_toggle_runtime_guards_and_state() {
 
     build_graph_html_fixture "$tmp_dir"
 
-    node - <<'NODE' "$output_dir/graph-wash.js" || exit 1
+    require_node
+    "$NODE_BIN" - <<'NODE' "$output_dir/graph-wash.js" || exit 1
 const fs = require('fs');
 const vm = require('vm');
 const file = process.argv[2];
