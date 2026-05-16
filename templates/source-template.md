@@ -9,6 +9,9 @@ created: {{DATE}}
 updated: {{DATE}}
 date: {{SOURCE_DATE}}
 authors: []
+affiliation:
+related_organizations: []
+related_companies: []
 domains: []
 tags: []
 summary: ""
@@ -43,6 +46,9 @@ image_paths: []
 | 原始位置 | {{RAW_PATH}} |
 | 日期 | {{SOURCE_DATE}} |
 | 作者 | 待补充 |
+| 首要单位 | 待补充 |
+| 相关单位 | 待补充 |
+| 相关公司 | 待补充 |
 | Domain | 待补充 |
 | Tag | 待补充 |
 

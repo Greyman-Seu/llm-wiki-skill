@@ -283,6 +283,8 @@ def source_record(page: dict[str, Any]) -> dict[str, Any]:
         "updated": str(data.get("updated") or "").strip(),
         "authors": as_str_list(data.get("authors")),
         "affiliation": str(data.get("affiliation") or "").strip(),
+        "relatedOrganizations": as_str_list(data.get("related_organizations") or data.get("organizations")),
+        "relatedCompanies": as_str_list(data.get("related_companies") or data.get("companies")),
         "keywords": tags,
         "tags": tags,
         "primaryDomainSlug": domains[0] if domains else "",

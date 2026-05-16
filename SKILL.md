@@ -494,7 +494,7 @@ bash ${SKILL_DIR}/scripts/adapter-state.sh classify-run <source_id> <exit_code> 
 
 8. **创建或更新材料页**（`wiki/sources/{slug}.md`）：
    - 参考 `templates/source-template.md` 的格式
-   - frontmatter 必须包含 `id`、`slug`、`title`、`type: source`、`material_type`、`source_type`、`date`、`authors`、`domains`、`tags`、`links`、`raw_refs`、`related_topics`、`related_syntheses`
+   - frontmatter 必须包含 `id`、`slug`、`title`、`type: source`、`material_type`、`source_type`、`date`、`authors`、`affiliation`、`related_organizations`、`related_companies`、`domains`、`tags`、`links`、`raw_refs`、`related_topics`、`related_syntheses`
    - 如果 `source_decision.action=update_source`，只更新发生变化的链接、摘要、tag/domain、关联主题或证据段，不重写无关内容
    - 如果同一材料新增了 arXiv/PDF/project/GitHub/hjfy/DOI 链接，应合并到已有 `links`，不要新建重复材料
    - 包含：材料信息、链接、核心摘要、关键贡献、方法与证据、局限与待验证、关联主题、关联综述、与其他材料的关系、原文摘录
