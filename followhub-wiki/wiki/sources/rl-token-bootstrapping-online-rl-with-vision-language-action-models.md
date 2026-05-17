@@ -6,7 +6,7 @@ type: source
 material_type: "paper"
 source_type: "paper"
 created: "2026-05-11"
-updated: "2026-05-16"
+updated: "2026-05-17"
 date: "2026-04-24"
 authors:
   - "Charles Xu"
@@ -16,6 +16,11 @@ authors:
   - "Adnan Esmail"
   - "Sergey Levine"
   - "Liyiming Ke"
+affiliation: "Physical Intelligence"
+related_organizations:
+  - "Physical Intelligence"
+related_companies:
+  - "Physical Intelligence"
 domains:
   - "Physical/Embodied Intelligence"
 tags:
