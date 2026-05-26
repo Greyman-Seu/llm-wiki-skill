@@ -8,7 +8,7 @@ source_type: "paper"
 source_kind: "arxiv_abs_url"
 source_input: "https://arxiv.org/abs/2602.10105"
 created: "2026-05-16"
-updated: "2026-05-16"
+updated: "2026-05-17"
 date: "2026-02-10"
 publish_date: "2026-02-10"
 authors:
@@ -21,7 +21,14 @@ authors:
   - "Boyi Li"
   - "Huazhe Xu"
   - "Jiangmiao Pang"
-affiliation: "Shanghai AI Laboratory; Tsinghua University; The Chinese University of Hong Kong; NVIDIA"
+affiliation: "Shanghai AI Laboratory"
+related_organizations:
+  - "Shanghai AI Laboratory"
+  - "Tsinghua University"
+  - "The Chinese University of Hong Kong"
+  - "NVIDIA"
+related_companies:
+  - "NVIDIA"
 domains:
   - "Physical/Embodied Intelligence"
 domain: "physical-embodied-intelligence"

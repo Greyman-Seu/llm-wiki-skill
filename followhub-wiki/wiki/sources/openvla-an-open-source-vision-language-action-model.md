@@ -6,7 +6,7 @@ type: source
 material_type: "paper"
 source_type: "paper"
 created: "2026-05-11"
-updated: "2026-05-16"
+updated: "2026-05-17"
 date: "2024-06-13"
 authors:
   - "Ted Xiao"
@@ -23,6 +23,18 @@ authors:
   - "Sergey Levine"
   - "Percy Liang"
   - "Chelsea Finn"
+affiliation: "Stanford University"
+related_organizations:
+  - "Stanford University"
+  - "UC Berkeley"
+  - "Toyota Research Institute"
+  - "Google DeepMind"
+  - "Physical Intelligence"
+  - "MIT"
+related_companies:
+  - "Toyota Research Institute"
+  - "Google DeepMind"
+  - "Physical Intelligence"
 domains:
   - "Physical/Embodied Intelligence"
 tags:

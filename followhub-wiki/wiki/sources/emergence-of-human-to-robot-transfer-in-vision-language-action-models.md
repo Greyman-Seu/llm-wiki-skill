@@ -6,7 +6,7 @@ type: source
 material_type: "paper"
 source_type: "paper"
 created: "2026-05-11"
-updated: "2026-05-16"
+updated: "2026-05-17"
 date: "2025-12-27"
 authors:
   - "Simar Kareer"
@@ -17,6 +17,12 @@ authors:
   - "Sergey Levine"
   - "Chelsea Finn"
   - "Suraj Nair"
+affiliation: "Physical Intelligence"
+related_organizations:
+  - "Physical Intelligence"
+  - "Georgia Institute of Technology"
+related_companies:
+  - "Physical Intelligence"
 domains:
   - "Physical/Embodied Intelligence"
 tags:

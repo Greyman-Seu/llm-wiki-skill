@@ -6,7 +6,7 @@ type: source
 material_type: "paper"
 source_type: "paper"
 created: "2026-05-11"
-updated: "2026-05-16"
+updated: "2026-05-17"
 date: "2026-03-04"
 authors:
   - "Marcel Torne"
@@ -26,6 +26,14 @@ authors:
   - "Sergey Levine"
   - "Chelsea Finn"
   - "Danny Driess"
+affiliation: "Physical Intelligence"
+related_organizations:
+  - "Physical Intelligence"
+  - "Stanford University"
+  - "UC Berkeley"
+  - "MIT"
+related_companies:
+  - "Physical Intelligence"
 domains:
   - "Physical/Embodied Intelligence"
 tags:
