@@ -4,7 +4,7 @@ slug: "human-to-robot-transfer"
 title: "Human-to-Robot Transfer"
 type: topic
 created: "2026-05-11"
-updated: "2026-05-16"
+updated: "2026-06-26"
 domains:
   - "Physical/Embodied Intelligence"
 tags:
@@ -14,6 +14,7 @@ source_slugs:
   - "emergence-of-human-to-robot-transfer-in-vision-language-action-models"
   - "pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities"
   - "deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos"
+  - "dexjoco-a-benchmark-and-toolkit-for-task-oriented-dexterous-manipulation-on-mujoco"
 synthesis_slugs:
   - "current-vla-landscape-foundation-control-memory-and-transfer"
 status: active
@@ -38,6 +39,9 @@ open_questions:
 - [来源: DexImit: Learning Bimanual Dexterous Manipulation from Monocular Human Videos](../sources/deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos.md)
   这篇补上了另一条路线：不直接让模型从 human video 中学表示，而是把单目人类操作视频重建、调度、规划并增强成双手灵巧机器人训练数据。
 
+- [来源: DexJoCo: A Benchmark and Toolkit for Task-Oriented Dexterous Manipulation on MuJoCo](../sources/dexjoco-a-benchmark-and-toolkit-for-task-oriented-dexterous-manipulation-on-mujoco.md)
+  这篇不是 human-video 数据生成工作，但它提供了功能型灵巧手任务、低成本手套遥操作采集和统一评测场，可以检验 human-to-robot / VLA 路线是否真的解决双手、接触密集和长时程操作。
+
 ## 当前判断
 
 - `Human-to-Robot Transfer` 这篇更强调“能力何时出现”
@@ -47,6 +51,7 @@ open_questions:
   - 预训练多样性负责让 shared representation 成熟
   - richer context / prompt 负责让这些能力在控制中被真正调用出来
   - 显式数据生成 pipeline 负责把一部分 human video 转成更接近机器人动作空间的 supervision
+  - benchmark / teleoperation 工具负责把这些迁移能力放到功能型灵巧任务里做压力测试
 
 ## 值得后续关注的问题
 
@@ -60,5 +65,6 @@ open_questions:
 - [[Emergence of Human to Robot Transfer in Vision-Language-Action Models]]
 - [[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities]]
 - [[DexImit: Learning Bimanual Dexterous Manipulation from Monocular Human Videos]]
+- [[DexJoCo: A Benchmark and Toolkit for Task-Oriented Dexterous Manipulation on MuJoCo]]
 - [[Human Video Robot Data Generation]]
 - [[Vision-Language-Action]]

@@ -4,7 +4,7 @@ slug: "vision-language-action"
 title: "Vision-Language-Action"
 type: topic
 created: "2026-05-11"
-updated: "2026-05-11"
+updated: "2026-06-30"
 domains:
   - "Physical/Embodied Intelligence"
 tags:
@@ -16,6 +16,8 @@ source_slugs:
   - "rl-token-bootstrapping-online-rl-with-vision-language-action-models"
   - "mem-multi-scale-embodied-memory-for-vision-language-action-models"
   - "emergence-of-human-to-robot-transfer-in-vision-language-action-models"
+  - "dexjoco-a-benchmark-and-toolkit-for-task-oriented-dexterous-manipulation-on-mujoco"
+  - "attena-rectifying-action-inequality-in-robotic-foundation-models"
 synthesis_slugs:
   - "current-vla-landscape-foundation-control-memory-and-transfer"
 status: active
@@ -62,6 +64,14 @@ VLA 的核心不是“把图像和文本都喂给机器人”，而是把机器�
   来自 [来源: Emergence of Human to Robot Transfer in Vision-Language-Action Models](../sources/emergence-of-human-to-robot-transfer-in-vision-language-action-models.md)
   这条路线关注 VLA 何时开始能真正吃进 human video，并把它转化成机器人能力。
 
+- **灵巧手基准与失败诊断**
+  来自 [来源: DexJoCo: A Benchmark and Toolkit for Task-Oriented Dexterous Manipulation on MuJoCo](../sources/dexjoco-a-benchmark-and-toolkit-for-task-oriented-dexterous-manipulation-on-mujoco.md)
+  DexJoCo 不提出新 VLA 模型，而是把 VLA/模仿学习策略在灵巧手、双手协作、按钮/插装/铰链交互和视觉随机化下的失败模式系统测出来。
+
+- **训练目标物理化**
+  来自 [来源: AttenA+: Rectifying Action Inequality in Robotic Foundation Models](../sources/attena-rectifying-action-inequality-in-robotic-foundation-models.md)
+  AttenA+ 不改 VLA/WAM 骨干，而是把动作速度场写进 loss 权重，让模型更重视低速、精细、接触关键的动作片段。
+
 ## 当前判断
 
 这几篇放在一起看，VLA 主线已经很清楚：
@@ -71,6 +81,8 @@ VLA 的核心不是“把图像和文本都喂给机器人”，而是把机器�
 - `RLT` 解决“如何把通才策略继续打磨到高精度”
 - `MEM` 解决“如何把策略延长到 long-horizon”
 - `Human-to-Robot Transfer` 解决“如何把人类数据真正吸纳进来”
+- `DexJoCo` 解决“如何用灵巧手任务和失败模式检验这些策略是否真的具备接触密集、双手和长时程能力”
+- `AttenA+` 解决“训练目标是否应该反映动作序列内部的物理关键性”
 
 也就是说，VLA 不再只是一个单点模型设计问题，而已经分化成一套系统问题族。
 
@@ -81,6 +93,8 @@ VLA 的核心不是“把图像和文本都喂给机器人”，而是把机器�
 - [[RL Token: Bootstrapping Online RL with Vision-Language-Action Models]]
 - [[MEM: Multi-Scale Embodied Memory for Vision Language Action Models]]
 - [[Emergence of Human to Robot Transfer in Vision-Language-Action Models]]
+- [[DexJoCo: A Benchmark and Toolkit for Task-Oriented Dexterous Manipulation on MuJoCo]]
+- [[AttenA+: Rectifying Action Inequality in Robotic Foundation Models]]
 - [[Online RL for VLA]]
 - [[Long-Horizon Memory for Robot Policies]]
 - [[Human-to-Robot Transfer]]
