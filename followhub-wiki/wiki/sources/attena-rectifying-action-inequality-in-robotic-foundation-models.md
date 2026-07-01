@@ -54,11 +54,11 @@ related_topics:
 related_syntheses:
   - "current-vla-landscape-foundation-control-memory-and-transfer"
 confidence: EXTRACTED
-hero_image: "https://arxiv.org/html/2605.13548v3/x1.png"
+hero_image: "https://followhub.tenstep.top/papers/attena-rectifying-action-inequality-in-robotic-foundation-models/figure-hero.png"
 images:
-  - "https://arxiv.org/html/2605.13548v3/x1.png"
-  - "https://arxiv.org/html/2605.13548v3/x3.png"
-  - "https://arxiv.org/html/2605.13548v3/x5.png"
+  - "https://followhub.tenstep.top/papers/attena-rectifying-action-inequality-in-robotic-foundation-models/figure-hero.png"
+  - "https://followhub.tenstep.top/papers/attena-rectifying-action-inequality-in-robotic-foundation-models/figure-method.png"
+  - "https://followhub.tenstep.top/papers/attena-rectifying-action-inequality-in-robotic-foundation-models/figure-result.png"
 source_url: "https://arxiv.org/abs/2605.13548"
 html_url: "https://arxiv.org/html/2605.13548v3"
 pdf_url: "https://arxiv.org/pdf/2605.13548.pdf"
@@ -76,7 +76,7 @@ AttenA+ 的核心价值是指出 VLA/WAM 训练里一个很朴素但长期被忽
 
 可以把 AttenA+ 理解成给机器人示范轨迹加一个“动作显微镜”：移动到目标附近的高速段通常只是过渡，错一点也能补；靠近物体、对齐、夹取、释放这些低速段才是最怕误差的地方。传统 VLA 把每个动作 token 一视同仁，AttenA+ 则根据专家动作的速度自动调权，让模型把学习容量更多花在这些慢而关键的瞬间。
 
-![AttenA+ 总览](https://arxiv.org/html/2605.13548v3/x1.png)
+![AttenA+ 总览](https://followhub.tenstep.top/papers/attena-rectifying-action-inequality-in-robotic-foundation-models/figure-hero.png)
 
 *AttenA+ 作为无结构改动的训练目标增强，可接入 OpenVLA-OFT、π0/π0.5、Diffusion Policy 和 WAM 等不同动作模型。*
 
@@ -126,7 +126,7 @@ Existing robotic foundation models, while powerful, are predicated on an implici
 - 速度是一个便宜、无需标注、容易跨数据集复用的关键性 proxy。
 - 这个方法最适合 precision-demanding manipulation：对齐、夹取、插入、释放、长程多阶段操作。
 
-![速度场与关键动作](https://arxiv.org/html/2605.13548v3/x3.png)
+![速度场与关键动作](https://followhub.tenstep.top/papers/attena-rectifying-action-inequality-in-robotic-foundation-models/figure-method.png)
 
 *论文通过速度场展示动作序列信息密度并不均匀，低速段通常对应操作成败关键处。*
 
@@ -150,7 +150,7 @@ Existing robotic foundation models, while powerful, are predicated on an implici
 | Libero-10 / OpenVLA-OFT | 94.5% SR | 96.6% SR | +2.1% | 长程任务收益更明显 |
 | Real Franka | 92.5% SR | 97.0% SR | +4.5% | 真实任务验证低速关键动作假设 |
 
-![实验任务与真实机器人验证](https://arxiv.org/html/2605.13548v3/x5.png)
+![实验任务与真实机器人验证](https://followhub.tenstep.top/papers/attena-rectifying-action-inequality-in-robotic-foundation-models/figure-result.png)
 
 *AttenA+ 在仿真基准和真实 Franka 任务上验证，真实任务包含关抽屉、放方块、多物体和长程序列操作。*
 
