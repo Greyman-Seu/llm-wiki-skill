@@ -1,0 +1,52 @@
+[
+  {
+    "figure_number": 1,
+    "caption": "Figure 1: Heterogeneous Tactile Transformer (HTT). HTT is pretrained on the Heterogeneous Paired Tactile (HPT) dataset , which consists of 1.6 1.6 M synchronized paired frames across four distinct sensors with a UMI device. HTT adopts sensor-specific encoders and a shared transformer trunk as core modules. Data from each sensor is patchified, fed into a sensor-specific encoder, and forwarded to th",
+    "image_url": "2606.29948v1/x1.png"
+  },
+  {
+    "figure_number": 2,
+    "caption": "Figure 2: Force/slip data collection and dataset statistics. A1. A tactile sensor and a 6 6 -D F/T sensor are mounted on a robot arm; a probe rig contacts the tactile sensor while synchronized tactile frames and ground-truth force are recorded for the force-estimation and slip-detection splits. A2. Example tactile frames collected with the four probe geometries. B1. The force range spans up to 40 ",
+    "image_url": "2606.29948v1/x2.png"
+  },
+  {
+    "figure_number": null,
+    "caption": "Table 1: Object classification results ( 20 20 -class top-1 accuracy, %) across the four heterogeneous tactile sensors. T3 and SITR are optical-based methods and are not applicable (n/a) to the array-based sensors. Best result per sensor in bold ; second-best underlined .",
+    "image_url": ""
+  },
+  {
+    "figure_number": null,
+    "caption": "Table 2: Force-sensitive tasks results. Force estimation reports the overall 3D force MAE (in N, lower is better); slip detection reports the macro-F1 (%, higher is better) as the dataset is highly imbalanced. Full per-axis force results, per-class slip F1 and variance are reported in Appendix C .",
+    "image_url": ""
+  },
+  {
+    "figure_number": 3,
+    "caption": "Figure 3: Real World Toy Screw and Grasp Tofu Experiments. Left: Task setup and tactile image from the Sharpa finger tip. Middle: Final rotation of screw; more than 600 degrees (close to tight) is considered success. Right: Grasp tofu completion status (20 rollouts), slip is the most common failure mode. On both tasks, our HTT representations achieve the best results.",
+    "image_url": "2606.29948v1/x3.png"
+  },
+  {
+    "figure_number": null,
+    "caption": "Table 3: Task success rate averaged over three seeds, each with 50 rollouts.",
+    "image_url": ""
+  },
+  {
+    "figure_number": 4,
+    "caption": "Figure 4: The four heterogeneous tactile sensors used in HPT pretraining, each mounted in the UMI gripper shell. Left to right: GelSight Mini and 9DTact (optical-based), TAC-02 and Xela uSkin (array-based).",
+    "image_url": "2606.29948v1/x4.png"
+  },
+  {
+    "figure_number": null,
+    "caption": "Table 4: Force estimation full results (test MAE in N, lower is better) for shear, normal, and overall 3D force. T3 and SITR are optical-based methods and are not applicable (n/a) to the taxel-based sensors. Best result per sensor and metric in bold ; second-best underlined .",
+    "image_url": ""
+  },
+  {
+    "figure_number": null,
+    "caption": "Table 5: Slip detection full results (test F1, %, higher is better): overall macro-F1 and per-class F1 for the static, incipient, and slide classes. T3 and SITR are optical-based methods and are not applicable (n/a) to the taxel-based sensors. Best result per sensor and metric in bold ; second-best underlined .",
+    "image_url": ""
+  },
+  {
+    "figure_number": 5,
+    "caption": "Figure 5: Example samples for 2 optical sensor encoders. Left: object classification frames (wash sponge, baseball on GelSight Mini; allen key, pot mat on 9DTact). Right: static force-estimation frames for two probe geometries ( p 1 p_{1} , p 3 p_{3} ) on each sensor. Each panel shows the raw camera frame and the background-subtracted processed frame; the processed view subtract with non-contact r",
+    "image_url": "2606.29948v1/x5.png"
+  }
+]

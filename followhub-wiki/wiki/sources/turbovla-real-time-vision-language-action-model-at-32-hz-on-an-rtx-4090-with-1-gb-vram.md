@@ -1,5 +1,9 @@
 ---
+id: "turbovla-real-time-vision-language-action-model-at-32-hz-on-an-rtx-4090-with-1-gb-vram"
+slug: "turbovla-real-time-vision-language-action-model-at-32-hz-on-an-rtx-4090-with-1-gb-vram"
 title: "TurboVLA: Real-Time Vision-Language-Action Model at 32 Hz on an RTX 4090 with <1 GB VRAM"
+type: source
+material_type: paper
 source_type: paper
 source_kind: "local_pdf"
 source_input: "/tmp/turbovla-2607.27205.pdf"
@@ -43,7 +47,16 @@ images:
   - https://arxiv.org/html/2607.27205v1/x2.png
 related_topics:
   - vision-language-action
+related_syntheses:
+  - current-vla-landscape-foundation-control-memory-and-transfer
 status: analyzed
+links:
+  original: https://arxiv.org/abs/2607.27205
+  arxiv: https://arxiv.org/abs/2607.27205
+  pdf: https://arxiv.org/pdf/2607.27205
+  html: https://arxiv.org/html/2607.27205
+  github: https://github.com/H-EmbodVis/TurboVLA
+  hjfy: https://hjfy.top/arxiv/2607.27205
 ---
 
 # TurboVLA: Real-Time Vision-Language-Action Model at 32 Hz on an RTX 4090 with <1 GB VRAM

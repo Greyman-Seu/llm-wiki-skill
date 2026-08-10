@@ -48,3 +48,14 @@
 - **更新主题**：Human-to-Robot Transfer
 - **更新综述**：当前 VLA 路线图：基座、可控性、在线精修、记忆与人类数据
 - **状态**：完成
+
+## 2026-08-10 — 新增 arXiv 论文
+
+- **操作**：使用 arxiv-to-wiki 全流程分析论文并写入 source note（HTML 优先，arxiv-fig 抽取架构图）
+- **标题**：Heterogeneous Tactile Transformer
+- **arXiv ID**：2606.29948
+- **slug**：2606.29948-heterogeneous-tactile-transformer
+- **新增主题**：Tactile Representation
+- **新 tag**：tactile-representation（已追加到 .wiki-vocabulary.md New Tag Proposal Log）
+- **更新索引**：index.md 新增素材条目与主题条目
+- **状态**：完成

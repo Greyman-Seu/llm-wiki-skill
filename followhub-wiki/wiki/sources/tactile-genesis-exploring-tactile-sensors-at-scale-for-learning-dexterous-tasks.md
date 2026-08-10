@@ -1,5 +1,9 @@
 ---
+id: "tactile-genesis-exploring-tactile-sensors-at-scale-for-learning-dexterous-tasks"
+slug: "tactile-genesis-exploring-tactile-sensors-at-scale-for-learning-dexterous-tasks"
 title: "Tactile Genesis: Exploring Tactile Sensors at Scale for Learning Dexterous Tasks"
+type: source
+material_type: paper
 source_type: paper
 source_kind: "local_pdf"
 source_input: "/tmp/tactile-genesis-2606.22332.pdf"
@@ -40,7 +44,16 @@ images:
   - https://followhub.tenstep.top/papers/2606.22332-tactile-genesis/figure-1-overview-cropped.png
 related_topics:
   - tactile-sensing
+related_syntheses:
+  - current-vla-landscape-foundation-control-memory-and-transfer
 status: analyzed
+links:
+  original: https://arxiv.org/abs/2606.22332
+  arxiv: https://arxiv.org/abs/2606.22332
+  pdf: https://arxiv.org/pdf/2606.22332
+  html: https://arxiv.org/html/2606.22332
+  project: https://neuroagents-lab.github.io/tactile-genesis/
+  hjfy: https://hjfy.top/arxiv/2606.22332
 ---
 
 # Tactile Genesis: Exploring Tactile Sensors at Scale for Learning Dexterous Tasks

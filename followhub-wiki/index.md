@@ -1,14 +1,14 @@
 # 知识库索引
 
-> 最后更新：2026-05-16
+> 最后更新：2026-08-10
 
 ---
 
 ## 概览
 
 - 主题：具身智能研究 Wiki
-- 素材总数：6
-- Wiki 页面总数：12
+- 素材总数：13
+- Wiki 页面总数：14
 
 ---
 
@@ -29,6 +29,7 @@
 - [[Long-Horizon Memory for Robot Policies]]（子主题种子）
 - [[Human-to-Robot Transfer]]（子主题种子）
 - [[Human Video Robot Data Generation]]（子主题种子）
+- [[Tactile Representation]]
 
 ---
 
@@ -42,6 +43,12 @@
 - [[MEM: Multi-Scale Embodied Memory for Vision Language Action Models]]
 - [[Emergence of Human to Robot Transfer in Vision-Language-Action Models]]
 - [[DexImit: Learning Bimanual Dexterous Manipulation from Monocular Human Videos]]
+- [[DexJaco: A Benchmark and Toolkit for Task-Oriented Dexterous Manipulation on MuJoCo]]
+- [[Attena: Rectifying Action Inequality in Robotic Foundation Models]]
+- [[STEAM: Self-Supervised Temporal Ensemble Advantage Modeling for Real-World Robot Learning]]
+- [[Tactile Genesis: Exploring Tactile Sensors at Scale for Learning Dexterous Tasks]]
+- [[TurboVLA: Real-Time Vision-Language-Action Model at 32 Hz on an RTX 4090 with <1 GB VRAM]]
+- [[Heterogeneous Tactile Transformer]]
 
 ---
 
