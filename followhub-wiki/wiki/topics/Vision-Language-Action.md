@@ -4,7 +4,7 @@ slug: "vision-language-action"
 title: "Vision-Language-Action"
 type: topic
 created: "2026-05-11"
-updated: "2026-06-30"
+updated: "2026-08-10"
 domains:
   - "Physical/Embodied Intelligence"
 tags:
@@ -19,6 +19,7 @@ source_slugs:
   - "dexjoco-a-benchmark-and-toolkit-for-task-oriented-dexterous-manipulation-on-mujoco"
   - "attena-rectifying-action-inequality-in-robotic-foundation-models"
   - "qwen-vla"
+  - "2606.17846-qwen-robotmanip-alignment-unlocks-scale-for-robotic-manipulation-foundation-models"
   - "dm05-open-world-embodied-foundation-model"
 synthesis_slugs:
   - "current-vla-landscape-foundation-control-memory-and-transfer"
