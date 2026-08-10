@@ -60,7 +60,7 @@
 - **更新索引**：index.md 新增素材条目与主题条目
 - **状态**：完成
 
-## 2026-08-10 — 新增 arXiv 论文
+## 2026-08-10 — 新增 arXiv 论文（Qwen-VLA）
 
 - **操作**：使用 arxiv-to-wiki direct 流程写入并登记 source note；HTML `2605.30280v1` 返回 404，按约定回退到 abs 与 PDF。
 - **标题**：Qwen-VLA: Unifying Vision-Language-Action Modeling across Tasks, Environments, and Robot Embodiments
@@ -68,4 +68,15 @@
 - **slug**：qwen-vla
 - **新增页面**：wiki/sources/qwen-vla.md
 - **关联主题**：Vision-Language-Action（仅建立 source 关联，未运行 update-wiki）
+- **状态**：完成
+
+## 2026-08-10 — 新增企业博客（DM0.5）
+
+- **操作**：处理 feishu 群聊 arxiv2wiki 请求，按 FollowHub wiki 流程将企业技术博客写入 source note（material_type: blog）
+- **标题**：DM0.5: 面向开放世界的通用具身智能基础模型（Dexmal 原力灵机）
+- **slug**：dm05-open-world-embodied-foundation-model
+- **原文链接**：https://www.dexmal.com/blog/dm0.5
+- **新增页面**：wiki/sources/dm05-open-world-embodied-foundation-model.md
+- **关联主题**：Vision-Language-Action（已加入 source_slugs）
+- **tag**：robot-foundation-model（seed tag，无需新增）
 - **状态**：完成

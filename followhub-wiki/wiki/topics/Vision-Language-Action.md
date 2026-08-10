@@ -19,6 +19,7 @@ source_slugs:
   - "dexjoco-a-benchmark-and-toolkit-for-task-oriented-dexterous-manipulation-on-mujoco"
   - "attena-rectifying-action-inequality-in-robotic-foundation-models"
   - "qwen-vla"
+  - "dm05-open-world-embodied-foundation-model"
 synthesis_slugs:
   - "current-vla-landscape-foundation-control-memory-and-transfer"
 status: active
@@ -73,6 +74,10 @@ VLA 的核心不是“把图像和文本都喂给机器人”，而是把机器�
   来自 [来源: AttenA+: Rectifying Action Inequality in Robotic Foundation Models](../sources/attena-rectifying-action-inequality-in-robotic-foundation-models.md)
   AttenA+ 不改 VLA/WAM 骨干，而是把动作速度场写进 loss 权重，让模型更重视低速、精细、接触关键的动作片段。
 
+- **历史上下文 + 具身推理 + 动作对齐的系统化**
+  来自 [来源: DM0.5: 面向开放世界的通用具身智能基础模型](../sources/dm05-open-world-embodied-foundation-model.md)
+  DM0.5 把长历史记忆（最长 60s）、11 种具身推理 CoT 任务、以及轨迹进展对齐三个设计做成一体，换来开放环境 Zero-Shot 泛化和真机 Table30 v2 SOTA。
+
 ## 当前判断
 
 这几篇放在一起看，VLA 主线已经很清楚：
@@ -84,6 +89,7 @@ VLA 的核心不是“把图像和文本都喂给机器人”，而是把机器�
 - `Human-to-Robot Transfer` 解决“如何把人类数据真正吸纳进来”
 - `DexJoCo` 解决“如何用灵巧手任务和失败模式检验这些策略是否真的具备接触密集、双手和长时程能力”
 - `AttenA+` 解决“训练目标是否应该反映动作序列内部的物理关键性”
+- `DM0.5` 解决“如何把历史上下文、具身推理、动作监督三件事系统化地收进一个可用的通用 VLA”
 
 也就是说，VLA 不再只是一个单点模型设计问题，而已经分化成一套系统问题族。
 
@@ -96,6 +102,7 @@ VLA 的核心不是“把图像和文本都喂给机器人”，而是把机器�
 - [[Emergence of Human to Robot Transfer in Vision-Language-Action Models]]
 - [[DexJoCo: A Benchmark and Toolkit for Task-Oriented Dexterous Manipulation on MuJoCo]]
 - [[AttenA+: Rectifying Action Inequality in Robotic Foundation Models]]
+- [[DM0.5: 面向开放世界的通用具身智能基础模型]]
 - [[Online RL for VLA]]
 - [[Long-Horizon Memory for Robot Policies]]
 - [[Human-to-Robot Transfer]]

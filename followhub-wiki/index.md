@@ -7,8 +7,8 @@
 ## 概览
 
 - 主题：具身智能研究 Wiki
-- 素材总数：13
-- Wiki 页面总数：21
+- 素材总数：14
+- Wiki 页面总数：22
 
 ---
 
@@ -50,6 +50,7 @@
 - [[TurboVLA: Real-Time Vision-Language-Action Model at 32 Hz on an RTX 4090 with <1 GB VRAM]]
 - [[Heterogeneous Tactile Transformer]]
 - [[Qwen-VLA: Unifying Vision-Language-Action Modeling across Tasks, Environments, and Robot Embodiments]]
+- [[DM0.5: 面向开放世界的通用具身智能基础模型]]
 
 ---
 
