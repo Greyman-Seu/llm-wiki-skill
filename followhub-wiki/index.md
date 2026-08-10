@@ -7,7 +7,7 @@
 ## 概览
 
 - 主题：具身智能研究 Wiki
-- 素材总数：14
+- 素材总数：15
 - Wiki 页面总数：22
 
 ---
@@ -51,6 +51,7 @@
 - [[Heterogeneous Tactile Transformer]]
 - [[Qwen-VLA: Unifying Vision-Language-Action Modeling across Tasks, Environments, and Robot Embodiments]]
 - [[DM0.5: 面向开放世界的通用具身智能基础模型]]
+- [[Qwen-RobotManip Technical Report: Alignment Unlocks Scale for Robotic Manipulation Foundation Models]]
 
 ---
 

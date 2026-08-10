@@ -70,6 +70,17 @@
 - **关联主题**：Vision-Language-Action（仅建立 source 关联，未运行 update-wiki）
 - **状态**：完成
 
+## 2026-08-10 — 新增 arXiv 论文（Qwen-RobotManip）
+
+- **操作**：使用 arxiv-to-wiki 流程写入并登记 source note
+- **标题**：Qwen-RobotManip Technical Report: Alignment Unlocks Scale for Robotic Manipulation Foundation Models
+- **arXiv ID**：2606.17846
+- **slug**：2606.17846-qwen-robotmanip-alignment-unlocks-scale-for-robotic-manipulation-foundation-models
+- **核心主张**：对齐 → 规模化 → 泛化；统一状态-动作表示（80维 canonical vector）+ 相机帧 delta 位姿 + in-context policy adaptation
+- **关联主题**：Vision-Language-Action（更新调研条目），Human-to-Robot Transfer，Cross-Embodiment
+- **综合页**：当前 VLA 路线图（更新，新增"跨具身对齐"子路线）
+- **状态**：完成
+
 ## 2026-08-10 — 新增企业博客（DM0.5）
 
 - **操作**：处理 feishu 群聊 arxiv2wiki 请求，按 FollowHub wiki 流程将企业技术博客写入 source note（material_type: blog）
