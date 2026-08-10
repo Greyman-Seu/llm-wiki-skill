@@ -18,6 +18,7 @@ source_slugs:
   - "emergence-of-human-to-robot-transfer-in-vision-language-action-models"
   - "dexjoco-a-benchmark-and-toolkit-for-task-oriented-dexterous-manipulation-on-mujoco"
   - "attena-rectifying-action-inequality-in-robotic-foundation-models"
+  - "qwen-vla"
 synthesis_slugs:
   - "current-vla-landscape-foundation-control-memory-and-transfer"
 status: active

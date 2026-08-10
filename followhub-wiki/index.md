@@ -8,7 +8,7 @@
 
 - 主题：具身智能研究 Wiki
 - 素材总数：13
-- Wiki 页面总数：14
+- Wiki 页面总数：21
 
 ---
 
@@ -49,6 +49,7 @@
 - [[Tactile Genesis: Exploring Tactile Sensors at Scale for Learning Dexterous Tasks]]
 - [[TurboVLA: Real-Time Vision-Language-Action Model at 32 Hz on an RTX 4090 with <1 GB VRAM]]
 - [[Heterogeneous Tactile Transformer]]
+- [[Qwen-VLA: Unifying Vision-Language-Action Modeling across Tasks, Environments, and Robot Embodiments]]
 
 ---
 

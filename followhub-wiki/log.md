@@ -59,3 +59,13 @@
 - **新 tag**：tactile-representation（已追加到 .wiki-vocabulary.md New Tag Proposal Log）
 - **更新索引**：index.md 新增素材条目与主题条目
 - **状态**：完成
+
+## 2026-08-10 — 新增 arXiv 论文
+
+- **操作**：使用 arxiv-to-wiki direct 流程写入并登记 source note；HTML `2605.30280v1` 返回 404，按约定回退到 abs 与 PDF。
+- **标题**：Qwen-VLA: Unifying Vision-Language-Action Modeling across Tasks, Environments, and Robot Embodiments
+- **arXiv ID**：2605.30280
+- **slug**：qwen-vla
+- **新增页面**：wiki/sources/qwen-vla.md
+- **关联主题**：Vision-Language-Action（仅建立 source 关联，未运行 update-wiki）
+- **状态**：完成
