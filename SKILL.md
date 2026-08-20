@@ -1221,6 +1221,8 @@ digest 不是把多篇材料重新摘要一遍，而是回答：
    python3 ${SKILL_DIR}/scripts/validate-followhub-wiki-package.py "<package_dir>"
    ```
 
+   对由 `arxiv-to-wiki` 生成的论文材料，还必须运行该流程的定向完整性检查。发布包中的 `backgroundMotivation`、`backgroundGap`、`methodOverview`、`methodCore`、`methodBreakdown`、`methodTakeaways` 不得在 Markdown → JSON 转换中丢失；任一字段未达到 `arxiv-to-wiki` 的内容门槛时都要阻止发布，回到材料页补写后重新构建。
+
 5. **发布**：
    ```bash
    bash ${SKILL_DIR}/scripts/publish-followhub-wiki-r2.sh "<package_dir>" local:/absolute/path

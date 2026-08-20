@@ -43,10 +43,11 @@ main() {
     command -v python3 >/dev/null 2>&1 || fail "python3 is required"
     [ -d "$WIKI_ROOT" ] || fail "sample followhub-wiki should exist"
 
-    local package_dir publish_dir
+    local package_dir publish_dir expected_sources
     TMP_DIR="$(mktemp -d)"
     package_dir="$TMP_DIR/package"
     publish_dir="$TMP_DIR/published"
+    expected_sources="$(find "$WIKI_ROOT/wiki/sources" -maxdepth 1 -type f -name '*.md' | wc -l | tr -d '[:space:]')"
     trap cleanup EXIT
 
     python3 "$REPO_ROOT/scripts/build-followhub-wiki-package.py" "$WIKI_ROOT" "$package_dir" --pretty >/dev/null
@@ -72,9 +73,9 @@ main() {
 
     [ "$(json_value "$package_dir/manifest.json" "data_version")" = "followhub-wiki-r2/v1" ] \
         || fail "manifest data_version mismatch"
-    [ "$(json_value "$package_dir/manifest.json" "counts.sources")" = "6" ] \
+    [ "$(json_value "$package_dir/manifest.json" "counts.sources")" = "$expected_sources" ] \
         || fail "manifest source count should match sample"
-    [ "$(json_value "$package_dir/sources.json" "len")" = "6" ] \
+    [ "$(json_value "$package_dir/sources.json" "len")" = "$expected_sources" ] \
         || fail "sources array count should match sample"
 
     bash "$REPO_ROOT/scripts/publish-followhub-wiki-r2.sh" "$package_dir" "local:$publish_dir" >/dev/null

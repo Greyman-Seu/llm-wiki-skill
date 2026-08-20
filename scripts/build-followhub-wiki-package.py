@@ -202,6 +202,9 @@ def strip_markdown(value: str) -> str:
     text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
     text = re.sub(r"\[\[([^\]]+)\]\]", r"\1", text)
     text = re.sub(r"`([^`]+)`", r"\1", text)
+    text = re.sub(r"\*\*([^*]+)\*\*", r"\1", text)
+    text = re.sub(r"__([^_]+)__", r"\1", text)
+    text = re.sub(r"(?<!\*)\*([^*\n]+)\*(?!\*)", r"\1", text)
     text = re.sub(r"^#+\s*", "", text, flags=re.MULTILINE)
     text = re.sub(r"^[>\-*]\s*", "", text, flags=re.MULTILINE)
     text = re.sub(r"\n{2,}", "\n", text)
@@ -260,6 +263,8 @@ def source_record(page: dict[str, Any]) -> dict[str, Any]:
     source_type = str(data.get("source_type") or data.get("material_type") or "material").strip()
     material_type = str(data.get("material_type") or source_type or "material").strip()
     risk_section = section_after_heading(body, ["风险与判断", "Risks"])
+    background_section = section_after_heading(body, ["背景与问题", "Background and Problem"])
+    method_section = section_after_heading(body, ["方法", "Method"])
     risk_limitations = split_labeled_items(extract_labeled_block(risk_section, ["局限", "限制", "Limitations"]))
     if not risk_limitations:
         risk_limitations = split_bullets(risk_section)
@@ -300,8 +305,14 @@ def source_record(page: dict[str, Any]) -> dict[str, Any]:
         "intuition": section_after_heading(body, ["直观理解"]),
         "abstractEn": section_after_heading(body, ["论文摘要（英文原文）", "Abstract"]),
         "abstractZh": section_after_heading(body, ["论文摘要（中文翻译）", "中文摘要"]),
-        "background": section_after_heading(body, ["背景与问题"]),
-        "method": section_after_heading(body, ["方法"]),
+        "background": background_section,
+        "backgroundMotivation": extract_labeled_block(background_section, ["动机", "为什么做", "Motivation"]),
+        "backgroundGap": extract_labeled_block(background_section, ["问题缺口", "Gap"]),
+        "method": method_section,
+        "methodOverview": extract_labeled_block(method_section, ["方法概述", "Overview"]),
+        "methodCore": extract_labeled_block(method_section, ["核心机制", "Core Mechanism"]),
+        "methodBreakdown": split_labeled_items(extract_labeled_block(method_section, ["方法拆解", "Breakdown"])),
+        "methodTakeaways": split_labeled_items(extract_labeled_block(method_section, ["关键要点", "Key Takeaways"])),
         "resultHighlights": split_bullets(section_after_heading(body, ["结果"])),
         "insightCore": split_bullets(section_after_heading(body, ["洞察"])),
         "risks": risk_section,
