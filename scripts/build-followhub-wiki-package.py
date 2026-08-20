@@ -333,6 +333,15 @@ def extract_labeled_block(section: str, labels: list[str]) -> str:
     capture = False
     collected: list[str] = []
     for line in str(section or "").splitlines():
+        heading_match = re.match(r"^\s*#{3,6}\s+(.+?)\s*#*\s*$", line)
+        if heading_match:
+            label = normalize_label(strip_markdown(heading_match.group(1)))
+            if label in wanted:
+                capture = True
+                collected = []
+                continue
+            if capture:
+                break
         label_match = re.match(r"^\s*\*\*([^*]+?)\s*[:：]?\*\*\s*(.*)$", line)
         if label_match:
             label = normalize_label(label_match.group(1))
@@ -349,11 +358,34 @@ def extract_labeled_block(section: str, labels: list[str]) -> str:
 
 
 def split_labeled_items(value: str) -> list[str]:
+    ordered = split_top_level_ordered_items(value)
+    if ordered:
+        return ordered
     bullets = split_bullets(value)
     if bullets:
         return bullets
     text = strip_markdown(value)
     return [text] if text else []
+
+
+def split_top_level_ordered_items(value: str) -> list[str]:
+    result: list[str] = []
+    current: list[str] = []
+    for line in str(value or "").splitlines():
+        match = re.match(r"^\s{0,3}\d+[.)]\s+(.+)$", line)
+        if match:
+            if current:
+                result.append(" ".join(current).strip())
+            current = [strip_markdown(match.group(1))]
+            continue
+        if current and line.strip():
+            detail = re.sub(r"^\s*[-*+]\s+", "", line).strip()
+            detail = strip_markdown(detail)
+            if detail:
+                current.append(detail)
+    if current:
+        result.append(" ".join(current).strip())
+    return [item for item in result if item][:12]
 
 
 def split_bullets(value: str) -> list[str]:

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -17,6 +18,15 @@ REQUIRED_TOP_LEVEL = [
     "graph-data.json",
     "search-index.json",
 ]
+
+STRUCTURED_SOURCE_FIELDS = {
+    "backgroundMotivation": ["动机", "为什么做", "Motivation"],
+    "backgroundGap": ["问题缺口", "Gap"],
+    "methodOverview": ["方法概述", "Overview"],
+    "methodCore": ["核心机制", "Core Mechanism"],
+    "methodBreakdown": ["方法拆解", "Breakdown"],
+    "methodTakeaways": ["关键要点", "Key Takeaways"],
+}
 
 
 def load_json(path: Path) -> Any:
@@ -93,6 +103,7 @@ def main() -> int:
         for synthesis_slug in as_list(source.get("relatedSynthesisSlugs")):
             if synthesis_slug not in synthesis_slugs:
                 warnings.append(f"source/{slug} references missing synthesis: {synthesis_slug}")
+        validate_structured_source_fields(source, errors)
 
     for topic in as_list(topics):
         slug = topic.get("slug")
@@ -159,6 +170,37 @@ def validate_collection(root: Path, kind: str, rows: Any, errors: list[str]) -> 
         if not (root / kind / f"{slug}.json").is_file():
             errors.append(f"missing {kind}/{slug}.json")
     return seen
+
+
+def normalize_label(value: str) -> str:
+    return re.sub(r"[\s:：]+", "", str(value or "").strip().lower())
+
+
+def body_has_label(body: str, labels: list[str]) -> bool:
+    wanted = {normalize_label(label) for label in labels}
+    for line in str(body or "").splitlines():
+        heading_match = re.match(r"^\s*#{3,6}\s+(.+?)\s*#*\s*$", line)
+        if heading_match and normalize_label(heading_match.group(1)) in wanted:
+            return True
+        bold_match = re.match(r"^\s*\*\*([^*]+?)\s*[:：]?\*\*", line)
+        if bold_match and normalize_label(bold_match.group(1)) in wanted:
+            return True
+    return False
+
+
+def validate_structured_source_fields(source: dict[str, Any], errors: list[str]) -> None:
+    body = str(source.get("body") or "")
+    slug = str(source.get("slug") or "")
+    for field, labels in STRUCTURED_SOURCE_FIELDS.items():
+        if not body_has_label(body, labels):
+            continue
+        value = source.get(field)
+        if isinstance(value, list):
+            present = bool(value)
+        else:
+            present = bool(str(value or "").strip())
+        if not present:
+            errors.append(f"source/{slug} lost structured field {field} during packaging")
 
 
 if __name__ == "__main__":
