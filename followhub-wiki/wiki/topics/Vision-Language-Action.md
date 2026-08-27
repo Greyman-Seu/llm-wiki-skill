@@ -4,7 +4,7 @@ slug: "vision-language-action"
 title: "Vision-Language-Action"
 type: topic
 created: "2026-05-11"
-updated: "2026-08-10"
+updated: "2026-08-27"
 domains:
   - "Physical/Embodied Intelligence"
 tags:
@@ -21,6 +21,7 @@ source_slugs:
   - "qwen-vla"
   - "2606.17846-qwen-robotmanip-alignment-unlocks-scale-for-robotic-manipulation-foundation-models"
   - "dm05-open-world-embodied-foundation-model"
+  - "2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback"
 synthesis_slugs:
   - "current-vla-landscape-foundation-control-memory-and-transfer"
 status: active
@@ -75,6 +76,10 @@ VLA 的核心不是“把图像和文本都喂给机器人”，而是把机器�
   来自 [来源: AttenA+: Rectifying Action Inequality in Robotic Foundation Models](../sources/attena-rectifying-action-inequality-in-robotic-foundation-models.md)
   AttenA+ 不改 VLA/WAM 骨干，而是把动作速度场写进 loss 权重，让模型更重视低速、精细、接触关键的动作片段。
 
+- **chunk 内流式触觉反馈**
+  来自 [来源: TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback](../sources/2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback.md)
+  TacForcing 不另设快触觉控制器，而是让同一个动作专家按块完成、执行并保留未来块中间态；每次执行后刷新触觉，EATA 只让最新触觉影响下一待执行块，把观测时刻与动作生效时刻显式对齐。
+
 - **历史上下文 + 具身推理 + 动作对齐的系统化**
   来自 [来源: DM0.5: 面向开放世界的通用具身智能基础模型](../sources/dm05-open-world-embodied-foundation-model.md)
   DM0.5 把长历史记忆（最长 60s）、11 种具身推理 CoT 任务、以及轨迹进展对齐三个设计做成一体，换来开放环境 Zero-Shot 泛化和真机 Table30 v2 SOTA。
@@ -90,6 +95,7 @@ VLA 的核心不是“把图像和文本都喂给机器人”，而是把机器�
 - `Human-to-Robot Transfer` 解决“如何把人类数据真正吸纳进来”
 - `DexJoCo` 解决“如何用灵巧手任务和失败模式检验这些策略是否真的具备接触密集、双手和长时程能力”
 - `AttenA+` 解决“训练目标是否应该反映动作序列内部的物理关键性”
+- `TacForcing` 解决“如何在同一个动作生成器内部交错 chunk 生成、执行与触觉更新，并限制反馈的时间作用域”
 - `DM0.5` 解决“如何把历史上下文、具身推理、动作监督三件事系统化地收进一个可用的通用 VLA”
 
 也就是说，VLA 不再只是一个单点模型设计问题，而已经分化成一套系统问题族。
@@ -103,6 +109,7 @@ VLA 的核心不是“把图像和文本都喂给机器人”，而是把机器�
 - [[Emergence of Human to Robot Transfer in Vision-Language-Action Models]]
 - [[DexJoCo: A Benchmark and Toolkit for Task-Oriented Dexterous Manipulation on MuJoCo]]
 - [[AttenA+: Rectifying Action Inequality in Robotic Foundation Models]]
+- [[TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback]]
 - [[DM0.5: 面向开放世界的通用具身智能基础模型]]
 - [[Online RL for VLA]]
 - [[Long-Horizon Memory for Robot Policies]]

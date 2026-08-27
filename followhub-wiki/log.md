@@ -91,3 +91,15 @@
 - **关联主题**：Vision-Language-Action（已加入 source_slugs）
 - **tag**：robot-foundation-model（seed tag，无需新增）
 - **状态**：完成
+
+## 2026-08-27 ingest | TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback
+
+- **操作**：使用 arxiv-to-wiki direct 流程深度解读论文、写入材料页并更新已有主题路线
+- **arXiv ID**：2608.25798v1
+- **slug**：2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback
+- **核心主张**：把 action chunk 拆成顺序完成与执行的块，保留远期动作的 flow 中间态；执行后刷新触觉，EATA 只让最新触觉影响下一待执行块
+- **关键证据**：UniVTAC 六任务平均 65%，真机三任务平均 69%；Fixed Tactile 在消融中无稳定收益，流式更新与 EATA 分别带来独立提升
+- **新增页面**：wiki/sources/2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback.md
+- **更新主题**：Vision-Language-Action、Tactile Representation
+- **综述动作**：unchanged；该论文补强触觉 VLA 的控制接口证据，但尚不足以改变现有总路线图的阶段性判断
+- **状态**：完成

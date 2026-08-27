@@ -1,14 +1,14 @@
 # 知识库索引
 
-> 最后更新：2026-08-10
+> 最后更新：2026-08-27
 
 ---
 
 ## 概览
 
 - 主题：具身智能研究 Wiki
-- 素材总数：15
-- Wiki 页面总数：22
+- 素材总数：17
+- Wiki 页面总数：24
 
 ---
 
@@ -52,6 +52,7 @@
 - [[Qwen-VLA: Unifying Vision-Language-Action Modeling across Tasks, Environments, and Robot Embodiments]]
 - [[DM0.5: 面向开放世界的通用具身智能基础模型]]
 - [[Qwen-RobotManip Technical Report: Alignment Unlocks Scale for Robotic Manipulation Foundation Models]]
+- [[TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback]]
 
 ---
 
