@@ -17,6 +17,65 @@ VALIDATOR_SPEC.loader.exec_module(VALIDATOR)
 
 
 class SourceRecordSectionTests(unittest.TestCase):
+    def test_figures_keep_section_zones_and_neighboring_captions(self):
+        body = """# Example
+
+## 直观理解
+
+![主要图](https://example.com/overview.png)
+
+*图 1：整体流程。*
+
+## 方法
+
+![方法图](https://example.com/method-a.svg)
+*图 2：第一阶段。*
+
+![第二个方法图](https://example.com/method-b.svg)
+
+## 结果
+
+![结果图](https://example.com/results.png)
+
+_图 3：成功率对比。_
+
+## 核心信息
+
+![补充图](https://example.com/supplement.png)
+"""
+
+        figures = MODULE.extract_figures(body)
+
+        self.assertEqual(
+            figures,
+            [
+                {
+                    "caption": "图 1：整体流程。",
+                    "src": "https://example.com/overview.png",
+                    "zone": "intuition",
+                },
+                {
+                    "caption": "图 2：第一阶段。",
+                    "src": "https://example.com/method-a.svg",
+                    "zone": "method",
+                },
+                {
+                    "caption": "第二个方法图",
+                    "src": "https://example.com/method-b.svg",
+                    "zone": "method",
+                },
+                {
+                    "caption": "图 3：成功率对比。",
+                    "src": "https://example.com/results.png",
+                    "zone": "results",
+                },
+                {
+                    "caption": "补充图",
+                    "src": "https://example.com/supplement.png",
+                },
+            ],
+        )
+
     def test_labeled_background_and_method_fields_survive_packaging(self):
         page = {
             "slug": "example",

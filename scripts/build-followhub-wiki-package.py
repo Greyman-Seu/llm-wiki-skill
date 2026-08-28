@@ -397,10 +397,51 @@ def split_bullets(value: str) -> list[str]:
     return result[:12]
 
 
+FIGURE_ZONE_HEADINGS = {
+    "intuition": {"直观理解", "intuition", "intuitive understanding"},
+    "background": {"背景与问题", "背景", "background", "background and problem", "motivation"},
+    "method": {"方法", "method", "methods", "approach", "architecture"},
+    "results": {"结果", "实验结果", "results", "experiments", "evaluation"},
+    "insights": {"洞察", "insight", "insights", "discussion"},
+    "risks": {"风险与判断", "局限", "risks", "limitations", "risks and judgment"},
+}
+
+
+def figure_zone_from_heading(value: str) -> str:
+    heading = re.sub(r"\s+", " ", strip_markdown(value)).strip().lower()
+    for zone, aliases in FIGURE_ZONE_HEADINGS.items():
+        if heading in aliases:
+            return zone
+    return ""
+
+
+def following_figure_caption(lines: list[str], line_index: int) -> str:
+    for line in lines[line_index + 1 : line_index + 4]:
+        stripped = line.strip()
+        if not stripped:
+            continue
+        match = re.fullmatch(r"(?:\*|_)(.+?)(?:\*|_)", stripped)
+        return strip_markdown(match.group(1)).strip() if match else ""
+    return ""
+
+
 def extract_figures(body: str) -> list[dict[str, str]]:
     figures: list[dict[str, str]] = []
-    for match in re.finditer(r"!\[([^\]]*)\]\(([^)]+)\)", body):
-        figures.append({"caption": match.group(1).strip() or "图", "src": match.group(2).strip()})
+    current_zone = ""
+    lines = body.splitlines()
+    for line_index, line in enumerate(lines):
+        heading_match = re.match(r"^\s*##(?!#)\s+(.+?)\s*#*\s*$", line)
+        if heading_match:
+            current_zone = figure_zone_from_heading(heading_match.group(1))
+            continue
+
+        for match in re.finditer(r"!\[([^\]]*)\]\(([^)]+)\)", line):
+            alt = match.group(1).strip()
+            caption = following_figure_caption(lines, line_index) or alt or "图"
+            figure = {"caption": caption, "src": match.group(2).strip()}
+            if current_zone:
+                figure["zone"] = current_zone
+            figures.append(figure)
     return figures[:16]
 
 

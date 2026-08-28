@@ -1223,6 +1223,8 @@ digest 不是把多篇材料重新摘要一遍，而是回答：
 
    对由 `arxiv-to-wiki` 生成的论文材料，还必须运行该流程的定向完整性检查。发布包中的 `backgroundMotivation`、`backgroundGap`、`methodOverview`、`methodCore`、`methodBreakdown`、`methodTakeaways` 不得在 Markdown → JSON 转换中丢失；任一字段未达到 `arxiv-to-wiki` 的内容门槛时都要阻止发布，回到材料页补写后重新构建。
 
+   如果材料页包含论文图片，构建器必须按图片所在二级章节写入 `figureGallery[].zone`，并优先保留图片后紧邻的图注。支持的正文位置为 `intuition`、`background`、`method`、`results`、`insights`、`risks`；不得把已有章节归属的图片全部扁平化到文末图库。
+
 5. **发布**：
    ```bash
    bash ${SKILL_DIR}/scripts/publish-followhub-wiki-r2.sh "<package_dir>" local:/absolute/path
