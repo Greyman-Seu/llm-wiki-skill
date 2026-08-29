@@ -103,3 +103,13 @@
 - **更新主题**：Vision-Language-Action、Tactile Representation
 - **综述动作**：unchanged；该论文补强触觉 VLA 的控制接口证据，但尚不足以改变现有总路线图的阶段性判断
 - **状态**：完成
+
+## 2026-08-29 update-wiki | MuSe 主题归并与触觉/力觉综述
+
+- **操作**：把 MuSe 归并到已有主题，并基于五篇相关材料创建聚焦 synthesis
+- **目标材料**：Multisensory Continual Learning: Adapting Pretrained Visuomotor Policies to Force
+- **更新主题**：Vision-Language-Action、Tactile Representation
+- **补齐关联材料**：Tactile Genesis、Heterogeneous Tactile Transformer、T-Rex、TacForcing
+- **新增综述**：触觉与力觉如何进入预训练机器人策略：表示、持续适配与执行闭环
+- **综述判断**：触觉/力觉接入需要“传感设计 → 跨硬件表示 → 无遗忘持续适配 → 与动作生效时间对齐的执行闭环”共同成立；现有工作尚未端到端贯通
+- **状态**：完成

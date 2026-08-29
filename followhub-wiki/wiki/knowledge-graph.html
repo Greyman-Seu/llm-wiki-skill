@@ -2202,9 +2202,9 @@
           <button class="mode-tab" type="button" data-route="graph" aria-pressed="true">图谱</button>
           <button class="mode-tab" type="button" data-route="papers" aria-pressed="false">论文</button>
         </nav>
-        <span class="status-pill"><i class="status-dot"></i>已生成 12 个索引点</span>
-        <span class="status-pill">关系 24 条</span>
-        <span class="status-pill">最近更新 2026-05-17</span>
+        <span class="status-pill"><i class="status-dot"></i>已生成 26 个索引点</span>
+        <span class="status-pill">关系 62 条</span>
+        <span class="status-pill">最近更新 2026-08-29</span>
         <a class="ghost-button github-button brand__github" href="https://github.com/sdyckjq-lab/llm-wiki-skill" target="_blank" rel="noopener" aria-label="打开 GitHub 项目">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
@@ -2218,7 +2218,7 @@
     <section class="mobile-atlas-preview" aria-label="移动端图谱预览">
       <div class="preview-copy">
         <strong>数字山水图谱</strong>
-        <span>12 点 · 24 关系</span>
+        <span>26 点 · 62 关系</span>
       </div>
       <div class="preview-map" aria-hidden="true"></div>
     </section>
@@ -2399,23 +2399,37 @@
   <script id="graph-data" type="application/json">
 {
   "meta": {
-    "build_date": "2026-05-17T11:20:36Z",
+    "build_date": "2026-08-29T00:07:46Z",
     "wiki_title": "研究目的与方向",
-    "total_nodes": 12,
-    "total_edges": 24,
+    "total_nodes": 26,
+    "total_edges": 62,
     "initial_view": [
       "Human-to-Robot Transfer",
-      "Long-Horizon Memory for Robot Policies",
       "Vision-Language-Action",
+      "tactile-force-into-pretrained-robot-policies",
+      "qwen-vla",
+      "tactile-representation",
+      "2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force",
+      "2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback",
+      "t-rex-tactile-reactive-dexterous-manipulation",
       "Human Video Robot Data Generation",
       "Online RL for VLA",
+      "2606.29948-heterogeneous-tactile-transformer",
+      "Long-Horizon Memory for Robot Policies",
       "pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities",
+      "tactile-genesis-exploring-tactile-sensors-at-scale-for-learning-dexterous-tasks",
       "deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos",
+      "dexjoco-a-benchmark-and-toolkit-for-task-oriented-dexterous-manipulation-on-mujoco",
       "emergence-of-human-to-robot-transfer-in-vision-language-action-models",
       "mem-multi-scale-embodied-memory-for-vision-language-action-models",
       "rl-token-bootstrapping-online-rl-with-vision-language-action-models",
+      "steam-self-supervised-temporal-ensemble-advantage-modeling-for-real-world-robot-learning",
       "current-vla-landscape-foundation-control-memory-and-transfer",
-      "openvla-an-open-source-vision-language-action-model"
+      "2606.17846-qwen-robotmanip-alignment-unlocks-scale-for-robotic-manipulation-foundation-models",
+      "attena-rectifying-action-inequality-in-robotic-foundation-models",
+      "dm05-open-world-embodied-foundation-model",
+      "openvla-an-open-source-vision-language-action-model",
+      "turbovla-real-time-vision-language-action-model-at-32-hz-on-an-rtx-4090-with-1-gb-vram"
     ],
     "degraded": false,
     "insights_degraded": false
@@ -2433,13 +2447,13 @@
       "label": "Human-to-Robot Transfer",
       "type": "topic",
       "community": "Human-to-Robot Transfer",
-      "content": "# Human-to-Robot Transfer\n\n> 人类视频什么时候能真正变成机器人能力，不只是数据源问题，也是表示能力和预训练多样性问题。\n\n## 主题概述\n\n这条主题关注 human video、human embodiment data 与 robot policy 之间的迁移。核心问题不是“人类数据多不多”，而是“模型什么时候开始有能力利用这些数据”。\n\n## 当前知识库里的代表工作\n\n- [来源: Emergence of Human to Robot Transfer in Vision-Language-Action Models](../sources/emergence-of-human-to-robot-transfer-in-vision-language-action-models.md)\n  这条主题的主工作。它提出：human-to-robot transfer 不是固定技巧，而是会随着 VLA 预训练多样性增长而涌现。\n\n- [来源: π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities](../sources/pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities.md)\n  虽然不是专门研究 human transfer，但它展示了 non-robot data、egocentric human data 与 robot data 可以被统一吸纳到 foundation model 训练中。\n\n- [来源: DexImit: Learning Bimanual Dexterous Manipulation from Monocular Human Videos](../sources/deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos.md)\n  这篇补上了另一条路线：不直接让模型从 human video 中学表示，而是把单目人类操作视频重建、调度、规划并增强成双手灵巧机器人训练数据。\n\n## 当前判断\n\n- `Human-to-Robot Transfer` 这篇更强调“能力何时出现”\n- `π0.7` 更强调“多源数据如何被统一利用”\n- `DexImit` 更强调“人类视频如何被编译成物理可行的机器人数据”\n- 放在一起看，可以把问题理解成：\n  - 预训练多样性负责让 shared representation 成熟\n  - richer context / prompt 负责让这些能力在控制中被真正调用出来\n  - 显式数据生成 pipeline 负责把一部分 human video 转成更接近机器人动作空间的 supervision\n\n## 值得后续关注的问题\n\n- human data 在 pretraining 阶段和 finetuning 阶段的作用是否不同\n- human-to-robot transfer 与 cross-embodiment transfer 是否本质同源\n- 显式 data generation 与 VLA co-training 是替代关系，还是更适合组合使用\n- 这种能力的出现，更依赖模型规模还是数据多样性\n\n## 相关页面\n\n- [[Emergence of Human to Robot Transfer in Vision-Language-Action Models]]\n- [[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities]]\n- [[DexImit: Learning Bimanual Dexterous Manipulation from Monocular Human Videos]]\n- [[Human Video Robot Data Generation]]\n- [[Vision-Language-Action]]"
+      "content": "# Human-to-Robot Transfer\n\n> 人类视频什么时候能真正变成机器人能力，不只是数据源问题，也是表示能力和预训练多样性问题。\n\n## 主题概述\n\n这条主题关注 human video、human embodiment data 与 robot policy 之间的迁移。核心问题不是“人类数据多不多”，而是“模型什么时候开始有能力利用这些数据”。\n\n## 当前知识库里的代表工作\n\n- [来源: Emergence of Human to Robot Transfer in Vision-Language-Action Models](../sources/emergence-of-human-to-robot-transfer-in-vision-language-action-models.md)\n  这条主题的主工作。它提出：human-to-robot transfer 不是固定技巧，而是会随着 VLA 预训练多样性增长而涌现。\n\n- [来源: π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities](../sources/pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities.md)\n  虽然不是专门研究 human transfer，但它展示了 non-robot data、egocentric human data 与 robot data 可以被统一吸纳到 foundation model 训练中。\n\n- [来源: DexImit: Learning Bimanual Dexterous Manipulation from Monocular Human Videos](../sources/deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos.md)\n  这篇补上了另一条路线：不直接让模型从 human video 中学表示，而是把单目人类操作视频重建、调度、规划并增强成双手灵巧机器人训练数据。\n\n- [来源: DexJoCo: A Benchmark and Toolkit for Task-Oriented Dexterous Manipulation on MuJoCo](../sources/dexjoco-a-benchmark-and-toolkit-for-task-oriented-dexterous-manipulation-on-mujoco.md)\n  这篇不是 human-video 数据生成工作，但它提供了功能型灵巧手任务、低成本手套遥操作采集和统一评测场，可以检验 human-to-robot / VLA 路线是否真的解决双手、接触密集和长时程操作。\n\n## 当前判断\n\n- `Human-to-Robot Transfer` 这篇更强调“能力何时出现”\n- `π0.7` 更强调“多源数据如何被统一利用”\n- `DexImit` 更强调“人类视频如何被编译成物理可行的机器人数据”\n- 放在一起看，可以把问题理解成：\n  - 预训练多样性负责让 shared representation 成熟\n  - richer context / prompt 负责让这些能力在控制中被真正调用出来\n  - 显式数据生成 pipeline 负责把一部分 human video 转成更接近机器人动作空间的 supervision\n  - benchmark / teleoperation 工具负责把这些迁移能力放到功能型灵巧任务里做压力测试\n\n## 值得后续关注的问题\n\n- human data 在 pretraining 阶段和 finetuning 阶段的作用是否不同\n- human-to-robot transfer 与 cross-embodiment transfer 是否本质同源\n- 显式 data generation 与 VLA co-training 是替代关系，还是更适合组合使用\n- 这种能力的出现，更依赖模型规模还是数据多样性\n\n## 相关页面\n\n- [[Emergence of Human to Robot Transfer in Vision-Language-Action Models]]\n- [[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities]]\n- [[DexImit: Learning Bimanual Dexterous Manipulation from Monocular Human Videos]]\n- [[DexJoCo: A Benchmark and Toolkit for Task-Oriented Dexterous Manipulation on MuJoCo]]\n- [[Human Video Robot Data Generation]]\n- [[Vision-Language-Action]]"
     },
     {
       "id": "Long-Horizon Memory for Robot Policies",
       "label": "Long-Horizon Memory for Robot Policies",
       "type": "topic",
-      "community": "Long-Horizon Memory for Robot Policies",
+      "community": "Vision-Language-Action",
       "content": "# Long-Horizon Memory for Robot Policies\n\n> 长时程机器人控制不是只把上下文窗口拉长，而是要决定不同时间尺度的信息如何表示。\n\n## 主题概述\n\n这条主题关注机器人策略如何处理分钟级任务。关键不是更多帧，而是多尺度记忆：哪些信息应该保留为短期视觉痕迹，哪些应该抽象成长期语义状态。\n\n## 当前知识库里的代表工作\n\n- [来源: MEM: Multi-Scale Embodied Memory for Vision Language Action Models](../sources/mem-multi-scale-embodied-memory-for-vision-language-action-models.md)\n  明确把 memory 分解成视频短期记忆和语言长期记忆，是这条主题的主工作。\n\n- [来源: π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities](../sources/pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities.md)\n  通过 subgoal image、subtask instruction、episode metadata 给策略提供 richer context，本质上也是在补 memory 和 progress control。\n\n## 当前判断\n\n- `MEM` 是显式 memory 架构路线\n- `π0.7` 更偏通过 richer prompt 和 context 让模型具备更强的阶段性控制\n- 这两条路线未来很可能会合流：显式 memory + 可控 prompt 共同支撑 long-horizon embodied policy\n\n## 值得后续关注的问题\n\n- 语言长期记忆如何更新、压缩和纠错\n- 视频短期记忆如何在保证实时性的同时保留关键信息\n- high-level memory 与 low-level control 的接口应如何设计\n\n## 相关页面\n\n- [[MEM: Multi-Scale Embodied Memory for Vision Language Action Models]]\n- [[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities]]\n- [[Vision-Language-Action]]"
     },
     {
@@ -2447,14 +2461,56 @@
       "label": "Online RL for VLA",
       "type": "topic",
       "community": "Vision-Language-Action",
-      "content": "# Online RL for VLA\n\n> 通才策略已经有了，接下来的问题是怎样把它快速打磨到高精度 specialist 表现。\n\n## 主题概述\n\n这条主题关注 VLA 预训练之后的在线适配。核心问题不是“VLA 能不能泛化”，而是“当真实机器人需要更高精度、更高速度时，怎么以较低样本成本继续优化它”。\n\n## 当前知识库里的代表工作\n\n- [来源: RL Token: Bootstrapping Online RL with Vision-Language-Action Models](../sources/rl-token-bootstrapping-online-rl-with-vision-language-action-models.md)\n  代表作。通过 `RL token` 把预训练 VLA 与轻量 actor-critic 接起来，让 online RL 重点修正 critical phase。\n\n- [来源: π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities](../sources/pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities.md)\n  虽然主体不是 RL 论文，但它明确展示了 generalist policy 可以蒸馏和吸收 specialist 经验，也说明 online optimization 与 foundation policy 不是对立关系。\n\n## 当前判断\n\n- `RLT` 给出的是一条很现实的 engineering 路线：不要重训整个 VLA，只给它暴露一个适合 RL 的接口\n- `π0.7` 则从另一个角度说明，generalist policy 最终仍然需要 specialist-style refinement，只是 refinement 的位置和形式不同\n\n## 值得后续关注的问题\n\n- online RL 的接口应该放在 VLA 哪一层最合适\n- 是 refinement head 更重要，还是 reward design 更重要\n- 对不同 embodiment，这类轻量接口是否还能保持稳定性\n\n## 相关页面\n\n- [[RL Token: Bootstrapping Online RL with Vision-Language-Action Models]]\n- [[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities]]\n- [[Vision-Language-Action]]"
+      "content": "# Online RL for VLA\n\n> 通才策略已经有了，接下来的问题是怎样把它快速打磨到高精度 specialist 表现。\n\n## 主题概述\n\n这条主题关注 VLA 预训练之后的在线适配。核心问题不是“VLA 能不能泛化”，而是“当真实机器人需要更高精度、更高速度时，怎么以较低样本成本继续优化它”。\n\n## 当前知识库里的代表工作\n\n- [来源: RL Token: Bootstrapping Online RL with Vision-Language-Action Models](../sources/rl-token-bootstrapping-online-rl-with-vision-language-action-models.md)\n  代表作。通过 `RL token` 把预训练 VLA 与轻量 actor-critic 接起来，让 online RL 重点修正 critical phase。\n\n- [来源: STEAM: Self-Supervised Temporal Ensemble Advantage Modeling for Real-World Robot Learning](../sources/steam-self-supervised-temporal-ensemble-advantage-modeling-for-real-world-robot-learning.md)\n  从另一个侧面补齐 online/refinement 闭环：它不设计新 VLA 接口，而是用专家轨迹的时间结构学习 frame-level advantage，从人工纠正、失败 rollout 和专家示范中筛出真正推进任务的局部片段，再接入 CFGRL。\n\n- [来源: π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities](../sources/pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities.md)\n  虽然主体不是 RL 论文，但它明确展示了 generalist policy 可以蒸馏和吸收 specialist 经验，也说明 online optimization 与 foundation policy 不是对立关系。\n\n## 当前判断\n\n- `RLT` 给出的是一条很现实的 engineering 路线：不要重训整个 VLA，只给它暴露一个适合 RL 的接口\n- `STEAM` 补的是数据质量与 credit assignment：真实机器人数据不是整条好/坏，而是需要逐帧识别哪些片段真正推进任务\n- `π0.7` 则从另一个角度说明，generalist policy 最终仍然需要 specialist-style refinement，只是 refinement 的位置和形式不同\n\n## 值得后续关注的问题\n\n- online RL 的接口应该放在 VLA 哪一层最合适\n- 是 refinement head 更重要，还是 reward / advantage / data-quality signal 更重要\n- frame-level advantage 这类数据筛选信号，能否和 RL token 这样的轻量接口稳定结合\n- 对不同 embodiment，这类轻量接口是否还能保持稳定性\n\n## 相关页面\n\n- [[RL Token: Bootstrapping Online RL with Vision-Language-Action Models]]\n- [[STEAM: Self-Supervised Temporal Ensemble Advantage Modeling for Real-World Robot Learning]]\n- [[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities]]\n- [[Vision-Language-Action]]"
     },
     {
       "id": "Vision-Language-Action",
       "label": "Vision-Language-Action",
       "type": "topic",
       "community": "Vision-Language-Action",
-      "content": "# Vision-Language-Action\n\n> 把视觉、语言和动作统一进同一策略建模框架，是当前具身智能主线之一。\n\n## 这条主题在讲什么\n\nVLA 的核心不是“把图像和文本都喂给机器人”，而是把机器人控制问题放进 foundation model 语境里，让预训练、多任务泛化、迁移、微调和跨 embodiment 学习都能在一套统一框架里讨论。\n\n## 为什么重要\n\n- VLA 是现在连接大模型能力与机器人执行能力的主干路线\n- 它把机器人学习从 task-specific policy 推向 reusable foundation policy\n- 很多后续方向，本质上都是在回答“VLA 还缺什么”\n  - 更强的可控性\n  - 更长的记忆\n  - 更高的精度\n  - 更好的跨 embodiment 迁移\n  - 更低成本地利用人类数据\n\n## 当前知识库里的几条子路线\n\n- **开源基座化**\n  来自 [来源: OpenVLA: An Open-Source Vision-Language-Action Model](../sources/openvla-an-open-source-vision-language-action-model.md)\n  OpenVLA 强调训练、微调、部署三件事一起开源，代表“VLA 作为公开基础设施”的路线。\n\n- **更强 steerability**\n  来自 [来源: π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities](../sources/pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities.md)\n  π0.7 通过 richer prompt、subgoal image、episode metadata 把“怎么做”也编码进策略上下文。\n\n- **在线 RL 精修**\n  来自 [来源: RL Token: Bootstrapping Online RL with Vision-Language-Action Models](../sources/rl-token-bootstrapping-online-rl-with-vision-language-action-models.md)\n  RLT 关注如何在保留 VLA 泛化先验的前提下，把精度和速度继续打磨到 specialist 水平。\n\n- **长时程记忆**\n  来自 [来源: MEM: Multi-Scale Embodied Memory for Vision Language Action Models](../sources/mem-multi-scale-embodied-memory-for-vision-language-action-models.md)\n  MEM 试图解决 VLA 在长达十几分钟任务中的任务进度保持和局部视觉记忆问题。\n\n- **利用 human data**\n  来自 [来源: Emergence of Human to Robot Transfer in Vision-Language-Action Models](../sources/emergence-of-human-to-robot-transfer-in-vision-language-action-models.md)\n  这条路线关注 VLA 何时开始能真正吃进 human video，并把它转化成机器人能力。\n\n## 当前判断\n\n这几篇放在一起看，VLA 主线已经很清楚：\n\n- `OpenVLA` 解决“基座是否开放、可训、可部署”\n- `π0.7` 解决“多源数据如何通过 prompt 变成可控能力”\n- `RLT` 解决“如何把通才策略继续打磨到高精度”\n- `MEM` 解决“如何把策略延长到 long-horizon”\n- `Human-to-Robot Transfer` 解决“如何把人类数据真正吸纳进来”\n\n也就是说，VLA 不再只是一个单点模型设计问题，而已经分化成一套系统问题族。\n\n## 相关页面\n\n- [[OpenVLA: An Open-Source Vision-Language-Action Model]]\n- [[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities]]\n- [[RL Token: Bootstrapping Online RL with Vision-Language-Action Models]]\n- [[MEM: Multi-Scale Embodied Memory for Vision Language Action Models]]\n- [[Emergence of Human to Robot Transfer in Vision-Language-Action Models]]\n- [[Online RL for VLA]]\n- [[Long-Horizon Memory for Robot Policies]]\n- [[Human-to-Robot Transfer]]"
+      "content": "# Vision-Language-Action\n\n> 把视觉、语言和动作统一进同一策略建模框架，是当前具身智能主线之一。\n\n## 这条主题在讲什么\n\nVLA 的核心不是“把图像和文本都喂给机器人”，而是把机器人控制问题放进 foundation model 语境里，让预训练、多任务泛化、迁移、微调和跨 embodiment 学习都能在一套统一框架里讨论。\n\n## 为什么重要\n\n- VLA 是现在连接大模型能力与机器人执行能力的主干路线\n- 它把机器人学习从 task-specific policy 推向 reusable foundation policy\n- 很多后续方向，本质上都是在回答“VLA 还缺什么”\n  - 更强的可控性\n  - 更长的记忆\n  - 更高的精度\n  - 更好的跨 embodiment 迁移\n  - 更低成本地利用人类数据\n  - 新感官模态的持续适配与低延迟闭环\n\n## 当前知识库里的几条子路线\n\n- **开源基座化**\n  来自 [来源: OpenVLA: An Open-Source Vision-Language-Action Model](../sources/openvla-an-open-source-vision-language-action-model.md)\n  OpenVLA 强调训练、微调、部署三件事一起开源，代表“VLA 作为公开基础设施”的路线。\n\n- **更强 steerability**\n  来自 [来源: π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities](../sources/pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities.md)\n  π0.7 通过 richer prompt、subgoal image、episode metadata 把“怎么做”也编码进策略上下文。\n\n- **在线 RL 精修**\n  来自 [来源: RL Token: Bootstrapping Online RL with Vision-Language-Action Models](../sources/rl-token-bootstrapping-online-rl-with-vision-language-action-models.md)\n  RLT 关注如何在保留 VLA 泛化先验的前提下，把精度和速度继续打磨到 specialist 水平。\n\n- **长时程记忆**\n  来自 [来源: MEM: Multi-Scale Embodied Memory for Vision Language Action Models](../sources/mem-multi-scale-embodied-memory-for-vision-language-action-models.md)\n  MEM 试图解决 VLA 在长达十几分钟任务中的任务进度保持和局部视觉记忆问题。\n\n- **利用 human data**\n  来自 [来源: Emergence of Human to Robot Transfer in Vision-Language-Action Models](../sources/emergence-of-human-to-robot-transfer-in-vision-language-action-models.md)\n  这条路线关注 VLA 何时开始能真正吃进 human video，并把它转化成机器人能力。\n\n- **灵巧手基准与失败诊断**\n  来自 [来源: DexJoCo: A Benchmark and Toolkit for Task-Oriented Dexterous Manipulation on MuJoCo](../sources/dexjoco-a-benchmark-and-toolkit-for-task-oriented-dexterous-manipulation-on-mujoco.md)\n  DexJoCo 不提出新 VLA 模型，而是把 VLA/模仿学习策略在灵巧手、双手协作、按钮/插装/铰链交互和视觉随机化下的失败模式系统测出来。\n\n- **训练目标物理化**\n  来自 [来源: AttenA+: Rectifying Action Inequality in Robotic Foundation Models](../sources/attena-rectifying-action-inequality-in-robotic-foundation-models.md)\n  AttenA+ 不改 VLA/WAM 骨干，而是把动作速度场写进 loss 权重，让模型更重视低速、精细、接触关键的动作片段。\n\n- **新感官模态的持续适配**\n  来自 [来源: Multisensory Continual Learning: Adapting Pretrained Visuomotor Policies to Force](../sources/2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force.md)\n  MuSe 把 force-torque 接入已有 visuomotor world model，并用未来视频/F/T 联合预测、旧数据 replay 与 missing-modality mask 同时优化新任务前向迁移和旧任务后向保持。\n\n- **异步快慢触觉闭环**\n  来自 [来源: T-Rex: Tactile-Reactive Dexterous Manipulation](../sources/t-rex-tactile-reactive-dexterous-manipulation.md)\n  T-Rex 让低频动作专家负责视觉语言规划、高频触觉专家复用缓存并沿同一 flow 轨迹细化动作，代表“多速率专家共享动作分布”的路线。\n\n- **chunk 内流式触觉反馈**\n  来自 [来源: TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback](../sources/2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback.md)\n  TacForcing 不另设快触觉控制器，而是让同一个动作专家按块完成、执行并保留未来块中间态；每次执行后刷新触觉，EATA 只让最新触觉影响下一待执行块，把观测时刻与动作生效时刻显式对齐。\n\n- **历史上下文 + 具身推理 + 动作对齐的系统化**\n  来自 [来源: DM0.5: 面向开放世界的通用具身智能基础模型](../sources/dm05-open-world-embodied-foundation-model.md)\n  DM0.5 把长历史记忆（最长 60s）、11 种具身推理 CoT 任务、以及轨迹进展对齐三个设计做成一体，换来开放环境 Zero-Shot 泛化和真机 Table30 v2 SOTA。\n\n## 当前判断\n\n这几篇放在一起看，VLA 主线已经很清楚：\n\n- `OpenVLA` 解决“基座是否开放、可训、可部署”\n- `π0.7` 解决“多源数据如何通过 prompt 变成可控能力”\n- `RLT` 解决“如何把通才策略继续打磨到高精度”\n- `MEM` 解决“如何把策略延长到 long-horizon”\n- `Human-to-Robot Transfer` 解决“如何把人类数据真正吸纳进来”\n- `DexJoCo` 解决“如何用灵巧手任务和失败模式检验这些策略是否真的具备接触密集、双手和长时程能力”\n- `AttenA+` 解决“训练目标是否应该反映动作序列内部的物理关键性”\n- `MuSe` 解决“如何把预训练时不存在的新力觉模态接入 foundation policy，同时避免旧能力遗忘”\n- `T-Rex` 解决“如何让低频视觉规划与高频触觉动作细化在同一生成轨迹上协同”\n- `TacForcing` 解决“如何在同一个动作生成器内部交错 chunk 生成、执行与触觉更新，并限制反馈的时间作用域”\n- `DM0.5` 解决“如何把历史上下文、具身推理、动作监督三件事系统化地收进一个可用的通用 VLA”\n\n也就是说，VLA 不再只是一个单点模型设计问题，而已经分化成一套系统问题族。\n\n## 相关页面\n\n- [[OpenVLA: An Open-Source Vision-Language-Action Model]]\n- [[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities]]\n- [[RL Token: Bootstrapping Online RL with Vision-Language-Action Models]]\n- [[MEM: Multi-Scale Embodied Memory for Vision Language Action Models]]\n- [[Emergence of Human to Robot Transfer in Vision-Language-Action Models]]\n- [[DexJoCo: A Benchmark and Toolkit for Task-Oriented Dexterous Manipulation on MuJoCo]]\n- [[AttenA+: Rectifying Action Inequality in Robotic Foundation Models]]\n- [[2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force|Multisensory Continual Learning: Adapting Pretrained Visuomotor Policies to Force]]\n- [[t-rex-tactile-reactive-dexterous-manipulation|T-Rex: Tactile-Reactive Dexterous Manipulation]]\n- [[2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback|TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback]]\n- [[tactile-force-into-pretrained-robot-policies|触觉与力觉如何进入预训练机器人策略：表示、持续适配与执行闭环]]\n- [[DM0.5: 面向开放世界的通用具身智能基础模型]]\n- [[Online RL for VLA]]\n- [[Long-Horizon Memory for Robot Policies]]\n- [[Human-to-Robot Transfer]]"
+    },
+    {
+      "id": "tactile-representation",
+      "label": "Tactile Representation",
+      "type": "topic",
+      "community": "tactile-representation",
+      "content": "# Tactile Representation\n\n> 跟踪触觉与力觉从传感器选择、共享表示，到预训练策略适配和执行期反馈的完整接口链。\n\n## 这条主题在讲什么\n\n触觉是接触丰富操作的关键观测，但传感器天然异构：光学式（GelSight 类）给稠密空间信息但帧率受限，阵列式或 F/T 传感器给高频力学信号但空间结构更弱。问题也不止是学一个 backbone：旧的视觉策略通常没有触觉标签，动作生成器又可能在执行前一次性定稿。本主题因此追踪一条连续问题线——如何选传感信号、学习可迁移表示、把新模态接入已有策略并在执行时及时使用它。\n\n## 为什么重要\n\n- 触觉是 vision-language-action 模型目前缺的那一路高密度接触信号\n- 没有可迁移的触觉 backbone，每次换传感器都要重训策略\n- 触觉仿真（Tactile Genesis 类）和真实采集（HTT 类 HPT）正在互相补齐基础设施\n- 即使表示可用，策略仍需同时解决旧数据缺失新模态、灾难性遗忘和反馈时效性\n\n## 当前理解\n\n| 子问题 | 代表材料 | 立场 |\n| --- | --- | --- |\n| 触觉硬件配置（位置/分辨率/类型）如何选？ | [[tactile-genesis-exploring-tactile-sensors-at-scale-for-learning-dexterous-tasks]] | 覆盖面积优先于分辨率；per-taxel 力/力矩在大多数灵巧任务里最稳健 |\n| 异构传感器如何共享 backbone？ | [[2606.29948-heterogeneous-tactile-transformer]] | sensor-specific encoder + shared transformer trunk + 跨模态预测对齐；MAE 重建 + 双向跨模态预测 |\n| 触觉 backbone 能否迁移到训练时未见的传感器？ | [[2606.29948-heterogeneous-tactile-transformer]] | 已在未出现的 Sharpa 触觉指尖上验证 toy screw / grasp tofu 上的成功率显著提升 |\n| 旧数据没有 F/T 标注时，预训练策略如何吸收新模态而不遗忘？ | [[2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force|Multisensory Continual Learning: Adapting Pretrained Visuomotor Policies to Force]] | early + late fusion 联合动作、视频、未来 F/T 预测；旧数据 replay 与 missing-modality mask 同时保留视觉动作先验 |\n| 高频触觉如何与低频 VLA 协同？ | [[t-rex-tactile-reactive-dexterous-manipulation|T-Rex: Tactile-Reactive Dexterous Manipulation]] | 慢动作专家缓存视觉语言上下文，快触觉专家沿同一 flow 去噪轨迹细化动作，形成约 5 Hz / 20 Hz 的异步闭环 |\n| 动作 chunk 执行期间，最新触觉如何继续修改未来动作？ | [[2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback|TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback]] | 未来动作保留 flow 中间态，动作块边生成边执行；EATA 只让当前触觉条件化下一待执行块，避免远期动作接收陈旧信号 |\n\n## 关键设计要点\n\n- **统一输入规范**：时序窗 τ + 减参考帧，让不同采样率、不同维度的传感器在 backbone 内行为可比。\n- **跨模态监督源**：利用\"同一次接触被多传感器同步记录\"作为天然对齐信号，无需人工标注。\n- **解耦结构**：sensor-specific encoder/decoder + shared trunk，让每个传感器保留局部细节、共享语义进入统一潜空间。\n- **imbalance 风险**：光学-阵列配对中，光学富信息会主导跨模态预测，阵列侧会出现 −4.3% 这种回退；需要 imbalance-aware 损失。\n- **持续适配接口**：MuSe 用缺失模态 mask、旧数据 replay 和未来多感官预测，让没有 F/T 标签的预训练数据仍能约束新模态适配，避免只在新任务上微调造成旧能力塌陷。\n- **多速率控制接口**：T-Rex 把低频视觉规划和高频触觉细化放在同一 flow 轨迹上，说明表示进入策略后还需要清楚的频率分工。\n- **时间作用域接口**：触觉更新不应无条件广播给所有未来动作；TacForcing 用 EATA 让当前触觉只影响下一动作块，并把更远动作保留为待后续触觉修订的中间态。\n\n## 当前判断\n\n这几条路线不是互相替代的模型技巧，而是同一条系统链上的不同层：Tactile Genesis 决定“感什么”，HTT 解决“跨硬件怎样表示”，MuSe 解决“怎样把新模态接进已有策略且不忘旧能力”，T-Rex 与 TacForcing 再回答“执行时怎样及时改动作”。当前证据已经说明静态拼接不足，但还没有一个系统同时证明跨传感器迁移、持续适配、旧任务保持和低延迟闭环。\n\n## 未解决问题\n\n- 异构 backbone 在纯阵列平台（无光学传感器）上是否仍可工作？\n- imbalance-aware 跨模态对齐是否能同时拿回阵列侧的损失？\n- 触觉 backbone 与 VLA 拼接的最优接口是什么（per-token fusion vs late fusion vs dual-stream）？\n- MuSe 的 replay + missing-modality mask 能否扩展到多个依次到来的新传感器，而不让回放成本随模态数量持续增长？\n- T-Rex 的双专家异步细化与 TacForcing 的单专家流式生成，在哪种算力、延迟和任务时域下各自更合适？\n- 单一流式专家已证明执行期更新与 EATA 有效，但论文尚未报告 block size、推理延迟、触觉采样延迟和等算力对比，不能据此判断真实闭环效率。\n- 触觉预训练需要多少跨传感器配对数据才能让 backbone 真正可迁移，而不是只适配原 4 种？\n\n## 相关页面\n\n- [[tactile-genesis-exploring-tactile-sensors-at-scale-for-learning-dexterous-tasks]]\n- [[2606.29948-heterogeneous-tactile-transformer]]\n- [[2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force|Multisensory Continual Learning: Adapting Pretrained Visuomotor Policies to Force]]\n- [[t-rex-tactile-reactive-dexterous-manipulation|T-Rex: Tactile-Reactive Dexterous Manipulation]]\n- [[2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback|TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback]]\n- [[tactile-force-into-pretrained-robot-policies|触觉与力觉如何进入预训练机器人策略：表示、持续适配与执行闭环]]\n- [[Physical/Embodied Intelligence]]（domain）"
+    },
+    {
+      "id": "2606.17846-qwen-robotmanip-alignment-unlocks-scale-for-robotic-manipulation-foundation-models",
+      "label": "Qwen-RobotManip Technical Report: Alignment Unlocks Scale for Robotic Manipulation Foundation Models",
+      "type": "source",
+      "community": "Vision-Language-Action",
+      "content": "# Qwen-RobotManip Technical Report: Alignment Unlocks Scale for Robotic Manipulation Foundation Models\n\n## 太长不看\n\nQwen-RobotManip 的核心不是“再堆更多机器人数据”，而是先把不同机器人在**表示、运动和行为**三个层面拉到同一坐标系，再讨论规模化。论文最有价值的证据是：统一动作表示后，跨具身数据在 OOD 验证误差和下游成功率上才出现清晰的规模趋势；但“只用公开数据”的说法只适用于 manipulation corpus，完整训练还混入了含 proprietary data 的 VL 数据。\n\n## 直观理解\n\n同一个“夹爪向画面右侧移动”，在 Franka、ALOHA、UR5 的关节维度和基座坐标里可能是完全不同的数字。Qwen-RobotManip 先用固定语义槽位统一“有哪些身体部件”，再把末端动作改写成相机坐标系下的相对位姿，使视觉上相似的动作在数值上也接近；episode 历史则让策略在线感知当前机器人的速度、抓取和运动学特征。\n\n![Qwen-RobotManip 总览：数据规模化、三层对齐、OOD 与真实机器人验证](https://arxiv.org/html/2606.17846v2/myteaser_V6.png)\n\n*论文首页总览：跨具身对齐是把异构操作数据转化为规模收益的中间环节。*\n\n## 核心信息\n\n- **模型**：Qwen3.5-4B 多模态骨干 + 10 层、768 hidden、12 heads 的 flow-matching DiT action expert\n- **操作数据**：11,420 小时机器人数据 + 1,933 小时人类第一视角视频 + 24,808 小时 Human-to-Robot 合成数据，合计约 38,100 小时\n- **VL 数据**：约 2,800 万条，VLA/VL 双流训练的数据比例为 9:1；该混合明确包含 proprietary data\n- **对齐机制**：80 维 canonical state-action vector、camera-frame delta EEF、structured embodiment prompt、in-context policy adaptation\n- **评估范围**：500+ 仿真任务、80+ 真实任务，覆盖任务/场景 OOD、指令跟随、零样本跨具身和四类真实机器人平台\n- **版本来源**：[arXiv v2 HTML](https://arxiv.org/html/2606.17846v2) · [PDF](https://arxiv.org/pdf/2606.17846) · [代码](https://github.com/QwenLM/Qwen-RobotManip) · [双语阅读](https://hjfy.top/arxiv/2606.17846)\n\n## 背景与问题\n\n**动机：**\n\n- LLM/VLM 的规模化成立，是因为不同来源最终都能被映射到统一 token/formulation；机器人数据没有这种天然接口。\n- 标准 LIBERO、RoboTwin 是同分布微调与测试。从零训练的 StarVLA、Qwen-RobotManip-scratch 也能接近或超过部分预训练模型，因此高分不等于预训练形成了可迁移能力。\n\n**问题缺口：**\n\n- **表示不一致**：机器人自由度、关节/夹爪/灵巧手字段和有效维度不同。\n- **坐标不一致**：同一末端运动可能记录在基座、世界、末端或不同相机坐标系中，数值监督互相冲突。\n- **行为不一致**：不同平台的速度、控制频率和运动学特征不同，仅提供 embodiment token 不足以动态校准策略。\n- **数据不够广**：遥操作数据昂贵且场景集中，人类第一视角视频虽多，但不能直接作为机器人动作监督。\n- **评估不敏感**：IID benchmark 很难区分记忆训练分布与真正的 OOD 泛化。\n\n## 论文摘要（英文原文）\n\nFoundation models in language and multimodality achieve strong generalization by aligning heterogeneous data under a unified formulation and training at scale. In this report, we investigate whether this scaling recipe can be applied to robotic manipulation to achieve genuine generalization. This is challenging because, unlike text, manipulation data is heterogeneous by nature, expensive to collect, and narrow in diversity, making alignment and scale simultaneously difficult. We present Qwen-RobotManip, a generalizable Vision-Language-Action foundation model built on Qwen-VL. Qwen-RobotManip introduces a unified alignment framework across the representation, motion, and behavioral dimensions of manipulation, making large-scale multi-source training coherent rather than conflicting. This alignment capability in turn enables Qwen-RobotManip to absorb manipulation data at a scale that prior training regimes could not sustain. A human-to-robot synthesis pipeline converts egocentric hand demonstrations into robot trajectories across 15 platforms, and a rigorous curation pipeline harmonizes heterogeneous datasets. Using only open-source datasets and human videos without proprietary data collection, Qwen-RobotManip constructs a ~38,100-hour pretraining corpus and exhibits emergent generalization capabilities, including zero-shot instruction following, robustness to perturbations, reactive error recovery, and cross-embodiment transfer. We find that standard benchmarks fail to capture pretraining quality and instead adopt OOD settings including RoboCasa365, LIBERO-Plus, EBench, RoboTwin-Clean2Rand, RoboTwin-IF, and RoboTwin-XE. Qwen-RobotManip substantially outperforms prior state-of-the-art models, including π0.5, across all OOD settings, ranks 1st in RoboChallenge with a 20% relative improvement, and is validated on real-robot platforms including AgileX ALOHA, Franka, UR, and ARX.\n\n## 论文摘要（中文翻译）\n\n语言和多模态基础模型之所以能获得强泛化，是因为异构数据可在统一形式下对齐，并能规模化训练。本文研究这套方法能否用于机器人操作。难点在于操作数据天然异构、采集昂贵且多样性有限。作者提出基于 Qwen-VL 的 Qwen-RobotManip，从表示、运动和行为三个维度统一对齐多源数据，并用 Human-to-Robot 管道把第一视角手部示范转换为 15 种机器人平台的轨迹。仅依靠公开机器人操作数据和人类视频，作者构建约 38,100 小时的 manipulation corpus，并在扰动鲁棒性、指令跟随、失败恢复和跨具身迁移上观察到泛化。由于标准 benchmark 难以反映预训练质量，论文重点采用 RoboCasa365、LIBERO-Plus、EBench、RoboTwin-Clean2Rand、RoboTwin-IF 和 RoboTwin-XE 等 OOD 设置，并在仿真与 AgileX ALOHA、Franka、UR、ARX 真机上验证模型。\n\n## 方法\n\n**方法概述：**\n\nQwen-RobotManip 是解耦式 VLA：Qwen3.5-4B 负责多视角感知、语言和上下文推理，DiT action expert 负责连续动作生成。DiT 的偶数块 cross-attend 视觉 token、奇数块 cross-attend 语言 token，二者都来自 VLM 最后一层；推理时用 4 步 Euler integration 生成 action chunk。\n\n![Qwen-RobotManip 模型结构与三层对齐](https://arxiv.org/html/2606.17846v2/method-0616.png)\n\n*Figure 3：Qwen-VL、DiT action expert、80 维统一状态动作表示、相机坐标 EEF 和历史上下文的完整连接方式。*\n\n**核心机制：**\n\nQwen-RobotManip 的核心不是单独增加一个跨具身标识，而是让表示、运动和行为三层对齐共同约束同一条动作生成链：canonical vector 统一各机器人字段的语义位置，camera-frame delta EEF 统一视觉相似运动的数值含义，structured prompt 与 episode history 再补足执行速度、相机方向和具体平台动力学。这样，多源样本进入 DiT 时不再提供相互冲突的监督，新增数据才可能转化为稳定的 OOD 收益。\n\n**方法拆解：**\n\n1. **表示对齐：80 维 canonical vector**\n   - 两个 29 维手臂块 + 22 个预留维度；每臂包括 7D 关节、9D 末端位姿、1D 夹爪和 12D 灵巧手。\n   - 不存在的部件补零，并通过 per-dimension binary mask 从 loss 中排除；每个样本只按有效项归一化，避免高自由度机器人主导梯度。\n\n2. **运动对齐：camera-frame delta EEF**\n   - 状态是绝对量；关节动作是绝对值；末端动作是相对当前状态的增量，旋转增量用 3D rotation vector。\n   - 末端位移和旋转被投影到参考相机坐标系，配合 CaPE、相机内参 embedding 和 end-effector type embedding，让视觉相似运动对应接近的数值动作。\n   - 这一模式需要训练与推理时都有相机标定；缺少标定时，auxiliary flag 会切回 robot-base relative mode。\n\n3. **行为对齐：prompt + episode context**\n   - prompt 包括 embodiment、instruction、speed、fps、camera view direction；训练时以 15% 概率丢弃部分字段。\n   - 历史视觉、状态和已执行 action chunk 被编码进 VLM。训练随机从 episode 内取历史位置，避免模型只复制最近动作；部署时使用滚动窗口。\n\n4. **双流训练**\n   - VLA batch 优化带有效维度/时间步 mask 的 flow-matching loss；VL batch 优化 next-token loss，权重 λ=0.1。\n   - VLA 与 VL 数据按 9:1 交替，action expert 对同一 action chunk 重复采样 8 个扩散时间步以摊薄 VLM 前向成本。\n\n### 数据扩展与清洗\n\nHuman-to-Robot 管道先把 MANO 手部关键点重定向为平行夹爪位姿，再用 SAM3 分割手臂、ProPainter 修复背景、MuJoCo IK 搜索机器人基座与关节轨迹，并用 Depth Anything v3 做遮挡感知合成。同一批 1,933 小时人类视频被渲染到 15 种双臂形态，形成 24,808 小时合成数据。\n\n![Human-to-Robot 数据合成管道](https://arxiv.org/html/2606.17846v2/h2r_pipeline.png)\n\n*Figure 1：动作重定向、手臂移除、基座搜索、IK 和深度合成的六阶段流程。*\n\n数据清洗还包括突变检测、状态动作时序对齐、极值过滤、FK 一致性和基座/末端方向对齐，并额外检查指令一致性、视频-状态投影一致性和视频质量。值得注意的是，状态动作时序检查淘汰了 RoboMIND UR-type 中 81% 的 episode，说明多源数据的“可用小时数”不能只看原始规模。\n\n**关键要点：**\n\n- 80 维向量的关键不是补零，而是固定每个维度的物理语义，并用逐维 mask 防止缺失部件和高自由度平台扭曲训练目标。\n- camera-frame delta EEF 把跨机器人对齐从“模型自己猜”改成显式几何约束，但部署时也因此依赖可靠相机标定。\n- episode context 负责适配同一动作表示下仍然存在的平台动力学差异；它与表示、运动对齐是互补关系，不能替代前两层。\n\n## 结果\n\n### 先区分基础版与增强变体\n\n论文报告的最佳数字经常来自 `Qwen-RobotManip-Context` 或加入 VL 的 post-training，而不是无后缀基础版。正确对比如下：\n\n| 评测 | Qwen-RobotManip 基础版 | 最佳增强版 | π0.5 / 其他强基线 |\n| --- | ---: | ---: | ---: |\n| LIBERO-Plus | 89.0% | Context 91.4% | π0.5 84.4% |\n| RoboTwin-C2R Hard（joint） | 62.6% | Context 69.4% | π0.5 47.9% |\n| RoboCasa365 Overall | 35.9% | Context 33.8% | RLDX-1 33.2%；π0.5 16.9% |\n| EBench Overall SR | 45.6% | Context 43.6% | π0.5 27.1% |\n| RoboTwin-IF | 72.2% | Context 72.0% | π0.5 49.6% |\n| RoboTwin-XE EEF 零样本均值 | 23.9% | — | π0.5 EEF 7.5% |\n\n![OOD 泛化结果总览](https://arxiv.org/html/2606.17846v2/ood_summary.svg)\n\n*Figure 7：任务/场景扰动、未见指令模板和零样本跨具身三个轴上的 OOD 结果。图中部分柱使用最佳变体，阅读时需结合表格区分基础版。*\n\n### 关键实验信号\n\n- IID 不是主证据：Context 版在 LIBERO、RoboTwin Easy/Hard 上为 99.2%/93.7%/94.0%，但 scratch 模型也有 98.2%/88.7%/88.4%。真正差异在 OOD。\n- 困难扰动更能拉开差距：RoboTwin-C2R Hard 中，scratch 从 Easy 71.6% 跌至 22.6%；基础 joint 版为 62.6%，Context joint 版为 69.4%。\n- 语言仍是控制信号：RoboTwin-IF 五类未见指令模板平均 72.2%，相对 π0.5 的 49.6% 提升 22.6 点。\n- 跨具身并未被完全解决：camera-frame EEF 在 ARX/UR5/Franka 上为 42.9%/22.8%/5.9%，虽然总均值是 π0.5 的 3.2 倍，但对形态差异最大的 Franka 仍很低。\n- 真实 ALOHA：7 个 ID 任务平均 88.6%（π0.5 42.9%）；4 个 OOD 任务平均 87.5%（π0.5 37.5%）。精密插入仍是弱项，yellow-disc-insertion 只有 2/5。\n- RoboChallenge Table30-v1：generalist track 平均成功率 45%，高于第二名 DM0 的 37%，相对提升约 21.6%（论文按 20% 表述）；并非每个 embodiment 都第一，UR5 平均低于 DM0。\n\n### 关键消融\n\n- Human-to-Robot 数据把 RoboTwin-C2R Hard 从 robot-only 54.7% 提到 58.7%，LIBERO-Plus camera 扰动从 72.8% 提到 80.0%。\n- 去掉预训练 VL co-training，RoboTwin-C2R Hard 从 62.6% 降到 54.4%，RoboTwin-IF 从 71.6% 降到 64.6%。\n- Context 在 4 个 denoise steps 下没有收益且运动抖动；提高到 10 步后平均从 structured prompt 的 65.9% 升到 70.9%，20 步不再明显提升。\n- last-layer cross-attention 在 LIBERO-Plus 为 87.5%，优于两个 self-attention 变体的 86.4% 和 87.0%，同时计算成本更低。\n\n## 洞察\n\n### 核心 insight\n\n“Alignment unlocks scale”最扎实的含义不是一句口号，而是**新增数据必须落在语义一致的监督接口上**。只把原始字段拼接并补零时，EEF 验证误差随数据量变化不稳定；统一语义槽位后，1% 到 100% 数据规模上的 OOD MSE 才呈近似 log-linear 下降。相机坐标 EEF 进一步把这个趋势转化为更强的下游 EEF 控制。\n\n![不同动作表示下的数据规模曲线](https://arxiv.org/html/2606.17846v2/scaling_curves.svg)\n\n*Figure 18：held-out 15 种具身、154 个未见任务上的验证 MSE。统一表示比原始字段拼接具有更清晰的规模趋势。*\n\n### 和已有方法的关系\n\n- 相比只用共享网络、embodiment token 或统一 action tokenization 的路线，本工作把“结构槽位”和“参考坐标”都显式统一，减少模型自行学习格式转换的负担。\n- 相比直接把 human video 当另一种 modality，该工作把人类轨迹和视觉都转换成目标机器人形态，换取更强动作对齐，但也引入了 IK、修复和渲染误差。\n- In-context policy adaptation 更接近在线系统辨识：它读取当前 episode 的执行签名来校准运动，而不是把历史当长时程任务记忆。\n\n### 可借鉴点\n\n- 用固定语义槽位 + per-dimension/per-step mask 作为跨具身数据接口，简单且容易审计。\n- 让 action reference frame 与主视觉 observation 对齐，可把视觉迁移直接转成动作迁移。\n- 随机采样历史位置是防止 context learner 走“复制最近动作”捷径的通用做法。\n- 将 IID 与 OOD 同时报告，并加入 scratch baseline，能更直接检验预训练是否真的提供 transferable structure。\n- 数据清洗应报告淘汰率和失败类型；81% 的坏子集比“总小时数”更能说明多源数据工程的难度。\n\n## 风险与判断\n\n**局限：**\n\n- 约 24,808 小时 Human-to-Robot 数据来自把 1,933 小时人类视频重复渲染到 15 种形态；它扩大了 embodiment 覆盖，但并没有同比增加独立任务语义，不能把合成小时数等同于同规模新经验。\n- 论文声称 manipulation corpus 没有专有采集，但第 2.5 节明确写出 VL mixture 包含 proprietary data；因此完整训练配方并非只依赖公开数据，复现边界需要分开表述。\n- “scale law”来自缩小规模的受控消融、best validation MSE 和 RoboTwin-C2R 下游曲线，尚不足以证明跨模型、跨任务都服从同一规模律。\n- 主要 OOD 证据仍以仿真为主；真机虽然覆盖四种平台，但很多结果样本数是每任务 5 或 10 次，置信区间和独立复现都缺失。\n- camera-frame EEF 需要准确相机内外参；Context 版需要更多去噪步，并在 episode 开始时因零历史出现迟疑，实时性与适配收益存在权衡。\n- 零样本跨具身对 Franka 仅 5.9%，说明“形态无关动作接口”降低了迁移难度，但远未消除视觉和运动学差异。\n\n**适用场景：**\n\n- 多机器人、多任务的 VLA 预训练数据接口设计\n- 需要相机视角 OOD、场景扰动和未见指令泛化的桌面操作\n- 新机器人上的少样本适配、跨具身技能复用和可标定条件下的 EEF 控制\n- 设计能区分预训练价值与 IID 记忆的机器人评估体系\n\n**最终判断：**\n\n这是一份重要且工程证据密集的 VLA 技术报告，最值得保留的是“统一监督接口决定跨具身数据能否规模化”的论证，以及 IID/OOD 对照、Human-to-Robot 数据引擎和 camera-frame EEF。它不应被简单总结为“38,100 小时数据带来 SOTA”，也不宜直接称为已经确立的范式：最佳成绩混合了基础版、Context 版和额外 post-training 配方，公开数据声明存在范围限定，规模规律与真机泛化还需要独立复现。作为 FollowHub 的 VLA 核心材料，它更适合被定位为**跨具身对齐与 OOD 评估的强系统基线**。\n\n## 结果速览表\n\n| 结论 | 证据 | 阅读提醒 |\n| --- | --- | --- |\n| 对齐后才能稳定吃进更多跨具身数据 | Figure 18/19：统一表示的 OOD MSE 下降更平滑，full-scale Hard EEF 56.6% | 受控缩小规模实验，不是普适规模律 |\n| OOD 才能体现预训练价值 | scratch 在 IID 接近预训练模型，但 C2R Hard 仅 22.6% | 最佳 69.4% 来自 Context joint 版 |\n| camera-frame EEF 支持零样本跨具身 | RoboTwin-XE 23.9% vs π0.5 EEF 7.5% | Franka 只有 5.9% |\n| VL co-training 保留语言与视觉能力 | 去掉 VL 后 C2R Hard -8.2、RoboTwin-IF -7.0 | VL mixture 含 proprietary data |\n| Human-to-Robot 对相机扰动最有效 | LIBERO-Plus Camera 72.8% → 80.0% | 合成小时数不等于独立任务多样性 |\n| 真机能力显著但仍有精细控制缺口 | ALOHA ID/OOD 88.6%/87.5%；插盘 2/5 | 每任务试验次数有限 |\n\n## 相关主题\n\n- [Vision-Language-Action](/wiki/topic/vision-language-action)：这篇材料补强了跨具身动作对齐、Human-to-Robot 数据扩展和 OOD 评估三条路线。\n- [当前 VLA 路线图：基座、可控性、在线精修、记忆与人类数据](/wiki/synthesis/current-vla-landscape-foundation-control-memory-and-transfer)：为“异构数据如何转成可迁移控制能力”提供了系统级证据。\n\n## 相关页面\n\n- [[Vision-Language-Action]]\n- [[当前 VLA 路线图：基座、可控性、在线精修、记忆与人类数据]]\n- [[OpenVLA: An Open-Source Vision-Language-Action Model]]\n- [[Emergence of Human to Robot Transfer in Vision-Language-Action Models]]"
+    },
+    {
+      "id": "2606.29948-heterogeneous-tactile-transformer",
+      "label": "Heterogeneous Tactile Transformer",
+      "type": "source",
+      "community": "tactile-representation",
+      "content": "# Heterogeneous Tactile Transformer\n\n## 太长不看\n\nHTT 是面向异构触觉传感器的自监督预训练框架：四种传感器共享同一个 Transformer trunk，靠 masked reconstruction + 双向跨模态预测把光学和阵列信号对齐到同一潜空间，并在未见过的新传感器上验证可迁移。\n\n## 直观理解\n\n四种触觉传感器（两光学的 GelSight Mini/9DTact、两阵列的 Xela/Tac-02）装在同一只 UMI 夹爪两侧同步采数据。每路信号先经过各自的 patchify + sensor-specific encoder 进入一个共享 Transformer trunk，再以\"重建自己被遮蔽的部分 + 跨传感器预测被遮蔽的目标 embedding\"的双重目标做自监督预训练。下游用同一套 backbone 在物体分类、力估计、滑移检测、真机螺丝刀/抓豆腐任务上微调。\n\n![架构总览](https://arxiv.org/html/2606.29948v1/x1.png)\n\n*Figure 1: Heterogeneous Tactile Transformer 架构总览*\n\n## 核心信息\n\n- **作者**：Jianxin Bi, Qiang Wang, Jayaram Reddy, Kelvin Lin, Soibkhon Khajikhanov, Ruihan Gao, Harold Soh\n- **作者单位**：National University of Singapore\n- **来源类型**：arxiv_html\n- **arXiv ID**：2606.29948\n- **原文链接**：https://arxiv.org/abs/2606.29948\n- **HTML 正文**：https://arxiv.org/html/2606.29948\n- **PDF 地址**：https://arxiv.org/pdf/2606.29948\n- **中英翻译地址**：https://hjfy.top/arxiv/2606.29948\n- **发布日期**：2026-06-29\n- **主题域**：Physical/Embodied Intelligence\n\n## 背景与问题\n\n**动机：** 触觉是接触丰富操作（抓取易碎、精密装配、材质识别）的关键观测，但触觉传感器天然异构：光学式（GelSight 类）能给稠密空间/几何信息但相机帧率受限；阵列式（taxel）能给出高频力/压信号但空间分辨率低。两类信号是互补的，但原始数据结构一个是图像、另一个是时序，难以用一个 backbone 直接学习可迁移表示。\n\n**问题缺口：** 已有的触觉自监督方法（基于 MAE 的 T3、SITR 等）几乎都只在光学触觉数据上预训练。一旦换到阵列传感器或需要力/滑移线索的下游任务，这些 backbone 不可用；把多模数据各自独立训练又浪费了\"同一次接触其实被多传感器同时记录\"这一关键监督信号。要的不是某一个传感器最强的 backbone，而是一个能跨传感器共享潜空间、又能容纳新传感器的统一 backbone。\n\n## 论文摘要（英文原文）\n\n> Tactile sensors are inherently heterogeneous: a model trained on one sensor cannot be directly used on another, which limits learning contact-rich manipulation policies from diverse tactile data at scale. To bridge this gap, we propose the Heterogeneous Tactile Transformer (HTT), a framework that learns shared tactile representations across heterogeneous sensors. HTT consists of sensor-specific encoders and a shared transformer trunk, and is pretrained with per-modality masked reconstruction together with cross-modal alignment between paired sensors. Pretraining uses our novel Heterogeneous Paired Tactile (HPT) dataset, containing 1.6M synchronized paired frames across four vision- and array-based tactile sensors. Across distinct tactile perception and real-world manipulation tasks, HTT is shown to learn transferable representations that adapt to new tasks and previously unseen sensors. Dataset, code, and model checkpoints will be released upon publication.\n\n## 论文摘要（中文翻译）\n\n触觉传感器天然异构：在一种传感器上训练的模型不能直接用于另一种，这限制了从大规模多样化触觉数据中学习接触丰富的操作策略。为弥合这一差距，本文提出异构触觉 Transformer（HTT），一个跨异构触觉传感器学习共享表示的框架。HTT 由传感器专属编码器与一个共享 Transformer trunk 组成，通过逐模态的遮蔽重建和成对传感器之间的跨模态对齐进行预训练。预训练使用新构建的异构成对触觉（HPT）数据集，包含四种视觉式与阵列式触觉传感器同步采得的 160 万对帧。在多种触觉感知和真实操作任务上，HTT 学到了可迁移表示，能适配新任务和训练时未见过的新传感器。数据集、代码与模型权重将于发表时公开。\n\n## 方法\n\n**方法概述：** HTT 是一个 MAE 风格的自监督预训练框架，结构上是「传感器专属 encoder + 共享 Transformer trunk + 传感器专属 decoder + 跨模态预测器」四件套，训练目标是\"每路重建自己被遮蔽的 patch + 跨传感器互预测被遮蔽的目标 embedding\"。\n\n**核心机制：** 同一接触被多个传感器同步记录 → 把每个传感器当作一个 modality → 在共享 trunk 的潜空间里通过\"预测对侧被遮蔽的 embedding\"建立双向跨模态约束，使得每个传感器的局部细节和跨传感器的语义对齐都进入同一表示。\n\n**方法拆解：**\n\n- **输入统一化**：每个训练实例是一个 τ = 0.2 s 的同步时间窗；光学帧缩放到 224×224 后用 ViT 风格 patchify；阵列式传感器把高频多维时序列切成非重叠时间 patch；所有模态在进入模型前都先减去无接触参考帧。\n- **四组件架构**：\n  - **Encoder $\\mathcal{E}_i$**：传感器专属，光学用 ViT、阵列用 self-attention transformer，把 token 编码为统一维度 embedding。\n  - **Shared Trunk $\\mathcal{T}$**：所有传感器共用一个 Transformer trunk，处理统一维度的 token embedding。\n  - **Decoder $\\mathcal{D}_i$**：传感器专属，从可见 token 经过 trunk 后的 embedding 重建被遮蔽 token，标准 MAE 目标 $\\mathcal{L}_{\\text{MAE}} = \\mathbb{E}_{i\\sim\\mathcal{I}}\\|\\mathcal{D}_i(\\mathcal{T}(\\mathcal{E}_i(\\mathbf{x}^i_v))) - \\mathrm{norm}(\\mathbf{x}^i_m)\\|_2^2$。\n  - **Predictor $\\mathcal{P}_{i\\to j}$**：跨模态预测器（cross-attention transformer），从源传感器完整 embedding + 目标传感器可见 embedding 预测目标被遮蔽的 embedding，对每对传感器做双向。\n- **跨模态对齐**：成对传感器 (i, j) 上做双向跨模态预测，把\"补全对侧被遮蔽的部分\"作为额外监督；这强制 trunk 学到能跨传感器迁移的潜空间。\n- **训练数据**：HPT 包含 1.6M 同步帧，用两对 sensor pair（Xela↔9DTact, TAC-02↔GS Mini）装在 UMI 夹爪两侧做 press/twist/slide 三种动作采集，预训练集和评测集无重叠。\n- **数据子集**：除预训练 paired unlabeled interaction 数据外，评测另设物体分类（20 类日常物体）、力估计（4 种 probe geometry + 6D F/T 真值，范围 0–40 N 法向 / 0–14 N 剪切）、滑移检测（用 Page CUSUM 把 6D 力时间序列切成 static / incipient / gross slip，分布 13.6% / 1.2% / 85.2%，稀有类极不均衡）。\n\n![方法细节与数据集](https://arxiv.org/html/2606.29948v1/x2.png)\n\n*Figure 2: 力/滑移数据采集与数据集统计。A1 探针平台 + 6D F/T；A2 四种 probe geometry；B1 力范围；B2 滑移标签分布严重不均衡。*\n\n**关键要点：**\n\n- 共享 trunk 只负责跨传感器语义，输入编码器和重建解码器仍保持传感器专属；这种分工避免用一种 tokenization 强行统一图像式和阵列式触觉。\n- 跨模态监督来自同一次接触的同步配对数据，不需要人工标签；masked reconstruction 保留模态内部细节，双向预测再对齐不同传感器的潜表示。\n- 对齐并非对所有传感器都单调增益：光学侧提升明显，Xela 等稀疏阵列侧可能因信息不对称而退化，因此下游采用前仍需逐传感器验证。\n\n## 结果\n\n**核心结果：**\n\n- **物体分类（4 传感器 20 类 top-1 acc，表 1）**：HTT 在 9DTact 上 94.84 ± 1.61%、GSMini 上 91.35 ± 1.08%，比最强光学 baseline SITR 分别高 13.5% / 17%；Xela 52.41%、TAC-02 26.20%，对阵列传感器是首次给出可比结果（baseline T3/SITR 不能用）。MAE（只重建，不对齐）在 9DTact 上 90.08%——加跨模态对齐再涨 4.8%，证明对齐项本身对光学侧有增益。\n- **力估计（3D 力 MAE，表 2/4）**：HTT 在 Xela、9DTact、GSMini 上均给出与 MAE-only 接近或更低的整体 MAE，但 TAC-02 略差（异构能力不均衡）。剪切分量上对齐带来的提升最明显。\n- **滑移检测（macro-F1，表 2/5）**：滑移标签严重不均衡（static 13.6% / incipient 1.2% / slide 85.2%），HTT 在多数传感器上 macro-F1 优于 baseline；阵列侧提升比光学侧更显著，因为 incipient slip 这种弱信号恰恰是阵列传感器的强项。\n- **真实机器人任务（表 3）**：在 toy screw 和 grasp tofu 上用 HTT 编码器作为策略 backbone，平均 50 个 rollout × 3 seed 的任务成功率显著优于 Scratch、MAE-only 和光学专用 baseline，且使用的是 pretraining 时未出现的 Sharpa 手指触觉传感器——直接验证 Q5（对新传感器的迁移）。\n- **消融对比**：HTT vs MAE（ours）vs Scratch 三档干净分离 MAE 自监督和跨模态对齐各自贡献：MAE 主要提升所有传感器分类；跨模态对齐对光学侧进一步提升、对阵列侧在小数据下会略有牺牲（信息不对称的代价）。\n\n**结果表：**\n\n| 任务 | 关键 baseline | HTT 表现 | 提升来源 |\n| --- | --- | --- | --- |\n| 物体分类（9DTact） | SITR 81.34% | **94.84%** | MAE + 跨模态对齐 |\n| 物体分类（GSMini） | SITR 74.31% | **91.35%** | MAE + 跨模态对齐 |\n| 物体分类（Xela） | MAE 56.68% | 52.41% | 对齐的代价 |\n| 物体分类（TAC-02） | MAE 26.16% | 26.20% | 持平 |\n| 滑移检测 macro-F1 | 视传感器而异 | 多数胜出 | 跨模态对齐对稀有类帮助最大 |\n| Toy screw 成功率 | Scratch/MAE baseline | **HTT 最高** | 编码器迁移到策略 |\n| Grasp tofu 成功率 | 同上 | **HTT 最高** | 同上 |\n\n## 洞察\n\n**核心 insight：**\n\n- **\"成对 + 跨模态预测\"是把异构传感器塞进同一个 trunk 的可行套路**：和语言-图像 CLIP 不同，这里监督信号来自\"同一接触的多视角同步记录\"，无需人工标注，比所有传感器独立做 MAE 都更便宜地把 trunk 推向跨传感器共享语义。\n- **共享 trunk + sensor-specific encoder/decoders 的解耦**：保留了每个传感器的局部细节（解码器专属），同时在 trunk 上建立共享语义——这是\"既能重建又能对齐\"的关键。\n- **信息不对称是真实代价**：光学富信息传感器从对齐中获益明显，阵列稀疏信号反而可能在双向预测里被光学淹没（Xela 出现 −4.3%）。这暗示跨模态对齐需要 imbalance-aware 的损失设计，或在训练时对信息密度低的 modality 加权。\n\n**和已有方法的关系：**\n\n- 相对 [[Tactile Genesis]]（仿真平台对比触觉抽象选择）：HTT 不选硬件配置，而是为已经存在的异构硬件学共享 backbone；两者互补。\n- 相对 T3 / SITR 等光学专用 MAE：HTT 是首个把跨模态对齐显式加入 MAE 框架并同时覆盖光学 + 阵列的触觉 backbone。\n- 相对通用多模态基础模型（CLIP / ImageBind）：监督信号是\"同一接触的多传感器同步\"而不是\"图像-文本对\"，没有文本侧，更接近 sensor-only 多模态对齐。\n\n**可借鉴点：**\n\n- \"成对多模态 + masked autoencoder + 跨模态预测\"模板可以直接套到其他多模态机器人感知（视觉+触觉、触觉+本体等）。\n- 对触觉下游任务，使用时序窗 + 减参考帧的统一输入规范，是让不同传感器在 backbone 里行为可比的简单有效手段。\n- 在迁移到未见过的新传感器时，\"只用 encoder + trunk、换掉 sensor-specific 输入适配\"是低成本路径。\n<!-- confidence: INFERRED -->\n\n## 风险与判断\n\n**局限：**\n\n- 跨模态对齐在光学-阵列配对上带来 Xela 分类准确率 −4.3% 的回退，信息密度不均衡下双向预测会偏向富信息模态，损失设计未做 imbalance 校正。\n- 仅在 4 种传感器 + 2 对 sensor pair 上验证，未涵盖电容、压电、视触融合等其他触觉模态；传感器泛化结论限于论文范围内。\n- HPT 数据全部在 UMI 夹爪 + 桌面接触场景下采集，复杂接触（高速冲击、柔性物体、多指协同）的迁移性未验证。\n- 滑移检测数据集 incipient slip 仅 1.2%，极不均衡，评测 macro-F1 虽改善但在实际部署中误报成本可能仍高。\n- 全部实验基于单时间窗 τ = 0.2 s，没有显式建模更长程时序依赖。\n\n**适用场景：**\n\n- 给已有多种触觉传感器（特别是光学 + 阵列混合）的机器人平台训练一个共享 backbone。\n- 缺少大规模标注触觉数据时，需要自监督预训练来冷启动下游感知任务（分类、力、滑移）。\n- 触觉传感器未来会迭代，希望 backbone 能跨硬件版本迁移。\n- 仿真（ManiFeel）+ 真实机器人端到端策略学习，触觉编码器作为策略观测的一部分。\n\n**最终判断：**\n\n- 是一篇**值得记入知识库**的论文：把\"异构触觉 + 自监督\"这件事做到了能落地于下游感知和真机操作的程度，数据集 HPT 也公开。\n- 学术增量：把多模态 MAE 的思路搬到触觉域并补了\"成对同步数据 + 双向跨模态预测\"这个新组合；不是纯架构创新，但是工程上有用的\"开箱即用 backbone\"。\n- 对当前具身智能研究的实际价值：中等偏高。短期内会成为\"异构触觉预训练\"的参照 baseline，未来若 Tactile Genesis + HTT 类工作成熟，会推动\"触觉 backbone + 策略\"成为标准组件，类似 vision-language 的 ViT/CLIP 路径。\n- 跟踪价值：① 是否会扩展到视触融合、电容式触觉；② imbalance-aware 对齐是否能补回阵列侧的损失；③ 是否会被纳入 VLA 或具身 foundation model 作为标准触觉编码器。\n\n## 结果速览表\n\n| 维度 | 数值 / 结论 |\n| --- | --- |\n| 预训练数据 | HPT 1.6M 同步帧，4 传感器 × 2 pair |\n| 物体分类最佳 | 9DTact 94.84% / GSMini 91.35% |\n| 比光学最强 baseline | +13.5% / +17.0% |\n| 真实机器人任务 | toy screw / grasp tofu 成功率显著优于 baseline |\n| 新传感器迁移 | 已在未见的 Sharpa 触觉指尖上验证 |\n| 主要缺陷 | 跨模态对齐在阵列侧有 −4.3% 回退 |\n\n## 相关主题\n\n- [[tactile-representation]]（提议新增主题）\n- [[Physical/Embodied Intelligence]]（domain）\n\n## 相关综述\n\n- [[tactile-force-into-pretrained-robot-policies|触觉与力觉如何进入预训练机器人策略：表示、持续适配与执行闭环]]：提供异构传感器共享表示与跨硬件迁移的证据。\n<!-- confidence: INFERRED -->"
+    },
+    {
+      "id": "2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force",
+      "label": "Multisensory Continual Learning: Adapting Pretrained Visuomotor Policies to Force",
+      "type": "source",
+      "community": "tactile-representation",
+      "content": "# Multisensory Continual Learning: Adapting Pretrained Visuomotor Policies to Force\n\n## 太长不看\n\n这篇论文最值得记住的不是“给 VLA 加一条触觉输入”，而是它把新模态接入表述成 continual learning：在少量新 contact-rich 数据上学会用 force，同时尽量不破坏旧的视觉动作能力。MuSe 的价值在于，它用 multisensory future prediction 和 replay 证明，旧任务上即使没有力标注，也能把力学结构以可迁移的方式对齐进预训练策略；真正的短板则是仍依赖离线适配和专门的 compliance 控制接口，而不是端到端解决全闭环接触控制。\n\n## 直观理解\n\n可以把 MuSe 理解成给一个已经会“看着做”的机器人老师补上一层接触常识。它不是直接拿少量力觉数据硬微调整套策略，而是让模型一边继续记住旧任务的视频世界，一边学会从视觉和动作上下文推断未来会感到多大的力，再把这份预测过的接触轨迹交给下游 compliance controller 去吸收执行偏差。\n\n![主要图](https://arxiv.org/html/2606.30988v3/teaser-v11.png)\n\n*主要图*\n\n## 核心信息\n\n- **作者**：Jaden Clark、Changhao Wang、Yihuai Gao、Seongheon Hong、Hojung Choi、Mark Cutkosky、Yifan Hou、Shuran Song\n- **作者单位**：Stanford University\n- **来源类型**：arxiv_html_url\n- **输入来源**：https://arxiv.org/html/2606.30988v3\n- **原文链接**：https://arxiv.org/abs/2606.30988\n- **HTML 正文**：https://arxiv.org/html/2606.30988v3\n- **PDF 地址**：https://arxiv.org/pdf/2606.30988.pdf\n- **项目地址**：https://jadenvc.github.io/multisensory-continual-learning/\n- **代码地址**：https://github.com/jadenvc/multisensory_wm/blob/main/README.md\n- **中英翻译地址**：https://hjfy.top/arxiv/2606.30988\n- **发布日期**：2026-06-29\n- **主题域**：Physical/Embodied Intelligence\n\n## 背景与问题\n\n**动机：** 机器人基础策略如今已经能通过大规模 vision-action 预训练获得较好的视觉泛化，但大量真实有价值的接触操作——擦拭、插接、按压、peg-in-hole、抓取后接触修正——都依赖高频力/力矩反馈。问题在于，历史预训练数据通常没有力传感器标注，而重新大规模采集多感官数据又昂贵且任务覆盖窄。如果每次引入新传感器都从头训练，就会丢掉已有 visuomotor 先验；如果只在新任务上强行微调，又很容易遗忘旧任务，形成一个典型的 multisensory continual learning 难题。\n\n**问题缺口：** 现有把触觉或力觉接进机器人策略的方法，大多默认从一开始就有多感官训练数据，或者只关注新任务上的 specialist 提升，而不回答“如何把新模态无缝嫁接到一个已经预训练好的视觉动作策略上”。这带来三层缺口：第一，预训练阶段旧数据没有力标签，模型如何避免把缺失模态当噪声；第二，适配新感官后如何保持旧任务能力，避免 catastrophic forgetting；第三，即便模型学会预测力，怎样把它转化为执行期真正有用的接触控制信号，而不是只停留在表征层面对齐。\n\n## 论文摘要（英文原文）\n\nRobot manipulation often relies on sensory feedback beyond vision, particularly in contact-rich settings where force, tactile, or audio signals reveal interaction states that are not directly observable from images. However, these modalities are often hardware- and task-specific, and large-scale multisensory robot datasets remain scarce. As a result, it is impractical to pretrain policies with every sensor they may encounter. We study multisensory continual learning: adapting a pretrained robot policy to new tasks with newly introduced modalities while preserving performance under the original sensor suite. We propose MultiSensory World Model (MuSe), which incorporates limited multisensory data into pretrained vision-only policies through multi-stage fusion, multisensory future prediction, and experience replay over pretraining data. We instantiate MuSe by augmenting a pretrained vision-only policy with force-torque sensing and evaluate it on real-world manipulation tasks. Our experiments show that MuSe performs strongly on contact-rich finetuning tasks while preserving, and in some cases improving, performance on the original pretraining tasks. These results suggest that a modest multisensory dataset can improve general robot capabilities beyond the finetuning distribution. Project website: https://jadenvc.github.io/multisensory-continual-learning/\n\n## 论文摘要（中文翻译）\n\n本文研究一种多感官持续学习问题：机器人策略先在大规模视觉-动作数据上预训练，但这些数据没有力/力矩标注；随后需要在少量新任务的多感官数据上适配出接触能力，同时保留原有任务表现。作者提出 MuSe，通过早期 token 融合与后期 cross-attention 融合把高频 force-torque 观测接入预训练 visuomotor world model，并联合预测未来动作、未来视频和未来力信号。训练时，预训练任务上的缺失力信号用可学习 mask token 替代，并配合 experience replay 防止遗忘。实验显示，MuSe 在前向迁移、后向迁移和跨模态力预测上都优于弱融合、无 replay 和 diffusion policy 基线，并能把预测力信号作为 adaptive compliance 控制的虚拟目标用于真机接触操作。\n\n## 方法\n\n**方法概述：** MuSe 把“预训练视觉动作策略如何安全吸收新触觉模态”拆成多阶段融合、跨模态未来预测和 experience replay 三件事：先用 token 级早融合和 cross-attention late fusion 把高频 force-torque 接进既有 visuomotor backbone，再联合预测动作、未来视频与未来力信号，让模型不仅学会控制，也学会在原先没有触觉监督的旧任务上补全接触动力学，从而在 forward transfer 与 backward transfer 上同时优于不带 replay、弱融合和 diffusion-policy 基线。\n\n**核心机制：** MuSe 以预训练的 MAR-Large visuomotor world model 为骨干，把 multisensory adaptation 设计成“结构化接入 + 未来预测 + replay 保形”三件配套机制。结构上，它先用 modality-specific encoder 编码图像、语言、动作、状态与双指 force-torque 历史，再在 token 级做 early fusion，同时额外加入一组对 F/T history 做 late fusion 的 cross-attention adapter，让模型既能把力信号当作时序上下文融入全局，又能保留一条专门服务接触细节的高带宽旁路。监督上，它不是只学下一个动作，而是同时预测未来动作、未来视频和未来 6 轴力信号，迫使隐状态对接触动态形成可迁移的世界模型。持续学习上，作者把旧 pretraining episode 通过 experience replay 混入 finetuning，并用 learnable mask token 占位缺失 F/T，再屏蔽对应力损失，使模型在适配新模态时仍保有旧分布的视觉动作先验。\n\n**方法拆解：** - 输入侧保留 MAR 的 4 帧视觉历史与 16 步动作历史，同时加入左右手同步的高频 force-torque 序列；每个 proprio 时间步聚合 6 个六维 wrench，形成 144 维 F/T 向量并经 MLP 投到 1024 维 token 空间。\n- 融合侧采用双路径设计：一条是把 F/T token 与图像、语言、状态一起做早融合，让接触信号进入统一世界模型；另一条是专门的 cross-attention late-fusion adapter，让 decoder 在生成未来时显式读取 F/T memory，弥补单一路径对高频接触信息建模不足。\n- 训练目标同时覆盖 16 步未来动作、4 帧未来视频和每个手指 96 个未来 F/T 样本；视频预测让隐状态继续锚定原先的视觉动力学，F/T 预测则要求模型学会从视觉接触上下文补全未来力学演化。\n- 持续学习阶段把 1,271 条无 F/T 的预训练 episode 与 434 条带 F/T 的新任务 episode 混合训练；旧数据的力通道用 learnable mask token 代替，并关闭 F/T reconstruction loss，只保留动作与视频目标，从而以 parameter-efficient 方式维持旧任务能力。\n\n**关键要点：** - MuSe 真正有效的不是简单多模态拼接，而是把 F/T 接入同时设计成表示融合问题和未来预测问题；如果去掉 video prediction 或 replay，模型对旧任务接触动力学的泛化都会明显变差。\n- 论文把 predicted future F/T 直接送入 adaptive compliance controller，说明它追求的不是“读出一个好看的 latent”，而是为执行器提供可操作的虚拟接触目标，这让 world model 表征和下游控制闭上了环。\n\n![方法图](https://arxiv.org/html/2606.30988v3/method_4.png)\n\n*方法图*\n\n## 结果\n\n**核心结果：** - MuSe 在预训练任务的跨模态 F/T 预测上把 L2 误差降低到 8.424，相比 late-only fusion 的 12.061、linear fusion 的 11.518 和 additive fusion 的 11.800 都明显更低；去掉 video prediction 后误差升到 9.90，去掉 experience replay 后升到 12.376，说明视觉未来预测与 replay 都在提升旧任务上的接触泛化。\n- 在前向迁移的新接触任务上，MuSe 的成功率整体高于对比基线：wiping 任务在 15 次评测中达到 11.5 次成功，高于 No F/T 的 5 次、No Pretrain 的 8 次和 diffusion policy 的 10 次；peg 任务达到 13/15，高于对应基线的 9/15、6/15 和 10/15。\n- 在后向迁移的旧任务保持上，MuSe 的成功率同样更高：wiping 为 12.5/15，显著高于 pretraining-only 的 8.5/15、No ER 的 0.5/15 和 diffusion policy 的 6.5/15；peg 为 10/15，也高于 8/15、2/15 和 5/15，说明 replay 对避免遗忘有决定性作用。\n\n**结果表：** | 评估 | 对比设置 | 结果 |\n| --- | --- | --- |\n| 旧任务跨模态 F/T 预测误差 | MuSe / Late-only / Linear / Additive / No video / No ER | **8.424 / 12.061 / 11.518 / 11.800 / 9.90 / 12.376** |\n| 前向迁移（Wiping, 15 次） | No F/T / No Pretrain / Diffusion Policy / MuSe | 5 / 8 / 10 / **11.5** |\n| 前向迁移（Peg, 15 次） | No F/T / No Pretrain / Diffusion Policy / MuSe | 9 / 6 / 10 / **13** |\n| 前向迁移（Pick&Place, 10 次） | No F/T / No Pretrain / Diffusion Policy / MuSe | 7.5 / 5 / 6 / **7.5** |\n| 后向迁移（Wiping, 15 次） | Pretraining Only / No ER / Diffusion Policy / MuSe | 8.5 / 0.5 / 6.5 / **12.5** |\n| 后向迁移（Peg, 15 次） | Pretraining Only / No ER / Diffusion Policy / MuSe | 8 / 2 / 5 / **10** |\n\n![结果图](https://arxiv.org/html/2606.30988v3/experiments_13.png)\n\n*结果图*\n\n![结果图](https://arxiv.org/html/2606.30988v3/back_appendix2.png)\n\n*结果图*\n\n## 洞察\n\n**核心 insight：** - 这篇论文给 VLA/visuomotor 社区一个很实用的 framing：新模态接入不一定等于换 backbone，更像是在维护一个已有基础策略的知识连续性。只要旧任务上还能通过视频预测保持世界模型约束，缺失模态也能被当作 masked channel 渐进吸收，而不是必须重做预训练。\n- MuSe 的结果提示，力觉的最大价值未必只是在执行时提供纠偏，而是在训练时迫使模型学习接触动力学。模型一旦能在旧任务上从视觉上下文预测出合理 F/T 轨迹，说明接触已经被编码成了可迁移的结构知识，而不是某个任务特定的控制 hack。\n\n**和已有方法的关系：** - 和只在新任务上训练 specialist diffusion policy 的路线相比，MuSe 更强调保留预训练 visuomotor prior，并把 continual learning 作为第一目标；和把触觉视作单纯额外 observation 的 late-fusion 方法相比，它通过 early+late 双路径和未来视频联合监督，显式加强模态间的结构对齐。\n\n**可借鉴点：** - 对任何想把新观测模态接入已有 foundation policy 的系统，都可以借鉴“缺失模态用 learnable mask token 占位 + 旧数据 replay 继续保留原监督目标”这套做法，它比简单停用旧数据或强行补零更像一个可扩展的 continual adaptation 接口。\n- 把辅助模态的未来预测结果直接对接到下游控制模块，是一种比只做 representation probing 更有工程价值的验证方式；它迫使附加模态既要可预测，也要可执行。\n\n![洞察图](https://arxiv.org/html/2606.30988v3/f_appendix2.png)\n\n*洞察图*\n\n## 风险与判断\n\n**局限：** - MuSe 解决的是“把新力觉模态接进既有 world model 并保持旧能力”，不是完整的实时闭环接触控制方案；最终执行仍依赖外部 adaptive compliance controller 去吸收接触偏差，所以性能上限部分取决于控制器设计而不只取决于表示学习本身。\n- 实验规模虽然覆盖 21 个预训练任务与 5 个带 F/T 新任务，但多感官 finetuning 数据仍只有 434 条 episode，且主要围绕双指夹持与少数接触丰富任务；对更复杂多接触、非抓取操作或不同力传感器形态的泛化证据还不够。\n\n**适用场景：** - 适合已经积累了大量 vision-action 预训练数据、但近期才开始在少数高价值接触任务上加装 force-torque 传感器的团队，例如擦拭、装配、peg-in-hole、按压和 compliant insertion 等接触密集操作。\n- 也适合把 world model 当中间层、下游仍保留经典 compliance / impedance controller 的系统，因为 MuSe 产出的 future F/T target 可以自然变成 controller 的参考信号。\n\n**最终判断：** - 值得持续跟踪。这篇论文不是单纯证明“力觉有用”，而是给出了一个把新感官迁移进预训练策略、同时避免旧能力塌陷的可复用模板。若后续要做触觉/音频/事件相机等新模态接入 foundation policy，MuSe 的 replay + masked missing modality + future prediction 组合很可能是比直接全量微调更稳的起点。\n\n## 结果速览表\n\n| 评估 | 对比设置 | 结果 |\n| --- | --- | --- |\n| 旧任务跨模态 F/T 预测误差 | MuSe / Late-only / Linear / Additive / No video / No ER | **8.424 / 12.061 / 11.518 / 11.800 / 9.90 / 12.376** |\n| 前向迁移（Wiping, 15 次） | No F/T / No Pretrain / Diffusion Policy / MuSe | 5 / 8 / 10 / **11.5** |\n| 前向迁移（Peg, 15 次） | No F/T / No Pretrain / Diffusion Policy / MuSe | 9 / 6 / 10 / **13** |\n| 前向迁移（Pick&Place, 10 次） | No F/T / No Pretrain / Diffusion Policy / MuSe | 7.5 / 5 / 6 / **7.5** |\n| 后向迁移（Wiping, 15 次） | Pretraining Only / No ER / Diffusion Policy / MuSe | 8.5 / 0.5 / 6.5 / **12.5** |\n| 后向迁移（Peg, 15 次） | Pretraining Only / No ER / Diffusion Policy / MuSe | 8 / 2 / 5 / **10** |\n\n## 相关主题\n\n- [[Vision-Language-Action]]：补充 foundation policy 吸收新感官模态且保持旧能力的持续适配路线。\n- [[tactile-representation|Tactile Representation]]：补上异构表示与执行期反馈之间的策略适配层。\n\n## 相关综述\n\n- [[tactile-force-into-pretrained-robot-policies|触觉与力觉如何进入预训练机器人策略：表示、持续适配与执行闭环]]：MuSe 补上“旧数据缺少新模态监督时，如何在保留原能力的同时吸收力觉”这一层。\n<!-- confidence: INFERRED -->\n\n## 相关页面\n\n- [[2606.29948-heterogeneous-tactile-transformer|Heterogeneous Tactile Transformer]]\n- [[t-rex-tactile-reactive-dexterous-manipulation|T-Rex: Tactile-Reactive Dexterous Manipulation]]\n- [[2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback|TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback]]"
+    },
+    {
+      "id": "2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback",
+      "label": "TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback",
+      "type": "source",
+      "community": "tactile-representation",
+      "content": "# TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback\n\n## 太长不看\n\nTacForcing 解决的不是“VLA 能否看到触觉”，而是“动作块执行到一半时，最新触觉能否继续改写尚未执行的动作”。它把一个动作 chunk 拆成顺序完成的块，保留未来块的 flow-matching 中间态，并用执行后新采集的触觉继续细化；EATA 只让最新触觉影响下一块，避免它提前污染更远期动作。六个 UniVTAC 仿真任务平均成功率 65%，三个真机任务平均 69%，但 v1 的真机评测每任务仅 16 次，尚不足以证明跨硬件泛化或实时成本优势。\n\n## 直观理解\n\n把普通 action chunk 想成一次写完的整段操作脚本：机器人开始执行后，即使手指感觉到打滑或卡住，后半段脚本也不会变。TacForcing 则像边执行边续写：先把最近的 5 个动作生成完并执行，远期动作只保留半成品；执行产生的新触觉回来后，再继续修改下一小段。EATA 又规定“这次手感只指导马上要做的那一段”，避免用当前接触状态过早决定更远的动作。\n\n![主要图](https://arxiv.org/html/2608.25798v1/Framwork.png)\n\n*主要图*\n\n## 核心信息\n\n- **作者**：Jianbo Zhou、Boyuan Zhao、Yuzheng Zhang、Yiyang Chen、Wenxin Chen、Qiuyue Li、Xiangyang Gu、Yuhan Cao、Xiao Xia、Yanzhe Hu、Zhijie Deng\n- **作者单位**：School of Computer Science, SJTU；SCUT；ECUST；ECNU；PolyU；CCUT；UESTC；HUST\n- **来源类型**：arxiv_html_url\n- **输入来源**：https://arxiv.org/html/2608.25798v1\n- **原文链接**：https://arxiv.org/abs/2608.25798v1\n- **HTML 正文**：https://arxiv.org/html/2608.25798v1\n- **PDF 地址**：https://arxiv.org/pdf/2608.25798v1\n- **项目地址**：https://88runaway.github.io/tacforcing/（论文发布时返回 404）\n- **代码地址**：暂未公开\n- **中英翻译地址**：https://hjfy.top/arxiv/2608.25798\n- **发布日期**：2026-08-26\n- **主题域**：Physical/Embodied Intelligence\n\n## 背景与问题\n\n**动机：** 接触密集操作中的滑移、摩擦、形变和受力变化常被手掌或物体遮挡，视觉在短时域内几乎不变，触觉表示却可能快速漂移。论文在 40 个动作、1.17 秒的滴管挤压片段中测得：相对初始状态，最终视觉表示平均余弦距离约 0.005，而触觉表示约 0.55。这个百倍量级的动态差异说明，触觉不是可在 action chunk 开头读取一次后长期复用的静态条件。\n\n**问题缺口：** 标准 flow-based Action Expert 给整个动作块使用同一个生成时间，并在执行前一次性完成采样；因此执行中出现的新接触信息无法改变同一 chunk 内尚未执行的动作。简单把初始触觉拼入条件也会让它越来越陈旧，而已有快慢双控制器虽然响应及时，却引入额外策略、接口和训练流程。论文要解决的是：能否在单一生成专家内交错动作生成与执行，让最新触觉修正未来动作，同时避免当前触觉错误地影响更远期、届时接触状态已经变化的动作。\n\n## 论文摘要（英文原文）\n\nContact-rich manipulation requires adapting to contact states that can evolve substantially within an action horizon. However, chunk-based vision-language-action models predict complete action chunks from observations collected before execution, leaving tactile conditioning stale during execution. Existing tactile-reactive approaches typically rely on separate high-frequency controllers, which increase both architectural and training complexity. In this paper, we introduce TacForcing, a streaming action-generation framework that effectively incorporates execution-time tactile feedback. Instead of employing a separate reactive controller, TacForcing replaces the standard action expert with a streaming action expert to generate actions conditioned on the evolving tactile observations acquired during execution. TacForcing also introduces Execution-Aware Tactile Attention (EATA), which restricts tactile conditioning to actions nearing execution, thereby reducing the temporal mismatch between tactile acquisition and action execution. Across six simulated UniVTAC tasks and three real-world contact-rich manipulation tasks, TacForcing achieves average success rates of 65% and 69%, respectively, outperforming strong baselines in both settings.\n\n## 论文摘要（中文翻译）\n\n接触密集型操作要求机器人适应在一个动作时域内可能发生显著变化的接触状态。然而，基于动作块的视觉—语言—动作模型会根据执行前采集的观测一次性预测完整动作块，使触觉条件在执行过程中逐渐过时。现有触觉响应方法通常依赖独立的高频控制器，增加了架构与训练复杂度。本文提出 TacForcing，一种能够有效利用执行期触觉反馈的流式动作生成框架。TacForcing 不再另设反应式控制器，而是用流式动作专家替换标准动作专家，使动作生成能够由执行期间不断变化的触觉观测来条件化。论文还提出执行感知触觉注意力 EATA，将触觉条件限制在即将执行的动作上，从而降低触觉采集与动作执行之间的时间错配。在六个 UniVTAC 仿真任务和三个真实接触密集型操作任务上，TacForcing 分别达到 65% 和 69% 的平均成功率，并超过强基线。\n\n## 方法\n\n**方法概述：** TacForcing 在 flow-matching VLA 中把长度为 H 的动作时域切成 K 个连续块，为不同块分配位置相关的 flow time；近期块先完成、先执行，远期块保留未完成的生成状态。每执行完一个块，模型重新编码最新触觉并从保留状态继续细化剩余块；EATA 通过注意力掩码只开放下一待执行块对当前触觉 token 的访问。这样，一个动作 chunk 的生成、执行和反馈被交错起来，无需外挂独立高频反射控制器。\n\n**核心机制：** 长度 H 的动作块被划分成 K 个、每块 B 个动作，并让第 k 块在第 kS 个采样步完成；所有未完成块共同推进，但越近的块越早到达 flow time 1。块完成后立即执行，未来块的中间态不丢弃。执行产生的触觉由共享编码器变成指尖 token，随后继续推进剩余块。EATA 的加性注意力掩码只允许下一待执行块读取最新触觉，其他远期块继续依赖任务上下文，等轮到自己成为下一块时再接收更新后的触觉。训练时随机采样生成进度，只对未完成动作回归 flow velocity，并使用与推理一致的块状态、阶段触觉和 EATA 掩码。\n\n**方法拆解：** - 任务上下文只编码一次：视觉、语言和本体状态形成 Ct，在整个动作 chunk 的流式生成中复用，避免每执行一小块都重跑完整 VLM。\n- 块级 flow 调度：设 H=KB、N=KS，第 k 块共享 flow time λk=min(n/kS,1)，使各块按顺序完成；已完成块冻结，未完成块继续迭代。\n- 执行与生成交错：每个已完成动作块立刻送去执行，执行后重新采集并编码 M 个指尖的触觉；模型从未来块保留的中间态继续，而不是重新从噪声生成整个 chunk。\n- 执行感知触觉注意力：在第 k 阶段，只有块 k 的 action query 能看见最新触觉 key，其他块的对应 mask 为负无穷，避免远期动作被即将过时的接触状态直接条件化。\n- 训练—推理对齐：训练随机采样归一化进度 p，构造各块不同噪声水平的中间动作，只对未完成位置计算 flow-matching loss，并匹配该阶段真实可用的触觉与 EATA 可见性。\n\n**关键要点：** - 固定触觉并不天然优于无触觉：它在消融中让仿真平均从 43% 降至 42%，真机从 42% 降至 31%，说明触觉的时效性比“是否有触觉”更关键。\n- 流式更新与 EATA 解决两个不同问题：前者让执行期触觉真正进入尚未完成的动作，后者约束这份触觉只作用于时间上对齐的下一块。\n- TacForcing 的结构优势是保留单一生成器与同一 flow 目标，但它把控制响应粒度固定为块级，因此 B=5 是响应速度、推理开销与动作连贯性之间的关键工程超参数。\n\n![方法图](https://arxiv.org/html/2608.25798v1/Framwork.png)\n\n*方法图*\n\n## 结果\n\n**核心结果：** - UniVTAC 六任务平均成功率为 65%，高于 FTP-1 的 59%、π0.5 的 51%、RDP 的 42% 和 UniVTAC-ACT 的 37%；TacForcing 在六项中有五项最高或并列最高。\n- 仿真中 TacForcing 相比 vision-only π0.5 高 14 个百分点，相比带独立快慢触觉控制器的 RDP 高 23 个百分点；唯一未获最佳的是 Lift Can，63% 略低于 FTP-1 的 66%。\n- 三个真机任务平均成功率为 69%，高于 FTP-1 的 52%、GR00T N1.7 的 42% 和 π0.5 的 27%；Stand Bottle 为 81%，Transfer Liquid 为 50%，Wipe Board 为 75%。\n- Transfer Liquid 的差距最大：TacForcing 为 50%，而 GR00T N1.7 为 19%，π0.5 与 FTP-1 都只有 6%，支持执行期触觉对遮挡下精细接触调节尤其重要。\n- 消融中，从 Fixed Tactile 加入流式执行期更新后，仿真三任务平均由 42% 升至 51%，真机由 31% 升至 48%；再加入 EATA 后分别升至 60% 和 69%。\n- 训练数据为仿真每任务 50 条示范、真机每任务 100 条示范；评测为仿真每任务 100 次 rollout、真机每任务 16 次独立试验。仿真基于 π0.5 初始化，真机基于 GR00T N1.7 初始化，触觉编码器均从 FTP-1 初始化。\n\n**结果表：** | 设置 / 指标 | 仿真平均 | 真机平均 | 结论 |\n| --- | ---: | ---: | --- |\n| Base（无触觉，消融子集） | 43% | 42% | 标准 Action Expert 基线 |\n| Fixed Tactile | 42% | 31% | 固定初始触觉无稳定收益，真机明显退化 |\n| 流式更新，无 EATA | 51% | 48% | 执行期更新本身有效 |\n| TacForcing 完整版 | **60%** | **69%** | EATA 在六个消融任务上全部继续提升 |\n| 完整主实验 | **65%** | **69%** | 仿真六任务、真机三任务 |\n| 最强对比基线 | FTP-1 59% | FTP-1 52% | 分别领先 6 与 17 个百分点 |\n\n![结果图](https://arxiv.org/html/2608.25798v1/real_result.png)\n\n*结果图*\n\n## 洞察\n\n**核心 insight：** - TacForcing 最值得记住的抽象是“执行期反馈要与可修订的生成状态相遇”：只要未来动作仍保留为中间态，反馈就能更新它；如果整个 chunk 已经定稿，再好的触觉表示也无处发挥。\n- EATA 揭示多模态控制中的时间作用域问题：最新观测并非越广播越好。对快速变化的触觉，当前信号对近端动作价值最高，对远端动作可能成为有害的陈旧条件。\n- 固定触觉比无触觉更差是关键反例。它说明接入新模态不能只比较“有/无”，还必须验证观测时间、动作生效时间和模型可修订窗口是否对齐。\n- 方法本质上把 rolling-horizon 控制引入 chunk 内部：不缩短整个 action horizon，而是让近期动作先收敛、远期动作保持可修改，从而兼顾规划跨度与反馈响应。\n\n**和已有方法的关系：** - 相对 FTP-1、UniVTAC-ACT 等把触觉作为动作块起点条件的方法，TacForcing 的增量不主要在触觉编码器，而在执行期间反复刷新触觉并保留未来动作的可修订性。\n- 相对 RDP 的慢视觉策略加快触觉反应控制器，TacForcing 不建立第二套控制输出，而是在同一 Streaming Action Expert 内用分块 flow schedule 交错生成和执行。\n- 相对 T-Rex 的快慢双专家共享去噪轨迹，TacForcing 更进一步尝试只保留一个流式动作专家，并用 EATA 显式限制每次触觉更新的时间作用域；两者都证明静态拼接触觉不足，但接口复杂度与实时证据各有不同。\n\n**可借鉴点：** - 任何按 chunk 生成序列的控制器都可考虑“近端先完成、远端保留中间态”的调度，让执行反馈进入同一生成过程，而不必另加残差控制器。\n- 为高频模态设计注意力时，应按“观测采集时间—动作实际执行时间”建立可见性，而不是让所有未来 token 无条件访问最新信号。\n- 评测触觉或力反馈方案时，应把固定条件、执行期刷新和时间对齐掩码分别消融，否则很容易把表示收益、反馈收益和架构收益混在一起。\n\n![洞察图](https://arxiv.org/html/2608.25798v1/obs_exp.png)\n\n*洞察图*\n\n## 风险与判断\n\n**局限：** - 论文只给出 v1 的九个任务结果：六个 UniVTAC 仿真任务和三个固定真机任务；没有跨机器人、跨手型、跨触觉传感器或新任务的泛化评测。\n- 真机每任务仅 16 次试验，单次成功对应 6.25 个百分点；81%、69% 等平均值受有限样本影响明显，也未报告置信区间或显著性检验。\n- 论文强调无需独立高频控制器，但没有报告闭环频率、每个 block 的推理延迟、触觉编码开销、端到端吞吐或与 RDP 在等算力预算下的比较。\n- 所有实验固定 B=5，未消融 block size、采样步间隔 S、触觉采样延迟、噪声与传感器漂移；因而响应性与计算效率之间的最佳折中仍未知。\n- 训练依赖 π0.5 或 GR00T N1.7 初始化以及 FTP-1 预训练触觉编码器，尚未证明从更弱骨干训练时增益是否保持；项目页在论文发布时仍不可访问，代码与数据复现状态也未确认。\n\n**适用场景：** - 适用于插孔、拔钥匙、管件对齐、液体转移、擦拭和稳握等在一个 action chunk 内接触状态会快速变化、视觉又受遮挡的操作。\n- 适用于已有 flow-matching VLA 与触觉编码器、希望保持较长动作时域又不想维护独立高频控制器的研究系统。\n\n**最终判断：** - TacForcing 是一篇值得重点跟踪的控制接口论文：它用清晰消融证明“执行期更新”与“触觉—执行时间对齐”都比静态触觉拼接更重要，并给出将反馈写回同一动作生成过程的简洁方案。\n- 现阶段应把 65%/69% 视为强而有限的 v1 证据，不宜外推成通用触觉 VLA 已解决；在项目代码、等算力延迟、block size、跨硬件与更大规模真机试验公开前，它仍是研究原型而非部署结论。\n\n## 结果速览表\n\n| 设置 / 指标 | 仿真平均 | 真机平均 | 结论 |\n| --- | ---: | ---: | --- |\n| Base（无触觉，消融子集） | 43% | 42% | 标准 Action Expert 基线 |\n| Fixed Tactile | 42% | 31% | 固定初始触觉无稳定收益，真机明显退化 |\n| 流式更新，无 EATA | 51% | 48% | 执行期更新本身有效 |\n| TacForcing 完整版 | **60%** | **69%** | EATA 在六个消融任务上全部继续提升 |\n| 完整主实验 | **65%** | **69%** | 仿真六任务、真机三任务 |\n| 最强对比基线 | FTP-1 59% | FTP-1 52% | 分别领先 6 与 17 个百分点 |\n\n## 相关主题\n\n- [[Vision-Language-Action]]：补充“VLA 如何在 action chunk 内接入执行期反馈”的流式动作生成路线。\n- [[Tactile Representation]]：把问题从触觉表示扩展到触觉信号的时间作用域与动作生效时间对齐。\n<!-- confidence: INFERRED -->\n\n## 相关页面\n\n- [[T-Rex: Tactile-Reactive Dexterous Manipulation]]\n- [[Heterogeneous Tactile Transformer]]\n- [[Vision-Language-Action]]\n- [[Tactile Representation]]\n- [[tactile-force-into-pretrained-robot-policies|触觉与力觉如何进入预训练机器人策略：表示、持续适配与执行闭环]]"
+    },
+    {
+      "id": "attena-rectifying-action-inequality-in-robotic-foundation-models",
+      "label": "AttenA+: Rectifying Action Inequality in Robotic Foundation Models",
+      "type": "source",
+      "community": "Vision-Language-Action",
+      "content": "# AttenA+: Rectifying Action Inequality in Robotic Foundation Models\n\n## 太长不看\n\nAttenA+ 的核心价值是指出 VLA/WAM 训练里一个很朴素但长期被忽略的问题：机器人动作时间步并不等价，慢速精细动作往往比快速过渡动作更决定任务成败。它用速度场给低速关键动作更高 loss 权重，不改模型结构、不加参数，却能在 Libero、RoboTwin 2.0 和真实 Franka 任务上稳定抬高强基线的上限。值得记住的不是某个复杂网络，而是“动作序列的物理结构可以直接进入训练目标”。\n\n## 直观理解\n\n可以把 AttenA+ 理解成给机器人示范轨迹加一个“动作显微镜”：移动到目标附近的高速段通常只是过渡，错一点也能补；靠近物体、对齐、夹取、释放这些低速段才是最怕误差的地方。传统 VLA 把每个动作 token 一视同仁，AttenA+ 则根据专家动作的速度自动调权，让模型把学习容量更多花在这些慢而关键的瞬间。\n\n![AttenA+ 总览](https://followhub.tenstep.top/papers/attena-rectifying-action-inequality-in-robotic-foundation-models/figure-hero.png)\n\n*AttenA+ 作为无结构改动的训练目标增强，可接入 OpenVLA-OFT、π0/π0.5、Diffusion Policy 和 WAM 等不同动作模型。*\n\n## 核心信息\n\n- **作者**：Daojie Peng、Fulong Ma、Jiahang Cao、Qiang Zhang、Xupeng Xie、Jian Guo、Ping Luo、Andrew F. Luo、Boyu Zhou、Jun Ma\n- **作者单位**：HKUST(GZ); HKU; USTC; IDEA Research; SUSTech; X-Humaniod\n- **来源类型**：arxiv_html_url\n- **用户输入版本**：https://arxiv.org/abs/2605.13548v1\n- **分析使用版本**：https://arxiv.org/html/2605.13548v3\n- **原文链接**：https://arxiv.org/abs/2605.13548\n- **PDF 地址**：https://arxiv.org/pdf/2605.13548.pdf\n- **代码地址**：https://github.com/DaojiePENG/AttenA-Plus\n- **中英翻译地址**：https://hjfy.top/arxiv/2605.13548\n- **发布日期**：2026-05-13\n- **主题域**：physical-embodied-intelligence\n\n## 背景与问题\n\n**动机：** VLA 和 WAM 正在成为端到端机器人控制的主流路线，但它们大多继承了语言模型式的“平坦训练”假设：序列中每个 token、每个时间步都以相同权重参与优化。对语言 token 来说这也许合理，但机器人操作轨迹天然带有物理层级：快速伸手、移动、绕行通常是过渡段；慢速对齐、接触、抓取、插入、释放才是高精度、高失败风险的关键段。\n\n**问题缺口：** 现有 VLA/WAM 的统一 loss 会把表示能力浪费在大量容错的高速动作上，同时低估“最后几厘米”的精细动作。论文把这种错配称为 action inequality：动作序列的信息密度和物理关键性并不均匀。它要解决的问题不是重新设计一个新骨干，而是怎样把这种轨迹内部的物理先验注入现有基础模型训练，让模型更关注真正决定成败的动作片段。\n\n## 论文摘要（英文原文）\n\nExisting robotic foundation models, while powerful, are predicated on an implicit assumption of temporal homogeneity: treating all actions as equally informative during optimization. This \"flat\" training paradigm, inherited from language modeling, remains indifferent to the underlying physical hierarchy of manipulation. In reality, robot trajectories are fundamentally heterogeneous, where low-velocity segments often dictate task success through precision-demanding interactions, while high-velocity motions serve as error-tolerant transitions. Such a misalignment between uniform loss weighting and physical criticality fundamentally limits the performance of current Vision-Language-Action (VLA) models and World-Action Models (WAM) in complex, long-horizon tasks. To rectify this, we introduce AttenA+, an architecture-agnostic framework that prioritizes kinematically critical segments via velocity-driven action attention. By reweighting the training objective based on the inverse velocity field, AttenA+ naturally aligns the model's learning capacity with the physical demands of manipulation. As a plug-and-play enhancement, AttenA+ can be integrated into existing backbones without structural modifications or additional parameters. Extensive experiments demonstrate that AttenA+ significantly elevates the ceilings of current state-of-the-art models. Specifically, it improves OpenVLA-OFT to 98.6% (+1.5%) on the Libero benchmark and pushes FastWAM to 92.4% (+0.6%) on RoboTwin 2.0. Real-world validation on a Franka manipulator further showcases its robustness and cross-task generalization. Our work suggests that mining the intrinsic structural priors of action sequences offers a highly efficient, physics-aware complement to standard scaling laws, paving a new path for general-purpose robotic control.\n\n## 论文摘要（中文翻译）\n\n现有机器人基础模型虽然强大，但隐含地假设时间上是同质的：在优化时把所有动作都视为同等有信息量。这种继承自语言建模的“平坦”训练范式，对操作任务底层的物理层级并不敏感。现实中，机器人轨迹本质上是异质的：低速片段往往通过高精度交互决定任务成功，而高速运动通常只是容错性较强的过渡。统一 loss 权重与物理关键性之间的错配，从根本上限制了当前 Vision-Language-Action（VLA）模型和 World-Action Model（WAM）在复杂长程任务中的表现。为纠正这一问题，作者提出 AttenA+，一个架构无关的框架，通过速度驱动的 action attention 优先学习运动学上关键的片段。AttenA+ 基于逆速度场重加权训练目标，使模型学习容量自然对齐操作任务的物理需求。作为即插即用增强，它可以无结构修改、无额外参数地集成到现有骨干中。大量实验表明，AttenA+ 显著提升当前 SOTA 模型的上限：在 Libero benchmark 上将 OpenVLA-OFT 提升到 98.6%（+1.5%），在 RoboTwin 2.0 上将 FastWAM 提升到 92.4%（+0.6%）。真实 Franka 机械臂验证进一步展示了其鲁棒性和跨任务泛化能力。该工作说明，挖掘动作序列的内在结构先验，是标准 scaling law 之外一种高效、物理感知的补充路径。\n\n## 方法\n\n**方法概述：** AttenA+ 不是新模型骨干，而是一个训练目标层面的增强框架。它先从专家轨迹中计算每个时间步的动作速度，再把速度映射成 attention/weight：速度越低、越可能处在精细接触或对齐阶段，loss 权重越高；速度越高、越可能是过渡运动，权重越低。\n\n**核心机制：** 论文用 ground-truth action 的瞬时速度幅值作为任务关键性的无监督 proxy。给定动作向量，取连续运动维度计算速度范数；再通过权重函数 `w_t = F_A(v_t)` 把速度映射为训练权重。这个权重直接乘到原本的 per-step loss 或生成式模型的向量场/score matching 目标上，因此无需改变 VLA/WAM 的网络结构。\n\n**方法拆解：**\n- **动作不平等建模**：把轨迹划分为高速容错过渡段和低速高精度交互段，认为后者对成功率和错误累积更关键。\n- **速度场构造**：在 Libero 等任务中，用专家动作前 6 个连续维度计算速度幅值，忽略二值 gripper 状态，以避免夹爪开合离散信号污染连续运动关键性估计。\n- **四类速度到权重映射**：论文测试 inverse、inverse squared、exponential decay、log 四种函数，让低速动作获得不同程度的非线性放大。\n- **稳定性正则**：通过 weight clipping 把权重限制在 `[1/clip_max, clip_max]`，并可做 loss normalization，使平均权重约为 1，避免低速噪声点支配梯度。\n- **范式无关集成**：对判别式 VLA，把 L1/L2 动作回归 loss 变成加权 loss；对 flow matching、diffusion policy、WAM 等生成式动作模型，则把同样的速度权重加到向量场或噪声预测目标上。\n\n**关键要点：**\n- AttenA+ 的重要性在于“物理先验进入 loss”，而不是架构创新。\n- 速度是一个便宜、无需标注、容易跨数据集复用的关键性 proxy。\n- 这个方法最适合 precision-demanding manipulation：对齐、夹取、插入、释放、长程多阶段操作。\n\n![速度场与关键动作](https://followhub.tenstep.top/papers/attena-rectifying-action-inequality-in-robotic-foundation-models/figure-method.png)\n\n*论文通过速度场展示动作序列信息密度并不均匀，低速段通常对应操作成败关键处。*\n\n## 结果\n\n**核心结果：**\n- **Libero SOTA 对比**：AttenA+OFT 在 Libero 上达到平均成功率 98.60%，相比 OpenVLA-OFT 的 97.10% 提升 +1.5%，错误率从 2.90% 降到 1.40%。在强基线已经接近饱和的条件下，这个增益有实际含义。\n- **RoboTwin 2.0**：基于 Fast-WAM 的 AttenA+WAM 达到 92.46% 平均成功率，相比 Fast-WAM 91.80% 提升 +0.6%，并略高于 LingBot-VA 的 92.2%；同时不需要 embodied pre-training。\n- **跨范式验证**：在 Libero 上，π0.5 加 AttenA+ 后平均成功率从 96.85% 提到 97.95%（+1.10%）；OpenVLA-OFT 加 AttenA+ 从 97.1% 到 98.6%（+1.50%）。说明它不只适用于一个判别式骨干。\n- **长程任务收益更明显**：OpenVLA-OFT 在 Libero-10 长程任务上从 94.5% 提到 96.6%（+2.1%），π0.5 在同类任务上从 92.4% 到 94.2%（+1.8%），符合“关键低速段影响错误累积”的假设。\n- **真实 Franka 实验**：平均成功率从 92.5% 提到 97.0%。四类任务中，简单关抽屉保持 50/50；放方块从 48/50 到 50/50；多物体从 45/50 到 49/50；长程任务从 42/50 到 45/50。\n- **消融结论**：没有单一 weighting strategy 在所有任务上占优；`clip_max=2` 或 `3` 常有收益，过大的 `clip_max=5` 会让低速噪声过度放大并伤害训练稳定性。\n\n**结果表：**\n\n| 设置 | 基线 | AttenA+ | 变化 | 关键信号 |\n| --- | --- | --- | --- | --- |\n| Libero / OpenVLA-OFT | 97.10% SR | 98.60% SR | +1.50% | 强基线高位继续提升，错误率 2.90%→1.40% |\n| Libero / π0.5 | 96.85% SR | 97.95% SR | +1.10% | 生成式 VLA 也有效 |\n| RoboTwin 2.0 / Fast-WAM | 91.80% SR | 92.46% SR | +0.66% | WAM 路线也有效，无 embodied pre-training |\n| Libero-10 / OpenVLA-OFT | 94.5% SR | 96.6% SR | +2.1% | 长程任务收益更明显 |\n| Real Franka | 92.5% SR | 97.0% SR | +4.5% | 真实任务验证低速关键动作假设 |\n\n![实验任务与真实机器人验证](https://followhub.tenstep.top/papers/attena-rectifying-action-inequality-in-robotic-foundation-models/figure-result.png)\n\n*AttenA+ 在仿真基准和真实 Franka 任务上验证，真实任务包含关抽屉、放方块、多物体和长程序列操作。*\n\n## 洞察\n\n**核心 insight：**\n- 机器人基础模型的下一个增益来源不一定总是更大数据/更大模型，也可能来自更正确地利用动作序列内部的物理结构。\n- “动作 token”不应该完全类比语言 token：语言 token 的重要性来自语义上下文，机器人动作的关键性还来自速度、接触、力、误差容忍度等物理属性。\n- AttenA+ 的简洁性很强：只要数据里有 expert action，就能后处理得到速度权重，因此是一个很容易成为训练 recipe 的技巧。\n\n**和已有方法的关系：**\n- 相比 OpenVLA、π0/π0.5、WAM 等模型论文，AttenA+ 更像一个可叠加的训练目标补丁；它不替代这些骨干，而是试图抬高它们的操作精度上限。\n- 相比 VLA-ADP 这类通过 pruning/效率优化处理动作冗余的方法，AttenA+ 不直接删掉动作，而是在保留完整轨迹的情况下重新分配学习重点。\n- 相比传统 imitation learning 的轨迹级/样本级加权，AttenA+ 更细到 timestep，并且权重来自物理运动学而不是人工质量标签或额外不确定性估计。\n\n**可借鉴点：**\n- 对机器人学习来说，loss design 里加入物理先验可能比盲目扩大 backbone 更经济。\n- 如果做 VLA 数据清洗或训练调参，可以额外记录速度/加速度/接触状态，把它们作为训练权重、采样权重或 curriculum 的依据。\n- 这个思路可扩展到力觉、触觉、接触事件、夹爪状态变化等更丰富信号：低速不是唯一关键性 proxy，但它是一个足够便宜的起点。\n\n## 风险与判断\n\n**局限：**\n- 速度低并不总等于关键，高速抓取、打乒乓球、投掷、动态避障等任务中，关键动作可能恰恰是高速且弹道式的。\n- 方法依赖手工设计的 velocity heuristic 和 clipping 阈值，不同任务需要选择不同 weighting strategy；消融也显示没有一种函数通吃所有任务。\n- 它只利用速度，没有直接使用力、扭矩、接触、滑移、视觉遮挡等更直接的物理关键性信号。\n- 在强基线高成功率场景下，仿真提升有时是 0.6%～1.5%，需要结合任务难度和方差判断工程性价比。\n\n**适用场景：**\n- VLA/WAM/扩散策略等已有动作模型的后续训练、微调或 ablation recipe。\n- 精密操作、长程操作、插入/对齐/放置/多物体序列等低速关键段明显的任务。\n- 数据中已有连续动作轨迹、但不想增加额外标注或修改模型结构的机器人学习项目。\n\n**最终判断：**\n- 这篇论文值得进知识库，因为它提供了一个很干净的“动作物理结构 → 训练目标”的范式。AttenA+ 不是复杂系统，但它提醒 VLA 训练不能只照搬语言模型的平坦 token 观；未来更强的机器人基础模型，很可能需要系统地把速度、接触、力觉和任务阶段这些物理信号写进优化过程。\n\n## 结果速览表\n\n| 指标 | AttenA+ 结果 | 结论 |\n| --- | --- | --- |\n| Libero / OpenVLA-OFT | 98.60% vs 97.10% | 强判别式 VLA 上 +1.50% |\n| Libero / π0.5 | 97.95% vs 96.85% | 生成式 VLA 上 +1.10% |\n| RoboTwin 2.0 / Fast-WAM | 92.46% vs 91.80% | WAM 上 +0.66%，略超 LingBot-VA |\n| Real Franka | 97.0% vs 92.5% | 真实任务平均 +4.5% |\n| 核心代价 | 无结构改动、无额外参数 | 主要成本是 loss 权重计算与调参 |\n| 主要限制 | 速度 heuristic 不总成立 | 动态高速关键任务需谨慎 |\n\n## 相关主题\n\n- vision-language-action\n\n## 相关页面\n\n- [[Vision-Language-Action]]\n- [[OpenVLA: An Open-Source Vision-Language-Action Model]]\n- [[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities]]\n- [[当前 VLA 路线图：基座、可控性、在线精修、记忆与人类数据]]"
     },
     {
       "id": "deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos",
@@ -2462,6 +2518,20 @@
       "type": "source",
       "community": "Human-to-Robot Transfer",
       "content": "# DexImit: Learning Bimanual Dexterous Manipulation from Monocular Human Videos\n\n## 太长不看\n\nDexImit 的价值在于把大量单目人类操作视频转成可训练的双手灵巧机器人数据，而不是直接把 human embodiment 当成 policy 输入。它通过重建、调度、动作生成和增强四阶段，把 Internet 或生成模型产生的人类视频变成物理可行的机器人轨迹，并在零真实机器人数据下支持 sim-to-real 部署。\n\n## 直观理解\n\n可以把 DexImit 理解成一个 human-video-to-robot-data compiler：先从单目视频里恢复手-物体交互和世界坐标，再把长时程双手动作拆成可调度子任务，最后用力闭合抓取、关键帧运动规划和数据增强生成机器人训练集。\n\n![主要图](https://arxiv.org/html/2602.10105/src/pipeline_new.png)\n\n*主要图*\n\n## 核心信息\n\n- **作者**：Juncheng Mu、Sizhe Yang、Yiming Bao、Hojin Bae、Tianming Wei、Linning Xu、Boyi Li、Huazhe Xu、Jiangmiao Pang\n- **作者单位**：Shanghai AI Laboratory; Tsinghua University; The Chinese University of Hong Kong; NVIDIA\n- **来源类型**：arxiv_abs_url\n- **输入来源**：https://arxiv.org/abs/2602.10105\n- **原文链接**：https://arxiv.org/abs/2602.10105\n- **HTML 正文**：https://arxiv.org/html/2602.10105\n- **PDF 地址**：https://arxiv.org/pdf/2602.10105.pdf\n- **代码地址**：https://mujc2021.github.io/deximit/\n- **中英翻译地址**：https://hjfy.top/arxiv/2602.10105\n- **发布日期**：2026-02-10\n- **主题域**：Physical/Embodied Intelligence\n\n## 背景与问题\n\n**动机：** 双手灵巧操作需要大量高质量机器人示范，但真实采集成本远高于普通夹爪操作。与此同时，互联网视频和视频生成模型可以提供大量人类操作视频，覆盖工具使用、长时程任务和细粒度手部动作，因此关键问题变成如何把这些视频转成机器人可用的数据。\n\n**问题缺口：** 直接把人手视频当作另一种 embodiment 训练策略会遇到视觉外观、动作空间和动力学差异；而现有从视频重建轨迹再生成机器人数据的方法又依赖深度或高精度重建，面对快速动作、遮挡、复杂交互和长时程双手协作时容易失败。\n\n## 论文摘要（英文原文）\n\nData scarcity fundamentally limits the generalization of bimanual dexterous manipulation, as real-world data collection for dexterous hands is expensive and labor-intensive. Human manipulation videos, as a direct carrier of manipulation knowledge, offer significant potential for scaling up robot learning. However, the substantial embodiment gap between human hands and robotic dexterous hands makes direct pretraining from human videos extremely challenging. To bridge this gap and unleash the potential of large-scale human manipulation video data, we propose DexImit, an automated framework that converts monocular human manipulation videos into physically plausible robot data, without any additional information. DexImit employs a four-stage generation pipeline: (1) reconstructing hand-object interactions from arbitrary viewpoints with near-metric scale; (2) performing subtask decomposition and bimanual scheduling; (3) synthesizing robot trajectories consistent with the demonstrated interactions; (4) comprehensive data augmentation for zero-shot real-world deployment. Building on these designs, DexImit can generate large-scale robot data based on human videos, either from the Internet or video generation models. DexImit is capable of handling diverse manipulation tasks, including tool use (e.g., cutting an apple), long-horizon tasks (e.g., making a beverage), and fine-grained manipulations (e.g., stacking cups).\n\n## 论文摘要（中文翻译）\n\n双手灵巧操作的数据稀缺严重限制了泛化能力，因为真实机器人数据采集昂贵且依赖人工。人类操作视频天然包含任务概念和底层动作，但人手与机器人灵巧手之间存在很大的 embodiment gap，导致直接从人类视频预训练非常困难。DexImit 提出一个自动框架，在没有额外深度、相机或标注信息的条件下，把单目人类操作视频转换成物理可行的机器人数据。它使用四阶段流程：近似尺度的手-物体交互重建、子任务分解与双手调度、与演示一致的机器人轨迹合成，以及面向零样本真实部署的数据增强。系统能处理工具使用、长时程任务和细粒度操作等多类双手灵巧任务。\n\n## 方法\n\n**方法概述：** DexImit 是一个从单目人类操作视频自动生成双手灵巧机器人训练数据的框架，核心流程是 4D 手-物体重建、action-centric 双手调度、力闭合抓取和运动规划、以及面向 sim-to-real 的数据增强。\n\n**核心机制：** DexImit 用四阶段 pipeline 缩小这个 gap：先用 SpatialTracker v2、Wilor、SAM3D 和 FoundationPose++ 从单目视频中恢复近似尺度的手与物体轨迹，并映射到统一世界坐标；再用 Qwen3-VL 做任务理解和子任务标注，通过 Action-Centric Scheduling 安排多手多阶段动作；随后用基于 force-closure 的抓取合成和关键帧运动规划生成机器人轨迹；最后通过物体位姿、尺度、相机和点云观测增强训练 3D Diffusion Policy。\n\n**方法拆解：**\n\n- 4D 重建：用手部尺寸先验估计单目深度尺度，结合手/物体分割、SAM3D 物体生成、Wilor 手姿态和 FoundationPose++ 6D 跟踪得到连续手-物体轨迹。\n- 世界坐标对齐：通过桌面法向、双手初始方向和物体初始包围盒把任意视角视频映射到统一机器人工作空间。\n- 双手调度：用 Qwen3-VL 把视频拆成 Task/Subaction，并用 Action-Centric Scheduling 处理单手、协作双手、并发双手和长时程任务。\n- 动作生成：用 MANO prompt 和 force-closure 约束生成抓取候选，再按与人手演示的一致性排序，并通过稳定性检查选择最终 grasp；物体运动通过关键帧相对变换转成末端执行器目标。\n- 数据增强：随机化物体位姿和尺度、相机位姿以及点云观测缺失/噪声，目标是在没有真实机器人数据的情况下提升零样本部署鲁棒性。\n\n**关键要点：**\n\n- 这篇论文把 human video 的价值从表示迁移推进到可执行数据生成：human video 可以被编译成机器人 demonstrations。\n- 最关键的工程选择是不用单一端到端策略硬吃视频，而是把重建、语义调度、物理抓取和增强分层处理。\n- DexImit 特别瞄准双手灵巧操作，因为这里真实数据更贵、普通 human-to-robot 路线更容易被 embodiment gap 卡住。\n\n![方法图](https://arxiv.org/html/2602.10105/src/pipeline_new.png)\n\n*方法图*\n\n## 结果\n\n**核心结果：**\n\n- 对象轨迹重建实验中，ST2+FPose 达到 82% 成功率，高于 ST2+PCR 的 76%、DA3+PCR 的 45%、TA+RANSAC 的 38%、VGGT+PCR 的 32% 和 TA+PCR 的 11%。\n- 六类仿真任务中，DexImit 在 Put Cup、Grapefruit、Fruits、Pour 上达到 100% 成功率，在 Pot 上达到 78%，在 Stack Cups 上达到 52%；RigVid 和 DexMan 在长时程或复杂双手任务上多项失败。\n- 真实零样本部署评估覆盖四个 real-world meta-tasks，并比较三种数据增强 ablation，论文结论是完整增强 pipeline 对 sim-to-real 鲁棒性最关键。\n- 运行时间分析显示，5s/10s/20s 输入视频总处理时间约为 173.1s/201.1s/256.6s，单视频约数分钟级，具备批量数据生成潜力。\n\n**结果表：**\n\n| 维度 | DexImit 结果 | 对比/含义 |\n| --- | --- | --- |\n| 4D 轨迹重建 | ST2+FPose 82% | 高于 ST2+PCR 76%、DA3+PCR 45%、VGGT+PCR 32% |\n| 仿真短程任务 | Put Cup/Grapefruit/Fruits/Pour 均 100% | 优于 RigVid/DexMan 的不完整覆盖 |\n| 长时程/细粒度任务 | Pot 78%，Stack Cups 52% | baseline 在这些任务上多项失败 |\n| 数据生成效率 | 20s 视频约 256.6s | 单视频数分钟，适合规模化但仍非实时 |\n\n![结果图](https://arxiv.org/html/2602.10105/src/sim_compress.png)\n\n*结果图*\n\n## 洞察\n\n**核心 insight：**\n\n- DexImit 提供了 human video 利用的另一条路线：不是等待大模型自然学会跨 embodiment 表示，而是把人类视频显式编译成机器人可训练数据。\n- 四阶段 pipeline 的价值在于把难题拆开：几何重建负责把视频落到物理世界，VLM 负责语义分解，抓取/规划负责物理可执行性，增强负责真实部署鲁棒性。\n- 这类 data-engine 方法和 VLA co-training 并不冲突：前者可以生产更接近机器人动作空间的 demonstration，后者负责把多源数据吸收到 foundation policy。\n\n**和已有方法的关系：**\n\n- 相对 Human-to-Robot Transfer 的 co-training 路线，DexImit 更偏显式数据生成和物理可行性约束。\n- 相对 RigVid/DexMan 等从视频复现轨迹的方法，DexImit 加入近似尺度重建、双手调度和力闭合抓取，降低轨迹噪声与 long-horizon compounding error。\n\n**可借鉴点：**\n\n- 用手部尺寸作为单目视频尺度估计先验，是把 human video 转 robot data 的实用桥接点。\n- Action-Centric Scheduling 可以作为长时程双手操作数据生成的中间表示，而不是直接从视频回归连续动作。\n- VLM 不只用于理解输入视频，也可以用于自动过滤生成数据是否符合文本描述。\n\n## 风险与判断\n\n**局限：**\n\n- 当前依赖 SAM3D 等刚体几何生成，不能很好处理软体或关节物体。\n- 系统针对桌面双手操作，尚不支持移动操作场景。\n- 长视频中多模块串联会积累误差，复杂长时程任务有时仍需要人工修正 VLM 子任务分解或重建结果。\n- 严重遮挡下的 in-hand manipulation 很难从单目视频可靠恢复，当前不支持专门机制。\n\n**适用场景：**\n\n- 适合需要从互联网视频、人工拍摄视频或视频生成模型中扩展双手灵巧操作数据的场景。\n- 适合工具使用、长时程桌面操作、双手协作和细粒度堆叠/倒水/切割等任务。\n\n**最终判断：**\n\n- 这篇论文值得进入 wiki，因为它把 human video 方向从 representation transfer 扩展到 robot data generation，是补齐 human-to-robot 路线的重要材料。\n- 它不直接改变 VLA 基座路线的判断，但会改变对 human data 的理解：人类视频既可以作为预训练信号，也可以通过重建与规划被编译成机器人数据。\n\n## 结果速览表\n\n| 维度 | DexImit 结果 | 对比/含义 |\n| --- | --- | --- |\n| 4D 轨迹重建 | ST2+FPose 82% | 高于 ST2+PCR 76%、DA3+PCR 45%、VGGT+PCR 32% |\n| 仿真短程任务 | Put Cup/Grapefruit/Fruits/Pour 均 100% | 优于 RigVid/DexMan 的不完整覆盖 |\n| 长时程/细粒度任务 | Pot 78%，Stack Cups 52% | baseline 在这些任务上多项失败 |\n| 数据生成效率 | 20s 视频约 256.6s | 单视频数分钟，适合规模化但仍非实时 |\n\n## 相关主题\n\n- human-video-robot-data-generation\n- human-to-robot-transfer\n\n## 相关页面\n\n- [[Human Video Robot Data Generation]]\n- [[Human-to-Robot Transfer]]\n- [[当前 VLA 路线图：基座、可控性、在线精修、记忆与人类数据]]"
+    },
+    {
+      "id": "dexjoco-a-benchmark-and-toolkit-for-task-oriented-dexterous-manipulation-on-mujoco",
+      "label": "DexJoCo: A Benchmark and Toolkit for Task-Oriented Dexterous Manipulation on MuJoCo",
+      "type": "source",
+      "community": "Human-to-Robot Transfer",
+      "content": "# DexJoCo: A Benchmark and Toolkit for Task-Oriented Dexterous Manipulation on MuJoCo\n\n## 太长不看\n\nDexJoCo 的价值不在于提出一个新策略模型，而在于把“灵巧手到底比夹爪强在哪里、现有 VLA/模仿学习策略在哪些灵巧交互上失败”变成了可系统测量的问题。它提供 11 个功能型 MuJoCo 任务、1.1K 条人类示范、低成本手套遥操作采集系统，以及面向视觉随机化、动力学随机化、多任务训练和 action-head 适配的评测工具链。对后续灵巧手机器人学习来说，这篇更像基础设施论文：它给出了一个比 pick-and-place 更接近真实灵巧操作的压力测试场。\n\n## 直观理解\n\n可以把 DexJoCo 理解成一个“灵巧手版 LIBERO / CALVIN”，但任务设计刻意避开简单抓取搬运，转向浇花、敲钉子、折眼镜、开微波炉、解锁 iPad、汉诺塔、装配、拍照等需要手指协调、接触反馈、顺序约束和双手分工的场景。作者不仅搭了仿真环境，还配了一套用 Rokoko 手套和 Vive Tracker 采集人类示范的低成本系统，再把这些数据转成 LeRobot / Diffusion Policy 等现代策略可以消费的格式。它真正想回答的是：当任务从“把东西拿起来”变成“用手完成一个有功能语义的动作”时，当前策略到底卡在哪里。\n\n![DexJoCo overview](https://arxiv.org/html/2605.16257v1/x1.png)\n\n*DexJoCo 总览：11 个任务、1.1K 人类示范、领域随机化回放与策略评测工具链。*\n\n## 核心信息\n\n- **作者**：Hanwen Wang、Weizhi Zhao、Xiangyu Wang、Siyuan Huang、He Lin、Boyuan Zheng、Rongtao Xu、Gang Wang、Yao Mu、He Wang、Lue Fan、Hongsheng Li、Zhaoxiang Zhang、Tieniu Tan\n- **作者单位**：NLPR & MAIS, CASIA; SJTU; MBZUAI; Beijing Institute of Basic Medical Sciences; PKU & Galbot; CUHK\n- **来源类型**：arxiv_abs_url\n- **输入来源**：https://arxiv.org/abs/2605.16257\n- **原文链接**：https://arxiv.org/abs/2605.16257\n- **HTML 正文**：https://arxiv.org/html/2605.16257v1\n- **PDF 地址**：https://arxiv.org/pdf/2605.16257.pdf\n- **项目页**：https://dexjoco.github.io\n- **中英翻译地址**：https://hjfy.top/arxiv/2605.16257\n- **发布日期**：2026-05-15\n- **主题域**：Physical/Embodied Intelligence\n\n## 背景与问题\n\n**动机：** 机器人操作社区已经有不少成熟的夹爪平台数据集和基准，但人类级操作往往依赖灵巧手：按按钮、挤压夹子、折叠眼镜、双手握持与插装、连续步骤执行等都不是简单开合夹爪能自然完成的。要推动这类能力，研究者需要标准化任务、可复现环境、统一数据格式和能暴露失败模式的评测协议。\n\n**问题缺口：** 现有灵巧手 benchmark 往往有四类不足：一是只考虑 hand-only 设置，脱离真实机械臂-手系统；二是任务集中在 in-hand manipulation 或 pick-and-place，不能凸显灵巧手相对夹爪的功能优势；三是缺少好用的人类示范采集系统，导致数据要么靠 RL 生成、要么行为不自然；四是缺乏统一语言指令与现代 VLA/模仿学习评测格式，难以比较不同策略。\n\n**DexJoCo 的定位：** 这篇论文把问题定位为“task-oriented dexterous manipulation”：不是单纯让手指动起来，而是让灵巧手在有功能语义的场景里完成任务。它更接近一个研究基础设施，目标是让后续模型在相同任务、相同数据和相同随机化设置下暴露真实瓶颈。\n\n## 论文摘要（英文原文）\n\nAchieving human-level manipulation requires dexterous robotic hands capable of complex object interactions. Advancing such capabilities further demands standardized benchmarks for systematic evaluation. However, existing dexterous benchmarks lack tasks that reflect the unique manipulation capabilities of dexterous hands over parallel grippers, as well as comprehensive evaluation pipelines. In this paper, we present DexJoCo, a benchmark and toolkit for task-oriented dexterous manipulation, comprising 11 functionally grounded tasks that evaluate tool-use, bimanual coordination, long-horizon execution, and reasoning. We develop a low-cost data collection system and collect 1.1K trajectories across these tasks, with support for domain randomization to assess robustness. We benchmark modern models under diverse settings, including visual and dynamics randomization, multi-task training, and action-head adaptation. Through extensive empirical analysis, we identify several important insights and common limitations of current policies in dexterous manipulation, highlighting key challenges for future research in dexterous hand robot learning.\n\n## 论文摘要（中文翻译）\n\n实现接近人类水平的操作能力，需要机器人灵巧手能够处理复杂物体交互；而推进这类能力又需要标准化 benchmark 来进行系统评测。然而，现有灵巧操作基准缺少能够体现灵巧手相对平行夹爪独特能力的任务，也缺乏完整评测流水线。本文提出 DexJoCo，一个面向任务导向灵巧操作的 benchmark 与工具包，包含 11 个有功能语义的任务，用于评估工具使用、双手协调、长时程执行和推理能力。作者开发了一个低成本数据采集系统，并在这些任务上采集 1.1K 条轨迹，同时支持领域随机化来评估鲁棒性。论文在视觉与动力学随机化、多任务训练、action-head 适配等多种设置下评测现代模型，通过系统实验总结出当前灵巧操作策略的重要局限，为未来灵巧手机器人学习指出关键挑战。\n\n## 方法\n\n**方法概述：** DexJoCo 由四层组成：MuJoCo 中的机械臂-灵巧手任务环境、低成本人类示范采集系统、可转换为主流格式的数据管线，以及对 ACT、Diffusion Policy、π0.5、GR00T N1.5 等策略的统一评测协议。\n\n![DexJoCo pipeline](https://arxiv.org/html/2605.16257v1/x2.png)\n\n*DexJoCo pipeline：任务构建、遥操作采集、轨迹增强、格式转换和策略评测。*\n\n**1. 机器人与观测/动作设定。** DexJoCo 基于 MuJoCo，机器人由 Rethink Robotics mount、Franka Panda 机械臂和 Allegro Hand 组成。观测包含第三人称与腕部 RGB/RGB-D、交互物体 pose、机器人运动状态、末端执行器 pose 和手部关节角。动作空间采用目标绝对末端位姿与 Allegro Hand 目标绝对关节角，这使数据既能表达机械臂移动，也能表达高维手指控制。\n\n**2. 低成本遥操作采集系统。** 作者用 Rokoko Smartgloves 捕捉手部运动，用 HTC Vive Tracker 与 Base Station 捕捉腕部/末端位姿，整体成本约 2,300 美元。手部 retargeting 使用 GeoRT 思路，将人类 fingertip keypoints 映射到 Allegro Hand 关节配置，目标包括保持指尖运动方向、扩大工作空间覆盖、保持均匀灵敏度、保留 pinch 行为以及避免自碰撞。这个设计的重点是：不用昂贵动捕房，也尽量避免 RGB 手势估计的遮挡问题。\n\n**3. 任务设计。** 每个任务定义为交互物体集合与目标约束集合，目标约束包括顺序/时序、目标 pose、关节状态和接触条件。任务只有在这些约束同时满足时才算成功。任务设计遵循四个原则：功能性交互、依赖灵巧性、长时程组合性、双手协调。具体任务包括 Hammer Nail、Click Mouse、Pick Bucket、Pinch Tongs、Fold Glasses、Water Plant，以及 Unlock iPad、Hanoi、Assembly、Microwave、Photograph 等双手任务。\n\n![DexJoCo tasks](https://arxiv.org/html/2605.16257v1/x5.png)\n\n*任务设计覆盖工具使用、按钮/铰链交互、双手协作、插装与长时程流程。*\n\n**4. 领域随机化。** DexJoCo 支持对象位置、桌面高度、第三人称相机位姿、光照方向/颜色、桌面纹理等随机化。一个关键设计是通过轨迹 replay 做视觉增强：同一条人类示范可以在不同渲染条件下重放，用于测试视觉鲁棒性，而不是只在固定场景上过拟合。\n\n**5. 策略训练和评测。** 论文评测了 DP-Transformer、DP-CNN、ACT、π0.5 和 GR00T N1.5。数据可以转换到 LeRobot Dataset v3.0 和 Diffusion Policy Zarr 等格式，评测采用 server-client 部署框架。实验设置还包括视觉随机化、动力学随机化、多任务训练，以及对 VLA action head 是否保留预训练权重的比较。\n\n## 结果\n\n**核心结果：** DexJoCo 对当前策略非常难。即便是预训练 VLA 或强模仿学习基线，在双手、插装、按钮点击、铰链挤压和长时程记忆任务上也会系统失败。视觉随机化会显著降低成功率，说明这些策略仍然容易依赖固定外观/视角；而语言泛化实验显示，VLA 在解锁 iPad 任务中没有真正学会语言条件控制，而是倾向固定动作偏置。\n\n**关键实验信号：**\n\n- 在只随机化物体位置和桌面高度的 `rand-obj` 设置下，平均成功率最高的是 π0.5（52.5%），DP-Transformer 也达到 50.4%，DP-CNN 为 47.6%，GR00T N1.5 为 40.2%，ACT 为 35.5%。\n- 在额外加入相机、光照、纹理的 `rand-full` 视觉随机化后，所有模型都明显下降：π0.5 从 52.5% 降到 34.1%，DP-Transformer 从 50.4% 降到 20.0%，DP-CNN 从 47.6% 降到 28.4%。\n- DP-CNN 在 Unlock iPad 和 Pinch Tongs 上异常强，作者推测这可能来自 FiLM 方式注入观测，比 self/cross attention 更利于精细视觉交互。\n- 失败模式集中在按钮、插入、挤压/释放和记忆：模型能拿起设备或移动物体，但经常按不到目标按钮；能抓住夹子但不能连续挤压释放；能把热狗放进微波炉但又随手带出来。\n- 多任务训练在相同训练步数下会退化：DP-Transformer 在所有任务下降，说明当前容量/训练设置还不能自然吸收这些异质灵巧任务。\n- 动力学随机化下，π0.5 平均比 DP-Transformer 更稳，提示大规模预训练对扰动有帮助，但并不能解决高维灵巧动作空间本身的瓶颈。\n- 保留预训练 action head 比完全随机初始化更好，说明 VLA 的动作头权重仍有迁移价值；但由于大多数预训练来自夹爪数据，高维灵巧手动作仍存在 embodiment mismatch。\n\n**结果速览表：**\n\n| 设置 / 模型 | DP-T | DP-C | ACT | π0.5 | GR00T N1.5 | 主要含义 |\n|---|---:|---:|---:|---:|---:|---|\n| rand-obj 平均成功率 | 50.4 | 47.6 | 35.5 | 52.5 | 40.2 | 任务本身已经有挑战，但强模型可在部分单臂任务上达到较高成功率 |\n| rand-full 平均成功率 | 20.0 | 28.4 | 22.7 | 34.1 | 30.5 | 视觉随机化造成普遍退化，外观/视角鲁棒性不足 |\n| 困难双手任务 | 多数模型低成功 | 部分精细交互较强 | 偏弱 | 相对较强但仍失败 | 不稳定 | 灵巧手长时程和双手协调不是现有 VLA 的自然强项 |\n| 语言泛化 | — | — | — | 失败 | — | 解锁任务中表现更像固定动作偏置，而非真实语言条件控制 |\n\n## 洞察\n\n**1. Benchmark 的任务语义比模型榜单更重要。** DexJoCo 最有价值的部分不是 π0.5 比 DP-T 高多少，而是它把灵巧手的关键能力拆成可以测的失败面：按钮点击、铰链/夹子、插装、双手异步分工、长时程步骤、视觉鲁棒性和语言条件控制。这些正是普通夹爪 benchmark 很难暴露的问题。\n\n**2. 灵巧手 foundation model 不能只继承夹爪 VLA。** 论文讨论指出，当前 VLA 多在夹爪数据上预训练，动作空间与 Allegro Hand 这类高维灵巧手不匹配。即使视觉语言骨干很强，action head 也未必能表达高维手指耦合。后续可能需要 hand-centric pretraining、embodiment-aware action representation 或更明确的手部关节/接触建模。\n\n**3. 视觉-only 对接触密集任务不够。** DexJoCo 的失败案例很清楚：模型常常“看见了物体”，但不知道按钮有没有按下、夹子有没有挤压到位、插装是否真正对齐。仅靠 RGB 和 proprioception 可能不足以覆盖接触力、滑移、局部形变等信息；触觉或接触状态可能是下一阶段精细操作的必要模态。\n\n**4. 对数据生成路线也有启发。** 这篇和 DexImit 互补：DexImit 解决如何从人类视频生成灵巧操作数据，DexJoCo 则提供标准任务和评测压力场。一个自然方向是用 DexImit/人类视频生成方法扩充 DexJoCo 这类功能型任务，再观察模型是否真的解决按钮、插装和双手协作。\n\n**可借鉴点：**\n\n- 做灵巧手 benchmark 时，应优先设计“功能完成条件”，而不是只定义末端位姿误差。\n- 数据采集系统可以采用低成本手套 + tracker + retargeting，而不必一开始就依赖昂贵动捕房。\n- 评测协议应同时包含视觉随机化、动力学随机化和 action-head adaptation，否则很容易高估模型能力。\n- failure taxonomy 应成为 benchmark 的一部分：成功率之外，还要记录精细动作失败、插入失败、记忆失败、交互元素忽略等模式。\n\n## 风险与判断\n\n**局限：**\n- DexJoCo 仍是 MuJoCo 仿真 benchmark，真实机器人部署中的接触、摩擦、传感器噪声、材质形变和执行延迟没有被完整覆盖。\n- 数据规模为 1.1K 条轨迹，对训练大规模通用灵巧手策略来说仍偏小，更适合评测和方法验证，而不是单独支撑 foundation model 训练。\n- 任务虽然比 pick-and-place 更丰富，但仍集中在桌面场景和固定机器人/手配置上，对移动操作、软体物体、复杂工具链和开放世界任务覆盖有限。\n- 论文暴露了语言泛化失败，但没有提供解决方法；它更像诊断工具，而不是完整模型方案。\n\n**适用场景：**\n- 用作灵巧手模仿学习、VLA action head 适配、视觉鲁棒性、双手协调和接触密集操作的统一评测场。\n- 用作新数据生成/遥操作采集方法的下游验证，例如从人类视频生成轨迹后在 DexJoCo 任务上训练策略。\n- 用作分析策略失败模式的工具，尤其适合研究按钮、铰链、插装、长时程和双手任务。\n\n**最终判断：**\n- 这是一篇值得放进知识库的基础设施论文。它本身不解决灵巧手策略学习，但清楚定义了“哪些能力还没解决”，并给出可复现实验场。对 FollowHub 的 embodied intelligence 线索来说，DexJoCo 可以作为评测基准节点，连接 OpenVLA/π0.5/GR00T 等 VLA 模型、DexImit 这类数据生成工作，以及未来 hand-centric foundation model 方向。\n\n## 结果速览表\n\n| 维度 | DexJoCo 设计 | 为什么重要 |\n|---|---|---|\n| 任务 | 11 个功能型灵巧操作任务，覆盖工具使用、双手协调、长时程、推理 | 避免 benchmark 退化为简单抓取搬运 |\n| 数据 | 1.1K 条人类示范轨迹 | 为模仿学习和 VLA 评测提供统一数据 |\n| 采集 | Rokoko 手套 + Vive Tracker，约 2,300 美元 | 降低灵巧手数据采集门槛 |\n| 随机化 | 对象、桌高、相机、光照、纹理、动力学 | 测试视觉与动力学鲁棒性 |\n| 基线 | DP-T、DP-C、ACT、π0.5、GR00T N1.5 | 覆盖从经典模仿学习到现代 VLA 的策略类型 |\n| 主要发现 | 视觉随机化、双手任务、精细交互、语言泛化仍是瓶颈 | 指向后续 hand-centric pretraining、多模态接触感知和更强时序记忆 |\n\n## 相关主题\n\n- [[Vision-Language-Action]]：DexJoCo 是评测 VLA 是否真正适配灵巧手高维动作空间的重要压力测试。\n- [[Human-to-Robot Transfer]]：低成本手套遥操作和 retargeting 体现了从人手示范到机器人灵巧手数据的另一条路线。\n- [[DexImit: Learning Bimanual Dexterous Manipulation from Monocular Human Videos]]：DexImit 偏数据生成，DexJoCo 偏任务基准和评测，两者共同指向灵巧操作数据与 benchmark 的基础设施化。"
+    },
+    {
+      "id": "dm05-open-world-embodied-foundation-model",
+      "label": "DM0.5: 面向开放世界的通用具身智能基础模型",
+      "type": "source",
+      "community": "Vision-Language-Action",
+      "content": "# DM0.5: 面向开放世界的通用具身智能基础模型\n\n> 原力灵机（Dexmal）具身基础模型第二代，接棒 26 年 2 月的 DM0，主打走出实验室、走向开放世界。\n\n## 太长不看\n\nDM0.5 延续 VLA 架构（4B VLM 多模态主干 + 680M Action Expert），核心不是堆规模，而是四项系统增强：长历史上下文、具身推理（CoT）、动态动作对齐监督、数据质量清洗。换来的是开放环境 Zero-Shot 泛化、更长记忆、更鲁棒动作和多机型迁移，在 RoboChallenge Table30 v2 真机评测拿下 SOTA，并在 LIBERO / RoboTwin2.0 / R2R+RxR 导航基准上多项领先。\n\n## 直观理解\n\n可以把它看成\"给 VLA 模型装了记忆 + 教会它边看边想下一步\"：不再只是盯着当前画面输出动作，而是把过去 60 秒的关键视觉信息一起建模，训练时额外学 11 种自回归推理任务（任务规划、事件预测、动作生成），再通过动态路径匹配把\"预测动作\"和\"真实轨迹进展\"对齐，从而把采集节奏噪声滤掉、学到任务真正的动作规律。\n\n## 核心信息\n\n- **发布方**：Dexmal 原力灵机\n- **来源类型**：blog（官方技术博客）\n- **原文链接**：https://www.dexmal.com/blog/dm0.5\n- **代码/权重**：GitHub(devmal/opendm)、HuggingFace、ModelScope\n- **发布时间**：2026-08（访问）；DM0 于 2026-02 发布\n- **主题域**：Physical/Embodied Intelligence\n\n## 背景与问题\n\n**动机：** VLA 过去两年让机器人走向视觉、语言、动作统一建模，但真实世界远高于一个 Demo。通用机器人基础模型不能只在固定场景做既定任务，必须理解指令、理解\"接下来为什么这样做\"，在不同相机视角、物体状态、环境、机器人本体和外部干扰下稳定执行，并在少量数据微调后快速适应新任务。\n\n**问题缺口：** DM0 第一代能在可控环境学复杂操作，却还没有真正跨出实验室。要落地开放世界，需要解决长程依赖（很多任务不是单帧马尔可夫能搞定的）、语义理解、数据噪声（遥操作节奏差异）和动作连续性四个问题。\n\n## 方法（基于博客描述）\n\n**架构：** VLA 架构；4B VLM 作为多模态主干 + 680M Action Expert 生成连续动作。相比 DM0，DM0.5 在历史上下文、具身推理、动作监督、数据质量四个层面系统增强。\n\n**三个关键设计：**\n\n1. **Context Abstraction Layer（历史信息融合）**：放弃\"每步只喂当前帧\"的近似 Markov 策略，把过去若干关键帧与当前帧共同建模，提供最长 1 分钟的任务进程记忆（物体从哪拿起、工具是否用过、区域是否清理、是否经过地标）。训练时从当前时刻向前采样多个历史 slot，每个 slot 经时间/空间抽样合并为固定数量视觉 token，采用随机历史长度与历史增强，让模型同时适应长/短/无有效历史，历史上不可用时可退化回当前观测策略。\n\n2. **Embodiment CoT Tasks（广泛具身推理）**：在机器人数据中引入 11 种自回归任务，除连续动作监督外强化指令遵循、动作预测和时序环境感知。分三类：\n   - **任务规划**：当前任务阶段、前后步骤关系、任务进度（做到哪一步、下一步做什么）\n   - **事件与环境预测**：任务边界、状态变化、未来关键事件\n   - **动作生成**：未来动作或动作语义摘要，形成清晰的动作意图表征\n   \n   作用：把机器人数据从单一动作监督扩展成\"指令理解 + 时序推理 + 动作生成\"联合监督，模型不只学\"当前画面→动作\"，还学\"在当前指令和任务进程下为什么这么动\"。\n\n3. **Trajectory Alignment Layer（动态动作匹配）**：同一任务多次采集常有不同执行节奏。若把预测动作与原始轨迹的固定时间点强绑定，模型会学到采集节奏而非任务规律。改为\"轨迹进展对齐\"：模型输出固定长度未来动作片段，数据侧保留细粒度真实轨迹，每个预测动作在真实轨迹中匹配一个严格单调递增的动作锚点（避免时间反转），用动态规划最小化所有匹配的总损失，并额外考虑相邻锚点的轨迹连续性。这降低遥操作时序相位噪声，让模型关注抓取、对准、接触、释放等任务关键动作。\n\n**训练策略：** 多源数据对齐混合训练——机器人操作数据为主体，VLM 数据维持开放词表理解与空间推理，导航数据提供长指令理解与路径决策监督，视频理解数据增强时序建模。分组学习率：视觉语言主干用小 lr 降低灾难性遗忘，动作专家用大 lr 充分学动作分布；混合精度 + 分布式训练。\n\n**推理：** Action Chunk 为单位，默认 10 个 diffusion/Flow Matching steps 生成 50 步 chunk。优化后 4090 单卡 10Hz、H100 单卡 20Hz。\n\n## 数据\n\n**数据构成（多源异构预训练）：**\n- **机器人操作数据**：松灵 ALOHA、Galaxea R1 Lite、AgiBot G1、Franka Panda、UR5、ARX5，以及 Dexmal 自研双臂移动操作机器人\n- **具身导航数据**：开源 VLM 导航 / 开放词汇导航数据集 + 自采 3D 重建场景导航\n- **第一人称人类操作数据**：日常生产环境第一视角操作（手部交互、工具使用、细粒度原子动作）\n- **通用多模态视觉语言数据**：图像/视频/视觉指令，自动生成管线增强空间定位、未来状态预测、动作后果分析、反事实推理\n\n**数据清洗策略（五招）：**\n1. 异常值去除：过滤明显超出物理范围或不满足运动连续性的样本，校验视觉/状态/动作一致性\n2. 静止帧去除：移除长时间无状态或动作变化的静止片段，提高有效动作密度\n3. 无价值动作去除：去掉执行不到位/意图不明确/与任务无关的片段，减少噪声监督\n4. 动作模式去重：对 ALOHA 等平台等价关节组合去重，保持关节表示一致\n5. 错误标注重标：自动化管线跨模态一致性校验，修正子任务标签，不丢数据\n\n## 实验\n\n**Zero-Shot 能力：** 从动作类型（8 类：pick/put/move/pull/cover/wipe/stack/press）与条件约束（7 类：color/shape/size/status/sequence/relative/absolute position）两个维度评测。在 Franka 平台对比 Pi0.5-Droid 与 DM0.5-Droid；在 Dexmal-Mirror 平台对比 DM0 与 DM0.5。DM0.5 在绝大多数维度显著优于 Pi0.5-Droid 与 DM0，动作覆盖面更广、基础操作更稳、指令遵循更强。\n\n**真机测试（RoboChallenge Table30 v2）：** Generalist Setting（每机型一个统一模型）。DM0.5 取得 SOTA：整体 Success Rate 43%，综合 Score 54.42。盖章定位、按按钮等记忆型任务提升显著；双手托盘等双臂协同和插花等精细操作为较强视觉 Grounding 与末端控制能力。\n\n**仿真测试：**\n- **LIBERO**：Spatial 99.0 / Object 99.8 / Goal 99.6 / Long 97.4 / Average **99.0**（对比 π0 94.2、π0.5 96.9、OpenVLA-OFT 97.1、GR00T N1.7 97.0、StarVLA 97.9、ABot-M0 98.6、Being-H0.5 98.9、Cosmos Policy 98.5）\n- **RoboTwin2.0**：Clean 93.6 / Randomized 93.3 / Average **93.5**（对比 π0 62.2、π0.5 79.8、Motus 87.9、ABot-M0 85.6、StarVLA 88.3、Being-H0.7 89.9、Qwen-VLA 86.7、LingBot-VA 92.2）\n\n**导航测试：** R2R Val-Unseen NE 4.8（最低）、SR 59.7（最高）；RxR Val-Unseen 四项指标（NE / SR / SPL / nDTW）均第一。\n\n## 洞察\n\n**核心 insight：**\n\n- **\"加记忆 + 教推理 + 动态对齐动作\"是 VLA 从演示走向通用化的系统模板**：长历史上下文解决\"多帧状态依赖\"、CoT 解决\"为什么要这么动\"、动态匹配解决\"采集噪声\"。三者合起来让模型从\"当前帧驱动的操作策略\"升级为\"理解任务进程的通用策略\"。\n- **历史和推理是低成本高回报的监督来源**：不新增真机采集，而是从已有机器人数据里加自回归推理任务 + 历史 slot 采样，属于\"把数据榨干\"式的训练侧增益。\n- **专注动作点而非时间点**：动态动作对齐把监督从\"固定时间对齐\"改成\"轨迹进展对齐\"，这一设计对遥操作数据普遍适用，是工程上很值得借鉴的一手。\n\n**和已有方法的关系：**\n\n- 相对 [[OpenVLA]] / [[π0.7]] 等 VLA 通用框架：DM0.5 同属 VLA，区别在于把\"历史上下文 + 具身推理 + 动作对齐\"作为显式系统设计整体纳入，而不只是扩大模型和数据。\n- 相对 [[MEM]] / [[Long-Horizon Memory]] 方向：DM0.5 的长记忆（最长 60s）是\"架构上直接支持历史输入\"的实现，印证了长程记忆对 VLA 的价值。\n- 相对 [[TurboVLA]]（RTX 4090 实时）：DM0.5 在 4090 单卡也给出了 10Hz 推理，属于能上消费级显卡的实时性水平，但主打的是通用泛化而非极致帧率。\n\n**可借鉴点：**\n\n- Context Abstraction Layer 用随机历史长度训练 + 可退化策略，是让模型同时适应长/短/无历史的安全设计，可迁移到任何序列决策模型。\n- 把动作监督从\"时间对齐\"换成\"轨迹进展对齐 + 单调匹配 + 动态规划\"，可复用到各类遥操作 / 示教数据的策略学习，降低采集节奏偏差。\n- 在机器人数据里注入自回归推理任务做联合监督，是低成本提升指令遵循与时序感知的有效手段。\n\n<!-- confidence: MAPPED -->\n\n## 风险与判断\n\n**局限（基于博客公开信息）：**\n\n- 这是发布博客而非完整论文，缺少消融实验细节、训练数据总量、去中心化评测方法与 error bar；\"SOTA\" 声明需以完整论文/后续复现为准。\n- Zero-Shot 评测任务集（8 动作 × 7 条件）为自建，缺乏与第三方开放 benchmark 的严格横向对齐；与 Pi0.5-Droid 的对比只在 Franka 平台。\n- Table30 v2 43% SR 说明真实开放环境仍有大量失败空间，\"走向开放世界\"是方向性陈述，不代表通用落地。\n- 博客强调多机型迁移但未给量化数据；4B 主干相对更大 VLA 在极端复杂长程任务上的上限未知。\n\n**适用场景：**\n\n- 需要\"一个模型处理多机器人本体 + 多任务\"的通用 VLA 选型。\n- 真实场景下对光照、视角、干扰鲁棒、并希望零样本跟自然语言指令操作的研究/产品。\n- 长程多步任务（需要跨帧状态记忆）或遥操作数据量大的策略训练。\n\n**最终判断：**\n\n- 是**值得记入知识库**的具身基础模型发布：把历史上下文、具身推理、动作对齐三个设计做成一体，且真机 Table30 v2 拿到 SOTA，方向校验较强。\n- 对当前具身智能的实际价值：**高**。它把三个相对分散的方向（long-horizon memory、VLA reasoning、action supervision）收敛到一个可运行的通用模型里，并开源权重，是可复现、可跟踪的路线参照。\n- 跟踪价值：① 是否有完整论文/消融放出；② 4B 主干能否向更大规模迁移成功；③ 后续 DM 系列在开放世界评测（如 LIBERO、RoboChallenge）的持续表现；④ 开源后社区 fine-tune 到新机型、新任务的泛化证据。\n\n## 结果速览表\n\n| 维度 | 数值 / 结论 |\n| --- | --- |\n| 模型架构 | 4B VLM 主干 + 680M Action Expert |\n| 长记忆 | 最长 60s 历史，1 分钟任务进程 |\n| 具身推理 | 11 种自回归任务 × 3 类（规划/预测/动作） |\n| 动作监督 | 动态轨迹进展对齐（单调匹配 + 动态规划） |\n| 真机 Table30 v2 | SOTA：SR 43% / Score 54.42 |\n| LIBERO | 平均 99.0（对比 π0 94.2） |\n| RoboTwin2.0 | 平均 93.5（对比 π0.5 79.8） |\n| R2R Val-Unseen | NE 4.8 / SR 59.7（最佳） |\n| 推理速度 | 4090 单卡 10Hz / H100 单卡 20Hz |\n| 备注 | 发布博客，非完整论文，消融/数据总量待补充 |\n\n## 相关主题\n\n- [[Vision-Language-Action]]"
     },
     {
       "id": "emergence-of-human-to-robot-transfer-in-vision-language-action-models",
@@ -2474,7 +2544,7 @@
       "id": "mem-multi-scale-embodied-memory-for-vision-language-action-models",
       "label": "MEM: Multi-Scale Embodied Memory for Vision Language Action Models",
       "type": "source",
-      "community": "Long-Horizon Memory for Robot Policies",
+      "community": "Vision-Language-Action",
       "content": "# MEM: Multi-Scale Embodied Memory for Vision Language Action Models\n\n## 太长不看\n\n这篇工作的重点，是把机器人策略里的“记忆”从单一历史帧堆叠，升级成多尺度、多模态的长期记忆结构。MEM 用视频短期记忆处理最近视觉细节，用文本长期记忆保留高层语义进度，从而把 VLA 推到更长时间跨度的任务上。\n\n## 直观理解\n\n如果普通 VLA 的记忆更像“最近几秒发生了什么”，那 MEM 想解决的是“机器人十分钟前做过什么、现在做到哪一步、接下来该切到哪个阶段”。它试图让策略同时记住局部感知细节和全局任务进度。\n\n![主要图](https://arxiv.org/html/2603.03596v1/x1.png)\n\n*主要图*\n\n## 核心信息\n\n- **作者**：Marcel Torne 等\n- **原文链接**：https://arxiv.org/abs/2603.03596\n- **HTML 正文**：https://arxiv.org/html/2603.03596v1\n- **PDF 地址**：https://arxiv.org/pdf/2603.03596.pdf\n- **发布日期**：2026-03-04\n- **主题域**：physical-embodied-intelligence\n\n## 背景与问题\n\n**动机：** 长时程机器人任务不是简单地看当前帧就能决策。比如做饭、整理厨房、做三明治，机器人既要记住最近的遮挡和物体位置，也要记住更长时间的任务阶段进展。\n\n**问题缺口：** 传统 end-to-end policy 的记忆往往只是在输入里堆过去观测，难以同时兼顾短期视觉细节和长期语义状态。作者要解决的是：怎样让 VLA 在长达十几分钟的任务中真正具备“多层次记忆”。\n\n## 论文摘要（英文原文）\n\nConventionally, memory in end-to-end robotic learning involves inputting a sequence of past observations into the learned policy. However, in complex multi-stage real-world tasks, the robot's memory must represent past events at multiple levels of granularity: from long-term memory that captures abstracted semantic concepts (e.g., a robot cooking dinner should remember which stages of the recipe are already done) to short-term memory that captures recent events and compensates for occlusions (e.g., a robot remembering the object it wants to pick up once its arm occludes it). In this work, our main insight is that an effective memory architecture for long-horizon robotic control should combine multiple modalities to capture these different levels of abstraction. We introduce Multi-Scale Embodied Memory (MEM), an approach for mixed-modal long-horizon memory in robot policies. MEM combines video-based short-horizon memory, compressed via a video encoder, with text-based long-horizon memory. Together, they enable robot policies to perform tasks that span up to fifteen minutes, like cleaning up a kitchen, or preparing a grilled cheese sandwich. Additionally, we find that memory enables MEM policies to intelligently adapt manipulation strategies in-context.\n\n## 论文摘要（中文翻译）\n\n传统端到端机器人学习中的记忆，通常只是把过去一段观测序列输入给策略。然而在复杂的多阶段真实任务中，机器人记忆必须在多个粒度上表示过去事件：既要有记录高层语义进度的长期记忆，也要有补偿遮挡和保留近期细节的短期记忆。作者的核心观点是，长时程机器人控制需要把多种模态结合起来，分别承载这些不同层次的抽象。为此他们提出 MEM，将视频短期记忆和文本长期记忆结合起来，使策略能够完成长达十五分钟的任务，并在上下文中更智能地调整 manipulation 策略。\n\n## 方法\n\n**方法概述：** MEM 试图把机器人策略中的记忆做成分层结构，而不是简单地把更多历史帧堆进上下文窗口。它把 memory 分成两类：短期 dense visual memory 和长期 semantic memory，并分别用视频编码器和语言记忆来承载。\n\n**核心机制：**\n\n- 高层 policy 更新 language memory，用于记录长期语义事件与任务阶段\n- 低层 policy 使用短期 observation-based memory，处理遮挡、近时感知和局部调整\n- 两类 memory 一起接入 VLA，使策略既能记住高层进度，也能保留近期视觉细节\n\n**方法拆解：**\n\n- 语言长期记忆负责存“已经做过什么、还没做什么、当前任务阶段是什么”\n- 视频短期记忆通过高效 video encoder 压缩近期视觉历史，避免直接把长序列原样送进 backbone\n- MEM 被集成进 π0.6 这类通用 VLA，使其能在长时程任务上保持 runtime 可接受\n- 论文还强调 memory 不只是提升 recall，还能帮助策略在上下文里改变 manipulation strategy\n\n![方法图](https://arxiv.org/html/2603.03596v1/x3.png)\n\n*方法图*\n\n**关键要点：**\n\n- 长期语义记忆和短期视觉记忆必须分开建模\n- memory 设计要考虑实时性，否则长历史会让推理延迟不可用\n- 这是把 VLA 往 long-horizon agent 化推进的一条关键路线\n\n## 结果\n\n**核心结果：**\n\n- MEM 支持跨度长达 `15 分钟` 的任务\n- 代表任务包括 cleanup kitchen、preparing a grilled cheese sandwich 等多阶段真实操作\n- 论文强调：没有 memory 的强 generalist policy 如 π0.6，在这些任务上明显不足；而组合短期视频记忆和长期语言记忆后，性能显著提升\n- 除了完成长时程任务，MEM 还支持 in-context adaptation，例如根据任务过程动态改变 grasp 高度、开门方向等 manipulation strategy\n\n![结果图](https://arxiv.org/html/2603.03596v1/x5.png)\n\n*结果图*\n\n**结果表：**\n\n| 维度 | MEM 结论 |\n| --- | --- |\n| 记忆结构 | 视频短期 + 语言长期 |\n| 时间跨度 | 最长约 15 分钟 |\n| 代表收益 | 长时程任务完成率与策略适应性提升 |\n| 相对无记忆基线 | 明显更强 |\n\n## 洞察\n\n**核心 insight：**\n\n- 这篇论文最重要的贡献，是把机器人 memory 从“上下文长度问题”提升成了“表示分层问题”。作者不是简单让模型看更多历史，而是明确区分哪些信息应该以视觉形式保留、哪些信息应该以语义形式长期保存。\n\n**和已有方法的关系：**\n\n- 相对直接堆历史帧的做法，它更关注 memory abstraction\n- 相对只做 low-level history encoder 的路线，它把 long-horizon semantic progress 也纳入体系\n- 相对 agent 式高层规划，这篇更接近把 memory 直接内嵌进 policy 结构\n\n**可借鉴点：**\n\n- 未来 long-horizon VLA 很可能都需要显式 memory decomposition\n- language memory 很适合作为任务阶段与语义进度的载体\n- 这篇对“具身智能为什么需要 memory module”给出了很有说服力的结构性答案\n\n## 风险与判断\n\n**局限：**\n\n- 长期语言记忆如何更新、压缩与纠错，本身就是新的复杂系统问题\n- 多模态 memory 会显著增加训练和系统设计复杂度\n- 这条路线虽然强，但也意味着更高的工程门槛和更重的模型维护成本\n\n**适用场景：**\n\n- 长时程多阶段 manipulation\n- 需要显式任务进度管理的具身系统\n- 面向 kitchen cleanup、recipe execution 这类真实长流程场景\n\n**最终判断：** 这篇是你这套 wiki 里非常值得保留的 `memory for embodied intelligence` 核心论文，后续很适合做 topic 页的骨架。\n\n## 结果速览表\n\n| 维度 | 结论 |\n| --- | --- |\n| 记忆类型 | 视频短期 + 文本长期 |\n| 目标问题 | 长时程多阶段控制 |\n| 实现重点 | 记忆分层与高效编码 |\n| 代表能力 | 最长 15 分钟任务 |\n\n## 相关主题\n\n- vision-language-action\n- long-horizon-memory-for-robot-policies\n\n## 相关页面\n\n- [[Vision-Language-Action]]\n- [[Long-Horizon Memory for Robot Policies]]\n- [[当前 VLA 路线图：基座、可控性、在线精修、记忆与人类数据]]\n- [[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities]]"
     },
     {
@@ -2488,8 +2558,15 @@
       "id": "pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities",
       "label": "π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities",
       "type": "source",
-      "community": "Long-Horizon Memory for Robot Policies",
+      "community": "Vision-Language-Action",
       "content": "# π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities\n\n## 太长不看\n\nπ0.7 的关键价值不只是把模型继续做大，而是把“可控的通才机器人策略”往前推了一步。它试图解决的核心问题是：当训练数据越来越杂时，机器人基础模型怎样既能吃下示范、失败轨迹、人类视频和网页数据，又不在推理时退化成平均化、含糊的动作。作者给出的答案是把“怎么做”也写进 prompt，包括子任务语言、子目标图像、质量/速度/错误等 episode metadata，让模型学会在多模态上下文里被 steer。\n\n## 直观理解\n\n可以把 π0.7 理解成一个面向具身智能的“提示可控型 VLA”。传统 VLA 往往只知道任务目标，而 π0.7 还显式接收策略线索和阶段性目标，所以它不只是知道“做什么”，还更知道“按什么方式做”。这使它更容易利用 heterogeneous data，并把不同来源学到的技能重新组合到新任务上。\n\n![Fig. 1 总览图](https://followhub.tenstep.top/papers/pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities/figure-hero.png?v=20260511a)\n\n*Fig. 1：π0.7 总览图，展示 heterogeneous data、prompt 组成以及开箱即用能力与 cross-embodiment transfer。*\n\n## 核心信息\n\n- **作者**：Bo Ai 等 Physical Intelligence 团队\n- **机构**：Physical Intelligence\n- **来源类型**：pdf_url\n- **输入来源**：https://www.pi.website/download/pi07.pdf\n- **项目页面**：https://www.pi.website/pi07\n- **PDF 地址**：https://www.pi.website/download/pi07.pdf\n- **arXiv**：https://arxiv.org/abs/2604.15483\n- **发布日期**：2026-04-16\n- **主题域**：physical-embodied-intelligence\n\n## 背景与问题\n\n**动机：** 机器人基础模型一直在追求 generalist 能力，但过去很多 VLA 虽然能覆盖很多任务，却很难真正展示类似 LLM 的组合泛化。尤其当数据混入不同策略、不同质量、失败轨迹和跨 embodiment 数据后，模型很容易把这些模式平均掉，最后既不稳也不够可控。\n\n**问题缺口：** 作者关注的不只是“怎样训练一个更强 VLA”，而是“怎样让机器人基础模型在更杂、更广的数据混合里仍然保持可控性，并把这些数据真正转化成可组合能力”。这也是具身智能走向通用化时的一个核心瓶颈。\n\n## 论文摘要（英文原文）\n\nWe present a new robotic foundation model, called π0.7, that can enable strong out-of-the-box performance in a wide range of scenarios. π0.7 can follow diverse language instructions in unseen environments, including multi-stage tasks with various kitchen appliances, provide zero-shot cross-embodiment generalization, for example enabling a robot to fold laundry without seeing the task before, and perform challenging tasks such as operating an espresso machine out of the box at a level of performance that matches much more specialized RL-finetuned models. The main idea behind π0.7 is to use diverse context conditioning during training. This conditioning information, contained in the prompt, makes it possible to steer the model precisely to perform many tasks with different strategies. It is conditioned not just on a language command that describes what it should do, but on additional multimodal information that also describes the manner or strategy in which it should do it, including metadata about task performance and subgoal images. This enables π0.7 to use very diverse data, including demonstrations, potentially suboptimal (autonomous) data including failures, and data from non-robot sources. Our experiments evaluate π0.7 across numerous tasks with multiple robot platforms, on tasks that require speed and dexterity, language following, and compositional task generalization.\n\n## 论文摘要（中文翻译）\n\n作者提出了一个新的机器人基础模型 π0.7，它可以在多种场景中实现很强的开箱即用表现。π0.7 能够在未见环境中遵循多样化语言指令，包括涉及多种厨房电器的多阶段任务；能够实现 zero-shot 的跨 embodiment 泛化，例如在从未见过该任务的情况下完成叠衣服；还能在不做任务特定后训练的前提下，完成如操作咖啡机这类具有挑战性的任务，其表现可与专门经过 RL 微调的模型相匹配。π0.7 的核心思想是在训练中使用多样化的上下文条件信息。这些包含在 prompt 里的条件让模型能够被更精确地 steer，从而以不同策略执行多种任务。模型接收的不仅是描述“做什么”的语言命令，还包括描述“如何做”的额外多模态信息，例如任务执行质量相关的 metadata 和子目标图像。这样一来，π0.7 就能利用非常多样的数据，包括示范数据、包含失败在内的次优自主数据，以及非机器人来源的数据。论文在多个机器人平台和大量任务上评估了 π0.7，涵盖速度与灵巧性、语言跟随以及组合泛化等能力。\n\n## 方法\n\n**方法概述：** π0.7 是一个约 5B 参数的机器人基础模型，由 4B 级别的 VLM backbone、MEM 风格的视频历史编码器和 860M 的 action expert 组成。作者没有把重点放在全新架构发明上，而是把重点放在 prompt 设计和数据利用方式上。\n\n**核心机制：** π0.7 不只接收 task instruction，而是把 context 扩展成多种模态的组合：\n\n- **子任务语言**：给出更细粒度的当前 subtask instruction\n- **子目标图像**：由轻量 world model 生成，帮助模型更明确地知道阶段性目标状态\n- **episode metadata**：包含速度、质量、是否犯错等标签，让模型学习“什么样的执行方式更优”\n- **控制模式标识**：区分 joint-level 与 end-effector 控制\n\n**训练数据策略：** 这篇工作的一大特点是明确拥抱 heterogeneous data，而不是只保留高质量示范：\n\n- 机器人示范数据\n- 较低质量甚至失败的轨迹\n- 来自先前模型评估或自主执行的数据\n- 人类 egocentric 视频\n- 通用多模态网页数据\n\n作者的核心判断是，只要 prompt 足够细、能把行为方式 disambiguate 清楚，次优数据和非机器人数据也能成为通才能力的一部分，而不只是噪声。\n\n**方法要点：**\n\n- 通过 richer prompting 缓解多源数据带来的 mode averaging\n- 用 subgoal image 把“想达到什么状态”显式交给策略模型\n- 用 metadata 让模型能在推理时被 steer 到“更快”“更稳”“少犯错”等偏好\n- 把 prior RL specialists 的经验蒸馏进一个 generalist 模型中\n\n![Fig. 2 架构图](https://followhub.tenstep.top/papers/pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities/figure-method.png?v=20260511a)\n\n*Fig. 2：架构总览图，说明 4B VLM backbone、MEM-style history encoder、860M action expert，以及 language / metadata / subgoal image 的关系。*\n\n## 结果\n\n**核心结果：**\n\n- π0.7 在多类高灵巧、长时程任务上实现了强 out-of-the-box 表现，不依赖任务特定 post-training\n- 在 espresso making、box building、laundry folding 等任务上，性能可与先前 RL specialist 模型竞争，部分任务吞吐甚至更高\n- 在未见环境中的 instruction following 上，明显优于 π0.5 和 π0.6\n- 在复杂 referential instruction 上，加入 world-model 生成的 subgoal image 后效果进一步提升\n- 展示了 zero-shot cross-embodiment transfer，例如在目标机器人从未见过相应任务数据时也能直接迁移\n\n![Fig. 6 结果图](https://followhub.tenstep.top/papers/pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities/figure-result.png?v=20260511a)\n\n*Fig. 6：开箱即用灵巧操作结果图，展示 π0.7 在 laundry、espresso、box building 等任务上与 specialist 路线的对比。*\n\n**结果速览表：**\n\n| 维度 | π0.7 的结论 |\n| --- | --- |\n| 开箱即用灵巧操作 | 能直接完成多种高难度 manipulation 任务 |\n| 对比 RL specialist | 多项任务接近甚至超过专用策略 |\n| 指令泛化 | 明显强于 π0.5 / π0.6 |\n| 跨 embodiment 泛化 | 展现 zero-shot transfer 能力 |\n| 组合泛化 | 能把已学技能重新组合到新任务 |\n\n## 洞察\n\n**核心 insight：** 这篇论文真正值得记住的不是“又一个更强的 VLA”，而是它把具身智能里的 prompt engineering 推到了更结构化的层面。作者实际上在做一件很重要的事：把训练数据中的“执行方式”也显式化，使得基础模型不只是学习任务结果，还学习任务风格、质量和阶段性目标。\n\n**和已有路线的关系：**\n\n- 相对传统 VLA，π0.7 更强调 steerability，而不是只强调任务覆盖面\n- 相对只吃高质量 demonstration 的路线，它更愿意吸收失败轨迹和 autonomous data\n- 相对只做 policy learning 的路线，它把 lightweight world model 纳入 prompt 生成链路，让图像化子目标成为机器人控制的一部分\n\n**可借鉴点：**\n\n- 具身智能里“数据更多”并不自动等于“泛化更强”，关键是有没有把数据差异显式编码给模型\n- subgoal image 可能是连接 world model 与 low-level policy 的一条务实接口\n- 从工程视角看，这篇工作说明通才策略与 specialist 策略不一定是替代关系，也可以是蒸馏关系\n\n## 风险与判断\n\n**局限：**\n\n- 论文展示了强 generalization 信号，但作者自己也承认，在如此大而杂的数据集下，很难严格界定什么是真正“未见”的任务\n- 许多能力可能来自对已见技能片段的 remix，而不是更强意义上的系统性推理\n- 这条路线对高质量标注、prompt 设计和数据组织的要求很高，复制门槛不低\n\n**适用场景：**\n\n- 面向多任务 manipulation 的机器人基础模型\n- 需要跨 embodiment 泛化的研究场景\n- 想把 world model、language coaching、metadata control 结合进统一策略框架的系统\n\n**最终判断：** 这是近阶段具身智能里很有代表性的一篇工作。它的重要性不只在性能，而在于明确提出并验证了一条“通过多模态可控 prompt 把 heterogeneous data 变成通才能力”的路线。\n\n## 相关主题\n\n- vision-language-action\n- human-to-robot-transfer\n\n## 相关页面\n\n- [[Vision-Language-Action]]\n- [[Online RL for VLA]]\n- [[Long-Horizon Memory for Robot Policies]]\n- [[Human-to-Robot Transfer]]\n- [[当前 VLA 路线图：基座、可控性、在线精修、记忆与人类数据]]"
+    },
+    {
+      "id": "qwen-vla",
+      "label": "Qwen-VLA: Unifying Vision-Language-Action Modeling across Tasks, Environments, and Robot Embodiments",
+      "type": "source",
+      "community": null,
+      "content": "# Qwen-VLA: Unifying Vision-Language-Action Modeling across Tasks, Environments, and Robot Embodiments\n\n## 太长不看\n\nQwen-VLA 将操作、连续导航、轨迹预测和人类第一视角运动统一为同一 action-and-trajectory prediction 问题；它不是为每个机器人另训策略，而是用 Qwen3.5-4B 与 1.15B 参数 DiT 动作专家共享建模。其关键价值是以 embodiment-aware prompt 保留各平台原生控制语义，并用四阶段训练把语言—动作先验、视觉 grounding、任务对齐和成功率优化串起来。跨操作、导航、真实 OOD 与动态零样本基准的结果表明，这个统一接口并未以明显的 specialist 性能为代价。\n\n## 直观理解\n\n把 Qwen-VLA 看作“同一位驾驶员配不同控制说明书”：图像和指令交给 Qwen 的视觉语言骨干理解，机器人型号、手臂与控制频率写在 prompt 里；DiT 动作专家再把这些高层条件逐步去噪成该平台可执行的一段连续动作或导航轨迹。\n\n## 核心信息\n\n- **作者**：Qwen Team\n- **作者单位**：pages\n- **来源类型**：arxiv_abs_url\n- **输入来源**：https://arxiv.org/abs/2605.30280\n- **原文链接**：https://arxiv.org/abs/2605.30280\n- **HTML 正文**：https://arxiv.org/html/2605.30280v1\n- **PDF 地址**：https://arxiv.org/pdf/2605.30280v1\n- **代码地址**：https://github.com/QwenLM/Qwen-VLA\n- **中英翻译地址**：https://hjfy.top/arxiv/2605.30280\n- **发布日期**：2026-05-28\n- **主题域**：physical-embodied-intelligence\n\n## 背景与问题\n\n**动机：** VLM 已能做开放世界感知和语言 grounding，扩散/flow policy 也能生成连续控制；但操作、导航、双臂、灵巧手与人类示范通常各有模型、动作空间和数据配方，阻碍能力与数据跨平台累积。\n\n**问题缺口：** 不同任务在动作维度、频率、预测长度和评测上不同，却都要在视觉观察、语言指令和具体 embodiment 约束下预测物理且语义一致的未来序列。核心问题是如何既不强行抹平原生控制约定，又让一个模型从这些异构监督中迁移视觉 grounding、空间推理与连续控制。\n\n## 论文摘要（英文原文）\n\nEmbodied intelligence is often studied through specialized models for individual tasks such as manipulation or navigation, resulting in fragmented capabilities and limited generalization across tasks, environments, and robot embodiments. In this work, we study whether heterogeneous embodied decision-making problems can be unified within a single vision-language-action model. We present Qwen-VLA, a unified embodied foundation model that extends Qwen’s vision-language modeling stack from perception, understanding, and reasoning to continuous action and trajectory generation through a DiT-based action decoder. Qwen-VLA is trained with a large-scale joint pretraining recipe over diverse data sources, including robotics manipulation trajectories, human egocentric demonstrations, synthetic simulation data, vision-and-language navigation data, trajectory-centric supervision, and auxiliary vision-language data. To support multiple robot platforms, we introduce embodiment-aware prompt conditioning, where robot-specific textual descriptions specify the current embodiment and control convention. We further cast manipulation, navigation, and trajectory prediction into a unified action-and-trajectory prediction framework, enabling transferable visual grounding, spatial reasoning, and continuous action generation across robot morphologies, task families, and environments. Experiments on manipulation, navigation, and trajectory-centric benchmarks show consistent multi-task performance and out-of-distribution generalization under variations in scene layout, background, lighting, object configuration, and robot embodiment. Qwen-VLA-Instruct achieves 97.9% on LIBERO, 73.7% on Simpler-WidowX, 86.1%/87.2% on RoboTwin-Easy/Hard, 69.0% OSR on R2R, 59.6% SR on RxR, 76.9% average OOD success in real-world ALOHA experiments, and 26.6% zero-shot success on DOMINO dynamic manipulation.\n\n## 论文摘要（中文翻译）\n\n具身智能常被拆成操作或导航等单一任务的专用模型，因而在任务、环境和机器人形态之间能力割裂、泛化有限。本文考察能否用单一视觉—语言—动作模型统一异构具身决策。Qwen-VLA 在 Qwen 视觉语言栈上加入基于 DiT 的动作解码器，把感知、理解和推理延伸到连续动作与轨迹生成；它以机器人操作轨迹、人类第一视角示范、合成仿真、视觉语言导航、轨迹监督和辅助视觉语言数据进行大规模联合预训练。为支持多种平台，作者把机器人形态和控制约定写入文本 prompt，并把操作、导航和轨迹预测化为统一的动作—轨迹预测。实验显示其在场景布局、背景、光照、物体配置和机器人形态变化下保持多任务与 OOD 泛化：Qwen-VLA-Instruct 在 LIBERO、Simpler-WidowX、RoboTwin Easy/Hard、R2R、RxR、真实 ALOHA OOD 与 DOMINO 零样本上分别达到 97.9%、73.7%、86.1%/87.2%、69.0% OSR、59.6% SR、76.9% 和 26.6%。\n\n## 方法\n\n**方法概述：** Qwen-VLA 用同一条件预测接口处理机器人动作、导航 waypoint、轨迹与人类姿态序列：强 Qwen3.5-4B 视觉语言骨干负责把视觉、语言和 embodiment 约束联系起来，单一 DiT flow-matching 动作专家负责把它们展开为连续控制。它不要求所有机器人共享同一种 action 定义，而是在条件与损失层面显式处理差异。\n\n**核心机制：** 模型以原生多模态 Qwen3.5-4B 为骨干，将视觉 token 与文本 token 早期融合；单流 DiT flow-matching 动作专家把 VLM hidden states 和 noisy action chunk 拼接，经联合 self-attention、AdaLN timestep conditioning 与 multi-section RoPE 预测速度场，并以少量 Euler 步生成连续序列。动作专家约 1.15B 参数、16 个 DiT blocks；不同任务由有效位 mask 和按数据集 1%/99% 分位数归一化处理。\n\n**方法拆解：** - 统一条件分布为 pθ(y_t:t+H-1 | o_t, x, e, z)：o 为图像/视频历史，x 为指令，e 为文字化的机器人平台、手臂配置、控制约定、频率和 horizon，z 为可选任务标识；目标可以是 EEF/关节动作、waypoint、驾驶轨迹或 MANO/骨骼运动。\n- 不把各平台动作强转成一种控制格式。对不足最大维度的动作做 zero padding，并以 validity mask 只在有效维度计算 loss；同一个 DiT 参数因此能覆盖 WidowX、Franka、Mobile ALOHA、AgiBot、人类等形态。\n- 四阶段配方先冻结 VLM、做无视觉 text-to-action (T2A) DiT 预训练，令语言与 embodiment prompt 成为动作“解压”条件；再做多模态 CPT、下游 SFT，最后只在 SimplerEnv 稀疏成功奖励上 RL，分别解决动作先验、视觉 grounding、任务精度与闭环优化。\n- 预训练混合以机器人操作轨迹为主（74.2%），另含人类第一视角轨迹 6.0%、导航 7.5%、作者合成轨迹 3.7%、通用 VL 3.4%、2D 空间 grounding 2.5%、自动驾驶 VQA 2.4% 和细粒度动作 caption 0.2%；公开真实数据超过 10,000 小时，另有超过 1,000 小时内部真实轨迹和 800 万合成轨迹。\n\n**关键要点：** - 将 embodiment 放在 prompt 而不是 per-robot head 中，是该文对“统一”的实质承诺：模型保留原数据集的控制语义，而共享潜在动作建模与视觉语言能力。\n- T2A 不是普通 data warm-up；它明确先训练随机 DiT 从压缩的语言意图还原整条动作，再引入视觉，避免随机 decoder 早期用视觉 shortcut 干扰已预训练 VLM。\n\n## 结果\n\n**核心结果：** - 单个 Qwen-VLA-Instruct 在未按 benchmark 单独适配的条件下：LIBERO 97.9%、RoboCasa-GR1 56.7%、Simpler-WidowX 73.7%、RoboTwin Easy/Hard 86.1%/87.2%；在 RoboTwin 两档均高于表中最佳 specialist ABot-M0 的 86.0%/85.0%。\n- 真实双臂 ALOHA 上，Base 微调的平均 in-domain 成功率 83.6%，对照的从头训练同构模型为 48.5%；OOD 平均为 76.9%，比 π0.5 高 35.4 个百分点，并在未见背景与指令上为 80.8% 与 84.6%。\n- 连续导航 Val-Unseen：R2R 的 OSR/SR 为 69.0/57.5（StreamVLN 为 64.2/56.9），RxR 的 SR/SPL 为 59.6/47.8（StreamVLN 为 52.9/46.0）。DOMINO 35 个动态操作套件上零样本 SR 26.6、MS 39.5；该阶段没有动态操作训练数据。\n- 消融直接支持训练配方：T2A 中约 20% 合成+80%真实、全轨迹预测达 71.09%，纯真实为 51.04%；T2A 用 Sigmoid-Normal、SFT 用 Beta 的组合也为 71.09%，两阶段都 Beta 仅 59.38%。保留 VL 共训使 RoboCasa 从 51.1 到 56.0、RoboTwin 从 81.8 到 86.4。\n\n**结果表：** | 评测切面 | Qwen-VLA-Instruct | 可比较证据 |\n| --- | ---: | --- |\n| 四个操作基准 | LIBERO 97.9；Simpler 73.7；RoboTwin E/H 86.1/87.2 | RoboTwin 超 ABot-M0 86.0/85.0；同时是一个 generalist |\n| 真实 ALOHA | in-domain 83.6；OOD 76.9 | 同构从头训练 48.5；OOD 比 π0.5 高 35.4 pp |\n| 连续导航 | R2R OSR 69.0 / SR 57.5；RxR SR 59.6 | R2R OSR 比 StreamVLN 高 4.8 pp；RxR SR 高 6.7 pp |\n| 动态操作零样本 | DOMINO SR 26.6；MS 39.5 | RL 阶段未使用动态操作数据 |\n\n![结果图](https://followhub.tenstep.top/papers/2605.30280-qwen-vla-unifying-vision-language-action-modeling-across-tasks-environments-and-robot-embodiment/color-conditioned-grasping-of-green-blue-red-and-yellow-balls-upper-two-panels-show-grasping-of.jpg)\n\n*结果图*\n\n## 洞察\n\n**核心 insight：** - 统一的难点不是把 action tensor padding 成一样长，而是明确控制语义。文字 embodiment prompt 让共享模型知道“这些数如何被执行”，而 mask/zero padding 仅解决张量计算层面的异构性。\n- 四阶段训练揭示了一个值得复用的分工：高层 VLM 已有语义压缩能力，随机连续动作 decoder 需要先学反向的、语言条件下的轨迹展开；否则视觉 token 容易成为捷径而非 grounding。\n- 该文最大的证据不是 LIBERO 97.9%，而是同一预训练能把 ALOHA OOD 从 36.2%（从头训练）推到 76.9%，并保住 VLN；这支持混合数据能形成可迁移空间—运动先验，但不证明所有 morphology 都可仅靠 prompt 接入。\n\n**和已有方法的关系：** - 相对为单一平台或单类任务分别训练 specialist 的路线，Qwen-VLA 使用同一 Qwen backbone、同一 DiT expert 和 prompt/mask 接口；它的比较对象包含 π0、π0.5、GR00T N1.6、StarVLA-OFT 与 ABot-M0。\n- 相对 token 自回归动作建模，DiT flow matching 更直接服务连续、多峰、高频 action chunk；相对仅 VLA 共训，保留一部分 VL 数据可提升需细粒度识别与组合解析的 RoboCasa/RoboTwin。\n\n**可借鉴点：** - 面对多 embodiment 数据，先记录每个平台的控制频率、horizon、臂配置和 action convention，再把它作为显式条件；不要在预处理阶段静默把不可交换的控制语义标准化掉。\n- 为连续控制接入强 VLM 时，可把 decoder pretraining、视觉联合预训练、任务 SFT 和 success-driven RL 分开做消融，避免把优化不稳定或增益来源混成一个“大训练配方”。\n\n## 风险与判断\n\n**局限：** - 跨 embodiment 的控制语义依赖人工编写的文字描述、数据集级归一化和有效维 mask；论文没有证明只换一段 prompt 就能在从未训练的新机器人上零样本安全运行，实际接入仍需该形态的数据与 SFT。\n- 强结果横跨不同 benchmark、指标与训练/适配设定，不能把 97.9% LIBERO、76.9% ALOHA OOD、69.0 R2R OSR 简化成统一的“通用成功率”；论文也未给出跨平台的统一安全、时延或长期故障恢复评测。\n- RL 只在 SimplerEnv 的稀疏二值奖励上采样；虽有温和迁移证据，但对真实世界奖励错设、接触动力学、长时程误差和安全约束的影响仍未被系统验证。\n\n**适用场景：** - 适合研究团队已有多种机器人和混合示范数据、希望共享视觉语言 grounding 与动作先验，却允许为新平台收集少量适配数据的研发流程。\n- 适合作为同时研究操作与连续导航的基础模型候选，尤其是需要用复杂自然语言、物体关系和背景变化来检验迁移的场景；不应直接当作无额外安全层的生产机器人控制器。\n\n**最终判断：** - 这是值得进入 VLA 主线的系统性论文。其最有价值的贡献是将 heterogeneous embodiment 的条件接口、数据混合与 staged optimization 同时做成可检验的统一方案；性能强但并未消除新形态数据、实时安全验证和真实长时程闭环的工程门槛。\n\n## 结果速览表\n\n| 评测切面 | Qwen-VLA-Instruct | 可比较证据 |\n| --- | ---: | --- |\n| 四个操作基准 | LIBERO 97.9；Simpler 73.7；RoboTwin E/H 86.1/87.2 | RoboTwin 超 ABot-M0 86.0/85.0；同时是一个 generalist |\n| 真实 ALOHA | in-domain 83.6；OOD 76.9 | 同构从头训练 48.5；OOD 比 π0.5 高 35.4 pp |\n| 连续导航 | R2R OSR 69.0 / SR 57.5；RxR SR 59.6 | R2R OSR 比 StreamVLN 高 4.8 pp；RxR SR 高 6.7 pp |\n| 动态操作零样本 | DOMINO SR 26.6；MS 39.5 | RL 阶段未使用动态操作数据 |\n\n## 相关主题\n\n- vision-language-action."
     },
     {
       "id": "rl-token-bootstrapping-online-rl-with-vision-language-action-models",
@@ -2499,11 +2576,46 @@
       "content": "# RL Token: Bootstrapping Online RL with Vision-Language-Action Models\n\n## 太长不看\n\n这篇工作最重要的点，是给 VLA 和在线 RL 之间找到了一个足够轻量的接口。作者没有直接对整套大模型做昂贵 RL，而是让预训练 VLA 暴露一个紧凑的 `RL token`，再在这个表示上训练小型 actor-critic，从而把 VLA 的泛化能力和 real-world online RL 的样本效率拼接起来。\n\n## 直观理解\n\n可以把 RLT 理解成“让 VLA 给 RL 提供一个好用的中间状态表示”。VLA 继续负责广义感知和先验动作建议，而在线 RL 只负责在关键精细阶段做快速校正，所以它特别适合“最后几毫米”这种高精度操作优化。\n\n![方法图](https://arxiv.org/html/2604.23073v2/x1.png)\n\n*方法图*\n\n## 核心信息\n\n- **作者**：Charles Xu 等\n- **机构**：Physical Intelligence\n- **原文链接**：https://arxiv.org/abs/2604.23073\n- **PDF 地址**：https://www.pi.website/download/rlt.pdf\n- **发布日期**：2026-04-24\n- **主题域**：physical-embodied-intelligence\n\n## 背景与问题\n\n**动机：** 预训练 VLA 已经能“开箱即用”完成很多 manipulation 任务，但在真实机器人上，最决定成功率的往往是最后的精细接触阶段，比如插接、拧螺丝、卡扣对齐等。\n\n**问题缺口：** 直接用 RL 精调大模型成本太高，传统高样本效率 RL 又往往基于更小模型、会丢掉 VLA 的泛化先验。作者试图解决的就是：能不能在不重训整套 VLA 的前提下，用几小时甚至几分钟真实机器人实践，就把关键精细阶段补强。\n\n## 论文摘要（英文原文）\n\nVision-language-action (VLA) models can learn to perform diverse manipulation skills \"out of the box,\" but achieving the precision and speed that real-world tasks demand requires further fine-tuning -- for example, via reinforcement learning (RL). We introduce a lightweight method that enables sample-efficient online RL fine-tuning of pretrained VLAs using just a few hours of real-world practice. We (1) adapt the VLA to expose an \"RL token,\" a compact readout representation that preserves task-relevant pretrained knowledge while serving as an efficient interface for online RL, and (2) train a small actor-critic head on this RL token to refine the actions, while anchoring the learned policy to the VLA. Online RL with the RL token (RLT) makes it possible to fine-tune even large VLAs with RL quickly and efficiently. Across four real-robot tasks (screw installation, zip tie fastening, charger insertion, and Ethernet insertion), RLT improves the speed on the hardest part of the task by up to 3x and raises success rates significantly within minutes to a few hours of practice. It can even surpass the speed of human teleoperation on some of the tasks.\n\n## 论文摘要（中文翻译）\n\nVLA 可以开箱执行多样化操作技能，但要达到真实任务要求的精度和速度，通常还需要进一步微调，比如用 RL。作者提出一种轻量方法，可以只用几小时真实机器人实践，就对预训练 VLA 做高样本效率的在线 RL 精调。方法分两步：一是让 VLA 暴露一个 `RL token`，它保留与任务相关的预训练知识，同时作为在线 RL 的高效接口；二是在这个 token 上训练一个小型 actor-critic 头，在保持策略锚定于原始 VLA 的同时对动作进行细化。作者在四个高精度真实机器人任务上表明，RLT 能在几分钟到几小时内显著提升成功率，并把关键阶段速度提升到最高 3 倍，部分任务甚至超过人类遥操作速度。\n\n## 方法\n\n**方法概述：** 这篇论文并不主张把整套大 VLA 直接拿去做重型 online RL，而是主张在预训练 VLA 与轻量 real-world RL 之间插入一个中间接口。作者通过一个 encoder-decoder transformer，从预训练 VLA 的内部特征里提取一个紧凑的 `RL token`，再基于这个 token 训练轻量 actor-critic，从而把 foundation model 的表示能力与在线 RL 的快速适配能力组合起来。\n\n**核心机制：**\n\n- 从 VLA 内部特征中暴露一个 `RL token`\n- 用小型 actor-critic 在 `RL token` 上进行样本高效在线 RL\n- 用 regularizer 把 actor 锚定在原始 VLA 行为附近，避免从零学起\n- 只把 online RL 用在高精度、最难的 critical phase，而不是整段任务\n\n**方法拆解：**\n\n- 先从预训练 VLA 的内部表示中压缩出一个维度更低、任务相关但仍保留预训练知识的 `RL token`\n- 在 `RL token` 上训练 actor 和 critic，使 online RL 只优化一个轻量策略层\n- actor 输入不仅包含 token，也参考 VLA 的原始动作建议，并通过锚定项限制策略偏移过大\n- 训练重点放在真实任务中的关键精细阶段，例如插接、拧入、卡扣等“最后几毫米”问题\n- 基础 VLA 继续执行前面较容易的阶段，而 RL 集中提升最容易失败的部分\n\n**关键要点：**\n\n- 让大模型保留先验，小模型承担快速适配\n- 强调 real-world online fine-tuning，而不是大规模离线再训练\n- 特别适合精细接触和高精度 manipulation 阶段\n- 这是把 generalist policy 继续打磨成 specialist-level precision 的务实路线\n\n## 结果\n\n**核心结果：**\n\n- 在 screw installation、zip tie fastening、charger insertion、Ethernet insertion 四个真实机器人任务上，RLT 都能在几分钟到几小时内带来明显收益\n- 论文摘要给出的最强结果是：关键阶段速度最高提升 `3x`\n- 在困难任务上不仅 throughput 提升，success rate 也明显改善\n- 对某些高精度部分，最终策略甚至能超过 expert teleoperation 的速度\n\n![结果图](https://arxiv.org/html/2604.23073v2/x2.png)\n\n*结果图*\n\n**结果表：**\n\n| 维度 | RLT 结论 |\n| --- | --- |\n| 微调目标 | 关键高精度阶段 |\n| 在线学习成本 | 几分钟到几小时 |\n| 速度提升 | 最多约 3x |\n| 成功率提升 | 困难任务上显著提高 |\n| 对比大模型直接 RL | 更轻、更快、更样本高效 |\n\n## 洞察\n\n**核心 insight：**\n\n- 这篇工作最值得记住的不是 `RL token` 这个名词本身，而是它展示了一种 VLA 与 online RL 的分层协作方式：foundation model 提供广义能力，轻量 RL 负责最后的高精度矫正。\n\n**和已有方法的关系：**\n\n- 相对直接对大模型做 RL 的路线，它更强调接口化和参数效率\n- 相对完全基于小模型的高样本效率 RL，它尽量不放弃 VLA 的预训练泛化能力\n- 相对把 specialist policy 与 generalist policy 割裂开来的做法，它更像在 generalist 上叠一层 task-specific sharpening\n\n**可借鉴点：**\n\n- 对具身智能来说，很多时候不需要重训整套模型，只需要找到一个合适的 adaptation interface\n- “critical phase only” 的 online RL 很适合真实机器人环境，因为它把实验预算集中在最值钱的阶段\n- 如果后面你关注具身智能系统工程，这篇可以看成是“foundation policy + lightweight adaptation head”范式的代表作\n\n## 风险与判断\n\n**局限：**\n\n- 论文验证任务集中在高精度 manipulation，而不是更复杂的长时程或跨场景连续任务\n- 方法高度依赖预训练 VLA 本身已经具备不错的先验；如果底座很弱，`RL token` 未必能救回来\n- 这种轻量 RL 接口是否能稳定推广到更多 embodiment、更多奖励形式，还需要更系统的验证\n\n**适用场景：**\n\n- 真实机器人上的高精度技能打磨\n- 在 generalist policy 基础上快速追求更高成功率和更高速度\n- 实验预算有限、不能承受整套大模型重训的场景\n\n**最终判断：** 这篇是 “VLA 如何接 online RL” 方向里很有代表性的工作，尤其适合放进你后续的 `VLA + RL refinement` 主线。\n\n## 结果速览表\n\n| 维度 | 结论 |\n| --- | --- |\n| 微调方式 | 轻量在线 RL |\n| 核心接口 | RL token |\n| 训练对象 | 小型 actor-critic |\n| 样本效率 | 几分钟到几小时 |\n| 关键收益 | 提升精度、速度和成功率 |\n\n## 相关主题\n\n- vision-language-action\n- online-rl-for-vla\n\n## 相关页面\n\n- [[Vision-Language-Action]]\n- [[Online RL for VLA]]\n- [[当前 VLA 路线图：基座、可控性、在线精修、记忆与人类数据]]\n- [[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities]]"
     },
     {
+      "id": "steam-self-supervised-temporal-ensemble-advantage-modeling-for-real-world-robot-learning",
+      "label": "STEAM: Self-Supervised Temporal Ensemble Advantage Modeling for Real-World Robot Learning",
+      "type": "source",
+      "community": "Vision-Language-Action",
+      "content": "# STEAM: Self-Supervised Temporal Ensemble Advantage Modeling for Real-World Robot Learning\n\n## 太长不看\n\nSTEAM 值得记住的点，是它把真实机器人数据清洗问题改写成“逐帧 advantage 建模”：不用人工奖励、不用 VLM 打分，也不假设整条轨迹好坏一致，而是从专家轨迹内部的时间顺序中学习哪些 frame pair 代表推进、停滞或倒退。它尤其适合 VLA/机器人策略在真实 rollout、人工纠正和混合质量数据上继续提升：先找出真正推进任务的局部片段，再把这些片段作为 CFGRL 的高质量训练信号。\n\n## 直观理解\n\n可以把 STEAM 理解成一个“机器人进展感知器”。它观察同一条专家示范里的两个画面，学习第二个画面相对第一个画面是向前推进了多少；反过来播放专家轨迹，则自然得到“倒退”的负样本。训练好以后，它用多个 temporal-offset predictor 对新 rollout 打分，并取 ensemble 中最保守的最低分，避免把分布外的错误动作误判成高价值动作。\n\n![STEAM overview](https://arxiv.org/html/2606.29834v1/x1.png)\n\n*STEAM overview：从专家演示中自监督学习 frame-level advantage，再用于混合质量数据筛选和策略优化。*\n\n## 核心信息\n\n- **作者**：Zhihao Liu、Qiuyi Gu、Yitao Wang、Dongming Qiao、Yixian Zhang、Shuaihang Chen、Liangzhi Shi、Tianxing Zhou、Zefang Huang、Kang Chen、Zhen Guo、Quanlu Zhang、Jincheng Yu、Xiaodan Liang、Guoliang Fan、Yu Wang、Feng Gao、Xinlei Chen、Chao Yu\n- **机构**：中科院自动化所、清华大学、Striding AI、国科大、中关村学院、鹏城实验室、哈工大、北理工、浙大、北大、Infinigence AI 等\n- **原文链接**：https://arxiv.org/abs/2606.29834\n- **HTML**：https://arxiv.org/html/2606.29834v1\n- **PDF**：https://arxiv.org/pdf/2606.29834\n- **发布日期**：2026-06-29\n- **主题域**：physical-embodied-intelligence\n\n## 背景与问题\n\n真实机器人学习越来越依赖异质数据：专家示范很贵，单靠专家数据覆盖不够；但 rollout、失败轨迹和人工纠正虽然能扩大状态-动作覆盖，却经常在同一条 episode 中混合了有用进展、卡顿、错误、回退和恢复。传统 trajectory-level filtering 太粗：整条丢弃会浪费其中的好片段，整条保留又会把坏动作当训练信号。\n\n论文把核心问题定义为 **frame-level advantage estimation**：给每个时刻一个局部进展质量分数，区分“正在推进任务”的动作和“停滞/退步/失败”的动作。这个问题难在三点：\n\n- 人工奖励、人工标注或跨轨迹校准成本高，不适合扩大真实机器人数据规模；\n- VLM/value model 虽然能给弱监督，但对物理接触和局部运动质量的判断可能不稳定；\n- 许多进展估计默认任务进度单调，而真实 rollout 可能先前进后失败、失败后恢复、或短暂回退再完成。\n\nSTEAM 的关键选择是：不去学习绝对 reward/value，而是利用专家轨迹内部天然存在的时间顺序。只要同一条专家轨迹是成功完成任务的，较后的帧相对较早的帧通常代表某种任务推进；这个相对时间偏移可以直接作为自监督标签。\n\n## 论文摘要（英文原文）\n\nReal-world robot learning increasingly relies on heterogeneous data, but demonstrations and rollouts often mix useful progress with stalls, corrections, and suboptimal behavior. Effective policy learning therefore requires frame-level advantages that distinguish reliable local progress from failures and regressions. We propose Self-supervised Temporal Ensemble Advantage Modeling (STEAM), a label-free method that learns such advantages from expert demonstrations. STEAM trains an ensemble of temporal-offset predictors on frame pairs within expert trajectories, using the normalized temporal offset between two frames as a self-supervised signal. Each predictor maps a frame pair to a distribution over temporal offsets, which is converted into a scalar advantage. STEAM then takes the minimum advantage across the ensemble to score mixed-quality rollout data conservatively. Across real-world bimanual towel folding, chip checkout, cola restocking, and single-arm pick-and-place tasks, STEAM identifies stalls, failures, and recoveries. When combined with CFGRL, STEAM further improves policy success rate by 59%, 54.3%, 23% and 16.2% over baselines, respectively.\n\n## 论文摘要（中文翻译）\n\n真实世界机器人学习越来越依赖异质数据，但示范和 rollout 往往混合了有用进展、停滞、纠正和次优行为。因此，有效的策略学习需要逐帧 advantage 来区分可靠的局部进展与失败或回退。本文提出 Self-supervised Temporal Ensemble Advantage Modeling（STEAM），一种无需标签的方法，从专家示范中学习这样的 advantage。STEAM 在专家轨迹内部的帧对上训练 temporal-offset predictor ensemble，以两帧之间的归一化时间偏移作为自监督信号。每个 predictor 将帧对映射到时间偏移分布，再转换为标量 advantage。随后 STEAM 在 ensemble 中取最小 advantage，以保守方式给混合质量 rollout 数据打分。在真实双臂叠毛巾、薯片结账、可乐补货以及单臂 pick-and-place 任务中，STEAM 能识别停滞、失败和恢复。与 CFGRL 结合后，STEAM 相比基线进一步将策略成功率分别提升 59%、54.3%、23% 和 16.2%。\n\n## 方法\n\n**方法概述：** STEAM 的流程是：从专家示范构造 frame pair → 用归一化时间偏移作为自监督目标训练多个 temporal-offset predictor → 把 predictor 的分布输出转成 frame-level advantage → 对混合质量数据取 ensemble-min 的保守分数 → 用分数生成 optimality label，并接入 CFGRL 训练 VLA/机器人策略。\n\n![STEAM framework](https://arxiv.org/html/2606.29834v1/x2.png)\n\n*STEAM framework：时间偏移自监督、distributional predictor、ensemble-min advantage 与 CFGRL 集成。*\n\n**1. 归一化 temporal offset 作为自监督目标**\n\n对专家轨迹 \\(\\tau_k=(f_{k,1},...,f_{k,L})\\)，任意两帧 \\(f_{k,i}\\)、\\(f_{k,j}\\) 的时间偏移是 \\(j-i\\)。正向帧对提供“向前推进”的监督；把成功轨迹反向配对，则提供“回退/负进展”的伪负样本。由于不同示范长度不同，论文用最大轨迹长度或高分位长度对 offset 做归一化，使快完成的高效轨迹在同一尺度下获得更高进展信号。\n\n**2. Distributional temporal-offset predictor**\n\n直接回归连续 offset 会让输出空间过大，因此 STEAM 将归一化 offset 截断到固定范围并离散成 \\(N\\) 个 bin。Predictor 输入两个视觉帧和语言指令，输出 temporal bin 的类别分布，并用 cross-entropy 训练。论文实验中 predictor 使用 SigLIP-SO400M 视觉编码器和 Gemma-3-270M 语言 backbone，后接任务相关 prediction head。\n\n**3. 从 offset 分布转换为 advantage**\n\n训练后，对某个 frame \\(f_i\\)，STEAM 固定一个 future frame \\(f_{i+H}\\)，让 predictor 预测两者的 temporal-offset distribution。再把分布的期望 bin 与固定 lookahead 对应的 ground-truth bin 做差，得到一个标量 advantage。直观上，如果模型认为这段局部运动比标准 lookahead 更“有效率”，advantage 更高；如果停滞、绕路或回退，advantage 会下降。\n\n**4. Ensemble-min 抑制分布外高估**\n\n单个 predictor 只在专家数据上训练，遇到 rollout 中的新状态或失败状态时可能过度自信，把坏动作误判成高 advantage。STEAM 训练多个独立 predictor，并取它们给出的最小 advantage 作为最终分数。这个 worst-of-M 聚合牺牲了一些召回，但能显著降低 false positive，对后续策略优化更安全。\n\n**5. 接入 CFGRL 进行策略改进**\n\nSTEAM 给专家示范、人工纠正、策略 rollout 等数据中的每个 frame 打分。由于不同数据源的 advantage 分布不同，论文对每类数据分别做 quantile thresholding，把高于阈值的 frame 标为 optimality label。然后将这些 label 作为 CFGRL 的条件信号，引导策略朝高质量局部进展样本生成动作。\n\n## 结果\n\n论文在四个真实机器人任务上评估 STEAM：ARX 双臂叠毛巾（5 阶段）、薯片结账（8 阶段）、可乐补货（4 阶段），以及 Franka 单臂 pick-and-place（2 阶段）。训练数据包含专家示范、autonomous rollout 和人工纠正 episode。\n\n![Robot setup and tasks](https://arxiv.org/html/2606.29834v1/x3.png)\n\n*真实机器人任务设置：双臂长程任务与单臂短程 pick-and-place。*\n\n**1. STEAM 能定位停滞、失败和恢复**\n\n在叠毛巾、薯片结账、可乐补货和 pick-and-place 的可视化中，STEAM advantage 在熟练推进阶段保持较高，在 retry、卡顿、失败或人工 takeover 阶段下降，并在纠正后恢复。这说明它不是只判断整条轨迹成功与否，而是在局部时刻识别“是否真正推进任务”。\n\n**2. 策略性能显著提升**\n\n| 方法 | Towel Folding 成功率 | Chip Checkout 成功率 | Cola Restocking 成功率 | Pick-and-Place 成功率 |\n|---|---:|---:|---:|---:|\n| BC | 33.3 | 39.5 | 52.0 | 63.8 |\n| HG-DAgger | 40.0 | 53.3 | 58.3 | — |\n| RECAP | 55.6 | 53.3 | 52.9 | 53.8 |\n| STEAM | **92.3** | **93.8** | **75.0** | **80.0** |\n| 相对 BC 提升 | +59.0 | +54.3 | +23.0 | +16.2 |\n\n在两个长程任务上最明显：叠毛巾成功率从 BC 的 33.3% 提到 92.3%，薯片结账从 39.5% 提到 93.8%。同时 STEAM 也改善了 throughput，例如叠毛巾达到 58 successful episodes/hour，而 RECAP 因未能过滤慢进展 rollout，throughput 低于 BC。\n\n**3. 混合数据比只用专家数据更有价值**\n\nSTEAM 在 expert-only setting 已能对叠毛巾、薯片结账、可乐补货带来提升，例如叠毛巾从 33.3% 提到 69.2%。但加入人工纠正和 autonomous rollout 后提升更大，说明 STEAM 的作用不是简单重加权专家数据，而是从非专家数据中筛出可用于扩大状态-动作覆盖的高价值片段。\n\n**4. 设计选择重要：bin count 和 ensemble size 都不能太弱**\n\n| 消融 | 成功率 | Score | Throughput |\n|---|---:|---:|---:|\n| bins=2 | 27.3 | 2.8 | 41 |\n| bins=8 | 54.6 | 3.8 | 51 |\n| bins=32（默认） | **92.3** | **4.9** | **58** |\n| ensemble=1 | 72.7 | 3.9 | 53 |\n| ensemble=3（默认） | **92.3** | **4.9** | **58** |\n| ensemble=5 | 90.9 | 4.6 | 55 |\n\n过少 bin 只能提供粗糙的 forward/backward 信号，无法区分不同程度的进展和回退；单 predictor 又容易在 rollout 分布外样本上高估。默认的 32 bins + 3 ensemble 是较好的平衡。\n\n## 洞察\n\n**1. 这篇的贡献不是一个新 VLA backbone，而是一个数据质量接口。** 对 VLA/机器人策略来说，未来很大一部分收益来自“如何使用真实混合数据”。STEAM 提供了一种实用路线：不要求人为标注每个失败原因，也不要求 VLM 理解细粒度物理接触，只利用专家轨迹的时间结构学习局部进展。\n\n**2. 相对时间顺序比绝对 reward 更容易规模化。** 真实任务之间阶段长度、动作速度和操作风格不同，跨轨迹的绝对 progress 很难校准；STEAM 只在同一条专家轨迹内部学习相对 offset，降低了标定难度。这与 video self-supervision 的思想一致，但用途转向机器人策略数据筛选。\n\n**3. ensemble-min 是整篇论文最“安全工程化”的部分。** 如果一个 advantage model 误把失败 rollout 中的异常状态打高分，后续 RL/BC 会放大错误信号。取最小分数不是为了最准确估计 reward，而是为了保守地避免 false positive，这对真实机器人训练比追求高召回更重要。\n\n**4. 它与 RL Token / CFGRL 路线互补。** RL Token 解决的是“如何让大 VLA 可被轻量在线 RL 调整”；STEAM 解决的是“哪些真实数据片段值得拿来调整”。二者共同指向一个趋势：通用 VLA 不一定直接端到端重训，而是通过轻量接口、数据筛选和局部 RL 做真实环境适配。\n\n**5. 对长程任务收益最大。** 叠毛巾和薯片结账的失败常发生在中后段，轨迹中前半段仍包含有用进展；trajectory-level filtering 会浪费这些片段，而 STEAM 的 frame-level 分数能把好片段保留下来。短程、专家轨迹高度一致的 pick-and-place 中，STEAM 的收益相对小一些，也说明它更适合混合质量、长程、多阶段任务。\n\n## 风险与判断\n\n**局限：**\n- STEAM 依赖“专家轨迹时间顺序大体代表任务进展”这一假设；如果专家示范中包含大量无效等待、反复调整或非单调策略，temporal offset 会变成噪声。\n- 论文主要在四个真实 manipulation 任务上验证，虽然任务多样，但还不足以证明它能泛化到所有 VLA、大规模开放世界任务或多机器人平台。\n- Advantage 只来自视觉帧对和语言指令，对力觉、触觉、接触稳定性等隐变量的捕捉有限；接触密集任务中可能需要融合 tactile/force 信号。\n- Ensemble-min 保守策略降低 false positive，但可能漏掉一些真实有用但分布外的新行为；在探索型任务中可能过度保守。\n\n**适用场景：**\n- 长程、多阶段机器人 manipulation，尤其是一条 episode 内既有推进也有失败/恢复的任务。\n- 已有一批专家示范，但还想利用人工纠正、失败 rollout、半成功轨迹来提升策略的真实机器人训练。\n- VLA/CFGRL/weighted BC 类 pipeline 中，需要一个 frame-level data selection 或 optimality labeling 模块。\n- 需要降低人工奖励设计和人工标注成本的真实机器人数据闭环。\n\n**最终判断：**\n- STEAM 是一篇很值得放进 FollowHub wiki 的机器人学习论文。它不是追求更大的 foundation model，而是补上了真实数据闭环里的关键环节：如何从混合质量机器人数据中抽取可靠的局部训练信号。对后续 VLA real-world adaptation、offline-to-online RL、人工纠正数据利用都有参考价值。\n\n## 结果速览表\n\n| 维度 | 结论 |\n|---|---|\n| 核心问题 | 混合质量真实机器人数据中，如何逐帧判断哪些动作真正推进任务 |\n| 核心方法 | 用专家轨迹 frame pair 的归一化时间偏移做自监督，训练 temporal-offset predictor ensemble |\n| 关键机制 | Distributional temporal bin prediction + scalar advantage + ensemble-min conservative aggregation |\n| 策略接口 | 将 STEAM advantage 转成 optimality label，接入 CFGRL 改进策略 |\n| 最强结果 | 叠毛巾 33.3→92.3，薯片结账 39.5→93.8，可乐补货 52.0→75.0，pick-and-place 63.8→80.0 |\n| 最值得借鉴 | 用相对时间顺序做数据质量监督，用 conservative ensemble 降低分布外高估 |\n| 主要风险 | 依赖专家轨迹时间顺序质量；保守聚合可能漏掉有价值的新行为 |\n\n## 相关主题\n\n- [[Vision-Language-Action]]\n- [[Online RL for VLA]]\n- [[Current VLA Landscape: Foundation Control, Memory, and Transfer]]"
+    },
+    {
+      "id": "t-rex-tactile-reactive-dexterous-manipulation",
+      "label": "T-Rex: Tactile-Reactive Dexterous Manipulation",
+      "type": "source",
+      "community": "tactile-representation",
+      "content": "# T-Rex: Tactile-Reactive Dexterous Manipulation\n\n## 太长不看\n\nT-Rex 的关键贡献不是把触觉当作又一种静态输入，而是让现有 VLA 的低频视觉动作规划与高频触觉修正协同工作。它用 22889 小时人类第一视角视频预训练、100 小时触觉同步机器人数据中训练和约 100 条任务示范后训练，在 12 个真实双手灵巧任务上达到 65% 平均成功率，相比最强基线 EgoScale 的 35% 高出 30 个百分点。结果很强，但目前仍是单一硬件平台上的研究级验证。\n\n## 直观理解\n\n可以把 T-Rex 想成一位先看清全局、再靠手感随时纠偏的操作者：慢速动作专家约 5 Hz 生成一段大方向正确的动作，快速触觉专家约 20 Hz 复用已缓存的视觉语言上下文，只根据最新十指触觉把尚未完全去噪的动作继续修细；因此视觉规划不必每次重算，触觉却能在滑移、挤压、插入和摩擦发生时及时闭环响应。\n\n![主要图](https://arxiv.org/html/2606.17055v2/teaser_v6_0609.png)\n\n*主要图*\n\n## 核心信息\n\n- **作者**：Dantong Niu、Zhuoyang Liu、Zekai Wang、Boning Shao、Zhao-Heng Yin、Anirudh Pai、Yuvan Sharma、Stefano Saravalle、Ruijie Zheng、Jing Wang、Ryan Punamiya、Mengda Xu、Yuqi Xie、Yunfan Jiang、Letian Fu、Konstantinos Kallidromitis、Matteo Gioia、Junyi Zhang、Jiaxin Ge、Haiwen Feng、Fabio Galasso、Wei Zhan、David M. Chan、Yutong Bai、Roei Herzig、Jiahui Lei、Li Fei-Fei、Ken Goldberg、Jitendra Malik、Pieter Abbeel、Yuke Zhu、Danfei Xu、Linxi Fan、Trevor Darrell\n- **作者单位**：UC Berkeley、NVIDIA、Stanford University、Panasonic、Sapienza University of Rome、ItalAI\n- **来源类型**：arxiv_html_url\n- **输入来源**：https://arxiv.org/html/2606.17055v2\n- **原文链接**：https://arxiv.org/abs/2606.17055v2\n- **HTML 正文**：https://arxiv.org/html/2606.17055v2\n- **PDF 地址**：https://arxiv.org/pdf/2606.17055v2\n- **代码地址**：https://tactile-rex.github.io/\n- **中英翻译地址**：https://hjfy.top/arxiv/2606.17055\n- **发布日期**：2026-06-15\n- **主题域**：Physical/Embodied Intelligence\n\n## 背景与问题\n\n**动机：** 视觉适合判断“物体在哪里、任务做到哪一步”，却不擅长判断手指接触后正在发生什么。插钥匙时的轻微卡阻、抽卡片时的摩擦变化、挤牙膏时的受力程度，以及易碎物体开始滑落的瞬间，都可能被手掌和物体遮挡，而且变化速度快于大型视觉模型的推理频率。人类之所以能稳定完成这些任务，是因为会根据连续触觉快速调整握力和运动方向。现有 VLA 通常约 5 Hz 地生成动作，主要依赖图像和语言；有些方法虽然拼接了当前力值，但单帧触觉不能表达“力正在增大还是减小”“接触是否开始滑移”这类动态。因此，机器人需要的不是“看见一次触觉”，而是一条能在视觉规划之间持续工作的高频触觉反馈回路。\n\n**问题缺口：** 要把这条反馈回路接到 VLA 上，需要同时解决四件事。第一，已有的人类视频预训练有丰富的语义和手部运动先验，却没有机器人触觉；从零收集同等规模的同步视触机器人数据又不可行。第二，视觉规划和触觉反应存在频率错配：如果每次触觉变化都重跑视觉骨干，计算开销太大；如果仍按视觉频率更新，机器人又来不及纠正滑移和受力。第三，原始触觉同时包含十个指尖的六轴力时间序列与空间形变图，简单 MLP 或单帧编码会丢失接触演化。第四，领域缺少覆盖双手多指、可变形物体、精细插入和力控制的统一真实评测。T-Rex 因而要回答的是：能否保留大规模 VLA 的全局能力，只用 100 小时机器人中训练数据学会接触物理，并让一个轻量触觉专家在不重算视觉的情况下实时修正动作。\n\n## 论文摘要（英文原文）\n\nThe ability to react dynamically to tactile signals has long been considered crucial to agile human-level dexterity. Yet contemporary learning-based Vision-Language-Action (VLA) models for robotic manipulation generally either overlook the tactile modality or are limited to encoders with static cues, due in part to the scarcity of diverse training data and standardized evaluation, architectural constraints in current VLA models, and limitations of static tactile encoders. In this paper, we push the frontier of tactile-reactive manipulation by addressing all of these limitations. We propose a large-scale, 100-hour tactile-rich dataset collected via a novel, data-efficient recipe that prioritizes elementary motor primitives. To effectively exploit naturally high-frequency touch signals without sacrificing the existing capabilities of existing VLAs, we introduce a variable-rate Mixture-of-Transformers (MoT) architecture equipped with a novel temporal tactile VQ-VAE encoder. We demonstrate the effectiveness of tactile-reactive policies on 12 manipulation tasks requiring delicate force control and deformable object manipulation, achieving over 30% higher average success rate than the strongest baseline.\n\n## 论文摘要（中文翻译）\n\n动态响应触觉信号长期以来一直被认为是实现类人敏捷灵巧性的关键。然而，当代用于机器人操作的学习式视觉语言动作模型通常忽略触觉模态，或者仅限于使用静态线索的编码器；其原因包括缺少多样化训练数据和标准化评测、现有 VLA 架构的约束，以及静态触觉编码器本身的局限。本文针对这些问题推进触觉响应操作：作者提出一个大规模、100 小时的触觉丰富数据集，并用优先覆盖基本运动原语的数据高效采集方案构建它。为了利用天然高频的触觉信号，同时不牺牲现有 VLA 的能力，作者提出可变速率 Mixture-of-Transformers 架构，并配备新的时序触觉 VQ-VAE 编码器。在 12 个需要精细力控制和可变形物体操作的任务上，触觉响应策略相对最强基线的平均成功率高出 30 个百分点以上。\n\n## 方法\n\n**方法概述：** T-Rex 的整体流程可以按“先学会看和规划，再学会接触，最后适配任务”来理解。\n\n1. **人类视频预训练**：先用 22,889 小时第一视角人类视频训练潜变量专家和动作专家。头戴相机画面与语言让模型学会识别物体和动作语义；人类手臂、手部运动经过重定向后变成统一动作监督。此时模型具备广泛的视觉运动先验，但还没有触觉专家，也不知道机器人真实接触时的力学反馈。\n2. **触觉机器人中训练**：再加入 100 小时、7,755 条双手机器人轨迹。数据不是围绕 12 个最终任务重复采集，而是让 207 个物体与 22 种运动原语形成 502 个可执行组合，例如按、擦、滑、拧、挤和插入。每条轨迹同步记录三路 RGB、双臂与 44 自由度双手状态、十个指尖的六轴力和形变深度图。这个阶段把人类视频先验对齐到机器人动作，并训练新的触觉专家学习“当前接触变化应该怎样修正动作”。\n3. **任务后训练**：对于开锁、抽卡、挤牙膏等复杂任务，再用约 100 条任务示范微调。中训练已经提供通用接触原语，所以后训练主要学习如何组合原语，而不是从头学习摩擦和受力。\n4. **异步执行**：部署时，动作专家约 5 Hz 运行一次，先根据图像和语言生成长度 16 的动作块；触觉专家约 20 Hz 插入执行，读取最新触觉并修改尚未执行的动作。视觉语言特征只在慢速阶段计算一次并缓存，因此快回路不需要反复运行昂贵视觉骨干。\n\n**核心机制：** 两个动作专家不是各自预测一套互相独立的控制命令，而是共同完成同一条 flow-matching 去噪轨迹。模型从随机噪声开始生成一个长度 16、每步 62 维的双臂双手动作块，总共做 10 次 Euler 去噪。1.41B 参数的动作专家先执行前 6 步，把噪声变成方向基本正确的中间动作，并把图像、语言、未来视觉表示和中间动作的 key-value cache 保存下来。随后 0.62B 参数的触觉专家不再读取原始图像，而是在动作块偏移 0、4、8、12 时取得最新触觉，复用缓存完成后 4 步去噪。这样，慢专家决定“手要往哪里去、任务处在哪一步”，快专家处理“现在是否打滑、力是否过大、接触位置是否需要微调”。训练时还随机加入 0、4、8、12 帧的触觉延迟，让模型适应部署时视觉缓存与实时触觉不同步的问题。\n\n**方法拆解：**\n\n- **触觉如何编码**：每个指尖最近 16 帧的六轴力序列先经过 1D 卷积 VQ-VAE，压缩成描述力变化趋势的离散 token；当前时刻的六轴力另走一条线性投影，避免压缩过程丢失瞬时接触；当前形变深度图由卷积网络提取空间接触形状。三类特征拼成触觉 token，分别覆盖“过去怎样变化、现在有多大力、接触发生在哪里”。\n- **三个专家怎样分工**：潜变量专家根据视觉与语言预测未来视觉表示，为动作提供时间上下文；动作专家负责低频、全局的动作块规划；触觉专家负责高频、局部的动作细化。三者处在 Mixture-of-Transformer-Experts 骨干中，通过共享注意力交换上下文，但保持各自参数和输入职责。\n- **动作如何生成**：策略输入三路 RGB、语言、力历史和形变图，输出长度 16 的 62 维动作块。双臂采用相对末端位姿增量，手指采用绝对关节目标；动作专家完成去噪区间 1.0 到 0.4，触觉专家完成 0.4 到 0。\n- **快回路怎样节省计算**：动作专家运行后缓存视觉语言 KV 与中间动作；触觉更新时只执行更小的触觉专家及 4 个 Euler 步。视觉塔、潜变量专家和动作专家都不重复前向，因此触觉能够约 20 Hz 更新，而全局规划保持约 5 Hz。\n- **训练目标怎样保持一致**：动作专家和触觉专家在不同时间区间回归同一个 flow velocity target，避免快回路变成与主策略分离的控制器；总损失还加入未来视觉预测项。慢专家仍在完整噪声区间训练，所以即使没有快专家也保留独立生成动作的能力。\n- **数据为什么可能高效**：100 小时中训练数据按“物体 × 运动原语”覆盖接触分布，而非只覆盖最终任务。论文假设擦、滑、压、拧等接触原子能力能够被复杂任务复用，后训练只需少量示范学习组合和语言条件。\n\n**关键要点：**\n\n- 触觉的价值主要来自动态闭环，而不是把单步力向量拼到 VLA 状态中；π0.5 直接拼接触觉后平均成功率反而从 17% 降到 6%。\n- 人类视频预训练与触觉机器人中训练是互补的：前者提供语义和粗粒度视觉运动先验，后者把先验落到可执行的接触动力学。\n- 异步结构本身贡献约 5 个百分点，而完整触觉模态贡献约 23 个百分点；主要收益来自正确利用动态触觉，异步执行是进一步提升效率与反应速度的接口。\n\n![方法图](https://arxiv.org/html/2606.17055v2/model_v2_0524.png)\n\n*方法图*\n\n## 结果\n\n**核心结果：** - 12 个真实触觉响应任务、每项 16 次随机位置和朝向评测中，T-Rex 平均成功率 65%，最强基线 EgoScale 为 35%，绝对高 30 个百分点。\n- 去掉全部触觉后，六项代表任务平均成功率从 65% 降到 42%；仅保留简化 MLP 力与形变为 58%，仅形变为 54%，证明时序力与空间形变均有贡献。\n- 把异步触觉细化改为同步执行，六项任务平均成功率从 65% 降到 60%；提升存在但小于触觉模态本身的 23 个百分点贡献。\n- 训练配方消融中，无人类预训练且无触觉中训练为 18%，只加人类预训练为 34%，只加触觉中训练为 45%，两者同时使用达到 65%。\n- 模型在 24 张 H100 上进行监督微调；动作专家和潜变量专家各 1.41B 参数，触觉专家 0.62B 参数，因此结果尚不能视为低成本部署证明。\n\n**结果表：** | 对比 / 消融 | 平均成功率 | 相对完整模型 | 说明 |\n| --- | ---: | ---: | --- |\n| T-Rex 完整模型 | **65%** | — | 12 任务主结果；消融平均取 6 个代表任务 |\n| EgoScale | 35% | -30 个百分点 | 12 任务最强基线 |\n| 无触觉 | 42% | -23 个百分点 | 触觉闭环是最大增益来源 |\n| 同步触觉细化 | 60% | -5 个百分点 | 异步快慢回路有独立贡献 |\n| 无人类预训练、无触觉中训练 | 18% | -47 个百分点 | 两阶段先验均缺失 |\n| 仅人类预训练 | 34% | -31 个百分点 | 有视觉运动先验，缺接触落地 |\n| 仅触觉中训练 | 45% | -20 个百分点 | 接触数据比单独人类预训练贡献更直接 |\n\n![结果图](https://arxiv.org/html/2606.17055v2/data_efficiency_v2_0529.png)\n\n*结果图*\n\n## 洞察\n\n**核心 insight：** - 真正值得记住的是快慢回路的接口设计：不是另起一个完全独立的反射控制器，而是在同一条 flow matching 轨迹上分段去噪，使低频规划与高频触觉修正共享动作分布。\n- 中训练数据按运动原语乘物体组织，而不是按 12 个下游任务收集，这是低数据迁移的关键假设：先覆盖接触原子能力，再用少量任务示范组合。\n- 触觉表示要同时保留历史变化和瞬时接触；VQ-VAE 压缩力序列解决时序动态，直接力投影避免离散压缩丢掉当前信号，形变图补空间结构。\n\n**和已有方法的关系：** - 相对 RDP 等任务专用快慢视触策略，T-Rex 把异步触觉修正纳入经过大规模预训练的基础模型，并面向双手多指操作。\n- 相对把触觉直接拼进 VLA 状态的做法，T-Rex 用独立触觉专家、专门时空编码器和分段去噪给触觉明确的控制职责。\n- 相对 Heterogeneous Tactile Transformer 关注跨传感器共享 backbone，T-Rex 关注触觉表示怎样进入动作生成闭环；两者分别解决表示迁移和策略响应。\n\n**可借鉴点：** - 对频率差异大的多模态系统，可缓存慢模态上下文，让快模态专家只运行轻量残差更新，并在训练时显式模拟缓存延迟。\n- 中训练数据可以按可组合运动原语设计覆盖率，用较少小时数替代为每个下游任务收集大规模专用数据。\n\n## 风险与判断\n\n**局限：** - 所有主结果都来自固定基座的 Dexmate Vega-1 与 Sharpa Wave 双手，跨机器人、跨手型、跨触觉传感器的泛化没有验证。\n- 12 个任务每项仅 16 次评测，而且多阶段任务允许按进度给部分分；65% 是平均进度型成功率，不等同于 65% 完整任务全成功。\n- 训练依赖 22889 小时人类视频、100 小时机器人数据与 24 张 H100，数据和算力门槛仍高；论文承诺开源数据，但实际复现成本未知。\n- 失败案例仍包括碰撞、滑落、定位不准、多指误触、用力过度与滑动错位，说明触觉不能替代精细视觉对齐、在线纠错和更好的行为分布覆盖。\n- 触觉硬件仍受传感器形变、跨设备标定漂移和缺少掌面密集感知限制；长时程紧公差任务可能仍需在线强化学习。\n\n**适用场景：** - 适合需要滑移、摩擦、挤压、插入、抽取、旋拧和可变形物体处理的固定平台双手灵巧操作研究。\n- 适合已有视觉语言动作基座、具备同步多指触觉数据，并希望用少量下游示范完成接触密集技能适配的实验室系统。\n\n**最终判断：** - T-Rex 是当前触觉 VLA 路线中值得重点跟踪的系统型工作：65% 对 35% 的同协议结果与触觉消融都说明动态触觉闭环确有实质价值。\n- 但它更像强研究原型而非通用部署方案；在跨硬件、完整任务成功率、传感器漂移、在线恢复和计算成本得到独立验证前，不应把结论外推为通用灵巧操作已经解决。\n\n## 结果速览表\n\n| 对比 / 消融 | 平均成功率 | 相对完整模型 | 说明 |\n| --- | ---: | ---: | --- |\n| T-Rex 完整模型 | **65%** | — | 12 任务主结果；消融平均取 6 个代表任务 |\n| EgoScale | 35% | -30 个百分点 | 12 任务最强基线 |\n| 无触觉 | 42% | -23 个百分点 | 触觉闭环是最大增益来源 |\n| 同步触觉细化 | 60% | -5 个百分点 | 异步快慢回路有独立贡献 |\n| 无人类预训练、无触觉中训练 | 18% | -47 个百分点 | 两阶段先验均缺失 |\n| 仅人类预训练 | 34% | -31 个百分点 | 有视觉运动先验，缺接触落地 |\n| 仅触觉中训练 | 45% | -20 个百分点 | 接触数据比单独人类预训练贡献更直接 |\n\n## 相关主题\n\n- [[Tactile Representation]]：T-Rex 把时序力与空间形变表示接入高频动作细化，回答了触觉 backbone 如何进入策略闭环。\n- [[Vision-Language-Action]]：T-Rex 为 VLA 补上异步高频触觉响应路线。\n<!-- confidence: INFERRED -->\n\n## 相关页面\n\n- [[Heterogeneous Tactile Transformer]]\n- [[Tactile Genesis: Exploring Tactile Sensors at Scale for Learning Dexterous Tasks]]\n- [[Vision-Language-Action]]\n- [[tactile-force-into-pretrained-robot-policies|触觉与力觉如何进入预训练机器人策略：表示、持续适配与执行闭环]]"
+    },
+    {
+      "id": "tactile-genesis-exploring-tactile-sensors-at-scale-for-learning-dexterous-tasks",
+      "label": "Tactile Genesis: Exploring Tactile Sensors at Scale for Learning Dexterous Tasks",
+      "type": "source",
+      "community": "tactile-representation",
+      "content": "# Tactile Genesis: Exploring Tactile Sensors at Scale for Learning Dexterous Tasks\n\n## 太长不看\n\nTactile Genesis 用大规模仿真比较触觉设计：先扩覆盖，再选类型，最后加分辨率。\n\n## 直观理解\n\n在同一只虚拟手上替换触觉配置，公平比较硬件观测的价值。\n\n![主要图](https://followhub.tenstep.top/papers/2606.22332-tactile-genesis/figure-1-overview-cropped.png)\n\n*主要图*\n\n## 核心信息\n\n- **作者**：Trinity Chung、Kashu Yamazaki、Dhruv Patel、Alexis Duburcq、Yiling Qiao、Katerina Fragkiadaki、Aran Nayebi\n- **作者单位**：暂无\n- **来源类型**：local_pdf\n- **输入来源**：/tmp/tactile-genesis-2606.22332.pdf\n- **原文链接**：https://arxiv.org/abs/2606.22332\n- **HTML 正文**：https://arxiv.org/html/2606.22332\n- **PDF 地址**：https://arxiv.org/pdf/2606.22332\n- **代码地址**：https://neuroagents-lab.github.io/tactile-genesis/\n- **中英翻译地址**：https://hjfy.top/arxiv/2606.22332\n- **发布日期**：2026-07-09\n- **主题域**：Physical/Embodied Intelligence\n\n## 背景与问题\n\n**动机：** 每一种传感器配置几乎都等于一只新机器人，现实中难以在相同任务和策略下公平比较。视觉与本体感觉无法直接观测滑移、局部接触和力闭合丢失等状态。\n\n**问题缺口：** 在固定灵巧操作流程中，应优先选择何种触觉表示、将其布置在哪里、采用多少分辨率，并且这些结论在带漂移与坏点的噪声下是否保持。\n\n## 论文摘要（英文原文）\n\nTactile Genesis is a GPU-parallel tactile simulation platform for comparing tactile abstractions in dexterous learning.\n\n## 论文摘要（中文翻译）\n\nTactile Genesis 是用于比较灵巧操作触觉抽象的 GPU 并行仿真平台。\n\n## 方法\n\n**方法概述：** 面向灵巧手触觉设计的受控学习消融。\n\n**核心机制：** 统一实现接触、深度、力/力矩、弹性体位移、接近、音频和温度；先用 PPO 训练可见特权状态的 teacher，再蒸馏只看本体感觉和一种触觉表示的 student。\n\n**方法拆解：** - 传感器可附着于任意机器人表面并共享位置与分辨率接口.\n- 统一建模读延迟、噪声、漂移、坏点、迟滞和串扰.\n- 控制变量不变，只替换触觉观测.\n\n为保证比较的是触觉而非策略，teacher 以完整物体状态和本体感觉训练；student 仅以本体感觉加一种触觉表示模仿 teacher，并用预测特权状态的辅助头作训练正则。实现上，接触 kernel 对 probes/environment 向量化，网格和点云查询用 BVH，弹性体 dilation/crosstalk 用 FFT，因此可进入大批量 student 训练的并行规模。\n\n![方法图](https://followhub.tenstep.top/papers/2606.22332-tactile-genesis/figure-1-overview-cropped.png)\n\n*方法图*\n\n## 结果\n\n**核心结果：** - 单 GPU 超过 20,000 并行环境和 1,000+ taxels，相对既有模拟器报告 3–20x 吞吐提升.\n- 整手约 200 taxels 已可覆盖实验任务.\n\n三项任务均显示本体感觉 baseline 落后于任意触觉 student。仅指尖明显差于整手；补上手掌和近端指节可填补大部分差距。掌内复位中 per-taxel force/torque 最能反映将发生的滑移；掌内旋转中 proximity 因在接触前感到物体而有优势；螺丝刀的短暂接触任务中各触觉类型都未追上 teacher，缺失的可能是时间整合或视觉而非更复杂接触阵列。\n\n作者还验证了弹性体读数：其 GelSight marker 位移拟合优于 FOTS/HydroShear，但对局部力向量任务不如 force/torque，因为邻近压入与剪切会共同影响一个 marker。真实 XHand1 的指尖聚合力策略得到连续 1–2 次旋转，和仿真中相近观测的趋势吻合，但不构成大规模真机成功率基准。\n\n**结果表：** | 设计选择 | 论文结论 |\\n| --- | --- |\\n| 覆盖位置 | 整手显著优于仅指尖 |\\n| 默认表示 | per-taxel 力/力矩最稳健 |\n\n## 洞察\n\n**核心 insight：** - 覆盖面积通常比指尖高分辨率更值得优先投资.\n- 传感器应按滑移、接近和短暂触点等失败机制匹配.\n\n**和已有方法的关系：** - 并列比较多种触觉抽象.\n\n**可借鉴点：** - 使用同一 teacher 和策略隔离观测设计作用.\n\n## 风险与判断\n\n**局限：** - teacher-student 设置限制学生策略上限.\n\n**适用场景：** - 灵巧手传感器布置与策略观测选择.\n\n**最终判断：** - 真机验证是趋势证据而非大规模成功率基准.\n\n硬件决策顺序应是：先覆盖手掌和近端指节，再选择 per-taxel 力/力矩，最后才为具体任务增加 proximity 或更高分辨率。该结论是受控仿真—蒸馏条件下的设计指导，采购真实硬件前仍须针对目标物体、传感器耐久和实际噪声验证。\n\n## 结果速览表\n\n| 设计选择 | 论文结论 |\\n| --- | --- |\\n| 覆盖位置 | 整手显著优于仅指尖 |\\n| 默认表示 | per-taxel 力/力矩最稳健 |\n\n## 相关主题\n\n- [[tactile-representation|Tactile Representation]]：提供传感覆盖、物理量与分辨率选择的上游设计证据。\n\n## 相关综述\n\n- [[tactile-force-into-pretrained-robot-policies|触觉与力觉如何进入预训练机器人策略：表示、持续适配与执行闭环]]：提供传感覆盖、物理量选择与仿真评测这一上游证据层。\n<!-- confidence: INFERRED -->"
+    },
+    {
+      "id": "turbovla-real-time-vision-language-action-model-at-32-hz-on-an-rtx-4090-with-1-gb-vram",
+      "label": "TurboVLA: Real-Time Vision-Language-Action Model at 32 Hz on an RTX 4090 with <1 GB VRAM",
+      "type": "source",
+      "community": null,
+      "content": "# TurboVLA: Real-Time Vision-Language-Action Model at 32 Hz on an RTX 4090 with <1 GB VRAM\n\n## 太长不看\n\nTurboVLA 将高频控制从 LLM 居中的 V→L→A 改为轻量的直接 V+L→A，在 LIBERO 达到 97.7% 且只需 0.2B、31.2ms、0.9GB。\n\n## 直观理解\n\n它将慢速规划与快速执行分离：执行器只负责把当前画面与指令对齐，并行输出连续动作。\n\n![主要图](https://arxiv.org/html/2607.27205v1/x2.png)\n\n*主要图*\n\n## 核心信息\n\n- **作者**：Hengyi Xie、Chenfei Yao、Xianjin Wu、Xuanyang Xi、Yiping Tang、Di Xu、Yingying Zhu、Dingkang Liang、Xiang Bai、Han Ding\n- **作者单位**：暂无\n- **来源类型**：local_pdf\n- **输入来源**：/tmp/turbovla-2607.27205.pdf\n- **原文链接**：https://arxiv.org/abs/2607.27205\n- **HTML 正文**：https://arxiv.org/html/2607.27205\n- **PDF 地址**：https://arxiv.org/pdf/2607.27205\n- **代码地址**：https://github.com/H-EmbodVis/TurboVLA\n- **中英翻译地址**：https://hjfy.top/arxiv/2607.27205\n- **发布日期**：2026-07-29\n- **主题域**：Physical/Embodied Intelligence\n\n## 背景与问题\n\n**动机：** 现有 VLA 往往把视觉投影到大语言模型空间，再由该空间生成机器人动作。即使使用并行 action expert，LLM 仍处在每个控制周期的关键路径，因此带来显存、延迟和本地部署成本。\n\n**问题缺口：** 论文要验证的是：在任务指令主要描述对象、属性和空间关系的执行级操作中，是否能保留必要的语言 grounding，却不再让大语言模型充当视觉到动作的中心接口，从而提高控制频率。\n\n## 论文摘要（英文原文）\n\nTurboVLA replaces the LLM-centric V→L→A pathway with lightweight bidirectional vision-language interaction and a compact continuous action decoder.\n\n## 论文摘要（中文翻译）\n\nTurboVLA 以轻量双向视觉—语言交互和紧凑连续动作解码器取代 LLM 居中的高频执行路径。\n\n## 方法\n\n**方法概述：** 面向执行级操作的高效率 VLA。\n\n**核心机制：** DINOv3 和 BERT 分别编码视觉与指令，六层双向 cross-attention 交换信息；ACT 风格动作块 decoder 结合机器人状态并行预测动作。\n\n**方法拆解：** - 保留 token 级文本表示以对齐对象、属性和空间关系.\n- 双向 cross-attention 同时更新视觉与指令流.\n- 一次输出连续动作块，避免自回归动作 token.\n\n在 LIBERO 中，模型用 DINOv3 ViT-B、12 步 7-DoF 动作块和混合四套件训练；在 RoboTwin 2.0 中改用 ViT-L、50 步 14 维双臂动作块。论文的比较单位是“从多模态输入到一个动作块”，因此其延迟优势同时来自更轻的语义路径和非自回归输出，而不只是参数少。\n\n**关键要点：** - 执行级控制不必让大语言模型处于每个控制步的关键路径.\n\n![方法图](https://arxiv.org/html/2607.27205v1/x2.png)\n\n*方法图*\n\n## 结果\n\n**核心结果：** - LIBERO 97.7%，0.2B、31.2ms、0.9GB.\n- RoboTwin 2.0 为 60.2%，43.4ms.\n\n在 50 个双臂 RoboTwin 任务上，TurboVLA 的 60.2% 高于 π0.5 的 57.0%，且后者报告 95.6ms；真机 AgileX Piper 的四项任务为 92.5%、80%、90%、87.5%。真机方案以 LIBERO 预训练权重为起点，每任务用 65 条示范微调 12.5k steps，因此它验证的是快速执行的可部署性，而不是零样本开放世界泛化。\n\n消融表明语言没有被“简化掉”：去掉语言时平均成功率从 97.7% 降为 70.8%，Goal 套件从 97.4% 降为 11.6%。无交互、单向交互和双向交互分别为 95.2%、96.1/96.5% 和 97.7%；交互层数 2/4/6/8 的结果为 93.5/95.7/97.7/96.6%，动作 horizon 8/10/12/15 为 96.4/96.9/97.7/95.6%。\n\n**结果表：** | 指标 | TurboVLA |\\n| --- | --- |\\n| LIBERO 平均成功率 | 97.7% |\\n| 参数/延迟/显存 | 0.2B / 31.2ms / 0.9GB |\n\n## 洞察\n\n**核心 insight：** - 适合与慢速规划器组成分层系统.\n- 移除的是高频 LLM 中枢而不是语言条件.\n\n**和已有方法的关系：** - 直接对视觉与语言做双向交互.\n\n**可借鉴点：** - 让 LLM 留在任务规划而非高频控制路径.\n\n## 风险与判断\n\n**局限：** - 不证明长程规划或开放式语义推理能力.\n\n**适用场景：** - 消费级 GPU 本地语言条件操作.\n\n**最终判断：** - 跨模型延迟仍受动作块长度和实现细节影响.\n\n更完整的判断是：这不是“VLA 不需要 LLM”，而是将 LLM 放到任务分解、异常恢复或人机交互等低频层，把视觉—语言 grounding 与连续控制交给轻量执行器。对已经具备上层规划器的机器人系统，这是可信且具工程价值的模块化路线。\n\n## 结果速览表\n\n| 指标 | TurboVLA |\\n| --- | --- |\\n| LIBERO 平均成功率 | 97.7% |\\n| 参数/延迟/显存 | 0.2B / 31.2ms / 0.9GB |\n\n## 相关主题\n\n- vision-language-action."
+    },
+    {
       "id": "current-vla-landscape-foundation-control-memory-and-transfer",
       "label": "当前 VLA 路线图：基座、可控性、在线精修、记忆与人类数据",
       "type": "synthesis",
       "community": "Human-to-Robot Transfer",
       "content": "# 当前 VLA 路线图：基座、可控性、在线精修、记忆与人类数据\n\n> 这 6 篇论文放在一起看，已经足够勾勒出当前具身智能 VLA 与 human data 主线的几条关键分叉。\n\n## 综述结论\n\n如果只看单篇论文，很容易觉得大家都在“继续做更强的 VLA”。但把 `OpenVLA`、`π0.7`、`RLT`、`MEM`、`Human-to-Robot Transfer`、`DexImit` 放在一起，会看到这条路线其实已经分化成六个相互关联的问题：\n\n1. `VLA 基座如何开放、可训、可部署`\n2. `heterogeneous data 如何变成可控能力`\n3. `通才策略如何继续被打磨到 specialist 级精度`\n4. `分钟级任务如何通过 memory 真正支撑起来`\n5. `人类数据何时开始能真正被机器人利用`\n6. `人类视频如何被显式编译成机器人可训练数据`\n\n这说明当前 VLA 研究已经不再只是单点模型设计，而是在演化成一套完整系统栈。\n\n## 路线 1：基座化\n\n代表工作：\n[来源: OpenVLA: An Open-Source Vision-Language-Action Model](../sources/openvla-an-open-source-vision-language-action-model.md)\n\nOpenVLA 回答的是最底层的问题：如果机器人领域要像语言模型一样进入 foundation model 时代，是否有一个真正公开、可训练、可微调、可部署的基座。它的意义不只是性能，而是把训练、适配、部署连成一条开源链路，使后续路线有了可复用底座。\n\n## 路线 2：可控性与多源数据吸纳\n\n代表工作：\n[来源: π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities](../sources/pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities.md)\n\nπ0.7 强调的是：当机器人基础模型开始吃 demonstration、autonomous data、human video、web data 时，真正的难点不是“数据够不够多”，而是“模型能不能分辨这些数据应该怎么用”。它通过子任务语言、subgoal image、episode metadata 把“怎么做”也写进 prompt，本质上是在解决 heterogeneous data 的 disambiguation 问题。\n\n## 路线 3：在线精修\n\n代表工作：\n[来源: RL Token: Bootstrapping Online RL with Vision-Language-Action Models](../sources/rl-token-bootstrapping-online-rl-with-vision-language-action-models.md)\n\nRLT 则往下游走一步，解决 foundation policy 落地时的高精度问题。它并不否定 VLA 的 generalist 路线，而是承认现实：很多真实机器人任务最终卡在最后几毫米。它给出的答案是用 `RL token` 之类的轻量接口，在不重训整套大模型的前提下，把关键阶段继续打磨成 specialist 级表现。\n\n## 路线 4：长时程记忆\n\n代表工作：\n[来源: MEM: Multi-Scale Embodied Memory for Vision Language Action Models](../sources/mem-multi-scale-embodied-memory-for-vision-language-action-models.md)\n\nMEM 进一步把问题拉长到分钟级任务。它说明单纯增加历史长度不能解决 long-horizon control，memory 必须是分层的：短期视觉记忆负责局部细节和遮挡补偿，长期语义记忆负责任务进度与阶段管理。这意味着 VLA 的未来很可能越来越像“带显式 memory module 的 embodied agent”。\n\n## 路线 5：人类数据吸纳\n\n代表工作：\n[来源: Emergence of Human to Robot Transfer in Vision-Language-Action Models](../sources/emergence-of-human-to-robot-transfer-in-vision-language-action-models.md)\n\nHuman-to-Robot Transfer 这篇把视角转向更上游的数据扩展问题。它的关键发现不是“human video useful”，而是“当 robot pretraining 多样性达到某个阈值后，human-to-robot transfer 才开始明显涌现”。这给出一个很重要的判断：具身智能里很多看似需要手工对齐的能力，可能其实是 scale 和 diversity 的副产物。\n\n## 路线 6：人类视频到机器人数据引擎\n\n代表工作：\n[来源: DexImit: Learning Bimanual Dexterous Manipulation from Monocular Human Videos](../sources/deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos.md)\n\nDexImit 补上了 human data 的另一种用法：不是直接把 human video 作为另一种 embodiment 参与训练，而是把单目人类操作视频经过 4D 重建、双手调度、抓取与运动规划、数据增强，显式转换成双手灵巧机器人训练数据。它说明 human video 的价值不只在 representation transfer，也可能在于成为一个可规模化的数据生成入口。\n\n## 综合判断\n\n把这 5 篇合起来看，目前 VLA 主线至少有三个明显结论：\n\n- **第一，VLA 不是单一路线，而是平台化问题。**\n  从 `OpenVLA` 到 `RLT`，可以看到大家已经默认 foundation policy 是起点，不是终点。\n\n- **第二，真正的瓶颈在“如何把广泛数据转成可靠控制”。**\n  `π0.7` 关心 prompt 和 steerability，`MEM` 关心 memory abstraction，`Human-to-Robot Transfer` 关心 pretraining diversity，`DexImit` 关心显式 data generation，这些本质都在解决“广覆盖是否真的会变成能力”。\n\n- **第三，后续突破更可能来自系统组合，而不是单点模型变大。**\n  基座、可控性、在线精修、长时程记忆、人类数据和数据生成引擎，这些路线更像模块而不是相互替代关系。未来更可能出现的是它们的组合系统。\n\n- **第四，human data 至少有两条不同技术路线。**\n  一条是 `Human-to-Robot Transfer` 代表的 co-training / representation transfer，另一条是 `DexImit` 代表的 reconstruction / scheduling / planning data engine。前者更依赖预训练多样性，后者更依赖几何与物理可行性检查。\n\n## 当前知识库的合理结构判断\n\n基于现在只有 6 篇 source 的状态，真正成熟的 topic 其实还不多。\n\n- `Vision-Language-Action` 已经是一个成立的总主题\n- `Online RL for VLA`、`Long-Horizon Memory`、`Human-to-Robot Transfer`、`Human Video Robot Data Generation` 目前更像正在形成中的子主题\n\n因此当前更合理的入口，不是强行把每条子方向都做成厚 topic，而是先保留一个总主题页，再用这篇 synthesis 作为跨论文主入口。\n\n## 后续建议\n\n- 再补 2-3 篇 `online RL for VLA / policy refinement` 论文，再厚化 `Online RL for VLA`\n- 再补 2-3 篇 `memory / long horizon` 论文，再厚化 `Long-Horizon Memory`\n- 再补 `human video / cross-embodiment / multimodal transfer` 论文，再厚化 `Human-to-Robot Transfer`\n- 再补 `video-to-robot-data / dexterous data generation / imitation from video` 论文，再判断 `Human Video Robot Data Generation` 是否应升级为更重的综述入口\n- 到那时再做更重的 topic，而不是现在就假装它们已经成熟\n\n## 相关页面\n\n- [[Vision-Language-Action]]\n- [[OpenVLA: An Open-Source Vision-Language-Action Model]]\n- [[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities]]\n- [[RL Token: Bootstrapping Online RL with Vision-Language-Action Models]]\n- [[MEM: Multi-Scale Embodied Memory for Vision Language Action Models]]\n- [[Emergence of Human to Robot Transfer in Vision-Language-Action Models]]\n- [[DexImit: Learning Bimanual Dexterous Manipulation from Monocular Human Videos]]\n- [[Human Video Robot Data Generation]]"
+    },
+    {
+      "id": "tactile-force-into-pretrained-robot-policies",
+      "label": "触觉与力觉如何进入预训练机器人策略：表示、持续适配与执行闭环",
+      "type": "synthesis",
+      "community": "tactile-representation",
+      "content": "# 触觉与力觉如何进入预训练机器人策略：表示、持续适配与执行闭环\n\n> 当前阶段最可靠的判断是：接触感知不是在输入端多拼一个 token，而是一条从传感器到控制时序都必须打通的系统链。\n\n## 当前判断\n\n把这五篇材料放在一起，触觉与力觉进入机器人基础策略至少需要四层接口同时成立：先决定哪些接触量值得感知，再把异构硬件压进可迁移表示；随后让原本只有视觉数据的策略吸收新模态而不遗忘；最后还要保证最新观测能在动作真正执行前进入仍可修订的控制状态。\n\n这四层目前已有分别成立的证据，但尚没有一篇工作把它们端到端贯通。`Tactile Genesis` 与 `HTT` 更接近上游感知基础设施，`MuSe` 补上预训练策略的持续适配，`T-Rex` 与 `TacForcing` 则给出两种执行期闭环。最重要的结论不是哪一篇替代另一篇，而是只解决其中一层不足以得到可扩展的接触控制系统。\n\n## 四层路线\n\n| 层 | 核心问题 | 代表材料 | 当前证据 | 尚缺什么 |\n| --- | --- | --- | --- | --- |\n| 传感设计 | 应该感知哪里、哪种物理量、多少分辨率？ | [[tactile-genesis-exploring-tactile-sensors-at-scale-for-learning-dexterous-tasks|Tactile Genesis]] | 受控仿真显示覆盖面积通常比指尖高分辨率更优先，per-taxel 力/力矩是较稳健默认项 | 大规模真机与耐久、漂移、成本验证 |\n| 表示迁移 | 光学式、阵列式等异构触觉能否共享 backbone？ | [[2606.29948-heterogeneous-tactile-transformer|Heterogeneous Tactile Transformer]] | 1.6M 同步帧、四种传感器的自监督对齐，并在预训练未见的 Sharpa 指尖上验证策略迁移 | 信息不对称导致阵列侧退化；跨硬件闭环尚未验证 |\n| 持续适配 | 旧数据没有新模态标签时，怎样吸收 F/T 且保留旧能力？ | [[2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force|MuSe]] | early + late fusion、未来视频/F/T 预测和旧数据 replay；去掉 replay 后旧任务表现显著塌陷 | 仍是离线适配，且主要覆盖一种 F/T 配置与有限任务 |\n| 执行闭环 | 高频接触状态怎样及时改写尚未执行的动作？ | [[t-rex-tactile-reactive-dexterous-manipulation|T-Rex]]、[[2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback|TacForcing]] | T-Rex 用快慢专家共享 flow 轨迹；TacForcing 用单专家分块生成和 EATA 对齐观测—动作时间 | 缺等算力延迟对比、跨传感器泛化与统一安全指标 |\n\n## MuSe 补上的关键缺口\n\n在 MuSe 之前，这组材料已经说明“触觉应该怎样表示”和“执行中为什么要不断刷新”，但中间少了一层：一个已经用海量 vision-action 数据训练好的策略，如何在旧数据根本没有力标注时接入新传感器。\n\nMuSe 把这个问题明确写成 multisensory continual learning。它不把 434 条新多感官 episode 当作重训基础模型的替代品，而是把 1,271 条旧 episode 继续放进 replay；旧样本的 F/T 通道用 learnable mask 占位并屏蔽对应重建损失，动作与视频目标则继续约束原有世界模型。结果上，去掉 replay 后旧 wiping / peg 任务分别只剩 0.5/15 和 2/15，而完整 MuSe 达到 12.5/15 和 10/15。这个差距说明，新模态适配首先是知识连续性问题，其次才是融合结构问题。\n\nMuSe 也没有完成最后一层闭环。它预测未来 F/T，再把轨迹交给外部 adaptive compliance controller；因此它证明了“接触动力学可被预测并成为控制目标”，却还没有回答执行中观测变化后如何在线修订这条目标。这个缺口正好由 T-Rex 和 TacForcing 的时间接口补充。\n\n## 两条执行期反馈路线\n\n### 路线 A：快慢专家共享一条生成轨迹\n\n[[t-rex-tactile-reactive-dexterous-manipulation|T-Rex]] 用约 5 Hz 的动作专家处理视觉语言规划，再由约 20 Hz 的触觉专家复用缓存、继续细化同一条 flow-matching 去噪轨迹。完整模型在 12 个真机任务上平均 65%，最强基线为 35%；去掉触觉后，代表任务平均降到 42%。它的优势是频率职责清楚，代价是需要额外专家、100 小时触觉中训练数据和较高算力。\n\n### 路线 B：单专家内部交错生成与执行\n\n[[2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback|TacForcing]] 不增加独立快控制器，而是让近期动作块先完成并执行，远期块保持 flow 中间态；执行后的新触觉只通过 EATA 影响下一待执行块。其关键反例是固定触觉在消融中并不优于无触觉，真机平均甚至从 42% 降到 31%；加入执行期刷新后升到 48%，再加 EATA 达到 69%。这说明“有没有触觉”不如“触觉采集时刻、动作生效时刻和可修订窗口是否对齐”重要。\n\n两条路线都反对一次性静态拼接，也都让触觉进入同一动作分布；真正未决的是，在相同闭环频率、算力、传感延迟和动作时域下，多专家分工与单专家流式调度谁更稳、更容易部署。\n\n## Claims\n\n1. **接触感知是一条接口栈，不是单一模态特征。** Tactile Genesis、HTT、MuSe、T-Rex 和 TacForcing 分别覆盖传感、表示、适配与控制时序；任何一层的成功都不能自动推出下一层成立。\n2. **离线持续适配与在线执行闭环正交。** MuSe 主要解决跨数据阶段的 forward/backward transfer；T-Rex 和 TacForcing 主要解决单次执行时域内的观测—动作反馈。完整系统需要两种时间尺度同时成立。\n3. **静态接入不是可信基线终点。** MuSe 的 no-replay 退化和 TacForcing 的 fixed-tactile 反例都表明，直接融合新模态可能伤害旧能力或当前控制；必须显式设计记忆保持与时间作用域。\n4. **跨硬件仍是最薄弱的端到端证据。** HTT 已在表示层展示未见传感器迁移，但 MuSe、T-Rex、TacForcing 的主要控制结果仍绑定特定传感配置和平台。\n\n## 分歧与限制\n\n- 这五篇使用的“触觉/力觉”并非同一种信号：从 per-taxel 力/力矩、光学形变、阵列信号到六轴 F/T 都有覆盖，不能把某一种传感器上的收益直接外推到另一种。\n- Tactile Genesis 的主要设计结论来自仿真—蒸馏设置；HTT 的跨硬件优势主要在表示与少量下游任务；后三篇的强结果则集中在固定真机平台，证据链仍不对称。\n- MuSe 依赖外部 compliance controller，T-Rex 和 TacForcing 更直接修改动作生成；三者的成功率、任务难度和控制栈不同，现有数字不能横向排名。\n- T-Rex 与 TacForcing 都缺少统一的端到端延迟、触觉采样延迟、算力和安全过载指标，因此“无需独立快控制器”或“快专家更及时”都还不是部署级结论。\n\n## 什么会改变这个判断\n\n- 一个统一实验把 HTT 式跨传感器 encoder、MuSe 式 replay/mask 适配和 T-Rex 或 TacForcing 式在线反馈串起来，并在训练时未见硬件上保持旧任务与新任务表现。\n- 在等算力、等闭环频率和等动作时域下直接比较双专家与单专家路线，同时报告延迟、抖动、力峰值和失败恢复。\n- 多个新模态按时间顺序加入同一 foundation policy 后，仍能以有界 replay 成本保持全部旧能力。\n- 从“单个平台多任务”扩展到跨机器人、跨手型、跨触觉传感器的真实接触基准，并给出统计置信区间。\n\n## 关联主题\n\n- [[tactile-representation|Tactile Representation]]：提供传感设计、表示迁移、持续适配与反馈接口这条主问题线。\n- [[Vision-Language-Action]]：提供预训练 foundation policy、动作生成与能力保持的系统背景。\n\n## 关联材料\n\n- [[tactile-genesis-exploring-tactile-sensors-at-scale-for-learning-dexterous-tasks|Tactile Genesis]]：上游传感配置与物理量选择。\n- [[2606.29948-heterogeneous-tactile-transformer|Heterogeneous Tactile Transformer]]：异构触觉共享表示与未见传感器迁移。\n- [[2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force|MuSe]]：新 F/T 模态的持续适配、未来预测与防遗忘。\n- [[t-rex-tactile-reactive-dexterous-manipulation|T-Rex]]：多速率专家的高频触觉动作细化。\n- [[2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback|TacForcing]]：单专家流式生成和执行感知触觉注意力。\n\n## 待跟进\n\n- 等待 T-Rex、TacForcing 的代码、统一延迟数据与跨硬件复现。\n- 跟踪 MuSe 是否扩展到触觉图像、音频或多种依次加入的新模态。\n- 在接触丰富操作主题成熟后，把 compliance / impedance 控制接口纳入同一证据链。"
     }
   ],
   "edges": [
@@ -2512,10 +2624,10 @@
       "from": "Human Video Robot Data Generation",
       "to": "Human-to-Robot Transfer",
       "type": "EXTRACTED",
-      "weight": 0.5,
+      "weight": 0.483,
       "source_signal_available": false,
       "signals": {
-        "co_citation": 0.2,
+        "co_citation": 0.167,
         "source_overlap": null,
         "type_affinity": 0.8
       }
@@ -2525,10 +2637,10 @@
       "from": "Human Video Robot Data Generation",
       "to": "Vision-Language-Action",
       "type": "EXTRACTED",
-      "weight": 0.5,
+      "weight": 0.453,
       "source_signal_available": false,
       "signals": {
-        "co_citation": 0.2,
+        "co_citation": 0.105,
         "source_overlap": null,
         "type_affinity": 0.8
       }
@@ -2538,10 +2650,10 @@
       "from": "Human-to-Robot Transfer",
       "to": "Human Video Robot Data Generation",
       "type": "EXTRACTED",
-      "weight": 0.5,
+      "weight": 0.483,
       "source_signal_available": false,
       "signals": {
-        "co_citation": 0.2,
+        "co_citation": 0.167,
         "source_overlap": null,
         "type_affinity": 0.8
       }
@@ -2551,10 +2663,10 @@
       "from": "Human-to-Robot Transfer",
       "to": "Vision-Language-Action",
       "type": "EXTRACTED",
-      "weight": 0.55,
+      "weight": 0.505,
       "source_signal_available": false,
       "signals": {
-        "co_citation": 0.3,
+        "co_citation": 0.211,
         "source_overlap": null,
         "type_affinity": 0.8
       }
@@ -2564,10 +2676,10 @@
       "from": "Long-Horizon Memory for Robot Policies",
       "to": "Vision-Language-Action",
       "type": "EXTRACTED",
-      "weight": 0.5,
+      "weight": 0.453,
       "source_signal_available": false,
       "signals": {
-        "co_citation": 0.2,
+        "co_citation": 0.105,
         "source_overlap": null,
         "type_affinity": 0.8
       }
@@ -2577,10 +2689,10 @@
       "from": "Online RL for VLA",
       "to": "Vision-Language-Action",
       "type": "EXTRACTED",
-      "weight": 0.5,
+      "weight": 0.479,
       "source_signal_available": false,
       "signals": {
-        "co_citation": 0.2,
+        "co_citation": 0.158,
         "source_overlap": null,
         "type_affinity": 0.8
       }
@@ -2588,44 +2700,330 @@
     {
       "id": "e7",
       "from": "Vision-Language-Action",
-      "to": "Online RL for VLA",
+      "to": "2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force",
       "type": "EXTRACTED",
-      "weight": 0.5,
+      "weight": 0.276,
       "source_signal_available": false,
       "signals": {
-        "co_citation": 0.2,
+        "co_citation": 0.053,
         "source_overlap": null,
-        "type_affinity": 0.8
+        "type_affinity": 0.5
       }
     },
     {
       "id": "e8",
       "from": "Vision-Language-Action",
-      "to": "Long-Horizon Memory for Robot Policies",
+      "to": "t-rex-tactile-reactive-dexterous-manipulation",
       "type": "EXTRACTED",
-      "weight": 0.5,
+      "weight": 0.303,
       "source_signal_available": false,
       "signals": {
-        "co_citation": 0.2,
+        "co_citation": 0.105,
         "source_overlap": null,
-        "type_affinity": 0.8
+        "type_affinity": 0.5
       }
     },
     {
       "id": "e9",
       "from": "Vision-Language-Action",
-      "to": "Human-to-Robot Transfer",
+      "to": "2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback",
       "type": "EXTRACTED",
-      "weight": 0.55,
+      "weight": 0.303,
       "source_signal_available": false,
       "signals": {
-        "co_citation": 0.3,
+        "co_citation": 0.105,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e10",
+      "from": "Vision-Language-Action",
+      "to": "tactile-force-into-pretrained-robot-policies",
+      "type": "EXTRACTED",
+      "weight": 0.329,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.158,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e11",
+      "from": "Vision-Language-Action",
+      "to": "Online RL for VLA",
+      "type": "EXTRACTED",
+      "weight": 0.479,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.158,
         "source_overlap": null,
         "type_affinity": 0.8
       }
     },
     {
-      "id": "e10",
+      "id": "e12",
+      "from": "Vision-Language-Action",
+      "to": "Long-Horizon Memory for Robot Policies",
+      "type": "EXTRACTED",
+      "weight": 0.453,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.105,
+        "source_overlap": null,
+        "type_affinity": 0.8
+      }
+    },
+    {
+      "id": "e13",
+      "from": "Vision-Language-Action",
+      "to": "Human-to-Robot Transfer",
+      "type": "EXTRACTED",
+      "weight": 0.505,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.211,
+        "source_overlap": null,
+        "type_affinity": 0.8
+      }
+    },
+    {
+      "id": "e14",
+      "from": "tactile-representation",
+      "to": "tactile-genesis-exploring-tactile-sensors-at-scale-for-learning-dexterous-tasks",
+      "type": "EXTRACTED",
+      "weight": 0.375,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.25,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e15",
+      "from": "tactile-representation",
+      "to": "2606.29948-heterogeneous-tactile-transformer",
+      "type": "EXTRACTED",
+      "weight": 0.5,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.5,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e16",
+      "from": "tactile-representation",
+      "to": "2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force",
+      "type": "EXTRACTED",
+      "weight": 0.375,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.25,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e17",
+      "from": "tactile-representation",
+      "to": "t-rex-tactile-reactive-dexterous-manipulation",
+      "type": "EXTRACTED",
+      "weight": 0.5,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.5,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e18",
+      "from": "tactile-representation",
+      "to": "2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback",
+      "type": "EXTRACTED",
+      "weight": 0.5,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.5,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e19",
+      "from": "tactile-representation",
+      "to": "tactile-force-into-pretrained-robot-policies",
+      "type": "EXTRACTED",
+      "weight": 0.464,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.429,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e20",
+      "from": "2606.17846-qwen-robotmanip-alignment-unlocks-scale-for-robotic-manipulation-foundation-models",
+      "to": "Vision-Language-Action",
+      "type": "EXTRACTED",
+      "weight": 0.25,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e21",
+      "from": "2606.29948-heterogeneous-tactile-transformer",
+      "to": "tactile-representation",
+      "type": "EXTRACTED",
+      "weight": 0.5,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.5,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e22",
+      "from": "2606.29948-heterogeneous-tactile-transformer",
+      "to": "tactile-force-into-pretrained-robot-policies",
+      "type": "EXTRACTED",
+      "weight": 0.393,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.286,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e23",
+      "from": "2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force",
+      "to": "Vision-Language-Action",
+      "type": "EXTRACTED",
+      "weight": 0.276,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.053,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e24",
+      "from": "2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force",
+      "to": "tactile-representation",
+      "type": "EXTRACTED",
+      "weight": 0.375,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.25,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e25",
+      "from": "2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force",
+      "to": "tactile-force-into-pretrained-robot-policies",
+      "type": "EXTRACTED",
+      "weight": 0.393,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.286,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e26",
+      "from": "2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force",
+      "to": "2606.29948-heterogeneous-tactile-transformer",
+      "type": "EXTRACTED",
+      "weight": 0.483,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.667,
+        "source_overlap": null,
+        "type_affinity": 0.3
+      }
+    },
+    {
+      "id": "e27",
+      "from": "2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force",
+      "to": "t-rex-tactile-reactive-dexterous-manipulation",
+      "type": "EXTRACTED",
+      "weight": 0.525,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.75,
+        "source_overlap": null,
+        "type_affinity": 0.3
+      }
+    },
+    {
+      "id": "e28",
+      "from": "2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force",
+      "to": "2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback",
+      "type": "EXTRACTED",
+      "weight": 0.525,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.75,
+        "source_overlap": null,
+        "type_affinity": 0.3
+      }
+    },
+    {
+      "id": "e29",
+      "from": "2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback",
+      "to": "Vision-Language-Action",
+      "type": "EXTRACTED",
+      "weight": 0.303,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.105,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e30",
+      "from": "2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback",
+      "to": "tactile-force-into-pretrained-robot-policies",
+      "type": "EXTRACTED",
+      "weight": 0.464,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.429,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e31",
+      "from": "attena-rectifying-action-inequality-in-robotic-foundation-models",
+      "to": "Vision-Language-Action",
+      "type": "EXTRACTED",
+      "weight": 0.25,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e32",
       "from": "deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos",
       "to": "Human Video Robot Data Generation",
       "type": "EXTRACTED",
@@ -2638,7 +3036,7 @@
       }
     },
     {
-      "id": "e11",
+      "id": "e33",
       "from": "deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos",
       "to": "Human-to-Robot Transfer",
       "type": "EXTRACTED",
@@ -2651,7 +3049,46 @@
       }
     },
     {
-      "id": "e12",
+      "id": "e34",
+      "from": "dexjoco-a-benchmark-and-toolkit-for-task-oriented-dexterous-manipulation-on-mujoco",
+      "to": "Vision-Language-Action",
+      "type": "EXTRACTED",
+      "weight": 0.25,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e35",
+      "from": "dexjoco-a-benchmark-and-toolkit-for-task-oriented-dexterous-manipulation-on-mujoco",
+      "to": "Human-to-Robot Transfer",
+      "type": "EXTRACTED",
+      "weight": 0.25,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e36",
+      "from": "dm05-open-world-embodied-foundation-model",
+      "to": "Vision-Language-Action",
+      "type": "EXTRACTED",
+      "weight": 0.25,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e37",
       "from": "emergence-of-human-to-robot-transfer-in-vision-language-action-models",
       "to": "Vision-Language-Action",
       "type": "EXTRACTED",
@@ -2664,7 +3101,7 @@
       }
     },
     {
-      "id": "e13",
+      "id": "e38",
       "from": "emergence-of-human-to-robot-transfer-in-vision-language-action-models",
       "to": "Human-to-Robot Transfer",
       "type": "EXTRACTED",
@@ -2677,7 +3114,7 @@
       }
     },
     {
-      "id": "e14",
+      "id": "e39",
       "from": "mem-multi-scale-embodied-memory-for-vision-language-action-models",
       "to": "Vision-Language-Action",
       "type": "EXTRACTED",
@@ -2690,7 +3127,7 @@
       }
     },
     {
-      "id": "e15",
+      "id": "e40",
       "from": "mem-multi-scale-embodied-memory-for-vision-language-action-models",
       "to": "Long-Horizon Memory for Robot Policies",
       "type": "EXTRACTED",
@@ -2703,7 +3140,7 @@
       }
     },
     {
-      "id": "e16",
+      "id": "e41",
       "from": "openvla-an-open-source-vision-language-action-model",
       "to": "Vision-Language-Action",
       "type": "EXTRACTED",
@@ -2716,7 +3153,7 @@
       }
     },
     {
-      "id": "e17",
+      "id": "e42",
       "from": "pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities",
       "to": "Vision-Language-Action",
       "type": "EXTRACTED",
@@ -2729,7 +3166,7 @@
       }
     },
     {
-      "id": "e18",
+      "id": "e43",
       "from": "pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities",
       "to": "Online RL for VLA",
       "type": "EXTRACTED",
@@ -2742,7 +3179,7 @@
       }
     },
     {
-      "id": "e19",
+      "id": "e44",
       "from": "pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities",
       "to": "Long-Horizon Memory for Robot Policies",
       "type": "EXTRACTED",
@@ -2755,7 +3192,7 @@
       }
     },
     {
-      "id": "e20",
+      "id": "e45",
       "from": "pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities",
       "to": "Human-to-Robot Transfer",
       "type": "EXTRACTED",
@@ -2768,7 +3205,7 @@
       }
     },
     {
-      "id": "e21",
+      "id": "e46",
       "from": "rl-token-bootstrapping-online-rl-with-vision-language-action-models",
       "to": "Vision-Language-Action",
       "type": "EXTRACTED",
@@ -2781,7 +3218,7 @@
       }
     },
     {
-      "id": "e22",
+      "id": "e47",
       "from": "rl-token-bootstrapping-online-rl-with-vision-language-action-models",
       "to": "Online RL for VLA",
       "type": "EXTRACTED",
@@ -2794,7 +3231,85 @@
       }
     },
     {
-      "id": "e23",
+      "id": "e48",
+      "from": "steam-self-supervised-temporal-ensemble-advantage-modeling-for-real-world-robot-learning",
+      "to": "Vision-Language-Action",
+      "type": "EXTRACTED",
+      "weight": 0.25,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e49",
+      "from": "steam-self-supervised-temporal-ensemble-advantage-modeling-for-real-world-robot-learning",
+      "to": "Online RL for VLA",
+      "type": "EXTRACTED",
+      "weight": 0.25,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e50",
+      "from": "t-rex-tactile-reactive-dexterous-manipulation",
+      "to": "Vision-Language-Action",
+      "type": "EXTRACTED",
+      "weight": 0.303,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.105,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e51",
+      "from": "t-rex-tactile-reactive-dexterous-manipulation",
+      "to": "tactile-force-into-pretrained-robot-policies",
+      "type": "EXTRACTED",
+      "weight": 0.464,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.429,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e52",
+      "from": "tactile-genesis-exploring-tactile-sensors-at-scale-for-learning-dexterous-tasks",
+      "to": "tactile-representation",
+      "type": "EXTRACTED",
+      "weight": 0.375,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.25,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e53",
+      "from": "tactile-genesis-exploring-tactile-sensors-at-scale-for-learning-dexterous-tasks",
+      "to": "tactile-force-into-pretrained-robot-policies",
+      "type": "EXTRACTED",
+      "weight": 0.321,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.143,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e54",
       "from": "current-vla-landscape-foundation-control-memory-and-transfer",
       "to": "Vision-Language-Action",
       "type": "EXTRACTED",
@@ -2807,7 +3322,7 @@
       }
     },
     {
-      "id": "e24",
+      "id": "e55",
       "from": "current-vla-landscape-foundation-control-memory-and-transfer",
       "to": "Human Video Robot Data Generation",
       "type": "EXTRACTED",
@@ -2818,46 +3333,147 @@
         "source_overlap": null,
         "type_affinity": 0.5
       }
+    },
+    {
+      "id": "e56",
+      "from": "tactile-force-into-pretrained-robot-policies",
+      "to": "tactile-genesis-exploring-tactile-sensors-at-scale-for-learning-dexterous-tasks",
+      "type": "EXTRACTED",
+      "weight": 0.321,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.143,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e57",
+      "from": "tactile-force-into-pretrained-robot-policies",
+      "to": "2606.29948-heterogeneous-tactile-transformer",
+      "type": "EXTRACTED",
+      "weight": 0.393,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.286,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e58",
+      "from": "tactile-force-into-pretrained-robot-policies",
+      "to": "2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force",
+      "type": "EXTRACTED",
+      "weight": 0.393,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.286,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e59",
+      "from": "tactile-force-into-pretrained-robot-policies",
+      "to": "t-rex-tactile-reactive-dexterous-manipulation",
+      "type": "EXTRACTED",
+      "weight": 0.464,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.429,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e60",
+      "from": "tactile-force-into-pretrained-robot-policies",
+      "to": "2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback",
+      "type": "EXTRACTED",
+      "weight": 0.464,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.429,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e61",
+      "from": "tactile-force-into-pretrained-robot-policies",
+      "to": "tactile-representation",
+      "type": "EXTRACTED",
+      "weight": 0.464,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.429,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
+    },
+    {
+      "id": "e62",
+      "from": "tactile-force-into-pretrained-robot-policies",
+      "to": "Vision-Language-Action",
+      "type": "EXTRACTED",
+      "weight": 0.329,
+      "source_signal_available": false,
+      "signals": {
+        "co_citation": 0.158,
+        "source_overlap": null,
+        "type_affinity": 0.5
+      }
     }
   ],
   "insights": {
     "surprising_connections": [],
     "isolated_nodes": [
       {
+        "id": "2606.17846-qwen-robotmanip-alignment-unlocks-scale-for-robotic-manipulation-foundation-models",
+        "label": "Qwen-RobotManip Technical Report: Alignment Unlocks Scale for Robotic Manipulation Foundation Models",
+        "degree": 1,
+        "community": "Vision-Language-Action"
+      },
+      {
+        "id": "attena-rectifying-action-inequality-in-robotic-foundation-models",
+        "label": "AttenA+: Rectifying Action Inequality in Robotic Foundation Models",
+        "degree": 1,
+        "community": "Vision-Language-Action"
+      },
+      {
+        "id": "dm05-open-world-embodied-foundation-model",
+        "label": "DM0.5: 面向开放世界的通用具身智能基础模型",
+        "degree": 1,
+        "community": "Vision-Language-Action"
+      },
+      {
         "id": "openvla-an-open-source-vision-language-action-model",
         "label": "OpenVLA: An Open-Source Vision-Language-Action Model",
         "degree": 1,
         "community": "Vision-Language-Action"
+      },
+      {
+        "id": "qwen-vla",
+        "label": "Qwen-VLA: Unifying Vision-Language-Action Modeling across Tasks, Environments, and Robot Embodiments",
+        "degree": 0,
+        "community": null
+      },
+      {
+        "id": "turbovla-real-time-vision-language-action-model-at-32-hz-on-an-rtx-4090-with-1-gb-vram",
+        "label": "TurboVLA: Real-Time Vision-Language-Action Model at 32 Hz on an RTX 4090 with <1 GB VRAM",
+        "degree": 0,
+        "community": null
       }
     ],
     "bridge_nodes": [
-      {
-        "id": "Human-to-Robot Transfer",
-        "label": "Human-to-Robot Transfer",
-        "community": "Human-to-Robot Transfer",
-        "connected_communities": [
-          "Long-Horizon Memory for Robot Policies",
-          "Vision-Language-Action"
-        ],
-        "community_count": 2
-      },
-      {
-        "id": "pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities",
-        "label": "π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities",
-        "community": "Long-Horizon Memory for Robot Policies",
-        "connected_communities": [
-          "Human-to-Robot Transfer",
-          "Vision-Language-Action"
-        ],
-        "community_count": 2
-      },
       {
         "id": "Vision-Language-Action",
         "label": "Vision-Language-Action",
         "community": "Vision-Language-Action",
         "connected_communities": [
           "Human-to-Robot Transfer",
-          "Long-Horizon Memory for Robot Policies"
+          "tactile-representation"
         ],
         "community_count": 2
       }
@@ -2865,8 +3481,8 @@
     "sparse_communities": [],
     "meta": {
       "degraded": false,
-      "node_count": 12,
-      "edge_count": 24,
+      "node_count": 26,
+      "edge_count": 62,
       "max_insight_nodes": 250,
       "max_insight_edges": 1000
     }
@@ -2874,32 +3490,45 @@
   "learning": {
     "version": 1,
     "entry": {
-      "recommended_start_node_id": "Human-to-Robot Transfer",
+      "recommended_start_node_id": "Vision-Language-Action",
       "recommended_start_reason": "community_hub",
       "default_mode": "global"
     },
     "views": {
       "path": {
         "enabled": true,
-        "start_node_id": "Human-to-Robot Transfer",
+        "start_node_id": "Vision-Language-Action",
         "node_ids": [
-          "Human-to-Robot Transfer",
-          "Human Video Robot Data Generation",
-          "deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos",
-          "emergence-of-human-to-robot-transfer-in-vision-language-action-models"
+          "Vision-Language-Action",
+          "2606.17846-qwen-robotmanip-alignment-unlocks-scale-for-robotic-manipulation-foundation-models",
+          "Long-Horizon Memory for Robot Policies",
+          "Online RL for VLA",
+          "attena-rectifying-action-inequality-in-robotic-foundation-models",
+          "dm05-open-world-embodied-foundation-model",
+          "mem-multi-scale-embodied-memory-for-vision-language-action-models",
+          "openvla-an-open-source-vision-language-action-model",
+          "pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities",
+          "rl-token-bootstrapping-online-rl-with-vision-language-action-models",
+          "steam-self-supervised-temporal-ensemble-advantage-modeling-for-real-world-robot-learning"
         ],
         "degraded": false
       },
       "community": {
         "enabled": true,
-        "community_id": "Human-to-Robot Transfer",
-        "label": "Human-to-Robot Transfer",
+        "community_id": "Vision-Language-Action",
+        "label": "Vision-Language-Action",
         "node_ids": [
-          "Human Video Robot Data Generation",
-          "Human-to-Robot Transfer",
-          "current-vla-landscape-foundation-control-memory-and-transfer",
-          "deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos",
-          "emergence-of-human-to-robot-transfer-in-vision-language-action-models"
+          "2606.17846-qwen-robotmanip-alignment-unlocks-scale-for-robotic-manipulation-foundation-models",
+          "Long-Horizon Memory for Robot Policies",
+          "Online RL for VLA",
+          "Vision-Language-Action",
+          "attena-rectifying-action-inequality-in-robotic-foundation-models",
+          "dm05-open-world-embodied-foundation-model",
+          "mem-multi-scale-embodied-memory-for-vision-language-action-models",
+          "openvla-an-open-source-vision-language-action-model",
+          "pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities",
+          "rl-token-bootstrapping-online-rl-with-vision-language-action-models",
+          "steam-self-supervised-temporal-ensemble-advantage-modeling-for-real-world-robot-learning"
         ],
         "is_weak": false,
         "degraded": false
@@ -2908,51 +3537,65 @@
         "enabled": true,
         "node_ids": [
           "Vision-Language-Action",
+          "tactile-force-into-pretrained-robot-policies",
+          "tactile-representation",
+          "2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force",
           "Human-to-Robot Transfer",
+          "2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback",
+          "t-rex-tactile-reactive-dexterous-manipulation",
+          "2606.29948-heterogeneous-tactile-transformer",
           "Human Video Robot Data Generation",
-          "Long-Horizon Memory for Robot Policies",
           "Online RL for VLA",
+          "Long-Horizon Memory for Robot Policies",
           "pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities",
+          "tactile-genesis-exploring-tactile-sensors-at-scale-for-learning-dexterous-tasks",
           "current-vla-landscape-foundation-control-memory-and-transfer",
           "deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos",
+          "dexjoco-a-benchmark-and-toolkit-for-task-oriented-dexterous-manipulation-on-mujoco",
           "emergence-of-human-to-robot-transfer-in-vision-language-action-models",
           "mem-multi-scale-embodied-memory-for-vision-language-action-models",
           "rl-token-bootstrapping-online-rl-with-vision-language-action-models",
-          "openvla-an-open-source-vision-language-action-model"
+          "steam-self-supervised-temporal-ensemble-advantage-modeling-for-real-world-robot-learning",
+          "2606.17846-qwen-robotmanip-alignment-unlocks-scale-for-robotic-manipulation-foundation-models",
+          "attena-rectifying-action-inequality-in-robotic-foundation-models",
+          "dm05-open-world-embodied-foundation-model",
+          "openvla-an-open-source-vision-language-action-model",
+          "qwen-vla",
+          "turbovla-real-time-vision-language-action-model-at-32-hz-on-an-rtx-4090-with-1-gb-vram"
         ],
         "degraded": false
       }
     },
     "communities": [
       {
-        "id": "Human-to-Robot Transfer",
-        "label": "Human-to-Robot Transfer",
-        "node_count": 5,
-        "source_count": 2,
-        "internal_edge_weight": 2,
-        "is_primary": true,
-        "is_weak": false,
-        "recommended_start_node_id": "Human-to-Robot Transfer"
-      },
-      {
         "id": "Vision-Language-Action",
         "label": "Vision-Language-Action",
-        "node_count": 4,
-        "source_count": 2,
-        "internal_edge_weight": 1.75,
-        "is_primary": false,
+        "node_count": 11,
+        "source_count": 8,
+        "internal_edge_weight": 5.114,
+        "is_primary": true,
         "is_weak": false,
         "recommended_start_node_id": "Vision-Language-Action"
       },
       {
-        "id": "Long-Horizon Memory for Robot Policies",
-        "label": "Long-Horizon Memory for Robot Policies",
-        "node_count": 3,
-        "source_count": 2,
-        "internal_edge_weight": 0.5,
+        "id": "tactile-representation",
+        "label": "Tactile Representation",
+        "node_count": 7,
+        "source_count": 5,
+        "internal_edge_weight": 10.031,
         "is_primary": false,
         "is_weak": false,
-        "recommended_start_node_id": "Long-Horizon Memory for Robot Policies"
+        "recommended_start_node_id": "tactile-force-into-pretrained-robot-policies"
+      },
+      {
+        "id": "Human-to-Robot Transfer",
+        "label": "Human-to-Robot Transfer",
+        "node_count": 6,
+        "source_count": 3,
+        "internal_edge_weight": 2.216,
+        "is_primary": false,
+        "is_weak": false,
+        "recommended_start_node_id": "Human-to-Robot Transfer"
       }
     ],
     "degraded": {

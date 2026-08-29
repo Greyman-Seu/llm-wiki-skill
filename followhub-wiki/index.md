@@ -1,14 +1,14 @@
 # 知识库索引
 
-> 最后更新：2026-08-27
+> 最后更新：2026-08-29
 
 ---
 
 ## 概览
 
 - 主题：具身智能研究 Wiki
-- 素材总数：17
-- Wiki 页面总数：24
+- 素材总数：18
+- Wiki 页面总数：26
 
 ---
 
@@ -52,7 +52,9 @@
 - [[Qwen-VLA: Unifying Vision-Language-Action Modeling across Tasks, Environments, and Robot Embodiments]]
 - [[DM0.5: 面向开放世界的通用具身智能基础模型]]
 - [[Qwen-RobotManip Technical Report: Alignment Unlocks Scale for Robotic Manipulation Foundation Models]]
+- [[T-Rex: Tactile-Reactive Dexterous Manipulation]]
 - [[TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback]]
+- [[Multisensory Continual Learning: Adapting Pretrained Visuomotor Policies to Force]]
 
 ---
 
@@ -69,3 +71,4 @@
 > 跨素材的深度分析
 
 - [[当前 VLA 路线图：基座、可控性、在线精修、记忆与人类数据]]
+- [[触觉与力觉如何进入预训练机器人策略：表示、持续适配与执行闭环]]
