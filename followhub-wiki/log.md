@@ -113,3 +113,16 @@
 - **新增综述**：触觉与力觉如何进入预训练机器人策略：表示、持续适配与执行闭环
 - **综述判断**：触觉/力觉接入需要“传感设计 → 跨硬件表示 → 无遗忘持续适配 → 与动作生效时间对齐的执行闭环”共同成立；现有工作尚未端到端贯通
 - **状态**：完成
+
+## 2026-09-03 ingest | Geometric Action Model for Robot Policy Learning
+
+- **操作**：使用 arxiv-to-wiki direct 流程深度解读论文、保留 arXiv HTML 主图/架构图/真实机器人结果图，并更新已有主题路线
+- **arXiv ID**：2606.17046v2
+- **slug**：2606.17046-geometric-action-model-for-robot-policy-learning
+- **核心主张**：在预训练 GFM 中间插入因果未来预测器，让浅层编码当前多视角几何、深层共同解码未来几何和动作，把几何从辅助特征升级为世界—动作模型的共享骨干
+- **关键证据**：LIBERO-Plus 85.5%，相机扰动 83.1%（较 Cosmos-Policy +9.7pp）；1.4B 参数、6.9 ms 单步推理，约比 Cosmos-Policy 快 55 倍
+- **新增页面**：wiki/sources/2606.17046-geometric-action-model-for-robot-policy-learning.md
+- **更新主题**：Vision-Language-Action
+- **tag**：复用 vision-language-action，无需更新词表
+- **综述动作**：unchanged；论文建立 geometry-native WAM 子路线，但单篇材料尚不足以改写现有跨材料综述判断
+- **状态**：完成

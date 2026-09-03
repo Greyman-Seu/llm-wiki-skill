@@ -4,12 +4,12 @@ slug: "vision-language-action"
 title: "Vision-Language-Action"
 type: topic
 created: "2026-05-11"
-updated: "2026-08-29"
+updated: "2026-09-03"
 domains:
   - "Physical/Embodied Intelligence"
 tags:
   - "vision-language-action"
-summary: "VLA 从开放基座、多源数据、在线精修和长时程记忆，继续扩展到新感官模态的持续适配与执行期闭环。"
+summary: "VLA 从开放基座、多源数据、在线精修和长时程记忆，继续扩展到新感官模态、几何世界建模与执行期闭环。"
 source_slugs:
   - "openvla-an-open-source-vision-language-action-model"
   - "pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities"
@@ -24,6 +24,7 @@ source_slugs:
   - "2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force"
   - "t-rex-tactile-reactive-dexterous-manipulation"
   - "2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback"
+  - "2606.17046-geometric-action-model-for-robot-policy-learning"
 synthesis_slugs:
   - "current-vla-landscape-foundation-control-memory-and-transfer"
   - "tactile-force-into-pretrained-robot-policies"
@@ -31,6 +32,7 @@ status: active
 open_questions:
   - "预训练阶段缺失的新感官模态，如何以有限数据接入而不破坏旧任务能力？"
   - "多速率专家与单专家流式生成，哪种执行期反馈接口更容易跨硬件扩展？"
+  - "几何潜空间的未来预测能否扩展到跨具身、移动操作与复杂语言推理，而不牺牲实时性？"
 ---
 # Vision-Language-Action
 
@@ -98,6 +100,10 @@ VLA 的核心不是“把图像和文本都喂给机器人”，而是把机器�
   来自 [来源: DM0.5: 面向开放世界的通用具身智能基础模型](../sources/dm05-open-world-embodied-foundation-model.md)
   DM0.5 把长历史记忆（最长 60s）、11 种具身推理 CoT 任务、以及轨迹进展对齐三个设计做成一体，换来开放环境 Zero-Shot 泛化和真机 Table30 v2 SOTA。
 
+- **几何原生的世界—动作模型**
+  来自 [来源: Geometric Action Model for Robot Policy Learning](../sources/2606.17046-geometric-action-model-for-robot-policy-learning.md)
+  GAM 把 GFM 在中间层切分，在几何潜空间因果预测未来状态与动作，再复用剩余深层共同解码未来深度和动作块；它代表“让几何骨干成为策略本体”而非仅做外部特征蒸馏的路线。
+
 ## 当前判断
 
 这几篇放在一起看，VLA 主线已经很清楚：
@@ -113,6 +119,7 @@ VLA 的核心不是“把图像和文本都喂给机器人”，而是把机器�
 - `T-Rex` 解决“如何让低频视觉规划与高频触觉动作细化在同一生成轨迹上协同”
 - `TacForcing` 解决“如何在同一个动作生成器内部交错 chunk 生成、执行与触觉更新，并限制反馈的时间作用域”
 - `DM0.5` 解决“如何把历史上下文、具身推理、动作监督三件事系统化地收进一个可用的通用 VLA”
+- `GAM` 解决“如何把预训练三维几何先验直接变成低延迟世界—动作骨干，并在相机扰动下保持空间鲁棒性”
 
 也就是说，VLA 不再只是一个单点模型设计问题，而已经分化成一套系统问题族。
 
@@ -130,6 +137,7 @@ VLA 的核心不是“把图像和文本都喂给机器人”，而是把机器�
 - [[2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback|TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback]]
 - [[tactile-force-into-pretrained-robot-policies|触觉与力觉如何进入预训练机器人策略：表示、持续适配与执行闭环]]
 - [[DM0.5: 面向开放世界的通用具身智能基础模型]]
+- [[Geometric Action Model for Robot Policy Learning]]
 - [[Online RL for VLA]]
 - [[Long-Horizon Memory for Robot Policies]]
 - [[Human-to-Robot Transfer]]

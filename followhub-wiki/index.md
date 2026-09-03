@@ -1,14 +1,14 @@
 # 知识库索引
 
-> 最后更新：2026-08-29
+> 最后更新：2026-09-03
 
 ---
 
 ## 概览
 
 - 主题：具身智能研究 Wiki
-- 素材总数：18
-- Wiki 页面总数：26
+- 素材总数：19
+- Wiki 页面总数：27
 
 ---
 
@@ -55,6 +55,7 @@
 - [[T-Rex: Tactile-Reactive Dexterous Manipulation]]
 - [[TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback]]
 - [[Multisensory Continual Learning: Adapting Pretrained Visuomotor Policies to Force]]
+- [[Geometric Action Model for Robot Policy Learning]]
 
 ---
 
