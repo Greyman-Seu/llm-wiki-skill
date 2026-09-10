@@ -46,7 +46,7 @@ related_topics:
   - tactile-representation
 related_syntheses:
   - current-vla-landscape-foundation-control-memory-and-transfer
-  - tactile-force-into-pretrained-robot-policies
+  - force-touch-robot-policy-review
 status: analyzed
 links:
   original: https://arxiv.org/abs/2606.22332
@@ -155,5 +155,5 @@ Tactile Genesis 是用于比较灵巧操作触觉抽象的 GPU 并行仿真平�
 
 ## 相关综述
 
-- [[tactile-force-into-pretrained-robot-policies|触觉与力觉如何进入预训练机器人策略：表示、持续适配与执行闭环]]：提供传感覆盖、物理量选择与仿真评测这一上游证据层。
+- [[force-touch-robot-policy-review|机器人策略中的力觉与触觉：从信号语义到闭环控制]]：提供传感覆盖、物理量选择与仿真评测这一上游证据层。
 <!-- confidence: INFERRED -->

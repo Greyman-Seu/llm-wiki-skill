@@ -126,3 +126,11 @@
 - **tag**：复用 vision-language-action，无需更新词表
 - **综述动作**：unchanged；论文建立 geometry-native WAM 子路线，但单篇材料尚不足以改写现有跨材料综述判断
 - **状态**：完成
+## 2026-09-10 update-wiki | 机器人策略中的力觉与触觉：从信号语义到闭环控制
+
+- **操作**：重新审阅力觉与触觉相关主题和十四篇材料，按信号语义、时间尺度与策略—控制接口重写总综述
+- **覆盖材料**：Tactile Genesis、HTT、ForceMimic、MuSe、FD-VLA、RDP、T-Rex、TacForcing、FoAR、ForceFlow、FM-VLA、Facet-0、ACP、CR-VLA-Force
+- **结构调整**：把 force 区分为实测观测、蒸馏先验、预测后果和控制目标，再组织为传感、数据与表示、策略适配、执行期反馈、记忆与后果、力位与柔顺执行六层路线
+- **重复清理**：删除旧综述 `tactile-force-into-pretrained-robot-policies`，将索引、主题页和材料页反向链接统一到 `force-touch-robot-policy-review`
+- **综述判断**：先明确力信号的语义与有效时域；学习策略负责任务条件化和慢时标目标，高频反馈或经典控制器负责动作块内接触稳定；蒸馏先验不能替代安全级真实测量
+- **状态**：完成

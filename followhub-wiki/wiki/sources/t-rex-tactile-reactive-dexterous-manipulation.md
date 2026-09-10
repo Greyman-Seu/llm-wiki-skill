@@ -101,7 +101,7 @@ related_topics:
   - "tactile-representation"
   - "vision-language-action"
 related_syntheses:
-  - "tactile-force-into-pretrained-robot-policies"
+  - "force-touch-robot-policy-review"
 confidence: EXTRACTED
 status: analyzed
 ---
@@ -250,4 +250,4 @@ The ability to react dynamically to tactile signals has long been considered cru
 - [[Heterogeneous Tactile Transformer]]
 - [[Tactile Genesis: Exploring Tactile Sensors at Scale for Learning Dexterous Tasks]]
 - [[Vision-Language-Action]]
-- [[tactile-force-into-pretrained-robot-policies|触觉与力觉如何进入预训练机器人策略：表示、持续适配与执行闭环]]
+- [[force-touch-robot-policy-review|机器人策略中的力觉与触觉：从信号语义到闭环控制]]

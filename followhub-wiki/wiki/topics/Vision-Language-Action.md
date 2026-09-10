@@ -4,7 +4,7 @@ slug: "vision-language-action"
 title: "Vision-Language-Action"
 type: topic
 created: "2026-05-11"
-updated: "2026-09-03"
+updated: "2026-09-10"
 domains:
   - "Physical/Embodied Intelligence"
 tags:
@@ -27,7 +27,7 @@ source_slugs:
   - "2606.17046-geometric-action-model-for-robot-policy-learning"
 synthesis_slugs:
   - "current-vla-landscape-foundation-control-memory-and-transfer"
-  - "tactile-force-into-pretrained-robot-policies"
+  - "force-touch-robot-policy-review"
 status: active
 open_questions:
   - "预训练阶段缺失的新感官模态，如何以有限数据接入而不破坏旧任务能力？"
@@ -135,7 +135,7 @@ VLA 的核心不是“把图像和文本都喂给机器人”，而是把机器�
 - [[2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force|Multisensory Continual Learning: Adapting Pretrained Visuomotor Policies to Force]]
 - [[t-rex-tactile-reactive-dexterous-manipulation|T-Rex: Tactile-Reactive Dexterous Manipulation]]
 - [[2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback|TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback]]
-- [[tactile-force-into-pretrained-robot-policies|触觉与力觉如何进入预训练机器人策略：表示、持续适配与执行闭环]]
+- [[force-touch-robot-policy-review|机器人策略中的力觉与触觉：从信号语义到闭环控制]]
 - [[DM0.5: 面向开放世界的通用具身智能基础模型]]
 - [[Geometric Action Model for Robot Policy Learning]]
 - [[Online RL for VLA]]
