@@ -4,13 +4,14 @@ slug: "human-to-robot-transfer"
 title: "Human-to-Robot Transfer"
 type: topic
 created: "2026-05-11"
-updated: "2026-06-26"
+updated: "2026-09-15"
 domains:
   - "Physical/Embodied Intelligence"
 tags:
   - "human-to-robot-transfer"
 summary: ""
 source_slugs:
+  - "om-1"
   - "emergence-of-human-to-robot-transfer-in-vision-language-action-models"
   - "pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities"
   - "deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos"
@@ -68,3 +69,8 @@ open_questions:
 - [[DexJoCo: A Benchmark and Toolkit for Task-Oriented Dexterous Manipulation on MuJoCo]]
 - [[Human Video Robot Data Generation]]
 - [[Vision-Language-Action]]
+
+## OM-1：统一采集接口与跨本体执行
+
+- [[om-1|OM-1]] 将可穿戴人类示教、多模态策略与仿真 RL 控制串联。其贡献是接口与执行的系统方向；博客未披露总数据规模和统一任务成功率，暂不据此调整既有性能排序。
+- 待验证：固定策略跨本体时，需要多少控制器训练、标定和观察/动作适配？

@@ -134,3 +134,9 @@
 - **重复清理**：删除旧综述 `tactile-force-into-pretrained-robot-policies`，将索引、主题页和材料页反向链接统一到 `force-touch-robot-policy-review`
 - **综述判断**：先明确力信号的语义与有效时域；学习策略负责任务条件化和慢时标目标，高频反馈或经典控制器负责动作块内接触稳定；蒸馏先验不能替代安全级真实测量
 - **状态**：完成
+
+## 2026-09-15 ingest | OM-1
+
+- 新增 [[om-1|OM-1]]，来源为 Reward AI 官方博客，保留本地原始快照。
+- 关联 human-to-robot-transfer 与 contact-rich-manipulation，区分策略人类数据和仿真 RL 控制。
+- 综述保持不变：博客尚未提供足以改写已有性能判断的受控比较与完整训练规模。

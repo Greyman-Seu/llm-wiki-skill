@@ -4,13 +4,14 @@ slug: "contact-rich-manipulation"
 title: "Contact-Rich Manipulation and Adaptive Compliance"
 type: topic
 created: "2026-08-28"
-updated: "2026-09-10"
+updated: "2026-09-15"
 domains:
   - "Physical/Embodied Intelligence"
 tags:
   - "contact-rich-manipulation"
 summary: "接触密集操作中的运动—力联合学习路线：如何从示范、实时反馈、训练期力蒸馏或动作后果预测获得任务相关接触表示，并在安全接触、轨迹精度、硬件成本、快速响应与部署价值学习之间动态权衡。"
 source_slugs:
+  - "om-1"
   - "adaptive-compliance-policy-learning-approximate-compliance-for-diffusion-guided-control"
   - "2503.02881-reactive-diffusion-policy-slow-fast-visual-tactile-policy-learning-for-contact-rich-manipulation"
   - "fm-vla-force-based-memory-for-vision-language-action-models-in-contact-rich-manipulation"
@@ -120,3 +121,8 @@ CC-VLA 则把这个缺口变成显式系统接口：1 Hz 的 pi0 输出期望位
 - [[Tactile Representation]]
 - [[force-touch-robot-policy-review|机器人策略中的力觉与触觉：从信号语义到闭环控制]]
 - [[Physical/Embodied Intelligence]]（domain）
+
+## OM-1：统一采集接口与跨本体执行
+
+- [[om-1|OM-1]] 将可穿戴人类示教、多模态策略与仿真 RL 控制串联。其贡献是接口与执行的系统方向；博客未披露总数据规模和统一任务成功率，暂不据此调整既有性能排序。
+- 待验证：固定策略跨本体时，需要多少控制器训练、标定和观察/动作适配？
