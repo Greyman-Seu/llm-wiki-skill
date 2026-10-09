@@ -1,14 +1,14 @@
 # 知识库索引
 
-> 最后更新：2026-09-15
+> 最后更新：2026-10-09
 
 ---
 
 ## 概览
 
 - 主题：具身智能研究 Wiki
-- 素材总数：30
-- Wiki 页面总数：39
+- 素材总数：31
+- Wiki 页面总数：40
 
 ---
 
@@ -67,6 +67,7 @@
 - [[ForceMimic: Force-Centric Imitation Learning with Force-Motion Capture System for Contact-Rich Manipulation]]
 - [[FoAR: Force-Aware Reactive Policy for Contact-Rich Robotic Manipulation]]
 - [[ForceFlow: Learning to Feel and Act via Contact-Driven Flow Matching]]
+- [[2609.18242-forcedelta-vla|ForceDelta-VLA: Distilling Force-Conditioned Action Corrections for Contact-Rich Manipulation]]
 - [[CR-VLA-Force: Learning Control-aware Compliance VLA Model for Robust Contact-rich Robotic Manipulation]]
 
 ---

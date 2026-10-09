@@ -4,7 +4,7 @@ slug: "contact-rich-manipulation"
 title: "Contact-Rich Manipulation and Adaptive Compliance"
 type: topic
 created: "2026-08-28"
-updated: "2026-09-15"
+updated: "2026-10-09"
 domains:
   - "Physical/Embodied Intelligence"
 tags:
@@ -12,6 +12,7 @@ tags:
 summary: "接触密集操作中的运动—力联合学习路线：如何从示范、实时反馈、训练期力蒸馏或动作后果预测获得任务相关接触表示，并在安全接触、轨迹精度、硬件成本、快速响应与部署价值学习之间动态权衡。"
 source_slugs:
   - "om-1"
+  - "2609.18242-forcedelta-vla"
   - "adaptive-compliance-policy-learning-approximate-compliance-for-diffusion-guided-control"
   - "2503.02881-reactive-diffusion-policy-slow-fast-visual-tactile-policy-learning-for-contact-rich-manipulation"
   - "fm-vla-force-based-memory-for-vision-language-action-models-in-contact-rich-manipulation"
@@ -67,6 +68,7 @@ open_questions:
 | 如何以自然的人手交互采集真实力—位示范，并将其迁移到机器人控制？ | [[ForceMimic: Force-Centric Imitation Learning with Force-Motion Capture System for Contact-Rich Manipulation]] | ForceCapture 在无机器人条件下记录六维 wrench、SLAM 位姿和 RGB-D；HybridIL 预测位姿—wrench，并由正交混合力位控制器执行。 |
 | 如何在不增加复杂低层力控参数的情况下，把高频力觉用于接触阶段纠偏？ | [[FoAR: Force-Aware Reactive Policy for Contact-Rich Robotic Manipulation]] | 独立未来接触预测器以 phi 门控力觉特征，并在 phi>=0.9 且力/扭矩不足时沿动作方向做 0.006m 位置修正；100Hz 力觉、反应式控制与视觉扩散策略协同工作。 |
 | 低维 wrench 怎样避免被高维视觉掩盖，并同时支持物理与空间 OOD？ | [[ForceFlow: Learning to Feel and Act via Contact-Driven Flow Matching]] | 十步 wrench 与本体状态通过 AdaLN 全局调制 flow-matching DiT，视觉只作 cross-attention 空间锚定；V2F 再把 VLM 定位与局部接触执行解耦。 |
+| 示范中没有残差标签时，怎样为快速接触修正构造显式监督？ | [[2609.18242-forcedelta-vla|ForceDelta-VLA]] | 冻结教师用同一视觉语言前缀、状态和流噪声输出力条件/力无关成对预测，位姿差作为力修正目标；另一个延迟目标补偿旧参考与当前参考及状态差。 |
 | 低频 VLA 怎样把期望力交给高频控制器，并在动作块内部持续柔顺？ | [[2609.05832-cr-vla-force|CR-VLA-Force]] | pi0 每秒预测一次位姿—夹爪—力动作块，历史力 token 与残差 MoE 负责接触感知，VG-ACC 以 500 Hz 根据力误差趋势调刚度；六条件平均成功率 89.2%，擦板 base 力误差 5.52%。 |
 
 <!-- confidence: INFERRED -->
@@ -96,6 +98,8 @@ ForceMimic 则从数据入口补上另一块：ForceCapture 让人直接操作�
 
 ForceFlow 进一步给出一条“力作为全局调节条件”的融合路线：十步 wrench history 通过 AdaLN 进入每个 DiT block，视觉序列只通过 cross-attention 提供空间锚定，同时把未来 wrench 作为动作生成的辅助目标。它在六项任务中达到 81.67% 平均成功率和 8.23 N 平均 Force Cost，消融又把历史与预测的角色拆开——前者主要决定可行性，后者主要改善力质量。不过 32/64 步执行、约 1.15 秒的重规划周期也说明，这仍是中频滚动策略，不能替代执行器侧的高频安全回路。
 
+ForceDelta-VLA 则把“参考动作与接触修正”变成显式监督问题：冻结教师在同一上下文、状态和噪声下输出力条件与力无关两个动作块，用差值定义力修正；延迟头再学习异步参考块和参考状态变化。修正器 2.43ms 的前向延迟低于 100Hz 控制命令间隔，九任务平均成功率 82.2% 并将成功试验峰值力降低约 26%。这补上了“高频反馈学什么”的关键一环，但每任务 200 条示范、关节力矩估计和成功试验力统计仍限制其安全与跨平台外推。
+
 CC-VLA 则把这个缺口变成显式系统接口：1 Hz 的 pi0 输出期望位姿和前馈力，500 Hz 的 VG-ACC 根据实时力误差在线调刚度。它在擦板 base/OOD 上把相对力误差压到 5.52%/8.78%，并在六个按钮、插入、开窗条件上达到 89.2% 平均成功率。这个结果支持“慢策略给目标、快控制器保接触”的路线，但其安全性仍只在单台 UR5e 和有限位姿偏移中验证，不能当作端到端形式化保证。
 
 ## 未解决问题
@@ -115,6 +119,7 @@ CC-VLA 则把这个缺口变成显式系统接口：1 Hz 的 pi0 输出期望位
 - [[Facet-0: A Robotic Foundation Model for Contact-Rich Precise Manipulation]]
 - [[ForceMimic: Force-Centric Imitation Learning with Force-Motion Capture System for Contact-Rich Manipulation]]
 - [[ForceFlow: Learning to Feel and Act via Contact-Driven Flow Matching]]
+- [[2609.18242-forcedelta-vla|ForceDelta-VLA: Distilling Force-Conditioned Action Corrections for Contact-Rich Manipulation]]
 - [[2609.05832-cr-vla-force|CR-VLA-Force: Learning Control-aware Compliance VLA Model for Robust Contact-rich Robotic Manipulation]]
 - [[T-Rex: Tactile-Reactive Dexterous Manipulation]]
 - [[TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback]]

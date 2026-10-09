@@ -40,7 +40,7 @@ raw_refs:
   - https://huggingface.co/collections/Dexmal/dm05
   - https://www.modelscope.cn/collections/Dexmal/DM05
 related_topics:
-  - Vision-Language-Action
+  - vision-language-action
 related_syntheses:
   - current-vla-landscape-foundation-control-memory-and-transfer
 status: analyzed

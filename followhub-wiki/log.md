@@ -140,3 +140,15 @@
 - 新增 [[om-1|OM-1]]，来源为 Reward AI 官方博客，保留本地原始快照。
 - 关联 human-to-robot-transfer 与 contact-rich-manipulation，区分策略人类数据和仿真 RL 控制。
 - 综述保持不变：博客尚未提供足以改写已有性能判断的受控比较与完整训练规模。
+
+## 2026-10-09 ingest | ForceDelta-VLA
+
+- **操作**：使用 arxiv-to-wiki direct 流程详细解读 arXiv 2609.18242v1，保留总览、修正蒸馏、异步部署、主实验、延迟敏感性、消融与未见物体图。
+- **slug**：2609.18242-forcedelta-vla
+- **核心主张**：用冻结教师的力条件/力无关成对预测构造显式力修正标签，并用独立延迟头补偿异步参考块与参考状态差异；轻量学生只输出五步位姿修正，避免在每个控制周期重生成完整 VLA 动作块。
+- **关键证据**：九任务平均成功率 82.2%，ForceVLA 54.4%，时序教师 70.6%；修正器前向 2.43±0.12ms，参考动作 189.7±6.8ms，单臂/双臂成功试验平均峰值力各降低约 26%。
+- **新增页面**：wiki/sources/2609.18242-forcedelta-vla.md
+- **更新主题**：Contact-Rich Manipulation and Adaptive Compliance
+- **综述动作**：unchanged；论文强化“力信号语义 + 异步时间尺度 + 受限残差接口”的既有判断，但单篇证据尚不足以重写跨材料综述。
+- **发布核验**：R2 source JSON 与本地包字段一致；Page 提交 7e3497d 已部署，正式地址 https://tenstep.top/wiki/source/2609.18242-forcedelta-vla 返回 HTTP 200。
+- **状态**：完成

@@ -38,6 +38,8 @@
 
 ## 最近更新
 
+- 2026-10-09：新增 [[2609.18242-forcedelta-vla|ForceDelta-VLA]]，梳理力条件/力无关教师差分、异步参考修正与实机接触结果。
+
 - 2026-05-11：新增 [[RL Token: Bootstrapping Online RL with Vision-Language-Action Models]]
 - 2026-05-11：新增 [[MEM: Multi-Scale Embodied Memory for Vision Language Action Models]]
 - 2026-05-11：新增 [[Emergence of Human to Robot Transfer in Vision-Language-Action Models]]

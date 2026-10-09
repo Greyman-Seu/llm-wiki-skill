@@ -52,7 +52,7 @@ raw_refs:
   - "https://arxiv.org/html/2608.30237v1"
 related_topics:
   - "vision-language-action"
-  - "Long-Horizon Memory for Robot Policies"
+  - "long-horizon-memory-for-robot-policies"
 related_syntheses:
   - "current-vla-landscape-foundation-control-memory-and-transfer"
 confidence: EXTRACTED
