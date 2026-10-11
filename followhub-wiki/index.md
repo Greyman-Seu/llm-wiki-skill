@@ -1,6 +1,6 @@
 # 知识库索引
 
-> 最后更新：2026-10-09
+> 最后更新：2026-10-11
 
 ---
 
@@ -31,6 +31,7 @@
 - [[Human Video Robot Data Generation]]（子主题种子）
 - [[Tactile Representation]]
 - [[Contact-Rich Manipulation and Adaptive Compliance]]
+- [[Robot Self-Improvement]]（子主题种子）
 
 ---
 
@@ -68,6 +69,7 @@
 - [[FoAR: Force-Aware Reactive Policy for Contact-Rich Robotic Manipulation]]
 - [[ForceFlow: Learning to Feel and Act via Contact-Driven Flow Matching]]
 - [[2609.18242-forcedelta-vla|ForceDelta-VLA: Distilling Force-Conditioned Action Corrections for Contact-Rich Manipulation]]
+- [[2609.38905-embodirsi|EmbodiRSI: Recursive Self-Improvement for Data-Efficient Robot Adaptation]]
 - [[CR-VLA-Force: Learning Control-aware Compliance VLA Model for Robust Contact-rich Robotic Manipulation]]
 
 ---

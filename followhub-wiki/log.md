@@ -4,6 +4,14 @@
 
 ---
 
+## 2026-10-11 ingest | EmbodiRSI: Recursive Self-Improvement for Data-Efficient Robot Adaptation
+
+- **操作**：精读 arXiv 2609.38905v3，保存 PDF/HTML 原文，写入 source note
+- **结构变更**：新增 `robot-self-improvement` 主题，并把 EmbodiRSI 挂载到该主题
+- **关键结论**：两轮 RSI 将仿真成功率 50.4%→83.5%；400 条自适应仿真轨迹加 10 条实机 HIL 达到 83.1% 实机成功率
+- **发布核验**：R2 source JSON 与本地包字段一致；Page 地址 https://tenstep.top/wiki/source/2609.38905-embodirsi 返回 HTTP 200
+- **状态**：完成
+
 ## 2026-05-10 — 初始化
 
 - **操作**：创建知识库
