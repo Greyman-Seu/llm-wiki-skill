@@ -1,0 +1,203 @@
+{
+  "requested_url": "https://sgs-rl.github.io/",
+  "resolved_url": "https://sgs-rl.github.io/",
+  "canonical_url": "https://sgs-rl.github.io/",
+  "title": "A Balanced Data Diet: Addressing the Exploration Bottleneck in Mega-Scale RL for Robot Control",
+  "published_time": "",
+  "retrieved_at": "2026-10-11T04:26:06.779512+00:00",
+  "sha256": "4506393247d565789dee02ba0cb25afb053e3205f2f033037504e1858759e311",
+  "media": [
+    {
+      "tag": "video",
+      "attribute": "src",
+      "url": "https://sgs-rl.github.io/media/library/reel5.mp4",
+      "description": "Highlight reel"
+    },
+    {
+      "tag": "video",
+      "attribute": "poster",
+      "url": "https://sgs-rl.github.io/media/library/reel5.jpg",
+      "description": "Highlight reel"
+    },
+    {
+      "tag": "img",
+      "attribute": "src",
+      "url": "https://sgs-rl.github.io/media/library/clips/anymal-c-terrains.jpg",
+      "description": ""
+    },
+    {
+      "tag": "img",
+      "attribute": "src",
+      "url": "https://sgs-rl.github.io/media/library/clips/anymal-d-floating-island.jpg",
+      "description": ""
+    },
+    {
+      "tag": "img",
+      "attribute": "src",
+      "url": "https://sgs-rl.github.io/media/library/clips/anymal-d-stepping-stones.jpg",
+      "description": ""
+    },
+    {
+      "tag": "img",
+      "attribute": "src",
+      "url": "https://sgs-rl.github.io/media/library/clips/anymal-d-climbing-box.jpg",
+      "description": ""
+    },
+    {
+      "tag": "img",
+      "attribute": "src",
+      "url": "https://sgs-rl.github.io/media/library/clips/ur5e-sim-rod-1.jpg",
+      "description": ""
+    },
+    {
+      "tag": "img",
+      "attribute": "src",
+      "url": "https://sgs-rl.github.io/media/library/clips/ur5e-sim-bnc-5.jpg",
+      "description": ""
+    },
+    {
+      "tag": "img",
+      "attribute": "src",
+      "url": "https://sgs-rl.github.io/media/library/clips/ur5e-sim-gear-mesh-3.jpg",
+      "description": ""
+    },
+    {
+      "tag": "img",
+      "attribute": "src",
+      "url": "https://sgs-rl.github.io/media/library/clips/franka-sim-nut-1.jpg",
+      "description": ""
+    },
+    {
+      "tag": "img",
+      "attribute": "src",
+      "url": "https://sgs-rl.github.io/media/library/clips/ur5e-real-nut-1.jpg",
+      "description": ""
+    },
+    {
+      "tag": "img",
+      "attribute": "src",
+      "url": "https://sgs-rl.github.io/media/library/clips/ur5e-real-rod-1.jpg",
+      "description": ""
+    },
+    {
+      "tag": "img",
+      "attribute": "src",
+      "url": "https://sgs-rl.github.io/media/library/clips/ur5e-real-gear-mesh-4.jpg",
+      "description": ""
+    },
+    {
+      "tag": "video",
+      "attribute": "poster",
+      "url": "https://sgs-rl.github.io/media/library/learning-hd/nut.jpg",
+      "description": "Nut on bolt: the policy at each checkpoint with footage, one task configuration"
+    },
+    {
+      "tag": "img",
+      "attribute": "src",
+      "url": "https://sgs-rl.github.io/media/library/clips/ur5e-real-nut-3.jpg",
+      "description": ""
+    },
+    {
+      "tag": "img",
+      "attribute": "src",
+      "url": "https://sgs-rl.github.io/media/library/clips/ur5e-real-rod-5.jpg",
+      "description": ""
+    },
+    {
+      "tag": "img",
+      "attribute": "src",
+      "url": "https://sgs-rl.github.io/media/library/clips/ur5e-real-gear-mesh-1.jpg",
+      "description": ""
+    },
+    {
+      "tag": "img",
+      "attribute": "src",
+      "url": "https://sgs-rl.github.io/media/library/clips/ur5e-sim-bnc-5.jpg",
+      "description": ""
+    },
+    {
+      "tag": "img",
+      "attribute": "src",
+      "url": "https://sgs-rl.github.io/media/library/clips/standin-ur5e-sim-waterproof.jpg",
+      "description": ""
+    },
+    {
+      "tag": "img",
+      "attribute": "src",
+      "url": "https://sgs-rl.github.io/media/library/clips/franka-sim-nut-2.jpg",
+      "description": ""
+    },
+    {
+      "tag": "img",
+      "attribute": "src",
+      "url": "https://sgs-rl.github.io/media/library/clips/anymal-c-terrains.jpg",
+      "description": ""
+    },
+    {
+      "tag": "img",
+      "attribute": "src",
+      "url": "https://sgs-rl.github.io/media/library/clips/anymal-d-climbing-box.jpg",
+      "description": ""
+    },
+    {
+      "tag": "img",
+      "attribute": "src",
+      "url": "https://sgs-rl.github.io/media/library/clips/anymal-d-stepping-stones.jpg",
+      "description": ""
+    },
+    {
+      "tag": "video",
+      "attribute": "poster",
+      "url": "https://sgs-rl.github.io/media/library/clips/franka-sim-nut-1m-full.jpg",
+      "description": "Nut on bolt, Franka, simulation, one take"
+    },
+    {
+      "tag": "video",
+      "attribute": "poster",
+      "url": "https://sgs-rl.github.io/media/library/runs/run-anymal-c.jpg",
+      "description": "All terrains, ANYmal C, simulation, one take"
+    },
+    {
+      "tag": "video",
+      "attribute": "poster",
+      "url": "https://sgs-rl.github.io/media/library/runs/run-ur5e-real-gear-mesh.jpg",
+      "description": "Gear mesh, UR5e, real world, one take"
+    }
+  ],
+  "links": [
+    {
+      "url": "https://sgs-rl.github.io/#top"
+    },
+    {
+      "url": "https://arxiv.org/abs/2610.12465"
+    },
+    {
+      "url": "https://zoctipus.github.io/"
+    },
+    {
+      "url": "https://www.mateoguaman.com/"
+    },
+    {
+      "url": "https://patrickyin.me/"
+    },
+    {
+      "url": "https://www.linkedin.com/in/iggydagnino"
+    },
+    {
+      "url": "https://homes.cs.washington.edu/~abhgupta/"
+    },
+    {
+      "url": "https://rosarioscalise.com/"
+    },
+    {
+      "url": "https://homes.cs.washington.edu/~bboots/"
+    },
+    {
+      "url": "https://arxiv.org/abs/2610.12465"
+    },
+    {
+      "url": "https://sgs-rl.github.io/terms/"
+    }
+  ],
+  "capture_method": "local_html"
+}
