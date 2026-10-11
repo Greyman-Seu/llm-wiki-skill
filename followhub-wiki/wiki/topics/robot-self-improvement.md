@@ -12,6 +12,7 @@ tags:
 summary: "关注机器人策略如何根据自身 rollout 失败持续生成纠正经验、更新采数分布，并检验这种递归改进能否跨场景、跨轮次稳定延续。"
 source_slugs:
   - "2609.38905-embodirsi"
+  - "2609.29166-harnesspai"
 synthesis_slugs: []
 status: active
 open_questions:
@@ -33,14 +34,19 @@ open_questions:
 - [来源: EmbodiRSI: Recursive Self-Improvement for Data-Efficient Robot Adaptation](../sources/2609.38905-embodirsi.md)
   把目标桌面重建为长期可复用仿真练习场；agent 监控 policy rollout，从 policy-reached state 生成纠正轨迹，并把最终失败归因到空间弱区以定向补采示范。匹配 400 条轨迹预算时比静态采集高 20.6 个百分点，R2+10 实机成功率达 83.1%。
 
+- [来源: HarnessPAI: An Evolving Harness for Physical AI](../sources/2609.29166-harnesspai.md)
+  先演化外部可执行程序而不是直接更新策略；程序在 rollout 间根据诊断反馈修复，并用成功 gate 在扰动场景生成专家轨迹。π0.5-LIBERO 用这些轨迹微调后，LIBERO-PRO 从 34.9% 升至 73.7%。
+
 ## 当前判断
 
 - 有价值的 self-improvement 不一定是模型改写自身，而是让数据采集策略随执行弱点共同演化。
+- HarnessPAI 补上另一条路线：把重复任务的执行经验固化为代码与节点化修复技能，再把已验证程序当作 success-filtered 数据采集器。
 - 训练时的外部恢复和测试时的 policy-only 自主行为必须分开报告，否则容易夸大系统可用性。
 - 该方向仍缺少跨 held-out 场景、长时间多轮更新、组件贡献和总成本的可复现验证。
 
 ## 相关页面
 
 - [[2609.38905-embodirsi|EmbodiRSI: Recursive Self-Improvement for Data-Efficient Robot Adaptation]]
+- [[2609.29166-harnesspai|HarnessPAI: An Evolving Harness for Physical AI]]
 - [[Online RL for VLA]]
 - [[Vision-Language-Action]]

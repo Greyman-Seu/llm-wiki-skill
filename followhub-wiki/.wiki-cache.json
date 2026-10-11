@@ -5,6 +5,11 @@
       "hash": "sha256:eca24d95fd45f5e3a47cfc9947bc4f0b5774823b0619124fc63794eea2ef86f9",
       "ingested_at": "2026-08-10T09:14:10Z",
       "source_page": "wiki/sources/qwen-vla.md"
+    },
+    "raw/articles/2609.29166.html": {
+      "hash": "sha256:eca00b323e506aa750eb377c143de40c523d2b599bacf14fee0daadfd46563f0",
+      "ingested_at": "2026-10-11T03:25:38Z",
+      "source_page": "wiki/sources/2609.29166-harnesspai.md"
     }
   }
 }

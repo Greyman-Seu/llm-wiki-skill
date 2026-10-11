@@ -160,3 +160,13 @@
 - **综述动作**：unchanged；论文强化“力信号语义 + 异步时间尺度 + 受限残差接口”的既有判断，但单篇证据尚不足以重写跨材料综述。
 - **发布核验**：R2 source JSON 与本地包字段一致；Page 提交 7e3497d 已部署，正式地址 https://tenstep.top/wiki/source/2609.18242-forcedelta-vla 返回 HTTP 200。
 - **状态**：完成
+
+## 2026-10-11 ingest | HarnessPAI: An Evolving Harness for Physical AI
+
+- **操作**：精读 arXiv 2609.29166v1，保存 PDF/HTML 原文，写入 source note。
+- **slug**：2609.29166-harnesspai
+- **核心主张**：把感知、任务理解、几何推理、动作原语调用和验证组织为可执行 harness；rollout 内固定程序开环执行，rollout 间用反馈演化程序与节点化技能。
+- **关键证据**：LIBERO-PRO 96.5% 高于 π0.5 的 34.9%；RoboCasa Atomic-Seen 92.2% 高于 WorldDreamer 的 65.0%；成功轨迹回流微调把 π0.5-LIBERO 从 34.9% 提升到 73.7%。
+- **新增材料**：wiki/sources/2609.29166-harnesspai.md
+- **更新主题**：Robot Self-Improvement
+- **状态**：完成

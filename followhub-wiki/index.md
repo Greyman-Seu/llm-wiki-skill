@@ -7,8 +7,8 @@
 ## 概览
 
 - 主题：具身智能研究 Wiki
-- 素材总数：31
-- Wiki 页面总数：40
+- 素材总数：33
+- Wiki 页面总数：43
 
 ---
 
@@ -70,6 +70,7 @@
 - [[ForceFlow: Learning to Feel and Act via Contact-Driven Flow Matching]]
 - [[2609.18242-forcedelta-vla|ForceDelta-VLA: Distilling Force-Conditioned Action Corrections for Contact-Rich Manipulation]]
 - [[2609.38905-embodirsi|EmbodiRSI: Recursive Self-Improvement for Data-Efficient Robot Adaptation]]
+- [[2609.29166-harnesspai|HarnessPAI: An Evolving Harness for Physical AI]]
 - [[CR-VLA-Force: Learning Control-aware Compliance VLA Model for Robust Contact-rich Robotic Manipulation]]
 
 ---
