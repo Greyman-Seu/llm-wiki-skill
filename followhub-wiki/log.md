@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-10-12 topic ingest | 3D-Native Embodied Model
+
+- **操作**：精读 arXiv 2610.12099v1 与用户提供的 Dexterity-BEV 项目 PDF，分别写入 source note，并创建专题路线页
+- **新增材料**：`wiki/sources/2610.12099-unitas-a-3d-native-world-action-model-for-embodied-manipulation.md`、`wiki/sources/2606.02274-dexterity-bev-aligning-3d-world-and-actions-for-generalizable-robot-policies-learning.md`
+- **新增主题**：`wiki/topics/3d-native-embodied-model.md`
+- **关键判断**：Dex-BEV 证明 BEV/TCP/时间对齐能显著提升跨本体与抗视角扰动能力；UNITAS 进一步把身体动作与环境响应统一为共享度量 3D 帧中的 point flow，支持动作生成与动作条件世界预测
+- **边界**：Dex-BEV 依赖相机外参与 BEV ROI，UNITAS 的真实任务覆盖仍窄且预测窗口约 3 秒；均未做第三方复现
+- **状态**：完成
+
 ## 2026-10-12 ingest | TACROSS: An Efficient and Low-Cost Scalable Human Touch System Across Heterogeneous Tactile Sensors for Dexterous Robot Learning
 
 - **操作**：使用 arxiv-to-wiki direct 流程精读 arXiv 2610.11945v1，写入 source note，并核对论文正文、核心图、硬件规格表和主要实验表

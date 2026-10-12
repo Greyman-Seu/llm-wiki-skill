@@ -7,8 +7,8 @@
 ## 概览
 
 - 主题：具身智能研究 Wiki
-- 素材总数：34
-- Wiki 页面总数：44
+- 素材总数：36
+- Wiki 页面总数：47
 
 ---
 
@@ -32,6 +32,7 @@
 - [[Tactile Representation]]
 - [[Contact-Rich Manipulation and Adaptive Compliance]]
 - [[Robot Self-Improvement]]（子主题种子）
+- [[3D-Native Embodied Model]]（子主题种子）
 
 ---
 
@@ -73,6 +74,8 @@
 - [[2609.29166-harnesspai|HarnessPAI: An Evolving Harness for Physical AI]]
 - [[CR-VLA-Force: Learning Control-aware Compliance VLA Model for Robust Contact-rich Robotic Manipulation]]
 - [[tacross-an-efficient-and-low-cost-scalable-human-touch-system-across-heterogeneous-tactile-sensors-for-dexterous-robot-learning|TACROSS: An Efficient and Low-Cost Scalable Human Touch System Across Heterogeneous Tactile Sensors for Dexterous Robot Learning]]
+- [[2606.02274-dexterity-bev-aligning-3d-world-and-actions-for-generalizable-robot-policies-learning|Dexterity-BEV: Aligning 3D World and Actions for Generalizable Robot Policies Learning]]
+- [[2610.12099-unitas-a-3d-native-world-action-model-for-embodied-manipulation|UNITAS: A 3D-Native World Action Model for Embodied Manipulation]]
 
 ---
 
