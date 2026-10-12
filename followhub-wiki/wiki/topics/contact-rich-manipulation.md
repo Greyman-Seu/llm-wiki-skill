@@ -4,7 +4,7 @@ slug: "contact-rich-manipulation"
 title: "Contact-Rich Manipulation and Adaptive Compliance"
 type: topic
 created: "2026-08-28"
-updated: "2026-10-09"
+updated: "2026-10-12"
 domains:
   - "Physical/Embodied Intelligence"
 tags:
@@ -22,6 +22,7 @@ source_slugs:
   - "foar-force-aware-reactive-policy-for-contact-rich-robotic-manipulation"
   - "2605.11048-forceflow-learning-to-feel-and-act-via-contact-driven-flow-matching"
   - "2609.05832-cr-vla-force"
+  - "tacross-an-efficient-and-low-cost-scalable-human-touch-system-across-heterogeneous-tactile-sensors-for-dexterous-robot-learning"
 synthesis_slugs:
   - "force-touch-robot-policy-review"
 status: "active"
@@ -66,6 +67,7 @@ open_questions:
 | 部署平台没有力传感器时，训练期真实力还能怎样发挥作用？ | [[FD-VLA: Force-Distilled Vision-Language-Action Model for Contact-Rich Manipulation]] | 用真实力潜变量监督视觉—状态条件化的 learnable query；推理时只保留预测力 token，但它是任务相关先验而非安全级闭环力反馈。 |
 | 怎样让策略在动作执行前就比较接触后果，而不只在碰撞后响应？ | [[Facet-0: A Robotic Foundation Model for Contact-Rich Precise Manipulation]] | 联合生成笛卡尔动作块与未来 wrist-wrench，再由分布式 Action–Wrench Critic 区分几何进度相似但接触结果不同的提案；预测 wrench 不直接执行。 |
 | 如何以自然的人手交互采集真实力—位示范，并将其迁移到机器人控制？ | [[ForceMimic: Force-Centric Imitation Learning with Force-Motion Capture System for Contact-Rich Manipulation]] | ForceCapture 在无机器人条件下记录六维 wrench、SLAM 位姿和 RGB-D；HybridIL 预测位姿—wrench，并由正交混合力位控制器执行。 |
+| 人类分布式触觉能否低成本扩充灵巧手接触示范？ | [[tacross-an-efficient-and-low-cost-scalable-human-touch-system-across-heterogeneous-tactile-sensors-for-dexterous-robot-learning|TACROSS]] | 10.86 美元压阻手套以约 150 Hz 覆盖掌指接触；接触语义对齐后，150 条人类示范加 30 条机器人示范达到 91.9% 四任务均值，而去掉语义对齐只有 49.4%。 |
 | 如何在不增加复杂低层力控参数的情况下，把高频力觉用于接触阶段纠偏？ | [[FoAR: Force-Aware Reactive Policy for Contact-Rich Robotic Manipulation]] | 独立未来接触预测器以 phi 门控力觉特征，并在 phi>=0.9 且力/扭矩不足时沿动作方向做 0.006m 位置修正；100Hz 力觉、反应式控制与视觉扩散策略协同工作。 |
 | 低维 wrench 怎样避免被高维视觉掩盖，并同时支持物理与空间 OOD？ | [[ForceFlow: Learning to Feel and Act via Contact-Driven Flow Matching]] | 十步 wrench 与本体状态通过 AdaLN 全局调制 flow-matching DiT，视觉只作 cross-attention 空间锚定；V2F 再把 VLM 定位与局部接触执行解耦。 |
 | 示范中没有残差标签时，怎样为快速接触修正构造显式监督？ | [[2609.18242-forcedelta-vla|ForceDelta-VLA]] | 冻结教师用同一视觉语言前缀、状态和流噪声输出力条件/力无关成对预测，位姿差作为力修正目标；另一个延迟目标补偿旧参考与当前参考及状态差。 |
@@ -123,6 +125,7 @@ CC-VLA 则把这个缺口变成显式系统接口：1 Hz 的 pi0 输出期望位
 - [[2609.05832-cr-vla-force|CR-VLA-Force: Learning Control-aware Compliance VLA Model for Robust Contact-rich Robotic Manipulation]]
 - [[T-Rex: Tactile-Reactive Dexterous Manipulation]]
 - [[TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback]]
+- [[TACROSS: An Efficient and Low-Cost Scalable Human Touch System Across Heterogeneous Tactile Sensors for Dexterous Robot Learning]]
 - [[Tactile Representation]]
 - [[force-touch-robot-policy-review|机器人策略中的力觉与触觉：从信号语义到闭环控制]]
 - [[Physical/Embodied Intelligence]]（domain）

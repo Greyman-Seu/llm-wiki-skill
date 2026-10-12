@@ -4,7 +4,7 @@ slug: "tactile-representation"
 title: "Tactile Representation"
 type: topic
 created: "2026-08-10"
-updated: "2026-09-10"
+updated: "2026-10-12"
 domains:
   - "Physical/Embodied Intelligence"
 tags:
@@ -17,6 +17,7 @@ source_slugs:
   - "2503.02881-reactive-diffusion-policy-slow-fast-visual-tactile-policy-learning-for-contact-rich-manipulation"
   - "t-rex-tactile-reactive-dexterous-manipulation"
   - "2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback"
+  - "tacross-an-efficient-and-low-cost-scalable-human-touch-system-across-heterogeneous-tactile-sensors-for-dexterous-robot-learning"
 synthesis_slugs:
   - "force-touch-robot-policy-review"
 status: "active"
@@ -52,6 +53,7 @@ open_questions:
 | --- | --- | --- |
 | 触觉硬件配置（位置/分辨率/类型）如何选？ | [[tactile-genesis-exploring-tactile-sensors-at-scale-for-learning-dexterous-tasks]] | 覆盖面积优先于分辨率；per-taxel 力/力矩在大多数灵巧任务里最稳健 |
 | 异构传感器如何共享 backbone？ | [[2606.29948-heterogeneous-tactile-transformer]] | sensor-specific encoder + shared transformer trunk + 跨模态预测对齐；MAE 重建 + 双向跨模态预测 |
+| 换能原理完全不同的压阻手套和电容机器人手怎样对齐？ | [[tacross-an-efficient-and-low-cost-scalable-human-touch-system-across-heterogeneous-tactile-sensors-for-dexterous-robot-learning|TACROSS]] | 不匹配原始 taxel，而映射到带 mask 的接触概率、强度、面积、压力中心和六阶段事件语义，再由共享时序/跨手指 Transformer 输出 256 维 latent；去掉该语义对齐会把 30:150 设置的成功率从 91.9% 拉低到 49.4%。 |
 | 触觉 backbone 能否迁移到训练时未见的传感器？ | [[2606.29948-heterogeneous-tactile-transformer]] | 已在未出现的 Sharpa 触觉指尖上验证 toy screw / grasp tofu 上的成功率显著提升 |
 | 旧数据没有 F/T 标注时，预训练策略如何吸收新模态而不遗忘？ | [[2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force|Multisensory Continual Learning: Adapting Pretrained Visuomotor Policies to Force]] | early + late fusion 联合动作、视频、未来 F/T 预测；旧数据 replay 与 missing-modality mask 同时保留视觉动作先验 |
 | 高频力/触觉怎样决定动作的精确落点？ | [[Reactive Diffusion Policy: Slow-Fast Visual-Tactile Policy Learning for Contact-Rich Manipulation]] | action-only encoder 学高层 latent，触觉/力只进入 decoder；低维瓶颈让实时接触信号承担亚毫米级位置细节。 |
@@ -91,5 +93,6 @@ open_questions:
 - [[Reactive Diffusion Policy: Slow-Fast Visual-Tactile Policy Learning for Contact-Rich Manipulation]]
 - [[t-rex-tactile-reactive-dexterous-manipulation|T-Rex: Tactile-Reactive Dexterous Manipulation]]
 - [[2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback|TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback]]
+- [[tacross-an-efficient-and-low-cost-scalable-human-touch-system-across-heterogeneous-tactile-sensors-for-dexterous-robot-learning|TACROSS]]
 - [[force-touch-robot-policy-review|机器人策略中的力觉与触觉：从信号语义到闭环控制]]
 - [[Physical/Embodied Intelligence]]（domain）

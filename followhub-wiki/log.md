@@ -4,6 +4,14 @@
 
 ---
 
+## 2026-10-12 ingest | TACROSS: An Efficient and Low-Cost Scalable Human Touch System Across Heterogeneous Tactile Sensors for Dexterous Robot Learning
+
+- **操作**：使用 arxiv-to-wiki direct 流程精读 arXiv 2610.11945v1，写入 source note，并核对论文正文、核心图、硬件规格表和主要实验表
+- **slug**：tacross-an-efficient-and-low-cost-scalable-human-touch-system-across-heterogeneous-tactile-sensors-for-dexterous-robot-learning
+- **关键结论**：TACROSS 用接触事件语义对齐压阻手套与电容 Revo2，人类触觉扩表示、机器人示范锚定动作；30 robot+150 ego 达 91.9% 平均成功，去掉语义对齐仅 49.4%，Ego-V 采集速度 3.5×、设备成本降 95.7%
+- **更新主题**：Tactile Representation、Contact-Rich Manipulation and Adaptive Compliance、Human-to-Robot Transfer
+- **状态**：完成
+
 ## 2026-10-11 ingest | EmbodiRSI: Recursive Self-Improvement for Data-Efficient Robot Adaptation
 
 - **操作**：精读 arXiv 2609.38905v3，保存 PDF/HTML 原文，写入 source note

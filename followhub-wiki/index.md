@@ -1,14 +1,14 @@
 # 知识库索引
 
-> 最后更新：2026-10-11
+> 最后更新：2026-10-12
 
 ---
 
 ## 概览
 
 - 主题：具身智能研究 Wiki
-- 素材总数：33
-- Wiki 页面总数：43
+- 素材总数：34
+- Wiki 页面总数：44
 
 ---
 
@@ -72,6 +72,7 @@
 - [[2609.38905-embodirsi|EmbodiRSI: Recursive Self-Improvement for Data-Efficient Robot Adaptation]]
 - [[2609.29166-harnesspai|HarnessPAI: An Evolving Harness for Physical AI]]
 - [[CR-VLA-Force: Learning Control-aware Compliance VLA Model for Robust Contact-rich Robotic Manipulation]]
+- [[tacross-an-efficient-and-low-cost-scalable-human-touch-system-across-heterogeneous-tactile-sensors-for-dexterous-robot-learning|TACROSS: An Efficient and Low-Cost Scalable Human Touch System Across Heterogeneous Tactile Sensors for Dexterous Robot Learning]]
 
 ---
 

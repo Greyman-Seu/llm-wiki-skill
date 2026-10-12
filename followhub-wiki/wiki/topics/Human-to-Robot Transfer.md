@@ -4,7 +4,7 @@ slug: "human-to-robot-transfer"
 title: "Human-to-Robot Transfer"
 type: topic
 created: "2026-05-11"
-updated: "2026-09-15"
+updated: "2026-10-12"
 domains:
   - "Physical/Embodied Intelligence"
 tags:
@@ -16,6 +16,7 @@ source_slugs:
   - "pi07-a-steerable-generalist-robotic-foundation-model-with-emergent-capabilities"
   - "deximit-learning-bimanual-dexterous-manipulation-from-monocular-human-videos"
   - "dexjoco-a-benchmark-and-toolkit-for-task-oriented-dexterous-manipulation-on-mujoco"
+  - "tacross-an-efficient-and-low-cost-scalable-human-touch-system-across-heterogeneous-tactile-sensors-for-dexterous-robot-learning"
 synthesis_slugs:
   - "current-vla-landscape-foundation-control-memory-and-transfer"
 status: active
@@ -43,11 +44,15 @@ open_questions:
 - [来源: DexJoCo: A Benchmark and Toolkit for Task-Oriented Dexterous Manipulation on MuJoCo](../sources/dexjoco-a-benchmark-and-toolkit-for-task-oriented-dexterous-manipulation-on-mujoco.md)
   这篇不是 human-video 数据生成工作，但它提供了功能型灵巧手任务、低成本手套遥操作采集和统一评测场，可以检验 human-to-robot / VLA 路线是否真的解决双手、接触密集和长时程操作。
 
+- [来源: TACROSS: An Efficient and Low-Cost Scalable Human Touch System Across Heterogeneous Tactile Sensors for Dexterous Robot Learning](../sources/tacross-an-efficient-and-low-cost-scalable-human-touch-system-across-heterogeneous-tactile-sensors-for-dexterous-robot-learning.md)
+  这篇把人类数据的作用拆成两层：分布式触觉用于学习跨压阻/电容传感器的接触语义，动作监督仍由少量 Revo2 机器人执行示范锚定；人手重定向只作为置信度加权伪标签。
+
 ## 当前判断
 
 - `Human-to-Robot Transfer` 这篇更强调“能力何时出现”
 - `π0.7` 更强调“多源数据如何被统一利用”
 - `DexImit` 更强调“人类视频如何被编译成物理可行的机器人数据”
+- `TACROSS` 更强调“人类触觉如何先翻译成接触事件语义，再由机器人动作锚定”
 - 放在一起看，可以把问题理解成：
   - 预训练多样性负责让 shared representation 成熟
   - richer context / prompt 负责让这些能力在控制中被真正调用出来
@@ -67,6 +72,7 @@ open_questions:
 - [[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities]]
 - [[DexImit: Learning Bimanual Dexterous Manipulation from Monocular Human Videos]]
 - [[DexJoCo: A Benchmark and Toolkit for Task-Oriented Dexterous Manipulation on MuJoCo]]
+- [[TACROSS: An Efficient and Low-Cost Scalable Human Touch System Across Heterogeneous Tactile Sensors for Dexterous Robot Learning]]
 - [[Human Video Robot Data Generation]]
 - [[Vision-Language-Action]]
 
