@@ -4,6 +4,13 @@
 
 ---
 
+## 2026-10-13 attach | Spatial Forcing → 3D-Native Embodied Model
+
+- **操作**：将已有 Spatial Forcing 解读页挂入 3D-Native Embodied Model 专题，不重新分析论文
+- **slug**：spatial-forcing-implicit-spatial-representation-alignment-for-vision-language-action-model
+- **结构变更**：source `related_topics` 新增 3d-native-embodied-model；专题新增代表工作、三路线对比与低侵入隐式对齐判断
+- **状态**：完成
+
 ## 2026-10-12 topic ingest | 3D-Native Embodied Model
 
 - **操作**：精读 arXiv 2610.12099v1 与用户提供的 Dexterity-BEV 项目 PDF，分别写入 source note，并创建专题路线页
