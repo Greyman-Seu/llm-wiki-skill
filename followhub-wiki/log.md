@@ -4,6 +4,16 @@
 
 ---
 
+## 2026-10-13 ingest | Grounded Action Model: 3D Grounding as a Foundation for Robotics
+
+- **操作**：使用 arxiv-to-wiki direct 流程精读 arXiv 2609.23863v2，下载 PDF/HTML，核对方法架构、RoboTwin 2.0、LIBERO-PRO、YAM/Franka 真机结果和观察消融
+- **slug**：`2609.23863-grounded-action-model`
+- **新增材料**：`wiki/sources/2609.23863-grounded-action-model.md`
+- **更新主题**：`wiki/topics/3d-native-embodied-model.md`
+- **核心主张**：冻结 WildDet3D 将语言、点击和框统一解析为目标对象的 2D/3D 框、度量深度和视觉特征；动作头融合对象过滤后的图像 token、点云检测 token、状态历史和语言语义，以 flow matching 输出关节动作块
+- **关键证据**：RoboTwin 2.0 Easy/Hard/平均为 62.96%/47.62%/55.29%；LIBERO-PRO 16 项平均 0.61；YAM 视觉偏移后 17/20；Franka 长程/记忆任务 OOD step completion 49.8%；观察消融显示对象过滤和图像/几何双流缺一不可
+- **状态**：完成
+
 ## 2026-10-13 attach | Spatial Forcing → 3D-Native Embodied Model
 
 - **操作**：将已有 Spatial Forcing 解读页挂入 3D-Native Embodied Model 专题，不重新分析论文
