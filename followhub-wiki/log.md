@@ -14,6 +14,16 @@
 - **关键证据**：RoboTwin 2.0 Easy/Hard/平均为 62.96%/47.62%/55.29%；LIBERO-PRO 16 项平均 0.61；YAM 视觉偏移后 17/20；Franka 长程/记忆任务 OOD step completion 49.8%；观察消融显示对象过滤和图像/几何双流缺一不可
 - **状态**：完成
 
+## 2026-10-17 ingest | ManipForce: Force-Guided Policy Learning with Frequency-Aware Representation for Contact-Rich Manipulation
+
+- **操作**：使用 arxiv-to-wiki direct 流程精读 arXiv 2509.19047v1，保存 abs/HTML/PDF 原文，覆盖手持采集机构、重力补偿、FMT tokenization、异步融合、六任务结果、消融和采样频率分析
+- **slug**：`2509.19047-manipforce-force-guided-policy-learning-with-frequency-aware-representation-for-contact-rich-manipulation`
+- **新增材料**：`wiki/sources/2509.19047-manipforce-force-guided-policy-learning-with-frequency-aware-representation-for-contact-rich-manipulation.md`
+- **更新主题**：Contact-Rich Manipulation and Adaptive Compliance、Tactile Representation；同步 force/touch 综述、索引和图谱
+- **核心主张**：自然手持示教可以用双相机、3D ArUco 和腕部 200Hz F/T 保留几何与接触语义；FMT 用频率/模态嵌入和双向 cross-attention 避免把高频力裁剪到低频视觉节奏
+- **关键证据**：六个真机任务平均成功率 RGB-only 为 21.7%、FMT 为 82.5%；齿轮装配 F/T 采样从 30Hz 到 200Hz 使成功率 40%→95%；±90° 姿态下重力补偿把力/力矩残差分别控制在约 ±1N 与 0.15N·m
+- **状态**：完成
+
 ## 2026-10-13 attach | Spatial Forcing → 3D-Native Embodied Model
 
 - **操作**：将已有 Spatial Forcing 解读页挂入 3D-Native Embodied Model 专题，不重新分析论文

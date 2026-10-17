@@ -4,7 +4,7 @@ slug: "contact-rich-manipulation"
 title: "Contact-Rich Manipulation and Adaptive Compliance"
 type: topic
 created: "2026-08-28"
-updated: "2026-10-12"
+updated: "2026-10-17"
 domains:
   - "Physical/Embodied Intelligence"
 tags:
@@ -23,6 +23,7 @@ source_slugs:
   - "2605.11048-forceflow-learning-to-feel-and-act-via-contact-driven-flow-matching"
   - "2609.05832-cr-vla-force"
   - "tacross-an-efficient-and-low-cost-scalable-human-touch-system-across-heterogeneous-tactile-sensors-for-dexterous-robot-learning"
+  - "2509.19047-manipforce-force-guided-policy-learning-with-frequency-aware-representation-for-contact-rich-manipulation"
 synthesis_slugs:
   - "force-touch-robot-policy-review"
 status: "active"
@@ -67,6 +68,7 @@ open_questions:
 | 部署平台没有力传感器时，训练期真实力还能怎样发挥作用？ | [[FD-VLA: Force-Distilled Vision-Language-Action Model for Contact-Rich Manipulation]] | 用真实力潜变量监督视觉—状态条件化的 learnable query；推理时只保留预测力 token，但它是任务相关先验而非安全级闭环力反馈。 |
 | 怎样让策略在动作执行前就比较接触后果，而不只在碰撞后响应？ | [[Facet-0: A Robotic Foundation Model for Contact-Rich Precise Manipulation]] | 联合生成笛卡尔动作块与未来 wrist-wrench，再由分布式 Action–Wrench Critic 区分几何进度相似但接触结果不同的提案；预测 wrench 不直接执行。 |
 | 如何以自然的人手交互采集真实力—位示范，并将其迁移到机器人控制？ | [[ForceMimic: Force-Centric Imitation Learning with Force-Motion Capture System for Contact-Rich Manipulation]] | ForceCapture 在无机器人条件下记录六维 wrench、SLAM 位姿和 RGB-D；HybridIL 预测位姿—wrench，并由正交混合力位控制器执行。 |
+| 高频腕部 wrench 怎样与低频 RGB 保持异步时间结构？ | [[2509.19047-manipforce-force-guided-policy-learning-with-frequency-aware-representation-for-contact-rich-manipulation|ManipForce]] | 手持双相机 + 3D ArUco + 200Hz F/T 采集自然示教；FMT 用频率/模态嵌入和双向 cross-attention 融合，六任务平均成功率 83%，齿轮任务从 30Hz 力采样的 40% 提升到 200Hz 的 95%。 |
 | 人类分布式触觉能否低成本扩充灵巧手接触示范？ | [[tacross-an-efficient-and-low-cost-scalable-human-touch-system-across-heterogeneous-tactile-sensors-for-dexterous-robot-learning|TACROSS]] | 10.86 美元压阻手套以约 150 Hz 覆盖掌指接触；接触语义对齐后，150 条人类示范加 30 条机器人示范达到 91.9% 四任务均值，而去掉语义对齐只有 49.4%。 |
 | 如何在不增加复杂低层力控参数的情况下，把高频力觉用于接触阶段纠偏？ | [[FoAR: Force-Aware Reactive Policy for Contact-Rich Robotic Manipulation]] | 独立未来接触预测器以 phi 门控力觉特征，并在 phi>=0.9 且力/扭矩不足时沿动作方向做 0.006m 位置修正；100Hz 力觉、反应式控制与视觉扩散策略协同工作。 |
 | 低维 wrench 怎样避免被高维视觉掩盖，并同时支持物理与空间 OOD？ | [[ForceFlow: Learning to Feel and Act via Contact-Driven Flow Matching]] | 十步 wrench 与本体状态通过 AdaLN 全局调制 flow-matching DiT，视觉只作 cross-attention 空间锚定；V2F 再把 VLM 定位与局部接触执行解耦。 |
@@ -98,6 +100,8 @@ Facet-0 把这条路线再推进一步：历史 wrench 不只条件化动作生�
 
 ForceMimic 则从数据入口补上另一块：ForceCapture 让人直接操作手持工具，五分钟完成一次削皮示范，避免力反馈遥操作的十三分钟级耗时和三次操作中断。它的 HybridIL 在单一西葫芦削皮任务中达到 100% 动作正确率和 85% 的连续长削皮率，但同时揭示了数据—控制一致性的硬门槛：仅把机器人力传感作为输入的 Force DP 反而只有 60%/10%，因为训练示范约 10N 的力分布与部署约 20N、局部超过 40N 的交互不匹配。
 
+ManipForce 进一步把数据接口和表示接口绑在一起：它不满足于把 200Hz wrench 降采样到 30Hz 图像流，而是用频率感知嵌入与双向 cross-attention 保留异步时间结构。其证据说明“有力”本身不充分，采样频率与 tokenization 位置会决定瞬时卡滞、插入尖峰等事件是否可见；但该系统仍依赖外部 ArUco、单一 Franka 平台和部署侧柔顺控制器，不显式输出安全力目标。
+
 ForceFlow 进一步给出一条“力作为全局调节条件”的融合路线：十步 wrench history 通过 AdaLN 进入每个 DiT block，视觉序列只通过 cross-attention 提供空间锚定，同时把未来 wrench 作为动作生成的辅助目标。它在六项任务中达到 81.67% 平均成功率和 8.23 N 平均 Force Cost，消融又把历史与预测的角色拆开——前者主要决定可行性，后者主要改善力质量。不过 32/64 步执行、约 1.15 秒的重规划周期也说明，这仍是中频滚动策略，不能替代执行器侧的高频安全回路。
 
 ForceDelta-VLA 则把“参考动作与接触修正”变成显式监督问题：冻结教师在同一上下文、状态和噪声下输出力条件与力无关两个动作块，用差值定义力修正；延迟头再学习异步参考块和参考状态变化。修正器 2.43ms 的前向延迟低于 100Hz 控制命令间隔，九任务平均成功率 82.2% 并将成功试验峰值力降低约 26%。这补上了“高频反馈学什么”的关键一环，但每任务 200 条示范、关节力矩估计和成功试验力统计仍限制其安全与跨平台外推。
@@ -120,6 +124,7 @@ CC-VLA 则把这个缺口变成显式系统接口：1 Hz 的 pi0 输出期望位
 - [[FD-VLA: Force-Distilled Vision-Language-Action Model for Contact-Rich Manipulation]]
 - [[Facet-0: A Robotic Foundation Model for Contact-Rich Precise Manipulation]]
 - [[ForceMimic: Force-Centric Imitation Learning with Force-Motion Capture System for Contact-Rich Manipulation]]
+- [[2509.19047-manipforce-force-guided-policy-learning-with-frequency-aware-representation-for-contact-rich-manipulation|ManipForce]]
 - [[ForceFlow: Learning to Feel and Act via Contact-Driven Flow Matching]]
 - [[2609.18242-forcedelta-vla|ForceDelta-VLA: Distilling Force-Conditioned Action Corrections for Contact-Rich Manipulation]]
 - [[2609.05832-cr-vla-force|CR-VLA-Force: Learning Control-aware Compliance VLA Model for Robust Contact-rich Robotic Manipulation]]

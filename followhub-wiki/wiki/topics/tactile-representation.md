@@ -4,7 +4,7 @@ slug: "tactile-representation"
 title: "Tactile Representation"
 type: topic
 created: "2026-08-10"
-updated: "2026-10-12"
+updated: "2026-10-17"
 domains:
   - "Physical/Embodied Intelligence"
 tags:
@@ -18,6 +18,7 @@ source_slugs:
   - "t-rex-tactile-reactive-dexterous-manipulation"
   - "2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback"
   - "tacross-an-efficient-and-low-cost-scalable-human-touch-system-across-heterogeneous-tactile-sensors-for-dexterous-robot-learning"
+  - "2509.19047-manipforce-force-guided-policy-learning-with-frequency-aware-representation-for-contact-rich-manipulation"
 synthesis_slugs:
   - "force-touch-robot-policy-review"
 status: "active"
@@ -57,6 +58,7 @@ open_questions:
 | 触觉 backbone 能否迁移到训练时未见的传感器？ | [[2606.29948-heterogeneous-tactile-transformer]] | 已在未出现的 Sharpa 触觉指尖上验证 toy screw / grasp tofu 上的成功率显著提升 |
 | 旧数据没有 F/T 标注时，预训练策略如何吸收新模态而不遗忘？ | [[2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force|Multisensory Continual Learning: Adapting Pretrained Visuomotor Policies to Force]] | early + late fusion 联合动作、视频、未来 F/T 预测；旧数据 replay 与 missing-modality mask 同时保留视觉动作先验 |
 | 高频力/触觉怎样决定动作的精确落点？ | [[Reactive Diffusion Policy: Slow-Fast Visual-Tactile Policy Learning for Contact-Rich Manipulation]] | action-only encoder 学高层 latent，触觉/力只进入 decoder；低维瓶颈让实时接触信号承担亚毫米级位置细节。 |
+| 异步低频视觉与高频腕部 wrench 怎样统一 tokenization？ | [[2509.19047-manipforce-force-guided-policy-learning-with-frequency-aware-representation-for-contact-rich-manipulation|ManipForce]] | 用时间戳窗口、频率感知嵌入、模态嵌入和双向 cross-attention 融合 30Hz RGB 与 200Hz F/T，而不是把力降到图像帧率。 |
 | 高频触觉如何与低频 VLA 协同？ | [[t-rex-tactile-reactive-dexterous-manipulation|T-Rex: Tactile-Reactive Dexterous Manipulation]] | 慢动作专家缓存视觉语言上下文，快触觉专家沿同一 flow 去噪轨迹细化动作，形成约 5 Hz / 20 Hz 的异步闭环 |
 | 动作 chunk 执行期间，最新触觉如何继续修改未来动作？ | [[2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback|TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback]] | 未来动作保留 flow 中间态，动作块边生成边执行；EATA 只让当前触觉条件化下一待执行块，避免远期动作接收陈旧信号 |
 
@@ -69,6 +71,7 @@ open_questions:
 - **imbalance 风险**：光学-阵列配对中，光学富信息会主导跨模态预测，阵列侧会出现 −4.3% 这种回退；需要 imbalance-aware 损失。
 - **持续适配接口**：MuSe 用缺失模态 mask、旧数据 replay 和未来多感官预测，让没有 F/T 标签的预训练数据仍能约束新模态适配，避免只在新任务上微调造成旧能力塌陷。
 - **多速率控制接口**：T-Rex 把低频视觉规划和高频触觉细化放在同一 flow 轨迹上，说明表示进入策略后还需要清楚的频率分工。
+- **频率感知嵌入**：ManipForce 在 token 层显式编码异步时间戳与模态来源；30Hz 与 200Hz F/T 的齿轮装配差异说明采样率本身携带任务语义。
 - **时间作用域接口**：触觉更新不应无条件广播给所有未来动作；TacForcing 用 EATA 让当前触觉只影响下一动作块，并把更远动作保留为待后续触觉修订的中间态。
 
 ## 当前判断
@@ -94,5 +97,6 @@ open_questions:
 - [[t-rex-tactile-reactive-dexterous-manipulation|T-Rex: Tactile-Reactive Dexterous Manipulation]]
 - [[2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback|TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback]]
 - [[tacross-an-efficient-and-low-cost-scalable-human-touch-system-across-heterogeneous-tactile-sensors-for-dexterous-robot-learning|TACROSS]]
+- [[2509.19047-manipforce-force-guided-policy-learning-with-frequency-aware-representation-for-contact-rich-manipulation|ManipForce]]
 - [[force-touch-robot-policy-review|机器人策略中的力觉与触觉：从信号语义到闭环控制]]
 - [[Physical/Embodied Intelligence]]（domain）

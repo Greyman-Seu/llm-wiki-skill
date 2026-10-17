@@ -78,6 +78,7 @@
 - [[2606.02274-dexterity-bev-aligning-3d-world-and-actions-for-generalizable-robot-policies-learning|Dexterity-BEV: Aligning 3D World and Actions for Generalizable Robot Policies Learning]]
 - [[2610.12099-unitas-a-3d-native-world-action-model-for-embodied-manipulation|UNITAS: A 3D-Native World Action Model for Embodied Manipulation]]
 - [[2609.23863-grounded-action-model|Grounded Action Model: 3D Grounding as a Foundation for Robotics]]
+- [[2509.19047-manipforce-force-guided-policy-learning-with-frequency-aware-representation-for-contact-rich-manipulation|ManipForce: Force-Guided Policy Learning with Frequency-Aware Representation for Contact-Rich Manipulation]]
 
 ---
 

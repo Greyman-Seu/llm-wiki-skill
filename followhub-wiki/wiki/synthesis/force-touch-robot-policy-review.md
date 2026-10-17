@@ -4,18 +4,19 @@ slug: "force-touch-robot-policy-review"
 title: "机器人策略中的力觉与触觉：从信号语义到闭环控制"
 type: synthesis
 created: "2026-09-02"
-updated: "2026-09-10"
+updated: "2026-10-17"
 domains:
   - "Physical/Embodied Intelligence"
 tags:
   - "tactile-representation"
   - "contact-rich-manipulation"
-summary: "综合十四篇材料，按力/触觉信号的角色和时间尺度重整机器人策略路线：传感与采集、表示与适配、执行期反馈、事件记忆与后果预测，以及由低层控制器落实的力位与柔顺接口。"
+summary: "综合十五篇材料，按力/触觉信号的角色和时间尺度重整机器人策略路线：传感与采集、表示与适配、执行期反馈、事件记忆与后果预测，以及由低层控制器落实的力位与柔顺接口。"
 judgment: "力觉与触觉不是可以统一拼接的一个额外模态，而是四类不可互换的策略变量：实测观测、蒸馏先验、预测后果和控制目标。当前最可信的系统原则是先明确力信号的语义与有效时域，再让学习策略负责任务条件化和慢时标决策、让高频反馈或经典控制器负责动作块内的接触稳定；现有证据尚未证明单一端到端模型能同时替代跨硬件表示、持续适配、实时安全闭环和力控制器。"
 source_slugs:
   - "tactile-genesis-exploring-tactile-sensors-at-scale-for-learning-dexterous-tasks"
   - "2606.29948-heterogeneous-tactile-transformer"
   - "2410.07554-forcemimic-force-centric-imitation-learning-with-force-motion-capture-system-for-contact-rich-manipulation"
+  - "2509.19047-manipforce-force-guided-policy-learning-with-frequency-aware-representation-for-contact-rich-manipulation"
   - "2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force"
   - "fd-vla-force-distilled-vision-language-action-model-for-contact-rich-manipulation"
   - "2503.02881-reactive-diffusion-policy-slow-fast-visual-tactile-policy-learning-for-contact-rich-manipulation"
@@ -76,7 +77,7 @@ confidence: INFERRED
 | 层 | 核心问题 | 代表材料 | 已有证据 | 主要缺口 |
 | --- | --- | --- | --- | --- |
 | 传感设计 | 感知位置、覆盖、分辨率和物理量怎样选择？ | [[tactile-genesis-exploring-tactile-sensors-at-scale-for-learning-dexterous-tasks|Tactile Genesis]] | 受控仿真表明覆盖面积常比局部高分辨率更重要，per-taxel 力/力矩是有竞争力的默认项 | 大规模真机、耐久、漂移与成本数据 |
-| 数据与表示 | 怎样自然采集力位示范，并跨异构硬件复用表示？ | [[2410.07554-forcemimic-force-centric-imitation-learning-with-force-motion-capture-system-for-contact-rich-manipulation|ForceMimic]]、[[2606.29948-heterogeneous-tactile-transformer|HTT]] | 手持 ForceCapture 降低采集门槛；HTT 用 1.6M 同步帧对齐四类传感器，并测试未见触觉指尖 | 采集到部署的动力学偏移；表示迁移尚未贯通控制层 |
+| 数据与表示 | 怎样自然采集力位示范，并跨异构硬件复用表示？ | [[2410.07554-forcemimic-force-centric-imitation-learning-with-force-motion-capture-system-for-contact-rich-manipulation|ForceMimic]]、[[2509.19047-manipforce-force-guided-policy-learning-with-frequency-aware-representation-for-contact-rich-manipulation|ManipForce]]、[[2606.29948-heterogeneous-tactile-transformer|HTT]] | 手持 ForceCapture 降低采集门槛；ManipForce 用 200Hz F/T、频率/模态嵌入和双向注意力保留异步接触事件，齿轮任务从 30Hz 的 40% 提升到 200Hz 的 95%；HTT 用 1.6M 同步帧对齐四类传感器并测试未见触觉指尖 | 采集到部署的动力学偏移；表示迁移尚未贯通控制层 |
 | 策略适配 | 旧数据没有力标签时怎样吸收新模态且保留旧能力？ | [[2606.30988-multisensory-continual-learning-adapting-pretrained-visuomotor-policies-to-force|MuSe]]、[[fd-vla-force-distilled-vision-language-action-model-for-contact-rich-manipulation|FD-VLA]] | replay、缺失模态 mask 和未来预测能缓解遗忘；训练期真实力可监督部署期潜在力先验 | 多模态连续到来时的成本；无传感器方案的不可观测接触 |
 | 执行期反馈 | 最新接触怎样在动作执行前改写仍可修订的动作？ | [[2503.02881-reactive-diffusion-policy-slow-fast-visual-tactile-policy-learning-for-contact-rich-manipulation|RDP]]、[[t-rex-tactile-reactive-dexterous-manipulation|T-Rex]]、[[2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback|TacForcing]]、[[foar-force-aware-reactive-policy-for-contact-rich-robotic-manipulation|FoAR]] | 快速解码、快慢专家、流式动作块和阶段门控均优于若干静态融合基线 | 缺等算力延迟比较、跨传感器复现和统一安全指标 |
 | 记忆与后果 | 接触历史怎样表示任务进度，未来接触怎样约束动作选择？ | [[fm-vla-force-based-memory-for-vision-language-action-models-in-contact-rich-manipulation|FM-VLA]]、[[facet-0|Facet-0]]、[[2605.11048-forceflow-learning-to-feel-and-act-via-contact-driven-flow-matching|ForceFlow]] | force memory 可记录视觉难辨的事件；未来 wrench 可作为辅助目标或 critic 的评价对象 | 长 episode 的容量、预测校准和 critic 的跨任务泛化 |
@@ -132,6 +133,7 @@ FM-VLA 把完整 episode 的 wrench 历史压成 8 个事件记忆 token，解�
 3. **低频学习策略不能自动成为安全回路。** 即使 ForceFlow 或 VLA 能预测接触结果，执行器仍要在模型下一次重规划前处理冲击、饱和和不稳定。
 4. **数据—控制一致性是硬门槛。** ForceMimic 中直接加入力的基线因示范约 10 N、部署约 20 N 且局部超过 40 N 的分布失配而退化，说明校准和控制映射不能留给网络自行吸收。
 5. **成功率不足以评价力策略。** 至少还要报告峰值力、力跟踪误差、接触保持、损伤、延迟与扰动恢复；ForceFlow 和 CR-VLA-Force 已部分补上这类指标，但尚无统一协议。
+6. **采样率是力觉表示的一部分。** ManipForce 的频率消融显示，同一个学习器拿到 30Hz 与 200Hz F/T 时，齿轮装配成功率差异可达 40%→95%；把力信号降采样到视觉帧率会删除短时尖峰和卡滞语义，不能只在论文归类中写“是否使用力”。
 
 ## 工程选择指南
 
