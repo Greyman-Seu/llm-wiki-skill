@@ -214,3 +214,14 @@
 - **新增材料**：wiki/sources/2609.29166-harnesspai.md
 - **更新主题**：Robot Self-Improvement
 - **状态**：完成
+
+## 2026-10-22 ingest | No Eyes, No Problem: What Does Touch Contribute to Blind Baoding Ball Manipulation?
+
+- **操作**：使用 arxiv-to-wiki direct 流程精读 arXiv 2610.23438v1，保存 PDF/HTML 原文，覆盖 POMDP 设置、PPO/Isaac Lab 训练、硬件对齐顺序耦合与 FSR 位点、SlewDR/STAT 两种 episode 级随机化、迟滞触觉标定、六配置真机消融与长时演示
+- **slug**：`2610.23438-no-eyes-no-problem-blind-baoding-ball-manipulation`
+- **新增材料**：`wiki/sources/2610.23438-no-eyes-no-problem-blind-baoding-ball-manipulation.md`
+- **更新主题**：Tactile Representation；更新索引
+- **核心主张**：盲保定球旋转的零样本迁移靠三件事——仿真 embodiment 与硬件顺序耦合/传感位点对齐、SlewDR 动作斜率随机化让动作可被硬件跟踪、STAT 触觉通道卡死随机化消除单通道依赖；触觉的角色是把本体感觉节律步态修正成完成的旋转并支持恢复，而非产生运动
+- **关键证据**：C3 真机 34.75±26.06 整圈、time-to-drop 94.8±68.0 s、0.36±0.061 rot/s、η=0.90；单次长时演示 225 个 180° 旋转（112.5 整圈）/310 s；关掉触觉（C3-TacOff）降至 5.0 整圈；先验硬件结果最高约 3 圈且有视觉
+- **发布核验**：Page 提交 888bdb0 已推送，正式地址 https://tenstep.top/wiki/source/2610.23438-no-eyes-no-problem-blind-baoding-ball-manipulation 返回 HTTP 200；package JSON 完整性检查通过（含 methodTakeaways 3 项、heroImage 与 8 张带 zone 的 figureGallery）
+- **状态**：完成

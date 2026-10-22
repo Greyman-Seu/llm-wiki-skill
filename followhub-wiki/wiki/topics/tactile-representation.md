@@ -4,7 +4,7 @@ slug: "tactile-representation"
 title: "Tactile Representation"
 type: topic
 created: "2026-08-10"
-updated: "2026-10-17"
+updated: "2026-10-22"
 domains:
   - "Physical/Embodied Intelligence"
 tags:
@@ -19,6 +19,7 @@ source_slugs:
   - "2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback"
   - "tacross-an-efficient-and-low-cost-scalable-human-touch-system-across-heterogeneous-tactile-sensors-for-dexterous-robot-learning"
   - "2509.19047-manipforce-force-guided-policy-learning-with-frequency-aware-representation-for-contact-rich-manipulation"
+  - "2610.23438-no-eyes-no-problem-blind-baoding-ball-manipulation"
 synthesis_slugs:
   - "force-touch-robot-policy-review"
 status: "active"
@@ -60,6 +61,7 @@ open_questions:
 | 高频力/触觉怎样决定动作的精确落点？ | [[Reactive Diffusion Policy: Slow-Fast Visual-Tactile Policy Learning for Contact-Rich Manipulation]] | action-only encoder 学高层 latent，触觉/力只进入 decoder；低维瓶颈让实时接触信号承担亚毫米级位置细节。 |
 | 异步低频视觉与高频腕部 wrench 怎样统一 tokenization？ | [[2509.19047-manipforce-force-guided-policy-learning-with-frequency-aware-representation-for-contact-rich-manipulation|ManipForce]] | 用时间戳窗口、频率感知嵌入、模态嵌入和双向 cross-attention 融合 30Hz RGB 与 200Hz F/T，而不是把力降到图像帧率。 |
 | 高频触觉如何与低频 VLA 协同？ | [[t-rex-tactile-reactive-dexterous-manipulation|T-Rex: Tactile-Reactive Dexterous Manipulation]] | 慢动作专家缓存视觉语言上下文，快触觉专家沿同一 flow 去噪轨迹细化动作，形成约 5 Hz / 20 Hz 的异步闭环 |
+| 稀疏二值触觉要多精确才能支撑持续盲操作？ | [[2610.23438-no-eyes-no-problem-blind-baoding-ball-manipulation|No Eyes, No Problem: Blind Baoding Ball Manipulation]] | 不需要逐传感器精确对齐：16 路二值 FSR/BioTac + SlewDR 动作限速 + STAT 通道卡死随机化即可零样本迁移；触觉负责修正与恢复而非产生步态，关触觉后整圈数 34.75→5.0。 |
 | 动作 chunk 执行期间，最新触觉如何继续修改未来动作？ | [[2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback|TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback]] | 未来动作保留 flow 中间态，动作块边生成边执行；EATA 只让当前触觉条件化下一待执行块，避免远期动作接收陈旧信号 |
 
 ## 关键设计要点
@@ -98,5 +100,6 @@ open_questions:
 - [[2608.25798-tacforcing-streaming-action-generation-with-execution-time-tactile-feedback|TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback]]
 - [[tacross-an-efficient-and-low-cost-scalable-human-touch-system-across-heterogeneous-tactile-sensors-for-dexterous-robot-learning|TACROSS]]
 - [[2509.19047-manipforce-force-guided-policy-learning-with-frequency-aware-representation-for-contact-rich-manipulation|ManipForce]]
+- [[2610.23438-no-eyes-no-problem-blind-baoding-ball-manipulation|No Eyes, No Problem: Blind Baoding Ball Manipulation]]
 - [[force-touch-robot-policy-review|机器人策略中的力觉与触觉：从信号语义到闭环控制]]
 - [[Physical/Embodied Intelligence]]（domain）
